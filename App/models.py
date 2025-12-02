@@ -24,6 +24,69 @@ class Student(models.Model):
 
     def __str__(self):
         return self.full_name
+    # Adding the validation rules 
+    from django.db import models
+# Note: We use ValueError here as a basic way to stop the save operation,
+# though ValidationError is usually better for forms/models.
+
+class Student(models.Model):
+    class Status(models.TextChoices):
+        ACTIVE = "ACTIVE", "Active"
+        INACTIVE = "INACTIVE", "Inactive"
+        COMPLETED = "COMPLETED", "Completed"
+        DROPPED = "DROPPED", "Dropped"
+
+    full_name = models.CharField(max_length=150)
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    date_of_birth = models.DateField(blank=True, null=True)
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.ACTIVE,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.full_name
+
+    def save(self, *args, **kwargs):
+        
+        name = self.full_name
+        
+        # Check 1a: Length
+        if len(name) <= 4:
+            raise ValueError("Name validation failed: Must be longer than 4 characters.")
+        
+        # Check 1b: Special Characters
+        # We check if the name contains anything that ISN'T a letter or a space.
+        allowed_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+        for char in name:
+            if char not in allowed_chars:
+                raise ValueError("Name validation failed: Cannot contain special characters (only letters and spaces allowed).")
+
+
+        #  Phone Number Validation (10 digits starting from 98) 
+        phone_number = self.phone
+        
+        # Only validate if a phone number is provided (since field is blank/null allowed)
+        if phone_number:
+            # Check  Length is exactly 10
+            if len(phone_number) != 10:
+                raise ValueError("Phone validation failed: Must be exactly 10 digits.")
+            
+            #  Starts with "98"
+            if not phone_number.startswith("98"):
+                raise ValueError("Phone validation failed: Must start with '98'.")
+            
+            # Check 2c: Entirely digits (basic check)
+            if not phone_number.isdigit():
+                 raise ValueError("Phone validation failed: Must only contain digits.")
+
+    
+        super().save(*args, **kwargs)
 
 # ADDing the courses for the System 
 # includes course info such as : tilttle , course code , description,
@@ -106,12 +169,15 @@ class Enrollment(models.Model):
 
 # Adding the classrooms 
 class Classroom(models.Model):
-    name = models.CharField(max_length=100)  # e.g. "Room 101"
+    # e.g. "Room 101"
+    name = models.CharField(max_length=100)  
     capacity = models.PositiveIntegerField()
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
+    
+
 # Adding the Schudules 
 # Scheduling the classroom, instructors ,batch , date , start and end times  
 class Schedule(models.Model):
