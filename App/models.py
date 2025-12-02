@@ -2,33 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class Student(models.Model):
-    class Status(models.TextChoices):
-        ACTIVE = "ACTIVE", "Active"
-        INACTIVE = "INACTIVE", "Inactive"
-        COMPLETED = "COMPLETED", "Completed"
-        DROPPED = "DROPPED", "Dropped"
 
-    full_name = models.CharField(max_length=150)
-    email = models.EmailField(blank=True, null=True)
-    phone = models.CharField(max_length=20, blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    date_of_birth = models.DateField(blank=True, null=True)
-    status = models.CharField(
-        max_length=20,
-        choices=Status.choices,
-        default=Status.ACTIVE,
-    )
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.full_name
-    # Adding the validation rules 
-    from django.db import models
-# Note: We use ValueError here as a basic way to stop the save operation,
-# though ValidationError is usually better for forms/models.
-
+# Student model
 class Student(models.Model):
     class Status(models.TextChoices):
         ACTIVE = "ACTIVE", "Active"
@@ -56,11 +31,11 @@ class Student(models.Model):
         
         name = self.full_name
         
-        # Check 1a: Length
+        # Check  Length
         if len(name) <= 4:
             raise ValueError("Name validation failed: Must be longer than 4 characters.")
         
-        # Check 1b: Special Characters
+        # Check  Special Characters
         # We check if the name contains anything that ISN'T a letter or a space.
         allowed_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
         for char in name:
@@ -85,7 +60,6 @@ class Student(models.Model):
             if not phone_number.isdigit():
                  raise ValueError("Phone validation failed: Must only contain digits.")
 
-    
         super().save(*args, **kwargs)
 
 # ADDing the courses for the System 
@@ -107,6 +81,23 @@ class Course(models.Model):
     def __str__(self):
         return f"{self.code} - {self.title}"
 
+# Instructor 
+class Instructor(models.Model):
+    # 1 to 1 with the user model for the instructor
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="instructor_profile",
+    )
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    specialization = models.CharField(max_length=150, blank=True, null=True)  # e.g. "Python, Django"
+    bio = models.TextField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        # Show full name if available, otherwise username
+        return self.user.get_full_name() or self.user.username
+    
 
 # There could be many(running classes ) batch for a single courses so we need to do the Batch 
 class Batch(models.Model):
@@ -121,7 +112,7 @@ class Batch(models.Model):
     # Example  "Python Jan 2026 Morning", "Python Jan 2026 Evening"
     name = models.CharField(max_length=150)  
     instructor = models.ForeignKey(
-        User,
+        Instructor,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -195,7 +186,7 @@ class Schedule(models.Model):
         related_name="classroom_sessions",
     )
     instructor = models.ForeignKey(
-        User,
+        Instructor,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -245,3 +236,33 @@ class Payments(models.Model):
 
     def __str__(self):
         return f"{self.student} - {self.amount} on {self.date.date()}"
+
+# Export history of the information
+class ExportHistory(models.Model):
+    class ExportType(models.TextChoices):
+        STUDENTS = "STUDENTS", "Students"
+        COURSES = "COURSES", "Courses"
+        BATCHES = "BATCHES", "Batches"
+        ENROLLMENTS = "ENROLLMENTS", "Enrollments"
+        PAYMENTS = "PAYMENTS", "Payments"
+        SCHEDULES = "SCHEDULES", "Schedules"
+        INSTRUCTORS = "INSTRUCTORS", "Instructors"
+        CLASSROOMS = "CLASSROOMS", "Classrooms"
+        ATTENDANCE = "ATTENDANCE", "Attendance"
+
+    export_type = models.CharField(
+        max_length=20,
+        choices=ExportType.choices,
+    )
+
+    exported_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="exports",
+    )
+    exported_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.export_type} export by {self.exported_by} at {self.exported_at}"
