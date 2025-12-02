@@ -35,6 +35,7 @@ class Course(models.Model):
     # default_duration_weeks : how ling the course usally runs 
     default_duration_weeks = models.PositiveIntegerField(blank=True, null=True)
     Course_fee = models.DecimalField(
+        decimal_places=2,
         max_digits=10,
         blank=True,
         null=True,
@@ -52,7 +53,7 @@ class Batch(models.Model):
         COMPLETED = "COMPLETED", "Completed"
         CANCELLED = "CANCELLED", "Cancelled"
 # a course has many batches 
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="batches")
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course_batches")
     # name of that batch Batch 1 , 2 
     # Example  "Python Jan 2026 Morning", "Python Jan 2026 Evening"
     name = models.CharField(max_length=150)  
@@ -61,7 +62,7 @@ class Batch(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="batches",
+        related_name="instructor_batches",
     )
     start_date = models.DateField()
     end_date = models.DateField()
@@ -83,9 +84,9 @@ class Enrollment(models.Model):
         DROPPED = "DROPPED", "Dropped"
 
     # student 
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="enrollments")
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="student_enrollments")
     # related batch
-    batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name="enrollments")
+    batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name="batch_enrollments")
     enrolled_on = models.DateField(auto_now_add=True)
 
 
@@ -101,3 +102,80 @@ class Enrollment(models.Model):
 
     def __str__(self):
         return f"{self.student} -> {self.batch}"
+
+
+# Adding the classrooms 
+class Classroom(models.Model):
+    name = models.CharField(max_length=100)  # e.g. "Room 101"
+    capacity = models.PositiveIntegerField()
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+# Adding the Schudules 
+# Scheduling the classroom, instructors ,batch , date , start and end times  
+class Schedule(models.Model):
+    class Status(models.TextChoices):
+        SCHEDULED = "SCHEDULED", "Scheduled"
+        COMPLETED = "COMPLETED", "Completed"
+        CANCELLED = "CANCELLED", "Cancelled"
+
+    batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name="sessions")
+    classroom = models.ForeignKey(
+        Classroom,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="classroom_sessions",
+    )
+    instructor = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="instructor_sessions",
+    )
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.SCHEDULED,
+    )
+
+    def __str__(self):
+        return f"{self.batch} @ {self.date} {self.start_time}-{self.end_time}"
+
+
+# Choosing the method for the Payments in the database 
+class Payments(models.Model):
+    class Method(models.TextChoices):
+        ESEWA = 'ESEWA', 'ESEWA'
+        BANK = 'BANK', 'BANK'
+        CASH = 'CASH', 'CASH'
+        OTHERS = 'OTHERS', 'OTHERS'
+
+    student = models.ForeignKey(
+        Student,
+        on_delete=models.CASCADE,
+        related_name='student_payments',
+    )
+    enrollment = models.ForeignKey(
+        Enrollment,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='enrollment_payments',
+    )
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    date = models.DateTimeField(auto_now_add=True)
+    method = models.CharField(
+        max_length=10,
+        choices=Method.choices,
+        default=Method.CASH,
+    )
+    remarks = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.student} - {self.amount} on {self.date.date()}"
