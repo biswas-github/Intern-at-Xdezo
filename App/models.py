@@ -53,8 +53,8 @@ class Student(models.Model):
                 raise ValueError("Phone validation failed: Must be exactly 10 digits.")
             
             #  Starts with "98"
-            if not phone_number.startswith("98"):
-                raise ValueError("Phone validation failed: Must start with '98'.")
+            # if not phone_number.startswith("98"):
+            #     raise ValueError("Phone validation failed: Must start with '98'.")
             
             # Check 2c: Entirely digits (basic check)
             if not phone_number.isdigit():
@@ -233,6 +233,7 @@ class Payments(models.Model):
         default=Method.CASH,
     )
     remarks = models.TextField(blank=True, null=True)
+    ref_no=models.CharField(blank=True , null=True)
 
     def __str__(self):
         return f"{self.student} - {self.amount} on {self.date.date()}"
