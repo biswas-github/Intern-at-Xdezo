@@ -1,0 +1,45 @@
+body {
+  background-color: #ff7b54;
+}
+
+.login-card {
+  max-width: 420px;
+  width: 100%;
+  border: none;
+}
+
+.form-control {
+  border-radius: 10px;
+  border-color: #ffe0c2;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 123, 84, 0.25);
+  border-color: #ff7b54;
+}
+
+.btn-orange {
+  background-color: #ff7b54;
+  border-color: #ff7b54;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.btn-orange:hover {
+  background-color: #ff8c6e;
+  border-color: #ff8c6e;
+}
+
+.btn-outline-orange {
+  background-color: #fff;
+  border-radius: 999px;
+  border: 2px solid #ff7b54;
+  color: #ff7b54;
+  font-weight: 600;
+}
+
+.btn-outline-orange:hover {
+  background-color: #ff7b54;
+  color: #fff;
+}
