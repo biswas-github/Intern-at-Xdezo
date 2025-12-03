@@ -1,19 +1,25 @@
-var form = document.querySelector("form");
-var passwordInput = document.getElementById("password");
-var passwordError = document.getElementById("password-error");
+window.onload = function () {
+  var form = document.querySelector("form");
+  var usernameInput = document.getElementById("username");
+  var passwordInput = document.getElementById("password");
 
-form.onsubmit = function (event) {
-  var value = passwordInput.value;
-  value = value.trim();
+  var adminBtn = document.querySelector("button[name='role'][value='ADMIN']");
+  var viewerBtn = document.querySelector("button[name='role'][value='VIEWER']");
 
-  // very simple rule: required and at least 4 characters
-  if (value === "") {
-    passwordError.textContent = "Password is required.";
+  // When admin button is clicked, fill admin data then submit
+  adminBtn.addEventListener("click", function (event) {
+    // if you only want to fill (not submit automatically), uncomment next line
+
     event.preventDefault();
-  } else if (value.length < 6) {
-    passwordError.textContent = "Password must be at least 6 characters.";
+    usernameInput.value = "admin_demo";
+    passwordInput.value = "admin1234";
+  });
+
+  // When viewer button is clicked, fill viewer data then submit
+  viewerBtn.addEventListener("click", function (event) {
+    // if you only want to fill (not submit automatically), uncomment next line
     event.preventDefault();
-  } else {
-    passwordError.textContent = "";
-  }
+    usernameInput.value = "viewer_demo";
+    passwordInput.value = "viewer1234";
+  });
 };

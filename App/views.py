@@ -7,10 +7,10 @@ def LoginPage(request):
         return render(request,'auth/login.html')
     if request.method=='POST':
         # if correct credential 
-        role=request.POST.get('role') 
-        if role=='ADMIN':
+        username=request.POST.get('username') 
+        if username=='admin_demo':
             return redirect('AdminDashboard')
-        elif role=='VIEWER':
+        elif username=='viewer_demo':
             return redirect(request,'ViewerDashboard')
 
 # admin dashboard after login 
