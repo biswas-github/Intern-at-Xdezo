@@ -550,7 +550,7 @@
               <!-- .menu -->
               <ul class="menu">
                 <!-- .menu-item -->
-                <li class="menu-item has-active">
+                <li class="menu-item ">
                   <a href="{% url 'AdminDashboard' %}" class="menu-link">
                     <span class="menu-icon oi oi-dashboard"></span>
                     <span class="menu-text">Dashboard</span>
@@ -665,8 +665,8 @@
                     <span class="menu-text">Data management</span>
                   </a>
                   <ul class="menu">
-                    <li class="menu-item">
-                      <a class="menu-link" href="{% url 'DataManagementStudent' %}" >Students</a>
+                    <li class="menu-item has-active">
+                      <a class="menu-link " href="{% url 'DataManagementStudent' %}" >Students</a>
                     </li>
                     <li class="menu-item">
                       <a href="#courses" class="menu-link"
@@ -816,108 +816,241 @@
                 <header class="page-title-bar">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                        <h1 class="page-title">New Page Title</h1>
+                        <!-- <h1 class="page-title">New Page Title</h1> -->
                         <p class="text-muted mb-0">Datamanagement / Students</p>
                         </div>
                     </div>
                 </header>
+
+
                 <!-- adding the students -->
-                 <p class="display-4">Adding  students</p>
-                 
-
-
-
-
-
-
-                 <!-- ./students add -->
-<p class="display-4">View students</p>
-                <!-- Page Content Section -->
-                <div class="page-section">
-                    <!-- YOUR CONTENT GOES HERE -->
-                     <div class="row">
-                        <div class=" col-12 col-sm-12 col-lg-9 me-sm-3 rounded">
-                            <!-- table copied -->
-                             <table class="table table-hover table-bordered">
-                          <!-- thead -->
-                          <thead class="thead-">
-                            <tr>
-                              <th style="min-width:200px"> Name </th>
-                              <th> Phone NO </th>
-                              <th> Email </th>
-                              <th> DOB </th>
-                              <th> Address </th>
-                              <th> Status </th>
-                              <th> updated at </th>
-
-                            </tr>
-                          </thead>
-                          <!-- /thead -->
-                          <!-- tbody -->
-                          <tbody>
-                            <!-- tr -->
-                            <tr>
-                              <td> Wine - Chateau Bonnet </td>
-                              <td> 113 </td>
-                              <td> $22.38 </td>
-                               <td> Wine - Chateau Bonnet </td>
-                              <td> 113 </td>
-                              <td> $22.38 </td>
-                            </tr>
-                            <!-- /tr -->
-                            <!-- tr -->
-                            <tr>
-                              <td> Cookie - Oatmeal </td>
-                              <td> 216 </td>
-                              <td> $21.90 </td>
-                               <td> Wine - Chateau Bonnet </td>
-                              <td> 113 </td>
-                              <td> $22.38 </td>
-                            </tr>
-                            <!-- /tr -->
-                            <!-- tr -->
-                            <tr>
-                              <td> True - Vue Containers </td>
-                              <td> 191 </td>
-                              <td> $24.96 </td>
-                               <td> Wine - Chateau Bonnet </td>
-                              <td> 113 </td>
-                              <td> $22.38 </td>
-                            </tr>
-                            <!-- /tr -->
-                            <!-- tr -->
-                            <tr>
-                              <td> Nut - Pumpkin Seeds </td>
-                              <td> 329 </td>
-                              <td> $32.21 </td>
-                               <td> Wine - Chateau Bonnet </td>
-                              <td> 113 </td>
-                              <td> $22.38 </td>
-                            </tr>
-                            <!-- /tr -->
-                            <!-- tr -->
-                            <tr>
-                              <td> Artichoke - Bottom, Canned </td>
-                              <td> 375 </td>
-                               <td> Wine - Chateau Bonnet </td>
-                              <td> 113 </td>
-                              <td> $22.38 </td>
-                              <td> $27.75 </td>
-                            </tr>
-                            <!-- /tr -->
-                          </tbody>
-                          <!-- /tbody -->
-                        </table>
+                 <!-- <h4 class="d-block d-lg-block d-sm-block">Adding students</h4> -->
+                 <!-- form -->
+                  <div class="row">
+                    <div class="col-12 col-sm-8 col-lg-8 border rounded mb-5 mb-sm-5 ">
+                      <div class="card-body ">
+                    <!-- .form -->
+                    <form>
+                      <!-- .fieldset -->
+                      <fieldset>
+                        <legend>Student Registration form</legend>
+                        <!-- .form-group -->
+                        <div class="form-group">
+                          <label for="lbl1">Student name 
+                            <abbr title="Required">*</abbr>
+                          </label>
+                          <input type="text" class="form-control placeholder-shown" id="lbl1" placeholder="Enter your name" required> 
                         </div>
-                        <div class=" col-12 col-lg-3  d-block d-sm-block  p-2 p-sm-2">
+                        <!-- /.form-group -->
+
+
+                        <!-- .form-group -->
+                        <div class="form-group">
+                          <label for="lbl1">Email
+                            <abbr title="Required">*</abbr>
+                          </label>
+                          <input type="email" class="form-control placeholder-shown" id="lbl1" placeholder="example@gmail.com" required> 
+                        </div>
+                        <!-- /.form-group -->
+
+                        <!-- .form-group -->
+                        <div class="form-group">
+                          <label for="lbl1">Phone Number
+                            <abbr title="Required">*</abbr>
+                          </label>
+                          <input type="text" class="form-control placeholder-shown" id="lbl1" placeholder="eg :9849554478" required> 
+                        </div>
+                        <!-- /.form-group -->
+                        
+                        <!-- .form-group -->
+                        <div class="form-group">
+                          <label for="lbl1">Address
+                            <abbr title="Required">*</abbr>
+                          </label>
+                          <input type="text" class="form-control placeholder-shown" id="lbl1" placeholder="Enter the place you reside" required> 
+                        </div>
+                        <!-- /.form-group -->
+
+                      <!-- select-element -->
+                        <div class="form-group">
+                          <label for="sel3">Status</label>
+                          <select class="custom-select" id="sel3" required >
+                            <option value=""> Choose... </option>
+                            <option value="ACTIVE"> Active</option>
+                            <option value="Inactive"> Inactive </option>
+                            <option value="Completed"> Completed </option>
+                            <option value="Completed"> Dropped</option>
+                          </select>
+                        </div>
+                        <div class="btn btn-outline-primary d-flex justify-content-center ">Register Student</div>
+                       
+                      </fieldset>
+                      <!-- /.fieldset -->
+                    </form>
+                    <!-- /.form -->
+                  </div>
+                    </div>
+                    <div class="col-12 col-sm-4 col-lg-4 d-flex  justify-content-center ">
+                      <div class=" col-12 col-lg-3  d-block d-sm-block  p-2 p-sm-2">
                             <div class="d-block">
-                                <a href="#AddStudents"><button type="button" class="btn btn-outline-primary">Add students</button></a>
+                                <a href="#studenttable"><button type="button" class="btn btn-primary">View students</button></a>
 
                             </div>
                         </div>
-                     </div>
-                    <!-- The right side is now empty of widgets but retains the dashboard margins -->
-                </div>
+                    </div>
+                  </div>
+                 <!-- ./students add -->
+
+
+<h1 class="page-title">View students</h1>
+                <!-- Page Content Section -->
+                <div class="page-section">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-lg-12 me-sm-3 rounded">
+
+            <table class="table table-hover table-bordered table-striped" id="studenttable">
+                <thead>
+                    <tr>
+                        <th style="min-width:200px">Name</th>
+                        <th>Phone No</th>
+                        <th>Email</th>
+                        <th>DOB</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                        <th>Updated At</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Ram Bahadur Thapa</td>
+                        <td>9845123456</td>
+                        <td>ram.thapa@example.com</td>
+                        <td>2003-05-14</td>
+                        <td>Kathmandu</td>
+                        <td>Active</td>
+                        <td>2025-01-10</td>
+                    </tr>
+
+                    <tr>
+                        <td>Sita Kumari Shrestha</td>
+                        <td>9801122334</td>
+                        <td>sita.shrestha@example.com</td>
+                        <td>2002-09-21</td>
+                        <td>Lalitpur</td>
+                        <td>Active</td>
+                        <td>2025-01-08</td>
+                    </tr>
+
+                    <tr>
+                        <td>Bishal Gurung</td>
+                        <td>9865012345</td>
+                        <td>bishal.gurung@example.com</td>
+                        <td>2004-01-12</td>
+                        <td>Pokhara</td>
+                        <td>Inactive</td>
+                        <td>2024-12-29</td>
+                    </tr>
+
+                    <tr>
+                        <td>Anisha KC</td>
+                        <td>9812345678</td>
+                        <td>anisha.kc@example.com</td>
+                        <td>2003-11-05</td>
+                        <td>Biratnagar</td>
+                        <td>Active</td>
+                        <td>2025-01-05</td>
+                    </tr>
+
+                    <tr>
+                        <td>Pratik Sharma</td>
+                        <td>9823456789</td>
+                        <td>pratik.sharma@example.com</td>
+                        <td>2001-07-19</td>
+                        <td>Butwal</td>
+                        <td>Suspended</td>
+                        <td>2024-12-20</td>
+                    </tr>
+
+                    <tr>
+    <td>Kritika Basnet</td>
+    <td>9847654321</td>
+    <td>kritika.basnet@example.com</td>
+    <td>2003-03-18</td>
+    <td>Bharatpur</td>
+    <td>Active</td>
+    <td>2025-01-12</td>
+</tr>
+
+<tr>
+    <td>Sandesh Paudel</td>
+    <td>9805567890</td>
+    <td>sandesh.paudel@example.com</td>
+    <td>2002-12-10</td>
+    <td>Dharan</td>
+    <td>Active</td>
+    <td>2025-01-03</td>
+</tr>
+
+<tr>
+    <td>Asmita Kunwar</td>
+    <td>9812445789</td>
+    <td>asmita.kunwar@example.com</td>
+    <td>2004-02-07</td>
+    <td>Tanahun</td>
+    <td>Inactive</td>
+    <td>2024-12-18</td>
+</tr>
+
+<tr>
+    <td>Rohan Khadka</td>
+    <td>9862341199</td>
+    <td>rohan.khadka@example.com</td>
+    <td>2001-10-22</td>
+    <td>Bhaktapur</td>
+    <td>Suspended</td>
+    <td>2024-11-30</td>
+</tr>
+
+<tr>
+    <td>Nikita Maharjan</td>
+    <td>9821457790</td>
+    <td>nikita.maharjan@example.com</td>
+    <td>2003-06-09</td>
+    <td>Kirtipur</td>
+    <td>Active</td>
+    <td>2025-01-09</td>
+</tr>
+
+<tr>
+    <td>Manoj Thapa Magar</td>
+    <td>9843234576</td>
+    <td>manoj.thapa@example.com</td>
+    <td>2002-04-26</td>
+    <td>Lamjung</td>
+    <td>Inactive</td>
+    <td>2024-12-15</td>
+</tr>
+
+<tr>
+    <td>Aayusha Kharel</td>
+    <td>9801239090</td>
+    <td>aayusha.kharel@example.com</td>
+    <td>2004-08-05</td>
+    <td>Itahari</td>
+    <td>Active</td>
+    <td>2025-01-01</td>
+</tr>
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
             </div>
           </div>
         </div>
