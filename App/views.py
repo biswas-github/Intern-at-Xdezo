@@ -23,6 +23,10 @@ def LoginPage(request):
 def AdminDashboard(request):
     return render(request,'ADMIN/Admin-Dashboard.html')
 
+# DataManagement-Student for managing the students 
+def DataManagementStudent(request):
+    return render(request,'ADMIN/DataManagement_Student.html')
+
 
 # first page for the viewer 
 def ViewerDashboard(request):
