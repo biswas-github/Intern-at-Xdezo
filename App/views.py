@@ -26,6 +26,18 @@ def AdminDashboard(request):
 # DataManagement-Student for managing the students 
 def DataManagementStudent(request):
     return render(request,'ADMIN/DataManagement_Student.html')
+# to view all the students
+def ViewStudent(request):
+    return render(request,'ADMIN/View-Student.html')
+# updating the student
+def UpdateStudent(request,id):
+    return render(request,'ADMIN/Update-Student.html')
+# showing the student details
+def ShowStudent(request,id):
+    return render(request,'ADMIN/Show-Student.html')
+# delete the students
+def DeleteStudent(request,id):
+    return render(request,'ADMIN/Delete-Student.html')
 
 
 # first page for the viewer 

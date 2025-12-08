@@ -1,5 +1,5 @@
 from django.urls import path,include
-from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent
+from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent
 
 
 # url patterns for the app
@@ -11,7 +11,15 @@ urlpatterns = [
         # datamanagement 
           #student
     path('AdminDashboard/DataManagementStudent',DataManagementStudent,name='DataManagementStudent'),
-    # for viewer dashboard
-    path('ViewerDashboard/',ViewerDashboard,name='ViewerDashboard')
+                #view students
+    path('AdminDashboard/DataManagementStudent/ViewStudent',ViewStudent,name="ViewStudent"),
+                #update students 
+    path('AdminDashboard/DataManagementStudent/UpdateStudent/<int:id>',UpdateStudent,name="UpdateStudent"),
+                #show student
+    path('AdminDashboard/DataManagementStudent/<int:id>',ShowStudent,name="ShowStudent"),
+                #delete Students
+    path('AdminDashboard/DataManagementStudent/DeleteStudent/<int:id>',DeleteStudent,name='DeleteStudent'),
 
+    # for viewer dashboard
+    path('ViewerDashboard/',ViewerDashboard,name='ViewerDashboard'),
 ]

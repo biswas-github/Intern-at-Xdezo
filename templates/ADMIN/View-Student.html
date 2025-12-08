@@ -536,7 +536,7 @@
                   </a>
                   <ul class="menu">
                     <li class="menu-item has-active">
-                      <a class="menu-link " href="{% url 'DataManagementStudent' %}">Students</a>
+                      <a class="menu-link" href="{% url 'DataManagementStudent' %}">Students</a>
                     </li>
                     <li class="menu-item">
                       <a href="#courses" class="menu-link">Courses</a>
@@ -652,133 +652,279 @@
           <div class="page">
             <div class="page-inner">
               <!-- Page header -->
+              <!-- back -->
+              <a href="{% url 'DataManagementStudent' %}" class="btn btn-lg btn-light"><i class="fa fa-angle-right"></i> Go Back</a>
+              <!-- ./back -->
               <header class="page-title-bar">
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <h1 class="page-title">Add new Students</h1>
-                    <p class="text-muted mb-0">Datamanagement / Students</p>
+                    <h1 class="page-title">View Students</h1>
+                    <p class="text-muted mb-0">DataManagement / Students / View students</p>
                   </div>
                 </div>
               </header>
-              <!-- adding the students -->
-              <!-- <h4 class="d-block d-lg-block d-sm-block">Adding students</h4> -->
-              <!-- form -->
-              <div class="row">
-                <div class="col-12 col-sm-8 col-lg-8 border rounded mb-5 mb-sm-5 ">
-                  <div class="card-body ">
-                    <!-- .form -->
-                    <form>
-                      <!-- .fieldset -->
-                      <fieldset>
-                        <legend>Student Registration form</legend>
-                        <!-- .form-group -->
-                        <div class="form-group">
-                          <label for="lbl1">
-                            Student name
-                            <abbr title="Required">*</abbr>
-                          </label>
-                          <input type="text"
-                                 class="form-control placeholder-shown"
-                                 id="lbl1"
-                                 placeholder="Enter your name"
-                                 required>
-                        </div>
-                        <!-- /.form-group -->
-                        <!-- .form-group -->
-                        <div class="form-group">
-                          <label for="lbl1">
-                            Email
-                            <abbr title="Required">*</abbr>
-                          </label>
-                          <input type="email"
-                                 class="form-control placeholder-shown"
-                                 id="lbl1"
-                                 placeholder="example@gmail.com"
-                                 required>
-                        </div>
-                        <!-- /.form-group -->
-                        <!-- .form-group -->
-                        <div class="form-group">
-                          <label for="lbl1">
-                            Phone Number
-                            <abbr title="Required">*</abbr>
-                          </label>
-                          <input type="text"
-                                 class="form-control placeholder-shown"
-                                 id="lbl1"
-                                 placeholder="eg :9849554478"
-                                 required>
-                        </div>
-                        <!-- /.form-group -->
-                        <!-- .form-group -->
-                        <div class="form-group">
-                          <label for="lbl1">
-                            Address
-                            <abbr title="Required">*</abbr>
-                          </label>
-                          <input type="text"
-                                 class="form-control placeholder-shown"
-                                 id="lbl1"
-                                 placeholder="Enter the place you reside"
-                                 required>
-                        </div>
-                        <!-- /.form-group -->
-                        <!-- select-element -->
-                        <div class="form-group">
-                          <label for="sel3">Status</label>
-                          <select class="custom-select" id="sel3" required>
-                            <option value="">Choose...</option>
-                            <option value="ACTIVE">Active</option>
-                            <option value="Inactive">Inactive</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Completed">Dropped</option>
-                          </select>
-                        </div>
-                        <div class="btn btn-outline-primary d-flex justify-content-center ">Register Student</div>
-                      </fieldset>
-                      <!-- /.fieldset -->
-                    </form>
-                    <!-- /.form -->
-                  </div>
-                </div>
-                <div class="col-12 col-sm-4 col-lg-4 d-flex  justify-content-center ">
-                  <div class=" col-12 col-lg-3  d-block d-sm-block  p-2 p-sm-2">
-                    <div class="d-block">
-                      <a href="{% url 'ViewStudent' %}">
-                        <button type="button" class="btn btn-primary  mb-sm-5 vw-sm-25 ">
-                          View and update
-                          <br>
-                          Students &nbsp;
-                        </button>
-                      </a>
+              <!-- Page Content Section -->
+              <div class="page-section">
+                <!-- YOUR CONTENT GOES HERE -->
+                <!-- .table view students  searchbar -->
+                <form class="top-bar-search w-100 w-md-auto border border-primary rounded"
+                      method="get"
+                      action="">
+                  <div class="input-group input-group-search">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <span class="oi oi-magnifying-glass"></span>
+                      </span>
                     </div>
+                    <input type="text"
+                           name="student"
+                           class="form-control"
+                           placeholder="Search"
+                           aria-label="Search"
+                           required />
+                    <div class="input-group-append d-none d-sm-flex">
+                      <button class="btn btn-primary" type="submit">Go</button>
+                    </div>
+                  </div>
+                </form>
+                <!-- ./ table view students -->
+                <div class="row">
+                  <div class="col-12 col-sm-12 col-lg-12 me-sm-3 rounded">
+                    <div class="table-responsive">
+                      <table class="table table-hover table-bordered table-striped"
+                             id="studenttable">
+                        <thead>
+                          <tr>
+                            <th style="min-width:200px">Name</th>
+                            <th>Phone No</th>
+                            <th>Email</th>
+                            <th>&nbsp; &nbsp; Actions&nbsp; &nbsp;</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Ram Bahadur Thapa</td>
+                            <td>9845123456</td>
+                            <td>ram.thapa@example.com</td>
+                            <td>
+                              <div class="d-flex flex-column flex-md-row gap-2 justify-content-center"
+                                   role="group">
+                                <!-- Added btn-sm for smaller size -->
+                                <a href="{% url 'ShowStudent' id=5 %}"
+                                   class="btn btn-info btn-sm text-white">Show more</a>
+                                <a href="{% url 'UpdateStudent' id=5 %}"
+                                   class="btn btn-warning btn-sm text-dark">Update</a>
+                                <a href="{% url 'DeleteStudent' id=5 %}" class="btn btn-danger btn-sm">Delete</a>
+                              </div>
+                            </td>
+                          </tr>
+                        </a>
+                        <tr>
+                          <td>Sita Kumari Shrestha</td>
+                          <td>9801122334</td>
+                          <td>sita.shrestha@example.com</td>
+                          <td>
+                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-center"
+                                 role="group">
+                              <!-- Added btn-sm for smaller size -->
+                              <a href="{% url 'ShowStudent' id=5 %}"
+                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <a href="{% url 'UpdateStudent' id=5 %}"
+                                 class="btn btn-warning btn-sm text-dark">Update</a>
+                              <a href="{% url 'DeleteStudent' id=5 %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Bishal Gurung</td>
+                          <td>9865012345</td>
+                          <td>bishal.gurung@example.com</td>
+                          <td>
+                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-center"
+                                 role="group">
+                              <!-- Added btn-sm for smaller size -->
+                              <a href="{% url 'ShowStudent' id=5 %}"
+                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <a href="{% url 'UpdateStudent' id=5 %}"
+                                 class="btn btn-warning btn-sm text-dark">Update</a>
+                              <a href="{% url 'DeleteStudent' id=5 %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Anisha KC</td>
+                          <td>9812345678</td>
+                          <td>anisha.kc@example.com</td>
+                          <td>
+                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-center"
+                                 role="group">
+                              <!-- Added btn-sm for smaller size -->
+                              <a href="{% url 'ShowStudent' id=5 %}"
+                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <a href="{% url 'UpdateStudent' id=5 %}"
+                                 class="btn btn-warning btn-sm text-dark">Update</a>
+                              <a href="{% url 'DeleteStudent' id=5 %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Pratik Sharma</td>
+                          <td>9823456789</td>
+                          <td>pratik.sharma@example.com</td>
+                          <td>
+                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-center"
+                                 role="group">
+                              <!-- Added btn-sm for smaller size -->
+                              <a href="{% url 'ShowStudent' id=5 %}"
+                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <a href="{% url 'UpdateStudent' id=5 %}"
+                                 class="btn btn-warning btn-sm text-dark">Update</a>
+                              <a href="{% url 'DeleteStudent' id=5 %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Kritika Basnet</td>
+                          <td>9847654321</td>
+                          <td>kritika.basnet@example.com</td>
+                          <td>
+                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-center"
+                                 role="group">
+                              <!-- Added btn-sm for smaller size -->
+                              <a href="{% url 'ShowStudent' id=5 %}"
+                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <a href="{% url 'UpdateStudent' id=5 %}"
+                                 class="btn btn-warning btn-sm text-dark">Update</a>
+                              <a href="{% url 'DeleteStudent' id=5 %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Sandesh Paudel</td>
+                          <td>9805567890</td>
+                          <td>sandesh.paudel@example.com</td>
+                          <td>
+                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-center"
+                                 role="group">
+                              <!-- Added btn-sm for smaller size -->
+                              <a href="{% url 'ShowStudent' id=5 %}"
+                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <a href="{% url 'UpdateStudent' id=5 %}"
+                                 class="btn btn-warning btn-sm text-dark">Update</a>
+                              <a href="{% url 'DeleteStudent' id=5 %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Asmita Kunwar</td>
+                          <td>9812445789</td>
+                          <td>asmita.kunwar@example.com</td>
+                          <td>
+                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-center"
+                                 role="group">
+                              <!-- Added btn-sm for smaller size -->
+                              <a href="{% url 'ShowStudent' id=5 %}"
+                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <a href="{% url 'UpdateStudent' id=5 %}"
+                                 class="btn btn-warning btn-sm text-dark">Update</a>
+                              <a href="{% url 'DeleteStudent' id=5 %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Rohan Khadka</td>
+                          <td>9862341199</td>
+                          <td>rohan.khadka@example.com</td>
+                          <td>
+                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-center"
+                                 role="group">
+                              <!-- Added btn-sm for smaller size -->
+                              <a href="{% url 'ShowStudent' id=5 %}"
+                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <a href="{% url 'UpdateStudent' id=5 %}"
+                                 class="btn btn-warning btn-sm text-dark">Update</a>
+                              <a href="{% url 'DeleteStudent' id=5 %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Nikita Maharjan</td>
+                          <td>9821457790</td>
+                          <td>nikita.maharjan@example.com</td>
+                          <td>
+                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-center"
+                                 role="group">
+                              <!-- Added btn-sm for smaller size -->
+                              <a href="{% url 'ShowStudent' id=5 %}"
+                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <a href="{% url 'UpdateStudent' id=5 %}"
+                                 class="btn btn-warning btn-sm text-dark">Update</a>
+                              <a href="{% url 'DeleteStudent' id=5 %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Manoj Thapa Magar</td>
+                          <td>9843234576</td>
+                          <td>manoj.thapa@example.com</td>
+                          <td>
+                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-center"
+                                 role="group">
+                              <!-- Added btn-sm for smaller size -->
+                              <a href="{% url 'ShowStudent' id=5 %}"
+                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <a href="{% url 'UpdateStudent' id=5 %}"
+                                 class="btn btn-warning btn-sm text-dark">Update</a>
+                              <a href="{% url 'DeleteStudent' id=5 %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Aayusha Kharel</td>
+                          <td>9801239090</td>
+                          <td>aayusha.kharel@example.com</td>
+                          <td>
+                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-center"
+                                 role="group">
+                              <!-- Added btn-sm for smaller size -->
+                              <a href="{% url 'ShowStudent' id=5 %}"
+                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <a href="{% url 'UpdateStudent' id=5 %}"
+                                 class="btn btn-warning btn-sm text-dark">Update</a>
+                              <a href="{% url 'DeleteStudent' id=5 %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
-              <!-- ./students add -->
+              <!-- The right side is now empty of widgets but retains the dashboard margins -->
             </div>
           </div>
         </div>
-      </main>
-      <!-- /.app-main -->
-    </div>
-    <!-- /.app -->
-    <!-- BEGIN BASE JS -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-    <!-- END BASE JS -->
-    <!-- BEGIN PLUGINS JS -->
-    <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-    <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-    <!-- END PLUGINS JS -->
-    <!-- BEGIN THEME JS -->
-    <script src="{% static 'javascript/main.min.js' %}"></script>
-    <!-- END THEME JS -->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-    <script>
+      </div>
+    </main>
+    <!-- /.app-main -->
+  </div>
+  <!-- /.app -->
+  <!-- BEGIN BASE JS -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  <!-- END BASE JS -->
+  <!-- BEGIN PLUGINS JS -->
+  <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+  <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+  <!-- END PLUGINS JS -->
+  <!-- BEGIN THEME JS -->
+  <script src="{% static 'javascript/main.min.js' %}"></script>
+  <!-- END THEME JS -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+  <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -786,6 +932,6 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
-    </script>
-  </body>
+  </script>
+</body>
 </html>
