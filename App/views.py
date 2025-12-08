@@ -22,7 +22,7 @@ def LoginPage(request):
 # admin dashboard after login 
 def AdminDashboard(request):
     return render(request,'ADMIN/Admin-Dashboard.html')
-
+# ----Students------#
 # DataManagement-Student for managing the students 
 def DataManagementStudent(request):
     return render(request,'ADMIN/DataManagement_Student.html')
@@ -39,6 +39,12 @@ def ShowStudent(request,id):
 def DeleteStudent(request,id):
     return render(request,'ADMIN/Delete-Student.html')
 
+# ----Courses------#
+# DataManagement->courses for managing the Courses
+def Course(request):
+    return render(request,'ADMIN/Courses.html')
+def ViewCourses(request):
+    return render(request,'ADMIN/View-Courses.html')
 
 # first page for the viewer 
 def ViewerDashboard(request):

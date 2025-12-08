@@ -539,7 +539,7 @@
                       <a class="menu-link " href="{% url 'DataManagementStudent' %}">Students</a>
                     </li>
                     <li class="menu-item">
-                      <a href="#courses" class="menu-link">Courses</a>
+                      <a href="{% url 'Course' %}" class="menu-link">Courses</a>
                     </li>
                     <li class="menu-item">
                       <a href="#batches" class="menu-link">Batches</a>
@@ -734,7 +734,10 @@
                             <option value="Completed">Dropped</option>
                           </select>
                         </div>
-                        <div class="btn btn-outline-primary d-flex justify-content-center ">Register Student</div>
+                        <button type="submit"
+                                class="btn btn-outline-primary d-flex justify-content-center w-100">
+                          Register Student
+                        </button>
                       </fieldset>
                       <!-- /.fieldset -->
                     </form>

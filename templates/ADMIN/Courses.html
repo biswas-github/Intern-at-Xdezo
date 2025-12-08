@@ -535,11 +535,11 @@
                                         <span class="menu-text">Data management</span>
                                     </a>
                                     <ul class="menu">
-                                        <li class="menu-item has-active">
-                                            <a class="menu-link" href="{% url 'DataManagementStudent' %}">Students</a>
+                                        <li class="menu-item ">
+                                            <a class="menu-link " href="{% url 'DataManagementStudent' %}">Students</a>
                                         </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'Course' %}" class="menu-link">Courses</a>
+                                        <li class="menu-item has-active">
+                                            <a href="{% url 'Course' %}" class="menu-link">Course</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#batches" class="menu-link">Batches</a>
@@ -652,95 +652,108 @@
                     <div class="page">
                         <div class="page-inner">
                             <!-- Page header -->
-                            <!-- back -->
-                            <a href="{% url 'ViewStudent' %}" class="btn btn-lg btn-light"><i class="fa fa-angle-right"></i> Go Back</a>
-                            <!-- ./back -->
                             <header class="page-title-bar">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="page-title">Update Students</h1>
-                                        <p class="text-muted mb-0">DataManagement / Students / Update Students</p>
+                                        <h1 class="page-title">Add new Course</h1>
+                                        <p class="text-muted mb-0">Datamanagement / Course</p>
                                     </div>
                                 </div>
                             </header>
-                            <!-- Page Content Section -->
-                            <!-- .form -->
-                            <form>
-                                <!-- .fieldset -->
-                                <fieldset>
-                                    <legend>Student Registration form</legend>
-                                    <!-- .form-group -->
-                                    <div class="form-group">
-                                        <label for="lbl1">
-                                            Student name
-                                            <abbr title="Required">*</abbr>
-                                        </label>
-                                        <input type="text"
-                                               class="form-control placeholder-shown"
-                                               id="lbl1"
-                                               placeholder="Enter your name"
-                                               value="Ram Bahadur Thapa	"
-                                               required>
+                            <!-- adding the students -->
+                            <!-- <h4 class="d-block d-lg-block d-sm-block">Adding students</h4> -->
+                            <!-- form -->
+                            <div class="row">
+                                <div class="col-12 col-sm-8 col-lg-8 border rounded mb-5 mb-sm-5 ">
+                                    <div class="card-body ">
+                                        <!-- .form -->
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <!-- .fieldset -->
+                                            <fieldset>
+                                                <legend>Register New Course</legend>
+                                                <!-- .form-group -->
+                                                <div class="form-group">
+                                                    <label for="lbl1">
+                                                        Tittle
+                                                        <abbr title="Required">*</abbr>
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control placeholder-shown"
+                                                           id="lbl1"
+                                                           placeholder="Enter Course Tittle"
+                                                           name="tittle"
+                                                           required>
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- .form-group -->
+                                                <div class="form-group">
+                                                    <label for="lbl1">
+                                                        Course CODE
+                                                        <abbr title="Required">*</abbr>
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control placeholder-shown"
+                                                           id="lbl1"
+                                                           placeholder="eg: python 101"
+                                                           name="CourseCode"
+                                                           required>
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- .form-group -->
+                                                <div class="form-group">
+                                                    <label for="lbl1">
+                                                        FEE
+                                                        <abbr title="Required">*</abbr>
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control placeholder-shown"
+                                                           id="lbl1"
+                                                           placeholder="16 k,16000"
+                                                           name="fee"
+                                                           required>
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- .form-group -->
+                                                <div class="form-group">
+                                                    <label for="lbl2">
+                                                        Description
+                                                        <abbr title="Required">*</abbr>
+                                                    </label>
+                                                    <textarea class="form-control placeholder-shown"
+                                                              id="lbl2"
+                                                              rows="4"
+                                                              placeholder="Enter the description"
+                                                              name="Description"
+                                                              required></textarea>
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- select-element -->
+                                                <button type="submit"
+                                                        class="btn btn-outline-primary d-flex justify-content-center w-100">
+                                                    Add Course
+                                                </button>
+                                            </fieldset>
+                                            <!-- /.fieldset -->
+                                        </form>
+                                        <!-- /.form -->
                                     </div>
-                                    <!-- /.form-group -->
-                                    <!-- .form-group -->
-                                    <div class="form-group">
-                                        <label for="lbl1">
-                                            Email
-                                            <abbr title="Required">*</abbr>
-                                        </label>
-                                        <input type="email"
-                                               class="form-control placeholder-shown"
-                                               id="lbl1"
-                                               placeholder="example@gmail.com"
-                                               value="ram.thapa@example.com"
-                                               required>
+                                </div>
+                                <div class="col-12 col-sm-4 col-lg-4 d-flex  justify-content-center ">
+                                    <div class=" col-12 col-lg-3  d-block d-sm-block  p-2 p-sm-2">
+                                        <div class="d-block">
+                                            <a href="{% url 'ViewCourses' %}">
+                                                <button type="button" class="btn btn-primary  mb-sm-5 vw-sm-25 ">
+                                                    View and update
+                                                    <br>
+                                                    courses &nbsp;
+                                                </button>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <!-- /.form-group -->
-                                    <!-- .form-group -->
-                                    <div class="form-group">
-                                        <label for="lbl1">
-                                            Phone Number
-                                            <abbr title="Required">*</abbr>
-                                        </label>
-                                        <input type="text"
-                                               class="form-control placeholder-shown"
-                                               id="lbl1"
-                                               placeholder="eg :9849554478"
-                                               value="9845123456"
-                                               required>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <!-- .form-group -->
-                                    <div class="form-group">
-                                        <label for="lbl1">
-                                            Address
-                                            <abbr title="Required">*</abbr>
-                                        </label>
-                                        <input type="text"
-                                               class="form-control placeholder-shown"
-                                               id="lbl1"
-                                               placeholder="Enter the place you reside"
-                                               value='pokhara'
-                                               required>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <!-- select-element -->
-                                    <div class="form-group">
-                                        <label for="sel3">Status</label>
-                                        <select class="custom-select" id="sel3" required>
-                                            <option value="">Choose...</option>
-                                            <option value="ACTIVE">Active</option>
-                                            <option value="Inactive">Inactive</option>
-                                            <option value="Completed">Completed</option>
-                                            <option value="Completed">Dropped</option>
-                                        </select>
-                                    </div>
-                                    <div class="btn btn-outline-primary d-flex justify-content-center ">Update Student</div>
-                                </fieldset>
-                                <!-- /.fieldset -->
-                            </form>
-                            <!-- /.form -->
+                                </div>
+                            </div>
+                            <!-- ./students add -->
                         </div>
                     </div>
                 </div>
