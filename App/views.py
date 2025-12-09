@@ -66,7 +66,9 @@ def Batch(request):
 def ViewBatches(request):
     return render(request,'ADMIN/Batch/View-Batches.html')
 
-
+# -----Instructor-------
+def Instructor(request):
+    return render(request,'ADMIN/Instructor/Instructor.html')
 
 # first page for the viewer 
 def ViewerDashboard(request):

@@ -535,16 +535,16 @@
                                         <span class="menu-text">Data management</span>
                                     </a>
                                     <ul class="menu">
-                                        <li class="menu-item has-active">
-                                            <a class="menu-link" href="{% url 'DataManagementStudent' %}">Students</a>
+                                        <li class="menu-item ">
+                                            <a class="menu-link " href="{% url 'DataManagementStudent' %}">Students</a>
                                         </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'Course' %}" class="menu-link">Courses</a>
+                                        <li class="menu-item ">
+                                            <a href="{% url 'Course' %}" class="menu-link">Course</a>
                                         </li>
-                                        <li class="menu-item">
+                                        <li class="menu-item ">
                                             <a href="{% url 'Batch' %}" class="menu-link">Batches</a>
                                         </li>
-                                        <li class="menu-item">
+                                        <li class="menu-item has-active">
                                             <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
                                         </li>
                                         <li class="menu-item">
@@ -655,60 +655,17 @@
                     <div class="page">
                         <div class="page-inner">
                             <!-- Page header -->
-                            <!-- back -->
-                            <a href="{% url 'ViewStudent' %}" class="btn btn-lg btn-light"><i class="fa fa-angle-right"></i> Go Back</a>
-                            <!-- ./back -->
                             <header class="page-title-bar">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="page-title">Show  Student Details</h1>
-                                        <p class="text-muted mb-0">DataManagement / Students /  Show  Student Details</p>
+                                        <h1 class="page-title">Add new Instructor</h1>
+                                        <p class="text-muted mb-0">Datamanagement / Instructor</p>
                                     </div>
                                 </div>
                             </header>
-                            <!-- Page Content Section -->
-                            <!-- student details section -->
-                            <div class="container mt-4">
-                                <div class="card shadow-sm">
-                                    <div class="card-header bg-primary text-white">
-                                        <h5 class="mb-0">Student Details</h5>
-                                    </div>
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-bordered mb-0">
-                                                <tbody>
-                                                    <!-- Name -->
-                                                    <tr>
-                                                        <th scope="row" class="bg-light" style="width: 30%; min-width: 120px;">Name</th>
-                                                        <td>John Doe</td>
-                                                    </tr>
-                                                    <!-- Address -->
-                                                    <tr>
-                                                        <th scope="row" class="bg-light">Address</th>
-                                                        <!-- 'text-break' prevents long addresses from breaking layout on small phones -->
-                                                        <td class="text-break">1234 Maple Avenue, Springfield, IL, 62704, USA</td>
-                                                    </tr>
-                                                    <!-- DOB -->
-                                                    <tr>
-                                                        <th scope="row" class="bg-light">Date of Birth</th>
-                                                        <td>Jan 15, 2002</td>
-                                                    </tr>
-                                                    <!-- Email -->
-                                                    <tr>
-                                                        <th scope="row" class="bg-light">Email</th>
-                                                        <td class="text-break">john.doe.student.2024@university.edu</td>
-                                                    </tr>
-                                                    <!-- Phone -->
-                                                    <tr>
-                                                        <th scope="row" class="bg-light">Phone Number</th>
-                                                        <td>+1 (555) 019-2834</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- content goes here -->
+                            <!-- form for the instructor -->
+                             
                         </div>
                     </div>
                 </div>
