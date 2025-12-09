@@ -46,7 +46,11 @@ def Course(request):
 def ViewCourses(request):
     return render(request,'ADMIN/View-Courses.html')
 def UpdateCourse(request,id):
+    if request.method=="POST":
+        # DO SOME LOGICS
+        return redirect('ViewCourses')
     return render(request,'ADMIN/Update-Course.html')
+
 
 def DeleteCourse(request,id):
     return render(request,'ADMIN/Delete-Course.html')
