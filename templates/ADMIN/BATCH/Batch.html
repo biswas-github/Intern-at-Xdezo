@@ -538,10 +538,10 @@
                                         <li class="menu-item ">
                                             <a class="menu-link " href="{% url 'DataManagementStudent' %}">Students</a>
                                         </li>
-                                        <li class="menu-item has-active">
+                                        <li class="menu-item ">
                                             <a href="{% url 'Course' %}" class="menu-link">Course</a>
                                         </li>
-                                        <li class="menu-item">
+                                        <li class="menu-item has-active">
                                             <a href="{% url 'Batch' %}" class="menu-link">Batches</a>
                                         </li>
                                         <li class="menu-item">
@@ -658,83 +658,108 @@
                             <header class="page-title-bar">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h1 class="page-title">Add new Course</h1>
-                                        <p class="text-muted mb-0">Datamanagement / Course</p>
+                                        <h1 class="page-title">Add new Batch</h1>
+                                        <p class="text-muted mb-0">Datamanagement / Batch</p>
                                     </div>
                                 </div>
                             </header>
-                            <!-- adding the students -->
-                            <!-- <h4 class="d-block d-lg-block d-sm-block">Adding students</h4> -->
-                            <!-- form -->
+                            <!-- Batch Registration Form UI -->
                             <div class="row">
                                 <div class="col-12 col-sm-8 col-lg-8 border rounded mb-5 mb-sm-5 ">
                                     <div class="card-body ">
                                         <!-- .form -->
                                         <form method="post">
-                                            {% csrf_token %}
+                                            <!-- {% csrf_token %} (Keep this commented or remove if strictly UI) -->
                                             <!-- .fieldset -->
                                             <fieldset>
-                                                <legend>Register New Course</legend>
-                                                <!-- .form-group -->
+                                                <legend>Register New Batch</legend>
+                                                <!-- .form-group for Batch Name (name) -->
                                                 <div class="form-group">
-                                                    <label for="lbl1">
-                                                        Tittle
+                                                    <label for="id_name">
+                                                        Batch Name
                                                         <abbr title="Required">*</abbr>
                                                     </label>
                                                     <input type="text"
                                                            class="form-control placeholder-shown"
-                                                           id="lbl1"
-                                                           placeholder="Enter Course Tittle"
-                                                           name="tittle"
+                                                           id="id_name"
+                                                           placeholder="eg: Python Jan 2026 Morning"
+                                                           name="name"
                                                            required>
                                                 </div>
                                                 <!-- /.form-group -->
-                                                <!-- .form-group -->
+                                                <!-- .form-group for Course (course - ForeignKey) -->
                                                 <div class="form-group">
-                                                    <label for="lbl1">
-                                                        Course CODE
+                                                    <label for="id_course">
+                                                        Course
                                                         <abbr title="Required">*</abbr>
                                                     </label>
-                                                    <input type="text"
-                                                           class="form-control placeholder-shown"
-                                                           id="lbl1"
-                                                           placeholder="eg: python 101"
-                                                           name="CourseCode"
-                                                           required>
+                                                    <select class="form-control" id="id_course" name="course" required>
+                                                        <option value="" disabled selected>Select a Course</option>
+                                                        <!-- Placeholder options (will be populated by Django) -->
+                                                        <option value="1">Course A (CODE101)</option>
+                                                        <option value="2">Course B (CODE202)</option>
+                                                    </select>
                                                 </div>
                                                 <!-- /.form-group -->
-                                                <!-- .form-group -->
+                                                <!-- .form-group for Instructor (instructor - ForeignKey, Optional) -->
                                                 <div class="form-group">
-                                                    <label for="lbl1">
-                                                        FEE
+                                                    <label for="id_instructor">Instructor</label>
+                                                    <select class="form-control" id="id_instructor" name="instructor">
+                                                        <!-- Option for null/blank field -->
+                                                        <option value="" selected>No Instructor Assigned (Optional)</option>
+                                                        <!-- Placeholder options (will be populated by Django) -->
+                                                        <option value="10">Instructor John Doe</option>
+                                                        <option value="11">Instructor Jane Smith</option>
+                                                    </select>
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <div class="row">
+                                                    <!-- .form-group for Start Date (start_date) -->
+                                                    <div class="form-group col-md-6">
+                                                        <label for="id_start_date">
+                                                            Start Date
+                                                            <abbr title="Required">*</abbr>
+                                                        </label>
+                                                        <input type="date"
+                                                               class="form-control"
+                                                               id="id_start_date"
+                                                               name="start_date"
+                                                               required>
+                                                    </div>
+                                                    <!-- /.form-group -->
+                                                    <!-- .form-group for End Date (end_date) -->
+                                                    <div class="form-group col-md-6">
+                                                        <label for="id_end_date">
+                                                            End Date
+                                                            <abbr title="Required">*</abbr>
+                                                        </label>
+                                                        <input type="date"
+                                                               class="form-control"
+                                                               id="id_end_date"
+                                                               name="end_date"
+                                                               required>
+                                                    </div>
+                                                    <!-- /.form-group -->
+                                                </div>
+                                                <!-- .form-group for Status (status - Choices) -->
+                                                <div class="form-group">
+                                                    <label for="id_status">
+                                                        Status
                                                         <abbr title="Required">*</abbr>
                                                     </label>
-                                                    <input type="text"
-                                                           class="form-control placeholder-shown"
-                                                           id="lbl1"
-                                                           placeholder="16 k,16000"
-                                                           name="fee"
-                                                           required>
+                                                    <select class="form-control" id="id_status" name="status" required>
+                                                        <!-- Options based on Batch.Status choices -->
+                                                        <option value="UPCOMING" selected>Upcoming</option>
+                                                        <option value="ONGOING">Ongoing</option>
+                                                        <option value="COMPLETED">Completed</option>
+                                                        <option value="CANCELLED">Cancelled</option>
+                                                    </select>
                                                 </div>
                                                 <!-- /.form-group -->
-                                                <!-- .form-group -->
-                                                <div class="form-group">
-                                                    <label for="lbl2">
-                                                        Description
-                                                        <abbr title="Required">*</abbr>
-                                                    </label>
-                                                    <textarea class="form-control placeholder-shown"
-                                                              id="lbl2"
-                                                              rows="4"
-                                                              placeholder="Enter the description"
-                                                              name="Description"
-                                                              required></textarea>
-                                                </div>
-                                                <!-- /.form-group -->
-                                                <!-- select-element -->
+                                                <!-- submit button -->
                                                 <button type="submit"
-                                                        class="btn btn-outline-primary d-flex justify-content-center w-100">
-                                                    Add Course
+                                                        class="btn btn-outline-primary d-flex justify-content-center w-100 mt-4">
+                                                    Add Batch
                                                 </button>
                                             </fieldset>
                                             <!-- /.fieldset -->
@@ -742,21 +767,22 @@
                                         <!-- /.form -->
                                     </div>
                                 </div>
+                                <!-- View Batches Button Block -->
                                 <div class="col-12 col-sm-4 col-lg-4 d-flex  justify-content-center ">
-                                    <div class=" col-12 col-lg-3  d-block d-sm-block  p-2 p-sm-2">
+                                    <div class=" col-12 col-lg-8  d-block d-sm-block  p-2 p-sm-2">
                                         <div class="d-block">
-                                            <a href="{% url 'ViewCourses' %}">
+                                            <a href="{% url 'ViewBatches' %}">
                                                 <button type="button" class="btn btn-primary  mb-sm-5 vw-sm-25 ">
                                                     View and update
                                                     <br>
-                                                    courses &nbsp;
+                                                    Batches &nbsp;
                                                 </button>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- ./students add -->
+                            <!-- ./Batch Registration Form UI -->
                         </div>
                     </div>
                 </div>

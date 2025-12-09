@@ -58,6 +58,16 @@ def ShowCourse(request,id):
     return render(request,'ADMIN/Show-Course.html')
 
 
+# ----Batch------#
+def Batch(request):
+    return render(request,'ADMIN/Batch/Batch.html')
+
+ #viewbatches
+def ViewBatches(request):
+    return render(request,'ADMIN/Batch/View-Batches.html')
+
+
+
 # first page for the viewer 
 def ViewerDashboard(request):
     return render(request,'ADMIN/Viewer-Dashboard.html')
