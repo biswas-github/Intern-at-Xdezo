@@ -551,6 +551,9 @@
                                         <li class="menu-item">
                                             <a href="#classrooms" class="menu-link">Classrooms</a>
                                         </li>
+                                        <li class="menu-item">
+                                            <a href="#Enrollment" class="menu-link">Enrollments</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <!-- finance  -->
@@ -714,6 +717,9 @@
                                                             <!-- Action Buttons -->
                                                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                                                  role="group">
+                                                                <!-- show COurse -->
+                                                                <a href="{% url 'ShowCourse' id=1 %}"
+                                                                   class="btn btn-info btn-sm text-white">Show more</a>
                                                                 <!-- Update Button -->
                                                                 <a href="{% url 'UpdateCourse' id=1 %}"
                                                                    class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -762,6 +768,8 @@
                                                             <!-- Action Buttons -->
                                                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                                                  role="group">
+                                                                <a href="{% url 'ShowCourse' id=2 %}"
+                                                                   class="btn btn-info btn-sm text-white">Show more</a>
                                                                 <!-- Update Button -->
                                                                 <a href="{% url 'UpdateCourse' id=2 %}"
                                                                    class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -810,6 +818,9 @@
                                                             <!-- Action Buttons -->
                                                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                                                  role="group">
+                                                                <!-- Show course button -->
+                                                                <a href="{% url 'ShowCourse' id=3 %}"
+                                                                   class="btn btn-info btn-sm text-white">Show more</a>
                                                                 <!-- Update Button -->
                                                                 <a href="{% url 'UpdateCourse' id=3 %}"
                                                                    class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -861,24 +872,23 @@
             </div>
         </main>
         <!-- /.app-main -->
-    </div>
-    <!-- /.app -->
-    <!-- BEGIN BASE JS -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-    <!-- END BASE JS -->
-    <!-- BEGIN PLUGINS JS -->
-    <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-    <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-    <!-- END PLUGINS JS -->
-    <!-- BEGIN THEME JS -->
-    <script src="{% static 'javascript/main.min.js' %}"></script>
-    <!-- END THEME JS -->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-    <script>
+        <!-- /.app -->
+        <!-- BEGIN BASE JS -->
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <!-- END BASE JS -->
+        <!-- BEGIN PLUGINS JS -->
+        <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+        <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+        <!-- END PLUGINS JS -->
+        <!-- BEGIN THEME JS -->
+        <script src="{% static 'javascript/main.min.js' %}"></script>
+        <!-- END THEME JS -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async
+                src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+        <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -886,6 +896,6 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
-    </script>
-</body>
+        </script>
+    </body>
 </html>
