@@ -45,6 +45,10 @@ def Course(request):
     return render(request,'ADMIN/Courses.html')
 def ViewCourses(request):
     return render(request,'ADMIN/View-Courses.html')
+def UpdateCourse(request,id):
+    return render(request,'ADMIN/Update-Course.html')
+def DeleteCourse(request,id):
+    return render(request,'ADMIN/Delete-Course.html')
 
 # first page for the viewer 
 def ViewerDashboard(request):
