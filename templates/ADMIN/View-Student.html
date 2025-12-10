@@ -657,7 +657,6 @@
             <div class="page-inner">
               <!-- Page header -->
               <!-- back -->
-              <a href="{% url 'DataManagementStudent' %}" class="btn btn-lg btn-light"><i class="fa fa-angle-right"></i> Go Back</a>
               <!-- ./back -->
               <header class="page-title-bar">
                 <div class="d-flex justify-content-between align-items-center">
@@ -670,6 +669,20 @@
               <!-- Page Content Section -->
               <div class="page-section">
                 <!-- YOUR CONTENT GOES HERE -->
+                <!-- button -->
+                <div class="w-25 p-2 p-sm-2">
+                  <div class="d-block">
+                    <a href="{% url 'DataManagementStudent' %}">
+                      <!-- Added w-100 so it fills the width on mobile -->
+                      <button type="button" class="btn btn-primary w-100 mb-sm-5">
+                        Student
+                        <br>
+                        Registration&nbsp;
+                      </button>
+                    </a>
+                  </div>
+                </div>
+                <!-- ./ button -->
                 <!-- .table view students  searchbar -->
                 <form class="top-bar-search w-100 w-md-auto border border-primary rounded"
                       method="get"

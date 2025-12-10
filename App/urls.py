@@ -10,7 +10,7 @@ urlpatterns = [
     path('AdminDashboard/',AdminDashboard,name='AdminDashboard'),
         # datamanagement 
           #student
-    path('AdminDashboard/DataManagementStudent',DataManagementStudent,name='DataManagementStudent'),
+    path('AdminDashboard/DataManagementStudent/AddStudent',DataManagementStudent,name='DataManagementStudent'),
                 #view students
     path('AdminDashboard/DataManagementStudent/ViewStudent',ViewStudent,name="ViewStudent"),
                 #update students 
@@ -20,7 +20,7 @@ urlpatterns = [
                 #delete Students
     path('AdminDashboard/DataManagementStudent/DeleteStudent/<int:id>',DeleteStudent,name='DeleteStudent'),
     # -----Courses------
-    path('AdminDashboard/Course',Course,name="Course"),
+    path('AdminDashboard/DataManagementCourse/AddCourse',Course,name="Course"),
             # ViewCourses
     path('AdminDashboard/DataManagementStudent/ViewCourses',ViewCourses,name="ViewCourses"),
             #update course

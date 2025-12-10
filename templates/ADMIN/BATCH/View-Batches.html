@@ -658,12 +658,24 @@
                             <header class="page-title-bar">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <a href="{% url 'Batch' %}" class="btn btn-lg btn-light"><i class="fa fa-angle-right"></i> Go Back</a>
                                         <h1 class="page-title">View All Batches</h1>
                                         <p class="text-muted mb-0">Datamanagement / Batch / ViewBatches</p>
                                     </div>
                                 </div>
                             </header>
+                            <!-- add the batches -->
+                            <div class=" col-12 col-lg-8  d-block d-sm-block  p-2 p-sm-2">
+                                <div class="d-block">
+                                    <a href="{% url 'Batch' %}">
+                                        <button type="button" class="btn btn-primary  mb-sm-5 vw-sm-25 ">
+                                            View and update
+                                            <br>
+                                            Batches &nbsp;
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- ./add batches -->
                             <!-- content goes here -->
                             <!-- Table for Viewing and Updating Batches -->
                             <div class="row">
@@ -725,6 +737,58 @@
                                                                                 aria-label="Close">X</button>
                                                                     </div>
                                                                     <div class="modal-body text-center">Delete the batch **Batch Name**?</div>
+                                                                    <div class="modal-footer justify-content-center">
+                                                                        <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
+                                                                        <a href="#" class="btn btn-secondary text-danger">Yes, Delete</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <!-- ./ Actions Column -->
+                                                </tr>
+                                                <tr>
+                                                    <!-- Batch Name -->
+                                                    <td>
+                                                        <strong class="">Django Jan 2025 Morning</strong>
+                                                    </td>
+                                                    <!-- Course -->
+                                                    <td>Django Development (PY101)</td>
+                                                    <!-- Status -->
+                                                    <td>
+                                                        <span class="badge badge-pill badge-success">Completed</span>
+                                                    </td>
+                                                    <!-- Start Date -->
+                                                    <td class="text-center">2025-01-15</td>
+                                                    <!-- End Date -->
+                                                    <td class="text-center">2028-04-15</td>
+                                                    <!-- Actions Column -->
+                                                    <td>
+                                                        <!-- 1. The Button Group -->
+                                                        <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
+                                                             role="group">
+                                                            <!-- View Students Button -->
+                                                            <a href="#" class="btn btn-info btn-sm text-white">View Batch</a>
+                                                            <!-- Update Button -->
+                                                            <a href="#" class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
+                                                            <!-- Delete Trigger Button -->
+                                                            <button type="button"
+                                                                    class="btn btn-danger btn-sm"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#deleteModal2">Delete</button>
+                                                        </div>
+                                                        <!-- 2. The Confirmation Modal -->
+                                                        <div class="modal fade" id="deleteModal2" tabindex="-1" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">Confirm Deletion</h5>
+                                                                        <button type="button"
+                                                                                class="btn-close"
+                                                                                data-bs-dismiss="modal"
+                                                                                aria-label="Close">X</button>
+                                                                    </div>
+                                                                    <div class="modal-body text-center">Delete the batch **Batch Name: Django Jan 2025 Morning**?</div>
                                                                     <div class="modal-footer justify-content-center">
                                                                         <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
                                                                         <a href="#" class="btn btn-secondary text-danger">Yes, Delete</a>
