@@ -39,6 +39,11 @@
     <!-- BEGIN THEME STYLES -->
     <link rel="stylesheet" href="{% static 'css/main.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
     <!-- END THEME STYLES -->
   </head>
   <body>
@@ -724,24 +729,43 @@
                             <td>9845123456</td>
                             <td>ram.thapa@example.com</td>
                             <!-- for the buttons -->
+                            <!-- Assuming you are inside a <td> element in your Django loop -->
                             <td>
                               <!-- 1. The Button Group -->
                               <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                    role="group">
-                                <!-- Show Button -->
-                                <a href="{% url 'ShowStudent' id=5 %}"
-                                   class="btn btn-info btn-sm text-white">Show more</a>
-                                <!-- Update Button -->
-                                <a href="{% url 'UpdateStudent' id=5 %}"
+                                <!-- *** NEW: Show More / Offcanvas Trigger Button *** -->
+                                <button type="button"
+                                        class="btn btn-info btn-sm text-white"
+                                        data-bs-toggle="offcanvas"
+                                        data-bs-target="#singleOffcanvas"
+                                        aria-controls="singleOffcanvas"
+                                        onclick="populateOffcanvas(this)"
+                                        data-id="data.id"
+                                        data-name="data.name"
+                                        data-age="data.age"
+                                        data-phone="data.phone"
+                                        data-email="data.email"
+                                        data-dob="data.DOB"
+                                        data-address="data.address"
+                                        data-status="data.status"
+                                        data-edit-url="#">
+                                  <!-- Using UpdateStudent URL as the Edit Link -->
+                                  Show more
+                                </button>
+                                <!-- *** END NEW BUTTON *** -->
+                                <!-- The original Update Button remains, but you can also make it a link inside the offcanvas -->
+                                <a href="{% url 'UpdateStudent' id=1 %}"
                                    class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
                                 <!-- Delete Trigger Button -->
                                 <button type="button"
                                         class="btn btn-danger btn-sm"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal5">Delete</button>
+                                        data-bs-target="#deleteModal1">Delete</button>
                               </div>
-                              <!-- 2. The Confirmation Modal -->
-                              <div class="modal fade" id="deleteModal5" tabindex="-1" aria-hidden="true">
+                              <!-- (The Delete Modal HTML would follow here or be placed at the end of the <body>) -->
+                              <!-- delete Confirmation -->
+                              <div class="modal fade" id="deleteModal1" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog">
                                   <div class="modal-content">
                                     <div class="modal-header">
@@ -751,7 +775,7 @@
                                               data-bs-dismiss="modal"
                                               aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body text-center">Delete the student Ram?</div>
+                                    <div class="modal-body text-center">Delete the student Ram Bahadur Thapa</div>
                                     <div class="modal-footer justify-content-center">
                                       <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
                                       <a href="{% url 'DeleteStudent' id=5 %}"
@@ -774,8 +798,20 @@
                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                  role="group">
                               <!-- Show Button -->
-                              <a href="{% url 'ShowStudent' id=5 %}"
-                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <button type="button"
+                                      class="btn btn-info btn-sm text-white"
+                                      data-bs-toggle="offcanvas"
+                                      data-bs-target="#singleOffcanvas"
+                                      aria-controls="singleOffcanvas"
+                                      onclick="populateOffcanvas(this)"
+                                      data-id="data.id"
+                                      data-name="sita kumari shrestha"
+                                      data-age="55"
+                                      data-phone="9801122334"
+                                      data-email="sita.shrestha@example.com"
+                                      data-dob="2009-11-33"
+                                      data-address="kathmandu"
+                                      data-status="Ongoing">Show more</button>
                               <!-- Update Button -->
                               <a href="{% url 'UpdateStudent' id=5 %}"
                                  class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -1266,5 +1302,116 @@
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
   </script>
+  <!-- bootstpap js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"></script>
+  <!-- single off canvas -->
+  <!-- The Single, Reusable Offcanvas Element -->
+  <div class="offcanvas offcanvas-end"
+       tabindex="-1"
+       id="singleOffcanvas"
+       aria-labelledby="offcanvasRightLabel">
+    <!-- 1. Offcanvas Header (The Blue Bar) -->
+    <!-- Used bg-primary and text-white for a strong Looper theme header -->
+    <div class="offcanvas-header bg-primary text-white shadow-sm">
+      <h5 id="offcanvasRightLabel" class="mb-0">Student Details</h5>
+      <!-- Use btn-close-white for better visibility on a dark background -->
+      <button type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"></button>
+    </div>
+    <!-- 2. Offcanvas Body (Enhanced) -->
+    <div class="offcanvas-body d-flex flex-column p-4">
+      <!-- Placeholder for the Name (Main Title) -->
+      <!-- Added strong visual focus with the title -->
+      <h3 id="offcanvas_data_name"
+          class="mb-4 text-dark font-weight-bold border-bottom pb-2">Loading Name...</h3>
+      <!-- Structured Contact and Personal Details using a Bootstrap List Group -->
+      <ul class="list-group list-group-flush mb-4">
+        <!-- Phone Number -->
+        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+          <span class="text-muted"><i class="fas fa-phone me-2 text-info"></i> Phone No:</span>
+          <!-- Added text-info for key data points -->
+          <span id="offcanvas_data_phone" class="font-weight-bold text-dark">N/A</span>
+        </li>
+        <!-- Email -->
+        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+          <span class="text-muted"><i class="fas fa-envelope me-2 text-info"></i> Email:</span>
+          <!-- Used text-primary (blue) for email/links -->
+          <span id="offcanvas_data_email" class="text-primary text-truncate ms-3">N/A</span>
+        </li>
+        <!-- Date of Birth -->
+        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+          <span class="text-muted"><i class="fas fa-calendar-alt me-2 text-info"></i> DOB:</span>
+          <!-- Placeholder for DOB -->
+          <span id="offcanvas_data_dob" class="text-secondary">N/A</span>
+        </li>
+        <!-- Status of the student -->
+        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+          <span class="text-muted"><i class="fas fa-check-circle me-2 text-info"></i> Status:</span>
+          <!-- Placeholder for Status, typically a badge for clear visual -->
+          <span id="offcanvas_data_status" class="badge bg-success">N/A</span>
+        </li>
+        <!-- Address (Simplified List Group Item) -->
+        <!-- Responsive: The content will automatically wrap due to Bootstrap's grid/flex utilities -->
+        <li class="list-group-item px-0 flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between mb-1">
+            <span class="text-muted"><i class="fas fa-map-marker-alt me-2 text-info"></i> Address:</span>
+          </div>
+          <!-- Placeholder for Address -->
+          <small id="offcanvas_data_address"
+                 class="text-wrap text-dark font-weight-bold">N/A</small>
+        </li>
+      </ul>
+    </div>
+    <!-- End of Offcanvas Body -->
+  </div>
+  <!-- populate off canvas data js  -->
+  <script>
+    // Place this function inside a <script> tag on your page.
+
+function populateOffcanvas(buttonElement) {
+    
+    // --- 1. READ THE DATA from the clicked button (using .dataset for simplicity) ---
+    // 'data-name' attribute becomes 'buttonElement.dataset.name'
+    const itemId = buttonElement.dataset.id;
+    const itemName = buttonElement.dataset.name;
+    const itemPhone = buttonElement.dataset.phone; // Assuming you pass 'data-phone'
+    const itemEmail = buttonElement.dataset.email; // Assuming you pass 'data-email'
+    const itemDob = buttonElement.dataset.dob;     // Assuming you pass 'data-dob'
+    const itemAddress = buttonElement.dataset.address; 
+ 
+    const status=buttonElement.dataset.status; 
+
+    
+    // --- 2. WRITE THE DATA into the Offcanvas elements (using IDs) ---
+
+    // Name (The big heading)
+    document.getElementById('offcanvas_data_name').textContent = itemName || 'N/A';
+    
+    // Phone Number
+    document.getElementById('offcanvas_data_phone').textContent = itemPhone || 'N/A';
+    
+    // Email
+    document.getElementById('offcanvas_data_email').textContent = itemEmail || 'N/A';
+    
+    // Date of Birth
+    document.getElementById('offcanvas_data_dob').textContent = itemDob || 'N/A';
+     
+
+     document.getElementById('offcanvas_data_status').textContent = status || 'N/A';
+    
+    
+    // Address (uses the <small> tag)
+    document.getElementById('offcanvas_data_address').textContent = itemAddress || 'N/A';
+    
+    // (Optional) Item ID in the header if you had one:
+   
+
+
+}
+</script>
 </body>
 </html>
