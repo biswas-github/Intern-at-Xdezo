@@ -535,14 +535,14 @@
                                         <span class="menu-text">Data management</span>
                                     </a>
                                     <ul class="menu">
-                                        <li class="menu-item ">
-                                            <a class="menu-link " href="{% url 'DataManagementStudent' %}">Students</a>
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
                                         </li>
-                                        <li class="menu-item ">
-                                            <a href="{% url 'Course' %}" class="menu-link">Course</a>
+                                        <li class="menu-item">
+                                            <a href="{% url 'ViewCourses' %}" class="menu-link">Course</a>
                                         </li>
-                                        <li class="menu-item has-active">
-                                            <a href="{% url 'Batch' %}" class="menu-link">Batches</a>
+                                        <li class="menu-item">
+                                            <a href="{% url 'ViewBatches' %}" class="menu-link">Batches</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
@@ -664,15 +664,17 @@
                                 </div>
                             </header>
                             <!-- add the batches -->
-                            <div class=" col-12 col-lg-8  d-block d-sm-block  p-2 p-sm-2">
-                                <div class="d-block">
-                                    <a href="{% url 'Batch' %}">
-                                        <button type="button" class="btn btn-primary  mb-sm-5 vw-sm-25 ">
-                                            View and update
-                                            <br>
-                                            Batches &nbsp;
-                                        </button>
-                                    </a>
+                            <div class="row">
+                                <div class=" col-12 col-lg-8  d-block d-sm-block  ">
+                                    <div class="d-block">
+                                        <a href="{% url 'Batch' %}">
+                                            <button type="button" class="btn btn-primary  mb-sm-2  ">
+                                                &nbsp; &nbsp; Register&nbsp; &nbsp;&nbsp;
+                                                <br>
+                                                Batches &nbsp;
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <!-- ./add batches -->

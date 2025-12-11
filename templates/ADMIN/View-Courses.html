@@ -667,15 +667,17 @@
                                 </div>
                             </header>
                             <!-- add course btn-->
-                            <div class=" col-12 col-lg-3  d-block d-sm-block  p-2 p-sm-2 w-100 w-sm-25">
-                                <div class="d-block">
-                                    <a href="{% url 'Course' %}">
-                                        <button type="button" class="btn btn-primary  mb-sm-5 vw-sm-25 ">
-                                            &nbsp; &nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <br>
-                                            &nbsp;&nbsp;courses &nbsp;
-                                        </button>
-                                    </a>
+                            <div class="row">
+                                <div class="col-12 col-lg-3  d-block d-sm-block">
+                                    <div class="d-block">
+                                        <a href="{% url 'Course' %}">
+                                            <button type="button" class="btn btn-primary  mb-1 mb-sm-1  vw-sm-25">
+                                                &nbsp; &nbsp;&nbsp; Register&nbsp; &nbsp;&nbsp;
+                                                <br>
+                                                courses
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <!-- ./ add course btn -->
@@ -719,7 +721,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <!-- Row 1 -->
+                                                    <!-- Row 1: Python with Django (Dynamic Offcanvas Button) -->
                                                     <tr>
                                                         <td>Python with Django</td>
                                                         <td>PY-101</td>
@@ -729,9 +731,23 @@
                                                             <!-- Action Buttons -->
                                                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                                                  role="group">
-                                                                <!-- show COurse -->
-                                                                <a href="{% url 'ShowCourse' id=1 %}"
-                                                                   class="btn btn-info btn-sm text-white">Show more</a>
+                                                                <!-- *** DYNAMIC OFFCANVAS BUTTON *** -->
+                                                                <button type="button"
+                                                                        class="btn btn-info btn-sm text-white"
+                                                                        data-bs-toggle="offcanvas"
+                                                                        data-bs-target="#singleOffcanvas"
+                                                                        aria-controls="singleOffcanvas"
+                                                                        onclick="populateOffcanvas(this)"
+                                                                        data-tittle="Python with Django"
+                                                                        data-code="PY-101"
+                                                                        data-fee="Rs. 15,000"
+                                                                        data-duration="3 Months"
+                                                                        data-description="The course focuses on full-stack development using the Django framework."
+                                                                        data-edit-url="{% url 'UpdateCourse' id=1 %}">
+                                                                    <!-- Using Update URL as Edit link -->
+                                                                    Show more
+                                                                </button>
+                                                                <!-- *** END DYNAMIC BUTTON *** -->
                                                                 <!-- Update Button -->
                                                                 <a href="{% url 'UpdateCourse' id=1 %}"
                                                                    class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -743,7 +759,8 @@
                                                                     Delete
                                                                 </button>
                                                             </div>
-                                                            <!-- Delete Confirmation Modal (Unique ID: deleteCourseModal1) -->
+                                                            <!-- Delete Confirmation Modal (Remaining Modals follow structure) -->
+                                                            <!-- ... Modal HTML here ... -->
                                                             <div class="modal fade"
                                                                  id="deleteCourseModal1"
                                                                  tabindex="-1"
@@ -770,7 +787,7 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <!-- Row 2 -->
+                                                    <!-- Row 2: Graphic Design (Dynamic Offcanvas Button) -->
                                                     <tr>
                                                         <td>Graphic Design</td>
                                                         <td>GD-205</td>
@@ -780,8 +797,22 @@
                                                             <!-- Action Buttons -->
                                                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                                                  role="group">
-                                                                <a href="{% url 'ShowCourse' id=2 %}"
-                                                                   class="btn btn-info btn-sm text-white">Show more</a>
+                                                                <!-- *** DYNAMIC OFFCANVAS BUTTON *** -->
+                                                                <button type="button"
+                                                                        class="btn btn-info btn-sm text-white"
+                                                                        data-bs-toggle="offcanvas"
+                                                                        data-bs-target="#singleOffcanvas"
+                                                                        aria-controls="singleOffcanvas"
+                                                                        onclick="populateOffcanvas(this)"
+                                                                        data-tittle="Graphic Design"
+                                                                        data-code="GD-205"
+                                                                        data-fee="Rs. 12,000"
+                                                                        data-duration="2 Months"
+                                                                        data-description="Learn the fundamentals of visual communication, design principles, and industry-standard software like Photoshop and Illustrator."
+                                                                        data-edit-url="{% url 'UpdateCourse' id=2 %}">
+                                                                    Show more
+                                                                </button>
+                                                                <!-- *** END DYNAMIC BUTTON *** -->
                                                                 <!-- Update Button -->
                                                                 <a href="{% url 'UpdateCourse' id=2 %}"
                                                                    class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -793,7 +824,8 @@
                                                                     Delete
                                                                 </button>
                                                             </div>
-                                                            <!-- Delete Confirmation Modal (Unique ID: deleteCourseModal2) -->
+                                                            <!-- Delete Confirmation Modal -->
+                                                            <!-- ... Modal HTML here ... -->
                                                             <div class="modal fade"
                                                                  id="deleteCourseModal2"
                                                                  tabindex="-1"
@@ -820,7 +852,7 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <!-- Row 3 -->
+                                                    <!-- Row 3: Digital Marketing (Using original <a> tag for comparison) -->
                                                     <tr>
                                                         <td>Digital Marketing</td>
                                                         <td>DM-300</td>
@@ -830,7 +862,7 @@
                                                             <!-- Action Buttons -->
                                                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                                                  role="group">
-                                                                <!-- Show course button -->
+                                                                <!-- Original <a> tag (WILL NOT use the Offcanvas correctly) -->
                                                                 <a href="{% url 'ShowCourse' id=3 %}"
                                                                    class="btn btn-info btn-sm text-white">Show more</a>
                                                                 <!-- Update Button -->
@@ -844,7 +876,8 @@
                                                                     Delete
                                                                 </button>
                                                             </div>
-                                                            <!-- Delete Confirmation Modal (Unique ID: deleteCourseModal3) -->
+                                                            <!-- Delete Confirmation Modal -->
+                                                            <!-- ... Modal HTML here ... -->
                                                             <div class="modal fade"
                                                                  id="deleteCourseModal3"
                                                                  tabindex="-1"
@@ -909,5 +942,89 @@
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
         </script>
+        <!-- bootstraps css -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+              crossorigin="anonymous">
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+                integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+                integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+                crossorigin="anonymous"></script>
     </body>
+    <!-- this is a single offcanvas -->
+    <!-- The Single, Reusable Offcanvas Element -->
+    <div class="offcanvas offcanvas-end shadow"
+         tabindex="-1"
+         id="singleOffcanvas"
+         aria-labelledby="offcanvasRightLabel">
+        <!-- Header -->
+        <div class="offcanvas-header bg-primary text-white">
+            <h5 id="offcanvasRightLabel" class="mb-0 font-weight-bold">Course Details</h5>
+            <button type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+        </div>
+        <!-- Offcanvas Body -->
+        <div class="offcanvas-body d-flex flex-column p-4">
+            <!-- 1. COURSE TITLE (Main Title) -->
+            <!-- This will hold the Course Tittle -->
+            <h3 id="offcanvas_data_tittle" class="mb-4 text-dark border-bottom pb-2">Loading Course Tittle...</h3>
+            <!-- 2. STRUCTURED DETAILS TABLE (Title, Code, Fee, Duration) -->
+            <!-- We use a stripped table to neatly align property/value pairs -->
+            <div class="table-responsive mb-4">
+                <table class="table table-striped table-bordered align-middle">
+                    <tbody>
+                        <!-- Course Code -->
+                        <tr>
+                            <th class="text-muted w-50">Code:</th>
+                            <td id="offcanvas_data_code" class="fw-semibold text-dark">N/A</td>
+                        </tr>
+                        <!-- Duration -->
+                        <tr>
+                            <th class="text-muted">Duration:</th>
+                            <td id="offcanvas_data_duration" class="fw-semibold text-dark">N/A</td>
+                        </tr>
+                        <!-- Fee -->
+                        <tr>
+                            <th class="text-muted">Fee:</th>
+                            <!-- Highlighted the fee for emphasis -->
+                            <td id="offcanvas_data_fee" class="fw-bold text-success">N/A</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 3. COURSE DESCRIPTION -->
+            <h5 class="mt-2 mb-2 text-primary border-bottom pb-1">Description</h5>
+            <p id="offcanvas_data_description" class="text-muted small">Loading course description...</p>
+        </div>
+    </div>
+    <!-- ========================================================================= -->
+    <!-- JS MAPPING REQUIRED FOR THIS STRUCTURE -->
+    <script>
+function populateOffcanvas(buttonElement) {
+    const data = buttonElement.dataset; 
+    
+    // 1. Tittle
+    document.getElementById('offcanvas_data_tittle').textContent = data.tittle || 'N/A';
+    
+    // 2. Table Fields
+    document.getElementById('offcanvas_data_code').textContent = data.code || 'N/A';
+    document.getElementById('offcanvas_data_duration').textContent = data.duration || 'N/A';
+    document.getElementById('offcanvas_data_fee').textContent = data.fee || 'N/A';
+
+    // 3. Description
+    document.getElementById('offcanvas_data_description').textContent = data.description || 'Loading course description...';
+    
+    // 4. Edit Link
+    const editLink = document.getElementById('offcanvas_edit_link');
+    if (editLink) {
+        editLink.href = data.editUrl || '#';
+    }
+}
+    </script>
 </html>
