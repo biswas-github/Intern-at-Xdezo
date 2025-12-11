@@ -535,14 +535,14 @@
                                         <span class="menu-text">Data management</span>
                                     </a>
                                     <ul class="menu">
-                                        <li class="menu-item ">
-                                            <a class="menu-link" href="{% url 'DataManagementStudent' %}">Students</a>
-                                        </li>
-                                        <li class="menu-item has-active">
-                                            <a href="{% url 'Course' %}" class="menu-link">Courses</a>
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="{% url 'Batch' %}" class="menu-link">Batches</a>
+                                            <a href="{% url 'ViewCourses' %}" class="menu-link">Course</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'ViewBatches' %}" class="menu-link">Batches</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
