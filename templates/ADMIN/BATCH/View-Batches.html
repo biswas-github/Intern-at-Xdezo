@@ -40,6 +40,17 @@
         <link rel="stylesheet" href="{% static 'css/main.min.css' %}" />
         <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
         <!-- END THEME STYLES -->
+        <!-- bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+              crossorigin="anonymous">
+        <!-- load calander js  -->
+        <!-- Calendar.js styles -->
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/gh/williamtroup/Calendar.js@main/dist/calendar.js.css">
+        <!-- calander js  -->
+        <script src="https://cdn.jsdelivr.net/gh/williamtroup/Calendar.js@main/dist/calendar.js"></script>
     </head>
     <body>
         <!-- .app -->
@@ -690,8 +701,6 @@
                                                     <th style="min-width:200px">Batch Name</th>
                                                     <th>Course</th>
                                                     <th>Status</th>
-                                                    <th style="min-width:100px" class="text-center">Start Date</th>
-                                                    <th style="min-width:100px" class="text-center">End Date</th>
                                                     <th>&nbsp; &nbsp; Actions&nbsp; &nbsp;</th>
                                                 </tr>
                                             </thead>
@@ -708,10 +717,6 @@
                                                     <td>
                                                         <span class="badge badge-pill badge-primary">UPCOMING</span>
                                                     </td>
-                                                    <!-- Start Date -->
-                                                    <td class="text-center">2026-01-15</td>
-                                                    <!-- End Date -->
-                                                    <td class="text-center">2026-04-15</td>
                                                     <!-- Actions Column -->
                                                     <td>
                                                         <!-- 1. The Button Group -->
@@ -760,17 +765,25 @@
                                                     <td>
                                                         <span class="badge badge-pill badge-success">Completed</span>
                                                     </td>
-                                                    <!-- Start Date -->
-                                                    <td class="text-center">2025-01-15</td>
-                                                    <!-- End Date -->
-                                                    <td class="text-center">2028-04-15</td>
                                                     <!-- Actions Column -->
                                                     <td>
                                                         <!-- 1. The Button Group -->
                                                         <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                                              role="group">
                                                             <!-- View Students Button -->
-                                                            <a href="#" class="btn btn-info btn-sm text-white">View Batch</a>
+                                                            <!-- <a href="#" class="btn btn-info btn-sm text-white">View Batch</a> -->
+                                                            <a class="btn-sm btn-info text-light"
+                                                               type="button"
+                                                               data-bs-toggle="offcanvas"
+                                                               data-bs-target="#Singleoffcanvas"
+                                                               aria-controls="offcanvasRight"
+                                                               onclick="populateoffcanvas(this)"
+                                                               data-batchname="data.batch_name"
+                                                               data-course="data.course_name"
+                                                               data-status="data.status"
+                                                               data-instructor="data.instructor"
+                                                               data-start_date="2025-11-22"
+                                                               data-end_date="2025-11-25">View Batch</a>
                                                             <!-- Update Button -->
                                                             <a href="#" class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
                                                             <!-- Delete Trigger Button -->
@@ -841,5 +854,136 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
                 crossorigin="anonymous"></script>
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+                integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+                integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+                crossorigin="anonymous"></script>
+        <!-- -----single offcanvas------ -->
+        <div class="offcanvas offcanvas-end"
+             tabindex="-1"
+             id="Singleoffcanvas"
+             aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+                <button type="button"
+                        class="btn-close text-reset"
+                        data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body d-flex flex-column p-4">
+                <!-- 1. BATCH NAME (Main Title) -->
+                <h3 id="offcanvas_batch_name" class="mb-4 text-dark border-bottom pb-2">Loading...</h3>
+                <!-- 2. DETAILS TABLE -->
+                <div class="table-responsive mb-4">
+                    <table class="table table-striped table-bordered align-middle">
+                        <tbody>
+                            <!-- Course Name -->
+                            <tr>
+                                <th class="text-muted w-50">Course:</th>
+                                <td id="offcanvas_course" class="fw-semibold text-dark">N/A</td>
+                            </tr>
+                            <!-- Instructor -->
+                            <tr>
+                                <th class="text-muted">Instructor:</th>
+                                <td id="offcanvas_instructor" class="fw-semibold text-dark">N/A</td>
+                            </tr>
+                            <!-- Status -->
+                            <tr>
+                                <th class="text-muted">Status:</th>
+                                <td id="offcanvas_status" class="fw-bold">N/A</td>
+                            </tr>
+                            <!-- Start Date (Requested at the end) -->
+                            <tr>
+                                <th class="text-muted">Start Date:</th>
+                                <td id="offcanvas_start_date" class="text-primary fw-medium">N/A</td>
+                            </tr>
+                            <!-- End Date (Requested at the end) -->
+                            <tr>
+                                <th class="text-muted">End Date:</th>
+                                <td id="offcanvas_end_date" class="text-danger fw-medium">N/A</td>
+                            </tr>
+                            <tr>
+                                <div id="calendar">Calander</div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </body>
+    <!-- populate script -->
+    <script>
+        function populateoffcanvas(element) {
+    // 1. Get data from the clicked button attributes
+    // Note: 'element' is the <button> that was clicked
+    const batchName = element.getAttribute('data-batchname');
+    const courseName = element.getAttribute('data-course');
+    const status = element.getAttribute('data-status');
+    const instructor = element.getAttribute('data-instructor');
+    const startDate = element.getAttribute('data-start_date');
+    const endDate = element.getAttribute('data-end_date');
+
+    // 2. Populate the Offcanvas HTML elements by ID
+    
+    // Set Header
+    const titleEl = document.getElementById('offcanvas_batch_name');
+    if(titleEl) titleEl.textContent = batchName;
+
+    // Set Table Data
+    const courseEl = document.getElementById('offcanvas_course');
+    if(courseEl) courseEl.textContent = courseName;
+
+    const instructorEl = document.getElementById('offcanvas_instructor');
+    if(instructorEl) instructorEl.textContent = instructor;
+
+    const statusEl = document.getElementById('offcanvas_status');
+    if(statusEl) {
+        statusEl.textContent = status;
+        
+        // Optional: Color code the status
+        statusEl.className = 'fw-bold'; // Reset classes
+        if (status.toLowerCase() === 'active') {
+            statusEl.classList.add('text-success');
+        } else if (status.toLowerCase() === 'completed') {
+            statusEl.classList.add('text-primary');
+        } else {
+            statusEl.classList.add('text-secondary');
+        }
+    }
+
+    const startEl = document.getElementById('offcanvas_start_date');
+  // if(startEl) startEl.textContent = startDate;
+
+    const endEl = document.getElementById('offcanvas_end_date');
+   // if(endEl) endEl.textContent = endDate;
+
+    //try for the calander js
+      const calendarInstance = new calendarJs("calendar", {
+      exportEventsEnabled: true,
+      useAmPmForTimeDisplays: true
+    });
+
+
+console.log(startDate)
+console.log(endDate)
+
+    // 2) Create an event
+    const event = {
+      from: new Date(startDate),
+      to: new Date(endDate),
+      title: "course duration",
+      description: "total time",
+    };
+
+    // 3) Add event to the calendar
+    calendarInstance.addEvent(event);
+
+     //offcanvas background click disable
+     
+}
+    </script>
+    <!-- backdrop problem -->
 </html>

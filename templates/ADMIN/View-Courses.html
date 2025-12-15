@@ -662,22 +662,24 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h1 class="page-title">View Courses</h1>
-                                        <p class="text-muted mb-0">DataManagement / Course / View Courses</p>
+                                        <p class="text-muted mb-0">
+                                            <a class="text-muted"
+                                               style="text-decoration: none"
+                                               href="{% url 'AdminDashboard' %}">DataManagement</a>/ Courses / <a class="text-primary">View Courses</a>
+                                        </p>
                                     </div>
                                 </div>
                             </header>
                             <!-- add course btn-->
-                            <div class="row">
-                                <div class="col-12 col-lg-3  d-block d-sm-block">
-                                    <div class="d-block">
-                                        <a href="{% url 'Course' %}">
-                                            <button type="button" class="btn btn-primary  mb-1 mb-sm-1  vw-sm-25">
-                                                &nbsp; &nbsp;&nbsp; Register&nbsp; &nbsp;&nbsp;
-                                                <br>
-                                                courses
-                                            </button>
-                                        </a>
-                                    </div>
+                            <div class="w-25 ms-0 ms-sm-0">
+                                <div class="d-block">
+                                    <a href="{% url 'Course' %}">
+                                        <!-- Button wrapper kept for blue background and clicking area -->
+                                        <button type="button" class="btn btn-primary mb-sm-1">
+                                            <!-- Removed text, added 'fa-2x' to make icon bigger -->
+                                            <i class="far fa-plus-square fa-3x" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                             <!-- ./ add course btn -->

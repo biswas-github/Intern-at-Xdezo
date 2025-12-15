@@ -654,13 +654,16 @@
         <div class="wrapper">
           <div class="page">
             <div class="page-inner">
-              <a href="{% url 'ViewStudent' %}" class="btn btn-lg btn-light"><i class="fa fa-angle-right"></i> Go Back</a>
               <!-- Page header -->
               <header class="page-title-bar">
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="">
                   <div>
                     <h1 class="page-title">Add new Students</h1>
-                    <p class="text-muted mb-0">Datamanagement / Students</p>
+                    <p class="text-muted mb-0">
+                      <a class="text-muted"
+                         style="text-decoration: none"
+                         href="{% url 'AdminDashboard' %}">DataManagement</a>/ <a href="{% url 'ViewStudent' %}">Students</a> / <a style="text-decoration: none" class="text-muted">Add new students</a>
+                    </p>
                   </div>
                 </div>
               </header>
