@@ -670,24 +670,27 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h1 class="page-title">View All Batches</h1>
-                                        <p class="text-muted mb-0">Datamanagement / Batch / ViewBatches</p>
+                                        <p class="text-muted mb-0">
+                                            <a class="text-muted"
+                                               style="text-decoration: none"
+                                               href="{% url 'AdminDashboard' %}">Datamanagement</a> / Batches/ ViewBatches
+                                        </p>
                                     </div>
                                 </div>
                             </header>
                             <!-- add the batches -->
-                            <div class="row">
-                                <div class=" col-12 col-lg-8  d-block d-sm-block  ">
-                                    <div class="d-block">
-                                        <a href="{% url 'Batch' %}">
-                                            <button type="button" class="btn btn-primary  mb-sm-2  ">
-                                                &nbsp; &nbsp; Register&nbsp; &nbsp;&nbsp;
-                                                <br>
-                                                Batches &nbsp;
-                                            </button>
-                                        </a>
-                                    </div>
+                            <div class="w-25 ms-0 ms-sm-0">
+                                <div class="d-block">
+                                    <a href="{% url 'Batch' %}">
+                                        <!-- Button wrapper kept for blue background and clicking area -->
+                                        <button type="button" class="btn btn-primary mb-sm-1">
+                                            <!-- Removed text, added 'fa-2x' to make icon bigger -->
+                                            <i class="far fa-plus-square fa-3x" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
+                            <!-- ./ button -->
                             <!-- ./add batches -->
                             <!-- content goes here -->
                             <!-- Table for Viewing and Updating Batches -->
