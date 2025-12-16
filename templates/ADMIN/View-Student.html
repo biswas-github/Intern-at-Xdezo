@@ -40,16 +40,8 @@
     <link rel="stylesheet" href="{% static 'css/main.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
     <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous">
     <!-- END THEME STYLES -->
-    <style>
-      .btn-primary{
-          background-color: #205fa2 !important; 
-      }
-    </style>
+    <style></style>
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -765,30 +757,13 @@
                                 <!-- Delete Trigger Button -->
                                 <button type="button"
                                         class="btn btn-danger btn-sm"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal1">Delete</button>
+                                        data-toggle="modal"
+                                        data-target="#deleteStudentModal"
+                                        data-name="Ram Bahadur Thapa"
+                                        data-delete-url="{% url 'DeleteStudent' id=1 %}"
+                                        onclick="populateDeleteModal(this)">Delete</button>
                               </div>
-                              <!-- (The Delete Modal HTML would follow here or be placed at the end of the <body>) -->
                               <!-- delete Confirmation -->
-                              <div class="modal fade" id="deleteModal1" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title">Confirm Deletion</h5>
-                                      <button type="button"
-                                              class="btn-close"
-                                              data-bs-dismiss="modal"
-                                              aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body text-center">Delete the student Ram Bahadur Thapa</div>
-                                    <div class="modal-footer justify-content-center">
-                                      <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
-                                      <a href="{% url 'DeleteStudent' id=5 %}"
-                                         class="btn btn-secondary text-danger">Yes, Delete</a>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
                             </td>
                             <!-- ./ for the buttons -->
                           </tr>
@@ -821,28 +796,11 @@
                               <!-- Delete Trigger Button -->
                               <button type="button"
                                       class="btn btn-danger btn-sm"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#deleteModal6">Delete</button>
-                            </div>
-                            <!-- 2. The Confirmation Modal -->
-                            <div class="modal fade" id="deleteModal6" tabindex="-1" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body text-center">Delete the student Sita Kumari Shrestha?</div>
-                                  <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="{% url 'DeleteStudent' id=5 %}"
-                                       class="btn btn-secondary text-danger">Yes, Delete</a>
-                                  </div>
-                                </div>
-                              </div>
+                                      data-toggle="modal"
+                                      data-target="#deleteStudentModal"
+                                      data-name="Sita Kumari Shrestha"
+                                      data-delete-url="{% url 'DeleteStudent' id=5 %}"
+                                      onclick="populateDeleteModal(this)">Delete</button>
                             </div>
                           </td>
                           <!-- ./ for the buttons -->
@@ -875,31 +833,13 @@
                               <!-- Delete Trigger Button -->
                               <button type="button"
                                       class="btn btn-danger btn-sm"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#deleteModal6">Delete</button>
+                                      data-toggle="modal"
+                                      data-target="#deleteStudentModal"
+                                      data-name="Bishal Gurung"
+                                      data-delete-url="{% url 'DeleteStudent' id=2 %}"
+                                      onclick="populateDeleteModal(this)">Delete</button>
                             </div>
                             <!-- 2. The Confirmation Modal -->
-                            <div class="modal fade" id="deleteModal6" tabindex="-1" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                  </div>
-                                  <!-- Note: Modal text should reflect Bishal, not Sita -->
-                                  <div class="modal-body text-center">Delete the student Bishal Gurung?</div>
-                                  <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
-                                    <!-- Assuming Bishal is ID 2 for consistency -->
-                                    <a href="{% url 'DeleteStudent' id=2 %}"
-                                       class="btn btn-secondary text-danger">Yes, Delete</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                           </td>
                         </tr>
                         <tr>
@@ -929,29 +869,13 @@
                               <!-- Delete Trigger Button -->
                               <button type="button"
                                       class="btn btn-danger btn-sm"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#deleteModal6">Delete</button>
+                                      data-toggle="modal"
+                                      data-target="#deleteStudentModal"
+                                      data-name="Anisha KC"
+                                      data-delete-url="{% url 'DeleteStudent' id=6 %}"
+                                      onclick="populateDeleteModal(this)">Delete</button>
                             </div>
                             <!-- 2. The Confirmation Modal -->
-                            <div class="modal fade" id="deleteModal6" tabindex="-1" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body text-center">Delete the student Sita Kumari Shrestha?</div>
-                                  <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="{% url 'DeleteStudent' id=5 %}"
-                                       class="btn btn-secondary text-danger">Yes, Delete</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                           </td>
                         </tr>
                         <tr>
@@ -981,29 +905,13 @@
                               <!-- Delete Trigger Button -->
                               <button type="button"
                                       class="btn btn-danger btn-sm"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#deleteModal6">Delete</button>
+                                      data-toggle="modal"
+                                      data-target="#deleteStudentModal"
+                                      data-name="Pratik Sharma"
+                                      data-delete-url="{% url 'DeleteStudent' id=7 %}"
+                                      onclick="populateDeleteModal(this)">Delete</button>
                             </div>
                             <!-- 2. The Confirmation Modal -->
-                            <div class="modal fade" id="deleteModal6" tabindex="-1" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body text-center">Delete the student Sita Kumari Shrestha?</div>
-                                  <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="{% url 'DeleteStudent' id=5 %}"
-                                       class="btn btn-secondary text-danger">Yes, Delete</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                           </td>
                         </tr>
                         <tr>
@@ -1033,29 +941,13 @@
                               <!-- Delete Trigger Button -->
                               <button type="button"
                                       class="btn btn-danger btn-sm"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#deleteModal6">Delete</button>
+                                      data-toggle="modal"
+                                      data-target="#deleteStudentModal"
+                                      data-name="Pratik Sharma"
+                                      data-delete-url="{% url 'DeleteStudent' id=7 %}"
+                                      onclick="populateDeleteModal(this)">Delete</button>
                             </div>
                             <!-- 2. The Confirmation Modal -->
-                            <div class="modal fade" id="deleteModal6" tabindex="-1" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body text-center">Delete the student Sita Kumari Shrestha?</div>
-                                  <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="{% url 'DeleteStudent' id=5 %}"
-                                       class="btn btn-secondary text-danger">Yes, Delete</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                           </td>
                         </tr>
                         <tr>
@@ -1085,29 +977,13 @@
                               <!-- Delete Trigger Button -->
                               <button type="button"
                                       class="btn btn-danger btn-sm"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#deleteModal6">Delete</button>
+                                      data-toggle="modal"
+                                      data-target="#deleteStudentModal"
+                                      data-name="Sandesh Paudel"
+                                      data-delete-url="{% url 'DeleteStudent' id=9 %}"
+                                      onclick="populateDeleteModal(this)">Delete</button>
                             </div>
                             <!-- 2. The Confirmation Modal -->
-                            <div class="modal fade" id="deleteModal6" tabindex="-1" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body text-center">Delete the student Sita Kumari Shrestha?</div>
-                                  <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="{% url 'DeleteStudent' id=5 %}"
-                                       class="btn btn-secondary text-danger">Yes, Delete</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                           </td>
                         </tr>
                         <tr>
@@ -1137,29 +1013,13 @@
                               <!-- Delete Trigger Button -->
                               <button type="button"
                                       class="btn btn-danger btn-sm"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#deleteModal6">Delete</button>
+                                      data-toggle="modal"
+                                      data-target="#deleteStudentModal"
+                                      data-name="Asmita Kunwar"
+                                      data-delete-url="{% url 'DeleteStudent' id=10 %}"
+                                      onclick="populateDeleteModal(this)">Delete</button>
                             </div>
                             <!-- 2. The Confirmation Modal -->
-                            <div class="modal fade" id="deleteModal6" tabindex="-1" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body text-center">Delete the student Sita Kumari Shrestha?</div>
-                                  <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="{% url 'DeleteStudent' id=5 %}"
-                                       class="btn btn-secondary text-danger">Yes, Delete</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                           </td>
                         </tr>
                         <tr>
@@ -1189,29 +1049,13 @@
                               <!-- Delete Trigger Button -->
                               <button type="button"
                                       class="btn btn-danger btn-sm"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#deleteModal6">Delete</button>
+                                      data-toggle="modal"
+                                      data-target="#deleteStudentModal"
+                                      data-name="Rohan Khadka"
+                                      data-delete-url="{% url 'DeleteStudent' id=11 %}"
+                                      onclick="populateDeleteModal(this)">Delete</button>
                             </div>
                             <!-- 2. The Confirmation Modal -->
-                            <div class="modal fade" id="deleteModal6" tabindex="-1" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body text-center">Delete the student Sita Kumari Shrestha?</div>
-                                  <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="{% url 'DeleteStudent' id=5 %}"
-                                       class="btn btn-secondary text-danger">Yes, Delete</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                           </td>
                         </tr>
                         <tr>
@@ -1241,29 +1085,13 @@
                               <!-- Delete Trigger Button -->
                               <button type="button"
                                       class="btn btn-danger btn-sm"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#deleteModal6">Delete</button>
+                                      data-toggle="modal"
+                                      data-target="#deleteStudentModal"
+                                      data-name="Nikita Maharjan"
+                                      data-delete-url="{% url 'DeleteStudent' id=12 %}"
+                                      onclick="populateDeleteModal(this)">Delete</button>
                             </div>
                             <!-- 2. The Confirmation Modal -->
-                            <div class="modal fade" id="deleteModal6" tabindex="-1" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body text-center">Delete the student Sita Kumari Shrestha?</div>
-                                  <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="{% url 'DeleteStudent' id=5 %}"
-                                       class="btn btn-secondary text-danger">Yes, Delete</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                           </td>
                         </tr>
                         <tr>
@@ -1297,25 +1125,6 @@
                                       data-bs-target="#deleteModal6">Delete</button>
                             </div>
                             <!-- 2. The Confirmation Modal -->
-                            <div class="modal fade" id="deleteModal6" tabindex="-1" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body text-center">Delete the student Sita Kumari Shrestha?</div>
-                                  <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="{% url 'DeleteStudent' id=5 %}"
-                                       class="btn btn-secondary text-danger">Yes, Delete</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                           </td>
                         </tr>
                         <tr>
@@ -1349,25 +1158,6 @@
                                       data-bs-target="#deleteModal6">Delete</button>
                             </div>
                             <!-- 2. The Confirmation Modal -->
-                            <div class="modal fade" id="deleteModal6" tabindex="-1" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Deletion</h5>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body text-center">Delete the student Sita Kumari Shrestha?</div>
-                                  <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-muted" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="{% url 'DeleteStudent' id=5 %}"
-                                       class="btn btn-secondary text-danger">Yes, Delete</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                           </td>
                         </tr>
                       </tbody>
@@ -1408,10 +1198,6 @@
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
   </script>
-  <!-- bootstpap js -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-          crossorigin="anonymous"></script>
   <!-- single normal modal -->
   <div class="modal fade"
        id="studentDetailsModal"
@@ -1426,38 +1212,40 @@
         </div>
         <div class="modal-body">
           <div class="table-responsive">
-            <table class="table table-striped table-bordered mb-0">
+            <table class="table table-bordered mb-0">
               <tbody>
-                <!-- Name -->
+                <!-- 1. Name (Blue Header) -->
                 <tr>
-                  <th scope="row" class="bg-light" style="width: 30%; min-width: 120px;">Name</th>
+                  <th scope="row"
+                      class="bg-primary text-white"
+                      style="width: 30%;
+                             min-width: 120px">Name</th>
                   <td id="modal_data_name"></td>
                 </tr>
-                <!-- Address -->
+                <!-- 2. Address (Light Header) -->
                 <tr>
-                  <th scope="row" class="bg-light">Address</th>
+                  <th scope="row" class="bg-light text-primary">Address</th>
                   <td class="text-break" id="modal_data_address"></td>
                 </tr>
-                <!-- DOB -->
+                <!-- 3. DOB (Blue Header) -->
                 <tr>
-                  <th scope="row" class="bg-light">Date of Birth</th>
+                  <th scope="row" class="bg-primary text-white">Date of Birth</th>
                   <td id="modal_data_dob"></td>
                 </tr>
-                <!-- Email -->
+                <!-- 4. Email (Light Header) -->
                 <tr>
-                  <th scope="row" class="bg-light">Email</th>
+                  <th scope="row" class="bg-light text-primary">Email</th>
                   <td class="text-break" id="modal_data_email"></td>
                 </tr>
-                <!-- Phone -->
+                <!-- 5. Phone (Blue Header) -->
                 <tr>
-                  <th scope="row" class="bg-light">Phone Number</th>
+                  <th scope="row" class="bg-primary text-white">Phone Number</th>
                   <td id="modal_data_phone"></td>
                 </tr>
-                <!-- Status (Added to match your script logic) -->
+                <!-- 6. Status (Light Header) -->
                 <tr>
-                  <th scope="row" class="bg-light">Status</th>
+                  <th scope="row" class="bg-light text-primary">Status</th>
                   <td>
-                    <!-- We use a span here so the badge style looks correct -->
                     <span id="modal_data_status" class="badge"></span>
                   </td>
                 </tr>
@@ -1467,7 +1255,6 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <!-- Optional: Use the editUrl if needed -->
         </div>
       </div>
     </div>
@@ -1530,6 +1317,60 @@ function populateModal(buttonElement) {
         } else {
             editBtn.style.display = 'none'; // Hide if no URL provided
         }
+    }
+}
+  </script>
+  <!-- now for the delete confirmation modal , this is sigle one -->
+  <!-- Single Generic Delete Confirmation Modal -->
+  <div class="modal fade"
+       id="deleteStudentModal"
+       tabindex="-1"
+       aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Deletion</h5>
+          <!-- Added both data-dismiss (BS4) and data-bs-dismiss (BS5) for compatibility -->
+          <button type="button"
+                  class="btn-close"
+                  data-dismiss="modal"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          Are you sure you want to delete <strong id="delete_modal_student_name"></strong>?
+        </div>
+        <div class="modal-footer justify-content-center">
+          <!-- Cancel Button -->
+          <button type="button"
+                  class="btn btn-muted"
+                  data-dismiss="modal"
+                  data-bs-dismiss="modal">Cancel</button>
+          <!-- The Dynamic Delete Link -->
+          <a href="#"
+             id="delete_modal_confirm_btn"
+             class="btn btn-secondary text-danger">Yes, Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- script for the population of the delete modal -->
+  <script>
+function populateDeleteModal(buttonElement) {
+    // 1. Get data from the clicked button
+    const studentName = buttonElement.getAttribute('data-name');
+    const deleteUrl = buttonElement.getAttribute('data-delete-url');
+
+    // 2. Populate the Modal Name
+    const nameSpan = document.getElementById('delete_modal_student_name');
+    if (nameSpan) {
+        nameSpan.textContent = studentName || 'this student';
+    }
+
+    // 3. Update the "Yes, Delete" Link href
+    const confirmBtn = document.getElementById('delete_modal_confirm_btn');
+    if (confirmBtn) {
+        confirmBtn.href = deleteUrl;
     }
 }
   </script>
