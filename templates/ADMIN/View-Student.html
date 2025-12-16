@@ -747,22 +747,17 @@
                                 <!-- *** NEW: Show More / Offcanvas Trigger Button *** -->
                                 <button type="button"
                                         class="btn btn-info btn-sm text-white"
-                                        data-bs-toggle="offcanvas"
-                                        data-bs-target="#singleOffcanvas"
-                                        aria-controls="singleOffcanvas"
-                                        onclick="populateOffcanvas(this)"
-                                        data-id="data.id"
-                                        data-name="data.name"
-                                        data-age="data.age"
-                                        data-phone="data.phone"
-                                        data-email="data.email"
-                                        data-dob="data.DOB"
-                                        data-address="data.address"
-                                        data-status="data.status"
-                                        data-edit-url="#">
-                                  <!-- Using UpdateStudent URL as the Edit Link -->
-                                  Show more
-                                </button>
+                                        data-toggle="modal"
+                                        data-target="#studentDetailsModal"
+                                        onclick="populateModal(this)"
+                                        data-id="1"
+                                        data-name="Ram Bahadur Thapa"
+                                        data-phone="9845123456"
+                                        data-email="ram.thapa@example.com"
+                                        data-dob="Jan 01, 1998"
+                                        data-address="Kathmandu, Nepal"
+                                        data-status="Active"
+                                        data-edit-url="{% url 'UpdateStudent' id=1 %}">Show more</button>
                                 <!-- *** END NEW BUTTON *** -->
                                 <!-- The original Update Button remains, but you can also make it a link inside the offcanvas -->
                                 <a href="{% url 'UpdateStudent' id=1 %}"
@@ -809,19 +804,17 @@
                                  role="group">
                               <!-- Show Button -->
                               <button type="button"
-                                      class="btn btn-info btn-sm text-white"
-                                      data-bs-toggle="offcanvas"
-                                      data-bs-target="#singleOffcanvas"
-                                      aria-controls="singleOffcanvas"
-                                      onclick="populateOffcanvas(this)"
-                                      data-id="data.id"
-                                      data-name="sita kumari shrestha"
-                                      data-age="55"
+                                      class="btn btn-sm btn-icon btn-info text-light"
+                                      data-toggle="modal"
+                                      data-target="#studentDetailsModal"
+                                      data-name="Sita Kumari Shrestha"
                                       data-phone="9801122334"
                                       data-email="sita.shrestha@example.com"
-                                      data-dob="2009-11-33"
-                                      data-address="kathmandu"
-                                      data-status="Ongoing">Show more</button>
+                                      data-dob="Feb 14, 1999"
+                                      data-address="Lalitpur, Nepal"
+                                      data-status="Active"
+                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
+                                      onclick="populateModal(this)">Show more</button>
                               <!-- Update Button -->
                               <a href="{% url 'UpdateStudent' id=5 %}"
                                  class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -864,20 +857,17 @@
                                  role="group">
                               <!-- *** UPDATED: DYNAMIC OFFCANVAS BUTTON *** -->
                               <button type="button"
-                                      class="btn btn-info btn-sm text-white"
-                                      data-bs-toggle="offcanvas"
-                                      data-bs-target="#singleOffcanvas"
-                                      aria-controls="singleOffcanvas"
-                                      onclick="populateOffcanvas(this)"
+                                      class="btn btn-sm btn-icon btn-info text-light"
+                                      data-toggle="modal"
+                                      data-target="#studentDetailsModal"
                                       data-name="Bishal Gurung"
                                       data-phone="9865012345"
                                       data-email="bishal.gurung@example.com"
-                                      data-dob="1999-05-15"
+                                      data-dob="May 15, 1999"
                                       data-address="Pokhara, Nepal"
-                                      data-status="Active">
-                                <!-- Assuming Bishal is ID 2 -->
-                                Show more
-                              </button>
+                                      data-status="Active"
+                                      data-edit-url="{% url 'UpdateStudent' id=2 %}"
+                                      onclick="populateModal(this)">Show more</button>
                               <!-- *** END UPDATED BUTTON *** -->
                               <!-- Update Button -->
                               <a href="{% url 'UpdateStudent' id=2 %}"
@@ -921,8 +911,18 @@
                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                  role="group">
                               <!-- Show Button -->
-                              <a href="{% url 'ShowStudent' id=5 %}"
-                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <button type="button"
+                                      class="btn btn-sm btn-icon btn-info text-light"
+                                      data-toggle="modal"
+                                      data-target="#studentDetailsModal"
+                                      data-name="Anisha KC"
+                                      data-phone="9812345678"
+                                      data-email="anisha.kc@example.com"
+                                      data-dob="Mar 10, 2000"
+                                      data-address="Bhaktapur, Nepal"
+                                      data-status="Active"
+                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
+                                      onclick="populateModal(this)">Show more</button>
                               <!-- Update Button -->
                               <a href="{% url 'UpdateStudent' id=5 %}"
                                  class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -963,8 +963,18 @@
                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                  role="group">
                               <!-- Show Button -->
-                              <a href="{% url 'ShowStudent' id=5 %}"
-                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <button type="button"
+                                      class="btn btn-sm btn-icon btn-info text-light"
+                                      data-toggle="modal"
+                                      data-target="#studentDetailsModal"
+                                      data-name="Pratik Sharma"
+                                      data-phone="9823456789"
+                                      data-email="pratik.sharma@example.com"
+                                      data-dob="Aug 22, 2001"
+                                      data-address="Chitwan, Nepal"
+                                      data-status="Active"
+                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
+                                      onclick="populateModal(this)">Show more</button>
                               <!-- Update Button -->
                               <a href="{% url 'UpdateStudent' id=5 %}"
                                  class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -1005,8 +1015,18 @@
                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                  role="group">
                               <!-- Show Button -->
-                              <a href="{% url 'ShowStudent' id=5 %}"
-                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <button type="button"
+                                      class="btn btn-sm btn-icon btn-info text-light"
+                                      data-toggle="modal"
+                                      data-target="#studentDetailsModal"
+                                      data-name="Kritika Basnet"
+                                      data-phone="9847654321"
+                                      data-email="kritika.basnet@example.com"
+                                      data-dob="Dec 05, 2000"
+                                      data-address="Biratnagar, Nepal"
+                                      data-status="Active"
+                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
+                                      onclick="populateModal(this)">Show more</button>
                               <!-- Update Button -->
                               <a href="{% url 'UpdateStudent' id=5 %}"
                                  class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -1047,8 +1067,18 @@
                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                  role="group">
                               <!-- Show Button -->
-                              <a href="{% url 'ShowStudent' id=5 %}"
-                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <button type="button"
+                                      class="btn btn-sm btn-icon btn-info text-light"
+                                      data-toggle="modal"
+                                      data-target="#studentDetailsModal"
+                                      data-name="Sandesh Paudel"
+                                      data-phone="9805567890"
+                                      data-email="sandesh.paudel@example.com"
+                                      data-dob="Jul 19, 1999"
+                                      data-address="Butwal, Nepal"
+                                      data-status="Active"
+                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
+                                      onclick="populateModal(this)">Show more</button>
                               <!-- Update Button -->
                               <a href="{% url 'UpdateStudent' id=5 %}"
                                  class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -1089,8 +1119,18 @@
                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                  role="group">
                               <!-- Show Button -->
-                              <a href="{% url 'ShowStudent' id=5 %}"
-                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <button type="button"
+                                      class="btn btn-sm btn-icon btn-info text-light"
+                                      data-toggle="modal"
+                                      data-target="#studentDetailsModal"
+                                      data-name="Asmita Kunwar"
+                                      data-phone="9812445789"
+                                      data-email="asmita.kunwar@example.com"
+                                      data-dob="Sep 30, 2002"
+                                      data-address="Dharan, Nepal"
+                                      data-status="Active"
+                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
+                                      onclick="populateModal(this)">Show more</button>
                               <!-- Update Button -->
                               <a href="{% url 'UpdateStudent' id=5 %}"
                                  class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -1131,8 +1171,18 @@
                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                  role="group">
                               <!-- Show Button -->
-                              <a href="{% url 'ShowStudent' id=5 %}"
-                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <button type="button"
+                                      class="btn btn-sm btn-icon btn-info text-light"
+                                      data-toggle="modal"
+                                      data-target="#studentDetailsModal"
+                                      data-name="Rohan Khadka"
+                                      data-phone="9862341199"
+                                      data-email="rohan.khadka@example.com"
+                                      data-dob="Nov 11, 2001"
+                                      data-address="Hetauda, Nepal"
+                                      data-status="Active"
+                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
+                                      onclick="populateModal(this)">Show more</button>
                               <!-- Update Button -->
                               <a href="{% url 'UpdateStudent' id=5 %}"
                                  class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -1173,8 +1223,18 @@
                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                  role="group">
                               <!-- Show Button -->
-                              <a href="{% url 'ShowStudent' id=5 %}"
-                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <button type="button"
+                                      class="btn btn-sm btn-icon btn-info text-light"
+                                      data-toggle="modal"
+                                      data-target="#studentDetailsModal"
+                                      data-name="Nikita Maharjan"
+                                      data-phone="9821457790"
+                                      data-email="nikita.maharjan@example.com"
+                                      data-dob="Jun 25, 2000"
+                                      data-address="Kirtipur, Nepal"
+                                      data-status="Active"
+                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
+                                      onclick="populateModal(this)">Show more</button>
                               <!-- Update Button -->
                               <a href="{% url 'UpdateStudent' id=5 %}"
                                  class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -1215,8 +1275,18 @@
                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                  role="group">
                               <!-- Show Button -->
-                              <a href="{% url 'ShowStudent' id=5 %}"
-                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <button type="button"
+                                      class="btn btn-sm btn-icon btn-info text-light"
+                                      data-toggle="modal"
+                                      data-target="#studentDetailsModal"
+                                      data-name="Manoj Thapa Magar"
+                                      data-phone="9843234576"
+                                      data-email="manoj.thapa@example.com"
+                                      data-dob="Apr 04, 1999"
+                                      data-address="Gorkha, Nepal"
+                                      data-status="Active"
+                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
+                                      onclick="populateModal(this)">Show more</button>
                               <!-- Update Button -->
                               <a href="{% url 'UpdateStudent' id=5 %}"
                                  class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -1257,8 +1327,18 @@
                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
                                  role="group">
                               <!-- Show Button -->
-                              <a href="{% url 'ShowStudent' id=5 %}"
-                                 class="btn btn-info btn-sm text-white">Show more</a>
+                              <button type="button"
+                                      class="btn btn-sm btn-icon btn-info text-light"
+                                      data-toggle="modal"
+                                      data-target="#studentDetailsModal"
+                                      data-name="Aayusha Kharel"
+                                      data-phone="9801239090"
+                                      data-email="aayusha.kharel@example.com"
+                                      data-dob="Oct 12, 2001"
+                                      data-address="Jhapa, Nepal"
+                                      data-status="Active"
+                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
+                                      onclick="populateModal(this)">Show more</button>
                               <!-- Update Button -->
                               <a href="{% url 'UpdateStudent' id=5 %}"
                                  class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
@@ -1332,124 +1412,125 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
           crossorigin="anonymous"></script>
-  <!-- single off canvas -->
-  <!-- The SINGLE, CORRECT Offcanvas Element for Course Details -->
-  <!-- The SINGLE, CORRECT Offcanvas Element for STUDENT Details -->
-  <div class="offcanvas offcanvas-end shadow"
+  <!-- single normal modal -->
+  <div class="modal fade"
+       id="studentDetailsModal"
        tabindex="-1"
-       id="singleOffcanvas"
-       aria-labelledby="offcanvasRightLabel">
-    <!-- 1. Offcanvas Header (Student Details) -->
-    <div class="offcanvas-header bg-primary text-white shadow-sm">
-      <h5 id="offcanvasRightLabel" class="mb-0">Student Details</h5>
-      <button type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"></button>
-    </div>
-    <!-- 2. Offcanvas Body (Student Details) -->
-    <div class="offcanvas-body p-4">
-      <!-- Student Name (Main Title) -->
-      <h3 id="offcanvas_data_name"
-          class="fw-semibold text-dark border-bottom pb-2 mb-4">Loading Student Name...</h3>
-      <!-- Structured Details Table (Table Striped) -->
-      <div class="table-responsive">
-        <table class="table table-hover table-bordered table-striped align-middle">
-          <tbody class="text-dark">
-            <!-- Phone Number -->
-            <tr>
-              <th class="text-muted w-50">
-                <i class="fas fa-phone me-2 text-primary"></i> Phone No
-              </th>
-              <td id="offcanvas_data_phone" class="fw-semibold">N/A</td>
-            </tr>
-            <!-- Email -->
-            <tr>
-              <th class="text-muted">
-                <i class="fas fa-envelope me-2 text-info"></i> Email
-              </th>
-              <td id="offcanvas_data_email" class="text-primary text-truncate">N/A</td>
-            </tr>
-            <!-- Date of Birth (DOB) -->
-            <tr>
-              <th class="text-muted">
-                <i class="fas fa-calendar-alt me-2 text-info"></i> DOB
-              </th>
-              <td id="offcanvas_data_dob" class="text-secondary">N/A</td>
-            </tr>
-            <!-- Status -->
-            <tr>
-              <th class="text-muted">
-                <i class="fas fa-check-circle me-2 text-success"></i> Status
-              </th>
-              <td>
-                <span id="offcanvas_data_status" class="badge bg-success">N/A</span>
-              </td>
-            </tr>
-            <!-- Address -->
-            <tr>
-              <th class="text-muted">
-                <i class="fas fa-map-marker-alt me-2 text-danger"></i> Address
-              </th>
-              <td id="offcanvas_data_address" class="fw-medium">N/A</td>
-            </tr>
-          </tbody>
-        </table>
+       role="dialog"
+       aria-labelledby="studentDetailsModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Students Details</h5>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered mb-0">
+              <tbody>
+                <!-- Name -->
+                <tr>
+                  <th scope="row" class="bg-light" style="width: 30%; min-width: 120px;">Name</th>
+                  <td id="modal_data_name"></td>
+                </tr>
+                <!-- Address -->
+                <tr>
+                  <th scope="row" class="bg-light">Address</th>
+                  <td class="text-break" id="modal_data_address"></td>
+                </tr>
+                <!-- DOB -->
+                <tr>
+                  <th scope="row" class="bg-light">Date of Birth</th>
+                  <td id="modal_data_dob"></td>
+                </tr>
+                <!-- Email -->
+                <tr>
+                  <th scope="row" class="bg-light">Email</th>
+                  <td class="text-break" id="modal_data_email"></td>
+                </tr>
+                <!-- Phone -->
+                <tr>
+                  <th scope="row" class="bg-light">Phone Number</th>
+                  <td id="modal_data_phone"></td>
+                </tr>
+                <!-- Status (Added to match your script logic) -->
+                <tr>
+                  <th scope="row" class="bg-light">Status</th>
+                  <td>
+                    <!-- We use a span here so the badge style looks correct -->
+                    <span id="modal_data_status" class="badge"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- Optional: Use the editUrl if needed -->
+        </div>
       </div>
-      <!-- Action Button Area -->
     </div>
   </div>
   <!-- populate off canvas data js  -->
   <script>
-function populateOffcanvas(buttonElement) {
+function populateModal(buttonElement) {
     
+    // 1. READ DATA (Same as before)
     const data = buttonElement.dataset; 
     
-    // --- 1. READ DATA (No Change) ---
     const studentName = data.name;
     const studentPhone = data.phone;
     const studentEmail = data.email;
     const studentDOB = data.dob;
     const studentAddress = data.address;
-    const studentStatus = data.status; // The target status field
+    const studentStatus = data.status;
     const editUrl = data.editUrl;
     
+    // 2. WRITE THE DATA (Updated IDs to match the Modal)
+    document.getElementById('modal_data_name').textContent = studentName || 'N/A';
+    document.getElementById('modal_data_phone').textContent = studentPhone || 'N/A';
+    document.getElementById('modal_data_email').textContent = studentEmail || 'N/A';
+    document.getElementById('modal_data_dob').textContent = studentDOB || 'N/A';
+    document.getElementById('modal_data_address').textContent = studentAddress || 'N/A';
     
-    // --- 2. WRITE THE DATA (No Change for Text Content) ---
-    document.getElementById('offcanvas_data_name').textContent = studentName || 'N/A';
-    document.getElementById('offcanvas_data_phone').textContent = studentPhone || 'N/A';
-    document.getElementById('offcanvas_data_email').textContent = studentEmail || 'N/A';
-    document.getElementById('offcanvas_data_dob').textContent = studentDOB || 'N/A';
-    document.getElementById('offcanvas_data_address').textContent = studentAddress || 'N/A';
-    
-    // C. Status Badge Update (THE CRITICAL CHANGE)
-    const statusElement = document.getElementById('offcanvas_data_status');
+    // 3. Status Badge Update
+    const statusElement = document.getElementById('modal_data_status');
     if (statusElement) {
         // Set the text
         statusElement.textContent = studentStatus || 'N/A';
         
-        // Dynamic badge color logic for: Active, Inactive, Completed, Dropped
-        let badgeClass = 'bg-secondary'; // Default for safety
+        // Dynamic badge color logic
+        let badgeClass = 'bg-secondary'; // Default
 
         if (studentStatus) {
             const statusLower = studentStatus.toLowerCase();
             
             if (statusLower === 'active') {
-                 badgeClass = 'bg-success';     // Green: Good status
+                 badgeClass = 'bg-success';
             } else if (statusLower === 'completed') {
-                 badgeClass = 'bg-primary';     // Blue: Finalized/Positive status
+                 badgeClass = 'bg-primary';
             } else if (statusLower === 'inactive') {
-                 badgeClass = 'bg-warning';     // Yellow: Needs attention/Neutral status
+                 badgeClass = 'bg-warning';
             } else if (statusLower === 'dropped') {
-                 badgeClass = 'bg-danger';      // Red: Negative/Critical status
+                 badgeClass = 'bg-danger';
             }
         }
         
-        // Update the class, ensuring 'badge' is always present
+        // Reset classes and apply new ones
         statusElement.className = 'badge ' + badgeClass; 
     }
-    
-   
+
+    // 4. Update Edit Button (Optional, if you want the footer button to do something)
+    const editBtn = document.getElementById('modal_data_edit_btn');
+    if (editBtn) {
+        if (editUrl) {
+            editBtn.href = editUrl;
+            editBtn.style.display = 'inline-block';
+        } else {
+            editBtn.style.display = 'none'; // Hide if no URL provided
+        }
+    }
 }
   </script>
 </body>
