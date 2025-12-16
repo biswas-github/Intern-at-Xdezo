@@ -65,6 +65,9 @@ def Batch(request):
  #viewbatches
 def ViewBatches(request):
     return render(request,'ADMIN/Batch/View-Batches.html')
+# DeleteBatch
+def DeleteBatch(request, id):
+    return render(request,'ADMIN/BATCH/Delete-Batch.html')
 
 # -----Instructor-------
 def Instructor(request):

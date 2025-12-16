@@ -1,5 +1,5 @@
 from django.urls import path,include
-from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor
+from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch
 
 
 # url patterns for the app
@@ -35,6 +35,9 @@ urlpatterns = [
     path('AdminDashboard/Batch',Batch,name="Batch"),
                 #view batch 
     path('AdminDashboard/Batch/ViewBatches',ViewBatches,name="ViewBatches"),
+#     DeleteBatch
+    path('AdminDashboard/Batch/DeleteBatch/<int:id>',DeleteBatch,name="DeleteBatch"),
+
 
 
 
