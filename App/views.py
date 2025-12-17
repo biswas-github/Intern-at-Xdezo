@@ -75,6 +75,15 @@ def UpdateBatch(request,id):
 # -----Instructor-------
 def Instructor(request):
     return render(request,'ADMIN/Instructor/View-Instructor.html')
+# UpdateInstructor
+def UpdateInstructor(request,id):
+    return render(request,'ADMIN/Instructor/Update-Instructor.html')
+# DeleteInstructor
+def DeleteInstructor(request,id):
+    return render(request,'ADMIN/Instructor/Delete-Instructor.html')
+
+
+    
 
 # first page for the viewer 
 def ViewerDashboard(request):
