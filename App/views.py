@@ -81,6 +81,9 @@ def UpdateInstructor(request,id):
 # DeleteInstructor
 def DeleteInstructor(request,id):
     return render(request,'ADMIN/Instructor/Delete-Instructor.html')
+# AddInstructor
+def AddInstructor(request):
+    return render(request,'ADMIN/Instructor/Add-Instructor.html')
 
 
     

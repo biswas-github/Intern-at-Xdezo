@@ -653,155 +653,122 @@
             <main class="app-main">
                 <div class="wrapper">
                     <div class="page">
-                        <div class="page-inner ms-2">
-                            <!-- Page header -->
-                            <header class="">
+                        <div class="page-inner">
+                            <!-- Page Header & Breadcrumbs -->
+                            <header class="page-title-bar">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="{% url 'AdminDashboard' %}">DataManagement</a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <a href="{% url 'Instructor' %}">Instructors</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Add Instructor</li>
+                                    </ol>
+                                </nav>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h1 class="page-title">View Instructors</h1>
-                                        <p class="text-muted mb-0">
-                                            <a style="text-decoration: none"
-                                               class="text-muted"
-                                               href="{% url 'AdminDashboard' %}">AdminDashboard</a> / Instructor/ <span class="text-primary">View instructors</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- add Instructor btn-->
-                                <div class="w-25 ms-0 ms-sm-0 mt-1 mb-1 ">
-                                    <div class="d-block">
-                                        <a href="{% url 'AddInstructor' %}">
-                                            <!-- Button wrapper kept for blue background and clicking area -->
-                                            <button type="button" class="btn btn-primary mb-sm-1">
-                                                <!-- Removed text, added 'fa-2x' to make icon bigger -->
-                                                <i class="far fa-plus-square fa-3x" aria-hidden="true"></i>
-                                            </button>
-                                        </a>
-                                    </div>
+                                    <h1 class="page-title">Register New Instructor</h1>
                                 </div>
                             </header>
-                            <!-- content goes here -->
-                            <div class="table-responsive">
-                                <table class="table table-hover table-bordered table-striped"
-                                       id="instructortable">
-                                    <thead>
-                                        <tr>
-                                            <th style="min-width:200px">Name</th>
-                                            <th>Specialization</th>
-                                            <th>Phone Number</th>
-                                            <th>&nbsp; &nbsp; Actions&nbsp; &nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- Row 1 -->
-                                        <tr>
-                                            <td>Mr. A. Sharma</td>
-                                            <td>Python & Django</td>
-                                            <td>9841234567</td>
-                                            <td>
-                                                <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                     role="group">
-                                                    <!-- View Button -->
-                                                    <button type="button"
-                                                            class="btn btn-info btn-sm text-white"
-                                                            data-toggle="modal"
-                                                            data-target="#instructorDetailsModal"
-                                                            data-name="{{ data.name }}"
-                                                            data-email="{{ instructor.user.email }}"
-                                                            data-phone="{{ instructor.phone }}"
-                                                            data-specialization="{{ instructor.specialization }}"
-                                                            data-bio="Hello this is a bio of the mr . A sharma"
-                                                            data-status="True"
-                                                            onclick="populateInstructorModal(this)">
-                                                        View Details
-                                                    </button>
-                                                    <!-- Update Button -->
-                                                    <a href="{% url 'UpdateInstructor' id=1 %}"
-                                                       class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                    <!-- Delete Button -->
-                                                    <button type="button"
-                                                            class="btn btn-danger btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#deleteInstructorModal"
-                                                            data-name="Mr. A. Sharma"
-                                                            data-delete-url="{% url 'DeleteInstructor' id=1 %}"
-                                                            onclick="populateDeleteModal(this)">Delete</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <!-- Row 2 -->
-                                        <tr>
-                                            <td>Ms. S. Karki</td>
-                                            <td>Graphic Design</td>
-                                            <td>9801987654</td>
-                                            <td>
-                                                <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                     role="group">
-                                                    <!-- View Button -->
-                                                    <button type="button"
-                                                            class="btn btn-info btn-sm text-white"
-                                                            data-toggle="modal"
-                                                            data-target="#instructorDetailsModal"
-                                                            data-name="Ms. S. Karki"
-                                                            data-specialization="Graphic Design (Ps, Ai, Id)"
-                                                            data-phone="9801987654"
-                                                            data-email="s.karki@example.com"
-                                                            data-address="Lalitpur, Nepal"
-                                                            onclick="populateInstructorModal(this)">
-                                                        View Details
-                                                    </button>
-                                                    <!-- Update Button -->
-                                                    <a href="{% url 'UpdateInstructor' id=2 %}"
-                                                       class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                    <!-- Delete Button -->
-                                                    <button type="button"
-                                                            class="btn btn-danger btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#deleteInstructorModal"
-                                                            data-name="Ms. S. Karki"
-                                                            data-delete-url="{% url 'DeleteInstructor' id=2 %}"
-                                                            onclick="populateDeleteModal(this)">Delete</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <!-- Row 3 -->
-                                        <tr>
-                                            <td>Mr. B. Rana</td>
-                                            <td>Digital Marketing</td>
-                                            <td>9860112233</td>
-                                            <td>
-                                                <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                     role="group">
-                                                    <!-- View Button -->
-                                                    <button type="button"
-                                                            class="btn btn-info btn-sm text-white"
-                                                            data-toggle="modal"
-                                                            data-target="#instructorDetailsModal"
-                                                            data-name="Mr. B. Rana"
-                                                            data-specialization="SEO & Social Media"
-                                                            data-phone="9860112233"
-                                                            data-email="b.rana@example.com"
-                                                            data-address="Bhaktapur, Nepal"
-                                                            onclick="populateInstructorModal(this)">
-                                                        View Details
-                                                    </button>
-                                                    <!-- Update Button -->
-                                                    <a href="{% url 'UpdateInstructor' id=3 %}"
-                                                       class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                    <!-- Delete Button -->
-                                                    <button type="button"
-                                                            class="btn btn-danger btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#deleteInstructorModal"
-                                                            data-name="Mr. B. Rana"
-                                                            data-delete-url="{% url 'DeleteInstructor' id=3 %}"
-                                                            onclick="populateDeleteModal(this)">Delete</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <!-- Page Content Section -->
+                            <div class="page-section">
+                                <div class="row">
+                                    <!-- Center the form nicely -->
+                                    <div class="col-12 col-sm-10 col-lg-8 border rounded mb-5 mb-sm-5 bg-white">
+                                        <div class="card-body">
+                                            <!-- Form -->
+                                            <form method="post">
+                                                <!-- {% csrf_token %} -->
+                                                <!-- SECTION 1: Personal Information -->
+                                                <fieldset>
+                                                    <legend>Personal Information</legend>
+                                                    <!-- Full Name (Updated) -->
+                                                    <div class="form-group">
+                                                        <label for="id_full_name">
+                                                            Full Name <abbr title="Required">*</abbr>
+                                                        </label>
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="id_full_name"
+                                                               name="full_name"
+                                                               placeholder="e.g. John Doe"
+                                                               required>
+                                                    </div>
+                                                    <!-- Contact Row -->
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="id_email">
+                                                                Email Address <abbr title="Required">*</abbr>
+                                                            </label>
+                                                            <input type="email"
+                                                                   class="form-control"
+                                                                   id="id_email"
+                                                                   name="email"
+                                                                   placeholder="e.g. john.doe@example.com"
+                                                                   required>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="id_phone">Phone Number</label>
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   id="id_phone"
+                                                                   name="phone"
+                                                                   placeholder="e.g. 9800000000">
+                                                        </div>
+                                                    </div>
+                                                    <!-- Address Row -->
+                                                    <div class="form-group">
+                                                        <label for="id_address">Address</label>
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="id_address"
+                                                               name="address"
+                                                               placeholder="e.g. Kathmandu, Nepal">
+                                                    </div>
+                                                </fieldset>
+                                                <hr class="my-4">
+                                                <!-- SECTION 2: Professional Details -->
+                                                <fieldset>
+                                                    <legend>Professional Details</legend>
+                                                    <!-- Specialization -->
+                                                    <div class="form-group">
+                                                        <label for="id_specialization">Specialization</label>
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="id_specialization"
+                                                               name="specialization"
+                                                               placeholder="e.g. Python, Django, Graphic Design">
+                                                    </div>
+                                                    <!-- Status (Is Active) -->
+                                                    <div class="form-group">
+                                                        <label for="id_is_active">Account Status</label>
+                                                        <select class="form-control" id="id_is_active" name="is_active">
+                                                            <option value="True" selected>Active</option>
+                                                            <option value="False">Inactive</option>
+                                                        </select>
+                                                        <small class="form-text text-muted">Set to 'Inactive' if the instructor is not currently teaching.</small>
+                                                    </div>
+                                                    <!-- Bio -->
+                                                    <div class="form-group">
+                                                        <label for="id_bio">Biography / Notes</label>
+                                                        <textarea class="form-control"
+                                                                  id="id_bio"
+                                                                  name="bio"
+                                                                  rows="4"
+                                                                  placeholder="Write a brief description about the instructor..."></textarea>
+                                                    </div>
+                                                    <!-- Action Buttons -->
+                                                    <div class="d-flex justify-content-between align-items-center mt-4">
+                                                        <button type="submit" class="btn btn-outline-primary px-5 w-100 w-sm-100">Register Instructor</button>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                            <!-- /.form -->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- ------ -->
                         </div>
                     </div>
                 </div>
@@ -833,138 +800,5 @@
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
         </script>
-        <!-- Single modals  -->
-        <!-- ================= SINGLE VIEW INSTRUCTOR MODAL ================= -->
-        <div class="modal fade"
-             id="instructorDetailsModal"
-             tabindex="-1"
-             role="dialog"
-             aria-labelledby="instructorDetailsLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Instructor Profile</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered mb-0">
-                                <tbody>
-                                    <!-- 1. Name (Blue) -->
-                                    <tr>
-                                        <th scope="row"
-                                            class="bg-primary text-white"
-                                            style="width: 30%;
-                                                   min-width: 130px">Name</th>
-                                        <td id="modal_inst_name"></td>
-                                    </tr>
-                                    <!-- 2. Email (Light) -->
-                                    <tr>
-                                        <th scope="row" class="bg-light text-primary">Email</th>
-                                        <td id="modal_inst_email" class="text-break"></td>
-                                    </tr>
-                                    <!-- 3. Phone (Blue) -->
-                                    <tr>
-                                        <th scope="row" class="bg-primary text-white">Phone</th>
-                                        <td id="modal_inst_phone"></td>
-                                    </tr>
-                                    <!-- 4. Specialization (Light) -->
-                                    <tr>
-                                        <th scope="row" class="bg-light text-primary">Specialization</th>
-                                        <td id="modal_inst_spec"></td>
-                                    </tr>
-                                    <!-- 5. Status (Blue) -->
-                                    <tr>
-                                        <th scope="row" class="bg-primary text-white">Status</th>
-                                        <td>
-                                            <span id="modal_inst_status" class="badge"></span>
-                                        </td>
-                                    </tr>
-                                    <!-- 6. Bio (Light) -->
-                                    <tr>
-                                        <th scope="row" class="bg-light text-primary">Bio</th>
-                                        <td id="modal_inst_bio" class="text-break" style="white-space: pre-wrap;"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ================= 2. SINGLE DELETE INSTRUCTOR MODAL ================= -->
-        <div class="modal fade"
-             id="deleteInstructorModal"
-             tabindex="-1"
-             role="dialog"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm Deletion</h5>
-                        <button type="button"
-                                class="btn-close"
-                                data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-                        Are you sure you want to delete <strong id="delete_modal_inst_name"></strong>?
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
-                        <!-- Link will be updated via JS -->
-                        <a href="#"
-                           id="delete_modal_confirm_btn"
-                           class="btn btn-secondary text-danger">Yes, Delete</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </body>
-    <!-- js for the models population of the data -->
-    <script>
-// --- 1. Populate View Instructor Modal ---
-function populateInstructorModal(buttonElement) {
-    const data = buttonElement.dataset;
-    
-    // 1. Basic Text Fields
-    document.getElementById('modal_inst_name').textContent = data.name || 'N/A';
-    document.getElementById('modal_inst_email').textContent = data.email || 'N/A';
-    document.getElementById('modal_inst_phone').textContent = data.phone || 'N/A';
-    document.getElementById('modal_inst_spec').textContent = data.specialization || 'N/A';
-    document.getElementById('modal_inst_bio').textContent = data.bio || 'No biography available.';
-
-    // 2. Status Badge Logic
-    // Django boolean usually comes as "True" or "False" string in data attributes
-    const statusEl = document.getElementById('modal_inst_status');
-    const isActive = data.status === "True" || data.status === "true";
-    
-    if (isActive) {
-        statusEl.textContent = "Active";
-        statusEl.className = "badge badge-success"; // Green
-    } else {
-        statusEl.textContent = "Inactive";
-        statusEl.className = "badge badge-secondary"; // Grey
-    }
-}
-// --- 2. Populate Delete Instructor Modal ---
-function populateDeleteModal(buttonElement) {
-    // Get data
-    const name = buttonElement.getAttribute('data-name');
-    const deleteUrl = buttonElement.getAttribute('data-delete-url');
-
-    // Set Text
-    const nameSpan = document.getElementById('delete_modal_inst_name');
-    if (nameSpan) nameSpan.textContent = name;
-
-    // Set URL
-    const confirmBtn = document.getElementById('delete_modal_confirm_btn');
-    if (confirmBtn) confirmBtn.href = deleteUrl;
-}
-    </script>
 </html>
