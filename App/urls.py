@@ -1,5 +1,5 @@
 from django.urls import path,include
-from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor
+from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom
 
 
 # url patterns for the app
@@ -54,8 +54,16 @@ urlpatterns = [
     path('AdminDashboard/Instructor/DeleteInstructor/<int:id>',DeleteInstructor,name="DeleteInstructor"),
             # AddInstructor
     path('AdminDashboard/Instructor/AddInstructor',AddInstructor,name="AddInstructor"),
-    
 
+#   #--------------ClassRoom------------#
+                #ViewClassroom
+    path('AdminDashboard/ClassRoom/ViewClassroom',ViewClassroom,name="ViewClassroom"),
+                
+#-------add classroom--------#
+    path('AdminDashboard/ClassRoom/AddClassroom',AddClassroom,name="AddClassroom"),
+                #UpdateClassroom
+    path('AdminDashboard/ClassRoom/UpdateClassroom/<int:id>',UpdateClassroom,name="UpdateClassroom"),
+    path('AdminDashboard/ClassRoom/DeleteClassroom/<int:id>',DeleteClassroom,name="DeleteClassroom"),
 
 
     # ---------for viewer dashboard--------

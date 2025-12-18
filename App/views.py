@@ -85,6 +85,22 @@ def DeleteInstructor(request,id):
 def AddInstructor(request):
     return render(request,'ADMIN/Instructor/Add-Instructor.html')
 
+#------Classroom----#
+# ViewClassroom
+def ViewClassroom(request):
+    return render(request,'ADMIN/Classroom/View-Classroom.html')
+# addclassroom 
+def AddClassroom(request):
+     return render(request,'ADMIN/Classroom/Add-Classroom.html')
+# update classroom
+def UpdateClassroom(request,id):
+     return render(request,'ADMIN/Classroom/Update-Classroom.html')
+# DeleteClassroom
+def DeleteClassroom(request,id):
+     return render(request,'ADMIN/Classroom/Delete-Classroom.html')
+
+
+
 
     
 
