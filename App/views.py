@@ -99,7 +99,16 @@ def UpdateClassroom(request,id):
 def DeleteClassroom(request,id):
      return render(request,'ADMIN/Classroom/Delete-Classroom.html')
 
-
+#------------ViewEnrollment--------------#
+# ViewEnrollment
+def ViewEnrollment(request):
+    return render(request,'ADMIN/Enrollment/View-Enrollment.html')
+def UpdateEnrollment(request,id):
+    return render(request,'ADMIN/Enrollment/Update-Enrollment.html')
+def AddEnrollment(request):
+    return render(request,'ADMIN/Enrollment/Add-Enrollment.html')
+def DeleteEnrollment(request,id):
+    return render(request,'ADMIN/Enrollment/Delete-Enrollment.html')
 
 
     

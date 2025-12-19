@@ -454,7 +454,7 @@
                             <!-- .menu -->
                             <ul class="menu">
                                 <!-- .menu-item -->
-                                <li class="menu-item ">
+                                <li class="menu-item has-active">
                                     <a href="{% url 'AdminDashboard' %}" class="menu-link">
                                         <span class="menu-icon oi oi-dashboard"></span>
                                         <span class="menu-text">Dashboard</span>
@@ -535,7 +535,7 @@
                                         <span class="menu-text">Data management</span>
                                     </a>
                                     <ul class="menu">
-                                        <li class="menu-item has-active">
+                                        <li class="menu-item">
                                             <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
                                         </li>
                                         <li class="menu-item">
@@ -550,7 +550,7 @@
                                         <li class="menu-item">
                                             <a href="{% url 'ViewClassroom' %}" class="menu-link">Classrooms</a>
                                         </li>
-                                        <li class="menu-item">
+                                        <li class="menu-item has-active">
                                             <a href="{% url 'ViewEnrollment' %}" class="menu-link">Enrollments</a>
                                         </li>
                                     </ul>
@@ -653,128 +653,185 @@
             <main class="app-main">
                 <div class="wrapper">
                     <div class="page">
-                        <div class="page-inner ms-2">
-                            <!-- Page header -->
-                            <!-- back -->
-                            <!-- ./back -->
-                            <header class="">
+                        <div class="page-inner">
+                            <!-- Page Header & Breadcrumbs -->
+                            <header class="page-title-bar">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="{% url 'AdminDashboard' %}">DataManagement</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Enrollments</li>
+                                    </ol>
+                                </nav>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h1 class="page-title">Update Students</h1>
-                                        <p class="text-muted mb-0">
-                                            <a style="text-decoration: none"
-                                               class="text-muted"
-                                               href="{% url 'AdminDashboard' %}">Datamanagement</a>/ <a style="text-decoration: none"
-    class="text-muted"
-    href="{% url 'ViewStudent' %}">Students</a> / <span class='text-primary'>Update Students</span>
-                                        </p>
-                                    </div>
+                                    <h1 class="page-title">View Enrollments</h1>
                                 </div>
                             </header>
+                            <!-- Add Enrollment Button -->
+                            <div class="w-25 ms-0 ms-sm-0 mt-1 mb-3">
+                                <div class="d-block">
+                                    <a href="{% url 'AddEnrollment' %}">
+                                        <button type="button" class="btn btn-primary mb-sm-1">
+                                            <i class="far fa-plus-square fa-3x" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
                             <!-- Page Content Section -->
-                            <!-- .form -->
-                            <form>
-                                <!-- .fieldset -->
-                                <fieldset>
-                                    <legend>Student Registration form</legend>
-                                    <!-- .form-group -->
-                                    <div class="form-group">
-                                        <label for="lbl1">
-                                            Student name
-                                            <abbr title="Required">*</abbr>
-                                        </label>
+                            <div class="page-section">
+                                <!-- Simple Search Bar -->
+                                <form class="top-bar-search w-100 w-md-auto border border-primary rounded mb-3"
+                                      method="get"
+                                      action="">
+                                    <div class="input-group input-group-search">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="oi oi-magnifying-glass"></span>
+                                            </span>
+                                        </div>
                                         <input type="text"
-                                               class="form-control placeholder-shown"
-                                               id="lbl1"
-                                               placeholder="Enter your name"
-                                               value="Ram Bahadur Thapa	"
-                                               required>
+                                               name="q"
+                                               class="form-control"
+                                               placeholder="Search enrollments..."
+                                               aria-label="Search"
+                                               required />
+                                        <div class="input-group-append d-none d-sm-flex">
+                                            <button class="btn btn-primary" type="submit">Go</button>
+                                        </div>
                                     </div>
-                                    <!-- /.form-group -->
-                                    <!-- .form-group -->
-                                    <div class="form-group">
-                                        <label for="lbl1">
-                                            Email
-                                            <abbr title="Required">*</abbr>
-                                        </label>
-                                        <input type="email"
-                                               class="form-control placeholder-shown"
-                                               id="lbl1"
-                                               placeholder="example@gmail.com"
-                                               value="ram.thapa@example.com"
-                                               required>
+                                </form>
+                                <!-- THE TABLE SECTION (Using your requested structure) -->
+                                <section class="card card-fluid">
+                                    <!-- .table-responsive -->
+                                    <div class="table-responsive">
+                                        <!-- .table -->
+                                        <table class="table table-hover table-striped" id="enrollmentTable">
+                                            <!-- thead -->
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th style="min-width:200px">Student Name</th>
+                                                    <th>Batch</th>
+                                                    <th>Enrolled On</th>
+                                                    <th>Status</th>
+                                                    <th style="min-width:150px; text-align:center;">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- /thead -->
+                                            <!-- tbody -->
+                                            <tbody>
+                                                <!-- Row 1: Active -->
+                                                <tr>
+                                                    <td>
+                                                        <strong>Ram Bahadur Thapa</strong>
+                                                    </td>
+                                                    <td>Python Jan 2026</td>
+                                                    <td>Jan 15, 2026</td>
+                                                    <td>
+                                                        <span class="badge badge-success">Active</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex flex-column flex-md-row gap-2 justify-content-center">
+                                                            <!-- View Details -->
+                                                            <button type="button"
+                                                                    class="btn btn-sm btn-icon btn-info text-white"
+                                                                    data-toggle="modal"
+                                                                    data-target="#enrollmentDetailsModal"
+                                                                    data-student="Ram Bahadur Thapa"
+                                                                    data-batch="Python Jan 2026"
+                                                                    data-date="Jan 15, 2026"
+                                                                    data-status="Active"
+                                                                    onclick="populateEnrollmentModal(this)">
+                                                                view more
+                                                            </button>
+                                                            <!-- Update -->
+                                                            <a href="{% url 'UpdateEnrollment' id=1 %}"
+                                                               class="btn btn-sm btn-icon btn-warning text-dark ml-1">
+                                                                Update
+                                                            </a>
+                                                            <!-- Delete -->
+                                                            <button type="button"
+                                                                    class="btn btn-sm btn-icon btn-danger ml-1"
+                                                                    data-toggle="modal"
+                                                                    data-target="#deleteEnrollmentModal"
+                                                                    data-name="Ram Bahadur -> Python 2026"
+                                                                    data-delete-url="{% url 'DeleteEnrollment' id=1 %}"
+                                                                    onclick="populateDeleteModal(this)">Delete</button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <!-- Row 2: Completed -->
+                                                <tr>
+                                                    <td>
+                                                        <strong>Sita Kumari</strong>
+                                                    </td>
+                                                    <td>Django Dec 2025</td>
+                                                    <td>Dec 01, 2025</td>
+                                                    <td>
+                                                        <span class="badge badge-primary">Completed</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex flex-column flex-md-row gap-2 justify-content-center">
+                                                            <!-- View Details -->
+                                                            <button type="button"
+                                                                    class="btn btn-sm btn-icon btn-info text-white"
+                                                                    data-toggle="modal"
+                                                                    data-target="#enrollmentDetailsModal"
+                                                                    data-student="Sita Kumari"
+                                                                    data-batch="Django Dec 2025"
+                                                                    data-date="Dec 01, 2025"
+                                                                    data-status="Completed"
+                                                                    onclick="populateEnrollmentModal(this)">
+                                                                View more
+                                                            </button>
+                                                            <!-- Update -->
+                                                            <a href="{% url 'UpdateEnrollment' id=2 %}"
+                                                               class="btn btn-sm btn-icon btn-warning text-dark ml-1">
+                                                                Update
+                                                            </a>
+                                                            <!-- Delete -->
+                                                            <button type="button"
+                                                                    class="btn btn-sm btn-icon btn-danger ml-1"
+                                                                    data-toggle="modal"
+                                                                    data-target="#deleteEnrollmentModal"
+                                                                    data-name="Sita Kumari -> Django 2025"
+                                                                    data-delete-url="{% url 'DeleteEnrollment' id=2 %}"
+                                                                    onclick="populateDeleteModal(this)">Delete</button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <!-- /tbody -->
+                                        </table>
+                                        <!-- /.table -->
                                     </div>
-                                    <!-- /.form-group -->
-                                    <!-- .form-group -->
-                                    <div class="form-group">
-                                        <label for="lbl1">
-                                            Phone Number
-                                            <abbr title="Required">*</abbr>
-                                        </label>
-                                        <input type="text"
-                                               class="form-control placeholder-shown"
-                                               id="lbl1"
-                                               placeholder="eg :9849554478"
-                                               value="9845123456"
-                                               required>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <!-- .form-group -->
-                                    <div class="form-group">
-                                        <label for="lbl1">
-                                            Address
-                                            <abbr title="Required">*</abbr>
-                                        </label>
-                                        <input type="text"
-                                               class="form-control placeholder-shown"
-                                               id="lbl1"
-                                               placeholder="Enter the place you reside"
-                                               value='pokhara'
-                                               required>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <!-- select-element -->
-                                    <div class="form-group">
-                                        <label for="sel3">Status</label>
-                                        <select class="custom-select" id="sel3" required>
-                                            <option value="">Choose...</option>
-                                            <option value="ACTIVE">Active</option>
-                                            <option value="Inactive">Inactive</option>
-                                            <option value="Completed">Completed</option>
-                                            <option value="Completed">Dropped</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit"
-                                            class="btn btn-outline-primary d-flex justify-content-center w-100">
-                                        Register Student
-                                    </button>
-                                </fieldset>
-                                <!-- /.fieldset -->
-                            </form>
-                            <!-- /.form -->
+                                    <!-- /.table-responsive -->
+                                </section>
+                            </div>
                         </div>
                     </div>
+                    <!-- /.page-inner -->
                 </div>
-            </main>
-            <!-- /.app-main -->
-        </div>
-        <!-- /.app -->
-        <!-- BEGIN BASE JS -->
-        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-        <!-- END BASE JS -->
-        <!-- BEGIN PLUGINS JS -->
-        <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-        <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-        <!-- END PLUGINS JS -->
-        <!-- BEGIN THEME JS -->
-        <script src="{% static 'javascript/main.min.js' %}"></script>
-        <!-- END THEME JS -->
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async
-                src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-        <script>
+                <!-- /.page -->
+            </div>
+            <!-- /.wrapper -->
+            <!-- /.app -->
+            <!-- BEGIN BASE JS -->
+            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+            <!-- END BASE JS -->
+            <!-- BEGIN PLUGINS JS -->
+            <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+            <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+            <!-- END PLUGINS JS -->
+            <!-- BEGIN THEME JS -->
+            <script src="{% static 'javascript/main.min.js' %}"></script>
+            <!-- END THEME JS -->
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async
+                    src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+            <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -782,6 +839,127 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
+            </script>
+        </body>
+        <!-- ================= 1. VIEW ENROLLMENT MODAL ================= -->
+        <div class="modal fade"
+             id="enrollmentDetailsModal"
+             tabindex="-1"
+             role="dialog"
+             aria-labelledby="enrollmentDetailsLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Enrollment Details</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered mb-0">
+                                <tbody>
+                                    <!-- 1. Student (Blue) -->
+                                    <tr>
+                                        <th scope="row" class="bg-primary text-white" style="width: 35%;">Student Name</th>
+                                        <td id="modal_enroll_student"></td>
+                                    </tr>
+                                    <!-- 2. Batch (Light) -->
+                                    <tr>
+                                        <th scope="row" class="bg-light text-primary">Batch</th>
+                                        <td id="modal_enroll_batch"></td>
+                                    </tr>
+                                    <!-- 3. Enrolled On (Blue) -->
+                                    <tr>
+                                        <th scope="row" class="bg-primary text-white">Enrolled Date</th>
+                                        <td id="modal_enroll_date"></td>
+                                    </tr>
+                                    <!-- 4. Status (Light) -->
+                                    <tr>
+                                        <th scope="row" class="bg-light text-primary">Status</th>
+                                        <td>
+                                            <span id="modal_enroll_status" class="badge"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ================= 2. DELETE CONFIRMATION MODAL ================= -->
+        <div class="modal fade"
+             id="deleteEnrollmentModal"
+             tabindex="-1"
+             role="dialog"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Deletion</h5>
+                        <button type="button"
+                                class="btn-close"
+                                data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        Are you sure you want to delete the enrollment for <strong id="delete_modal_enroll_name"></strong>?
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
+                        <!-- The Javascript will inject the HREF here -->
+                        <a href="#"
+                           id="delete_modal_confirm_btn"
+                           class="btn btn-secondary text-danger">Yes, Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+// --- 1. Populate View Enrollment Modal ---
+function populateEnrollmentModal(buttonElement) {
+    const data = buttonElement.dataset;
+    
+    // Text Fields
+    document.getElementById('modal_enroll_student').textContent = data.student || 'N/A';
+    document.getElementById('modal_enroll_batch').textContent = data.batch || 'N/A';
+    document.getElementById('modal_enroll_date').textContent = data.date || 'N/A';
+
+    // Status Badge Logic
+    const statusEl = document.getElementById('modal_enroll_status');
+    const status = data.status || '';
+    statusEl.textContent = status;
+    statusEl.className = 'badge'; // Reset
+    
+    if (status.toLowerCase() === 'active') {
+        statusEl.classList.add('badge-success');
+    } else if (status.toLowerCase() === 'completed') {
+        statusEl.classList.add('badge-primary');
+    } else if (status.toLowerCase() === 'dropped') {
+        statusEl.classList.add('badge-danger');
+    } else {
+        statusEl.classList.add('badge-secondary');
+    }
+}
+
+// --- 2. Populate Delete Modal ---
+function populateDeleteModal(buttonElement) {
+    // Get Data
+    const name = buttonElement.getAttribute('data-name');
+    const deleteUrl = buttonElement.getAttribute('data-delete-url');
+
+    // Update Modal Text
+    document.getElementById('delete_modal_enroll_name').textContent = name;
+    
+    // Update Delete Button Link
+    const confirmBtn = document.getElementById('delete_modal_confirm_btn');
+    if (confirmBtn) {
+        confirmBtn.href = deleteUrl;
+    }
+}
         </script>
-    </body>
-</html>
+    </html>

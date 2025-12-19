@@ -1,5 +1,5 @@
 from django.urls import path,include
-from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom
+from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom,ViewEnrollment,UpdateEnrollment,AddEnrollment,DeleteEnrollment
 
 
 # url patterns for the app
@@ -64,6 +64,21 @@ urlpatterns = [
                 #UpdateClassroom
     path('AdminDashboard/ClassRoom/UpdateClassroom/<int:id>',UpdateClassroom,name="UpdateClassroom"),
     path('AdminDashboard/ClassRoom/DeleteClassroom/<int:id>',DeleteClassroom,name="DeleteClassroom"),
+
+    # -------Enrollments-----------#
+    # ViewEnrollment
+    path('AdminDashboard/Enrollment/ViewEnrollment',ViewEnrollment,name="ViewEnrollment"),
+
+                #AddEnrollment
+    path('AdminDashboard/Enrollment/AddEnrollment',AddEnrollment,name="AddEnrollment"),
+    # Update enrollment
+    path('AdminDashboard/Enrollment/UpdateEnrollment/<int:id>',UpdateEnrollment,name="UpdateEnrollment"),
+        #AddEnrollment
+    path('AdminDashboard/Enrollment/AddEnrollment',AddEnrollment,name="AddEnrollment"),
+            # DeleteEnrollment
+
+    path('AdminDashboard/Enrollment/DeleteEnrollment/<int:id>',DeleteEnrollment,name="DeleteEnrollment"),
+
 
 
     # ---------for viewer dashboard--------
