@@ -549,7 +549,7 @@
                                         <li class="menu-item has-active">
                                             <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
                                         </li>
-                                        <li class="menu-item">
+                                        <li class="menu-item has-active">
                                             <a href="{% url 'ViewCourses' %}" class="menu-link">Course</a>
                                         </li>
                                         <li class="menu-item">
@@ -664,21 +664,39 @@
             <main class="app-main">
                 <div class="wrapper">
                     <div class="page">
-                        <div class="page-inner ms-2">
-                            <!-- Page header -->
-                            <!-- back -->
-                            <a href="{% url 'ViewStudent' %}" class="btn btn-lg btn-light"><i class="fa fa-angle-right"></i> Go Back</a>
-                            <!-- ./back -->
-                            <header class="">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h1 class="page-title">Delete Students</h1>
-                                        <p class="text-muted mb-0">DataManagement / Students / Delete Student</p>
+                        <div class="page-inner">
+                            <!-- Page Content Section -->
+                            <div class="page-section">
+                                <!-- .empty-state -->
+                                <div class="empty-state container pb-4 d-flex flex-column justify-content-center"
+                                     style="min-height: 70vh">
+                                    <!-- 1. The Icon (Visual Confirmation) -->
+                                    <!-- Using a large Trash icon with a success check overlay look, or just a simple Success Circle -->
+                                    <div class="state-figure mb-4">
+                                        <span class="fa-stack fa-4x">
+                                            <i class="far fa-circle fa-stack-2x text-success"></i>
+                                            <i class="fa fa-check fa-stack-1x text-success"></i>
+                                        </span>
+                                    </div>
+                                    <!-- 2. The Title -->
+                                    <h3 class="state-header">Deleted Successfully!</h3>
+                                    <!-- 3. The Description -->
+                                    <p class="state-description lead text-muted">
+                                        The record has been permanently removed from the system.
+                                        <br>
+                                        This action cannot be undone.
+                                    </p>
+                                    <!-- 4. Action Buttons -->
+                                    <div class="state-action mt-3">
+                                        <!-- Primary Action: Go Back to List -->
+                                        <!-- Replace 'AdminDashboard' with the specific view you want (e.g., 'ViewStudent') -->
+                                        <a href="{% url 'ViewStudent' %}" class="btn btn-primary px-5">
+                                            <i class="fa fa-arrow-left mr-2"></i> Back
+                                        </a>
                                     </div>
                                 </div>
-                            </header>
-                            <!-- Page Content Section -->
-                            <div class="success-box">Student data has been deleted Sucessfully</div>
+                                <!-- /.empty-state -->
+                            </div>
                         </div>
                     </div>
                 </main>
