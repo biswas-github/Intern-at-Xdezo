@@ -670,7 +670,7 @@
                     <div class="page">
                         <div class="page-inner ms-2 me-2">
                             <!-- Page Header & Breadcrumbs -->
-                            <header class="page-title-bar">
+                            <header class="">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item">
@@ -679,11 +679,11 @@
                                         <li class="breadcrumb-item">
                                             <a href="{% url 'ViewPayment' %}">Finance</a>
                                         </li>
-                                        <li class="breadcrumb-item active" aria-current="page">Add Payment</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Update Payment</li>
                                     </ol>
                                 </nav>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <h1 class="page-title">Record New Payment</h1>
+                                    <h1 class="page-title">Update Payment Details</h1>
                                 </div>
                             </header>
                             <!-- Page Content Section -->
@@ -698,27 +698,27 @@
                                                 <!-- SECTION 1: Payer Details -->
                                                 <fieldset>
                                                     <legend>Payer Information</legend>
-                                                    <!-- Student Selection -->
+                                                    <!-- Student Selection (Pre-selected) -->
                                                     <div class="form-group">
                                                         <label for="id_student">
                                                             Student <abbr title="Required">*</abbr>
                                                         </label>
                                                         <select class="form-control" id="id_student" name="student" required>
-                                                            <option value="" disabled selected>Select Student</option>
-                                                            <!-- These will be populated from DB -->
-                                                            <option value="1">Ram Bahadur Thapa (ID: 101)</option>
+                                                            <option value="" disabled>Select Student</option>
+                                                            <!-- Pre-selected student -->
+                                                            <option value="1" selected>Ram Bahadur Thapa (ID: 101)</option>
                                                             <option value="2">Sita Kumari (ID: 102)</option>
                                                         </select>
                                                     </div>
-                                                    <!-- Enrollment Selection (Optional but recommended) -->
+                                                    <!-- Enrollment Selection (Pre-selected) -->
                                                     <div class="form-group">
                                                         <label for="id_enrollment">Linked Enrollment (Batch)</label>
                                                         <select class="form-control" id="id_enrollment" name="enrollment">
-                                                            <option value="" selected>-- General Payment (No specific batch) --</option>
-                                                            <option value="10">Python Jan 2026</option>
+                                                            <option value="">-- General Payment --</option>
+                                                            <!-- Pre-selected batch -->
+                                                            <option value="10" selected>Python Jan 2026</option>
                                                             <option value="11">Django Dec 2025</option>
                                                         </select>
-                                                        <small class="form-text text-muted">Select which course/batch this payment is for.</small>
                                                     </div>
                                                 </fieldset>
                                                 <hr class="my-4">
@@ -726,7 +726,7 @@
                                                 <fieldset>
                                                     <legend>Transaction Details</legend>
                                                     <div class="row">
-                                                        <!-- Amount -->
+                                                        <!-- Amount (Pre-filled) -->
                                                         <div class="col-md-6 mb-3">
                                                             <label for="id_amount">
                                                                 Amount (Rs.) <abbr title="Required">*</abbr>
@@ -737,42 +737,47 @@
                                                                    name="amount"
                                                                    step="0.01"
                                                                    min="0"
-                                                                   placeholder="e.g. 5000.00"
+                                                                   value="15000.00"
                                                                    required>
                                                         </div>
-                                                        <!-- Payment Method -->
+                                                        <!-- Payment Method (Pre-selected) -->
                                                         <div class="col-md-6 mb-3">
                                                             <label for="id_method">Payment Method</label>
                                                             <select class="form-control" id="id_method" name="method">
-                                                                <option value="CASH" selected>Cash</option>
-                                                                <option value="ESEWA">eSewa</option>
+                                                                <option value="CASH">Cash</option>
+                                                                <option value="ESEWA" selected>eSewa</option>
                                                                 <option value="BANK">Bank Transfer</option>
                                                                 <option value="OTHERS">Others</option>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <!-- Reference Number -->
+                                                    <!-- Transaction Date (Read Only - auto_now_add usually isn't editable) -->
+                                                    <div class="form-group">
+                                                        <label for="id_date">Transaction Date</label>
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="id_date"
+                                                               value="Jan 15, 2026 14:30"
+                                                               disabled>
+                                                        <small class="form-text text-muted">Original payment date cannot be modified.</small>
+                                                    </div>
+                                                    <!-- Reference Number (Pre-filled) -->
                                                     <div class="form-group">
                                                         <label for="id_ref_no">Reference / Transaction No.</label>
                                                         <input type="text"
                                                                class="form-control"
                                                                id="id_ref_no"
                                                                name="ref_no"
-                                                               placeholder="e.g. ESW-123456 or CHQ-998877">
-                                                        <small class="form-text text-muted">Required for Bank/Online transfers.</small>
+                                                               value="ESW-987654321">
                                                     </div>
-                                                    <!-- Remarks -->
+                                                    <!-- Remarks (Pre-filled) -->
                                                     <div class="form-group">
                                                         <label for="id_remarks">Remarks</label>
-                                                        <textarea class="form-control"
-                                                                  id="id_remarks"
-                                                                  name="remarks"
-                                                                  rows="3"
-                                                                  placeholder="e.g. First installment paid by father."></textarea>
+                                                        <textarea class="form-control" id="id_remarks" name="remarks" rows="3">Full payment for Python course.</textarea>
                                                     </div>
                                                     <!-- Action Buttons -->
                                                     <div class="d-flex flex-column mt-4">
-                                                        <button type="submit" class="btn btn-outline-primary w-100">Save Payment</button>
+                                                        <button type="submit" class="btn btn-primary w-100">Update Payment</button>
                                                     </div>
                                                 </fieldset>
                                             </form>

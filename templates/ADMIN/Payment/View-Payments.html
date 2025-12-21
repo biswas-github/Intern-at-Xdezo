@@ -774,7 +774,8 @@
                                                                     view more
                                                                 </button>
                                                                 <!-- Update Button -->
-                                                                <a href="#" class="btn btn-sm  btn-warning mx-2">update</a>
+                                                                <a href="{% url 'UpdatePayment' id=1 %}"
+                                                                   class="btn btn-sm  btn-warning mx-2">update</a>
                                                                 <!-- Delete Button -->
                                                                 <button type="button"
                                                                         class="btn btn-sm  btn-danger"
@@ -855,7 +856,8 @@
                                                                         onclick="populatePaymentModal(this)">
                                                                     view more
                                                                 </button>
-                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                <a href="{% url 'UpdatePayment' id=1 %}"
+                                                                   class="btn btn-sm btn-warning mx-2">update</a>
                                                                 <button type="button"
                                                                         class="btn btn-sm btn-danger"
                                                                         data-toggle="modal"

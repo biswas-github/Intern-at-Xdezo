@@ -118,6 +118,9 @@ def ViewPayment(request):
         # AddPayment
 def AddPayment(request):
     return render(request,'ADMIN/Payment/Add-Payment.html')
+#   UpdatePayment
+def UpdatePayment(request,id):
+    return render(request,'ADMIN/Payment/Update-Payment.html')
 
 
 # first page for the viewer 
