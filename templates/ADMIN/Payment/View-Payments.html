@@ -592,14 +592,14 @@
                                 <!-- ./menuitems -->
                                 <!--  ./finance-->
                                 <!-- .menu-item -->
-                                <li class="menu-item has-child">
+                                <li class="menu-item has-child has-open">
                                     <a href="#" class="menu-link">
                                         <span class="menu-icon oi oi-people"></span>
                                         <span class="menu-text">Finance</span>
                                     </a>
                                     <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="#students" class="menu-link">Payments</a>
+                                        <li class="menu-item has-active">
+                                            <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#courses" class="menu-link">Dues and overdues</a>
@@ -782,7 +782,7 @@
                                                                         data-toggle="modal"
                                                                         data-target="#deletePaymentModal"
                                                                         data-name="Payment of 15,000 by Ram Bahadur"
-                                                                        data-delete-url="/payment/delete/1"
+                                                                        data-delete-url="{% url 'DeletePayment' id=2 %}"
                                                                         onclick="populateDeleteModal(this)">
                                                                     Delete
                                                                 </button>
@@ -822,7 +822,7 @@
                                                                         data-toggle="modal"
                                                                         data-target="#deletePaymentModal"
                                                                         data-name="Payment of 5,000 by Sita Kumari"
-                                                                        data-delete-url="/payment/delete/2"
+                                                                        data-delete-url="{% url 'DeletePayment' id=3 %}"
                                                                         onclick="populateDeleteModal(this)">
                                                                     Delete
                                                                 </button>
@@ -863,7 +863,7 @@
                                                                         data-toggle="modal"
                                                                         data-target="#deletePaymentModal"
                                                                         data-name="Payment of 12,000 by Hari Krishna"
-                                                                        data-delete-url="/payment/delete/3"
+                                                                        data-delete-url="{% url 'DeletePayment' id=3 %}"
                                                                         onclick="populateDeleteModal(this)">
                                                                     Delete
                                                                 </button>
@@ -903,7 +903,7 @@
                                                                         data-toggle="modal"
                                                                         data-target="#deletePaymentModal"
                                                                         data-name="Payment of 20,000 by Anjali Sherpa"
-                                                                        data-delete-url="/payment/delete/4"
+                                                                        data-delete-url="{% url 'DeletePayment' id=4 %}"
                                                                         onclick="populateDeleteModal(this)">
                                                                     Delete
                                                                 </button>
@@ -943,7 +943,7 @@
                                                                         data-toggle="modal"
                                                                         data-target="#deletePaymentModal"
                                                                         data-name="Payment of 7,500 by Bibek Rana"
-                                                                        data-delete-url="/payment/delete/5"
+                                                                        data-delete-url="{% url 'DeletePayment' id=6 %}"
                                                                         onclick="populateDeleteModal(this)">
                                                                     Delete
                                                                 </button>

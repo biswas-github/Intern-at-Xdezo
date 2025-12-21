@@ -587,7 +587,7 @@
                   </a>
                   <ul class="menu">
                     <li class="menu-item">
-                      <a href="#students" class="menu-link">Payments</a>
+                      <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
                     </li>
                     <li class="menu-item">
                       <a href="#courses" class="menu-link">Dues and overdues</a>
@@ -657,539 +657,261 @@
         <div class="wrapper">
           <div class="page">
             <div class="page-inner ms-2">
-              <!-- Page header -->
-              <!-- back -->
-              <!-- ./back -->
-              <header class="">
+              <!-- Page Header & Breadcrumbs -->
+              <header class="page-title-bar">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="{% url 'AdminDashboard' %}">DataManagement</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Students</li>
+                  </ol>
+                </nav>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h1 class="page-title">View Students</h1>
-                    <p class="text-muted mb-0">
-                      <a class="text-muted"
-                         style="text-decoration: none"
-                         href="{% url 'AdminDashboard' %}">DataManagement</a>/ Students / <a class="text-primary"
-    style="text-decoration: none"
-    href="{% url 'ViewStudent' %}">View students</a>
-                    </p>
-                  </div>
+                  <h1 class="page-title">View Students</h1>
                 </div>
               </header>
+              <!-- Add Student Button -->
+              <div class="mb-3 mt-1">
+                <div class="d-block">
+                  <a href="{% url 'DataManagementStudent' %}"
+                     class="text-decoration-none ms-2">
+                    <button type="button" class="btn btn-outline-dark shadow-sm ">
+                      <i class="fas fa-plus "></i>
+                    </button>
+                  </a>
+                </div>
+                <!--  -->
+              </div>
               <!-- Page Content Section -->
               <div class="page-section">
-                <!-- YOUR CONTENT GOES HERE -->
-                <!-- button -->
-                <div class="w-25 ms-0 ms-sm-0">
-                  <div class="d-block">
-                    <a href="{% url 'DataManagementStudent' %}">
-                      <!-- Button wrapper kept for blue background and clicking area -->
-                      <button type="button" class="btn btn-primary mb-sm-1">
-                        <!-- Removed text, added 'fa-2x' to make icon bigger -->
-                        <i class="far fa-plus-square fa-3x" aria-hidden="true"></i>
-                      </button>
-                    </a>
-                  </div>
-                </div>
-                <!-- ./ button -->
-                <!-- .table view students  searchbar -->
-                <form class="top-bar-search w-100 w-md-auto border border-primary rounded mb-1 mb-sm-1 mt-1 mt-sm-1"
-                      method="get"
-                      action="">
-                  <div class="input-group input-group-search">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <span class="oi oi-magnifying-glass"></span>
-                      </span>
+                <div class="card card-fluid">
+                  <div class="card-body">
+                    <!-- Search Filter -->
+                    <div class="form-group">
+                      <div class="input-group input-group-alt">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                        </div>
+                        <!-- The Search Logic -->
+                        <input id="table-search"
+                               type="text"
+                               class="form-control"
+                               placeholder="Search students...">
+                        <div class="input-group-append">
+                          <button id="clear-search"
+                                  type="button"
+                                  class="close"
+                                  aria-label="Close"
+                                  style="display:none;
+                                         position: absolute;
+                                         right: 10px;
+                                         top: 10px;
+                                         z-index: 5">
+                            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    <input type="text"
-                           name="student"
-                           class="form-control"
-                           placeholder="Search"
-                           aria-label="Search"
-                           required />
-                    <div class="input-group-append d-none d-sm-flex">
-                      <button class="btn btn-primary" type="submit">Go</button>
-                    </div>
-                  </div>
-                </form>
-                <!-- ./ table view students -->
-                <div class="row">
-                  <div class="col-12 col-sm-12 col-lg-12 me-sm-3 rounded">
+                    <!-- The Student Table -->
                     <div class="table-responsive">
-                      <table class="table table-hover table-bordered table-striped"
-                             id="studenttable">
-                        <thead>
+                      <table class="table table-hover table-striped" id="studentTable">
+                        <thead class="thead-light">
                           <tr>
                             <th style="min-width:200px">Name</th>
                             <th>Phone No</th>
                             <th>Email</th>
-                            <th>&nbsp; &nbsp; Actions&nbsp; &nbsp;</th>
+                            <th style="min-width:150px; text-align:right;">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
+                          <!-- Row 1 -->
                           <tr>
-                            <td>Ram Bahadur Thapa</td>
-                            <td>9845123456</td>
-                            <td>ram.thapa@example.com</td>
-                            <!-- for the buttons -->
-                            <!-- Assuming you are inside a <td> element in your Django loop -->
-                            <td>
-                              <!-- 1. The Button Group -->
-                              <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                   role="group">
-                                <!-- *** NEW: Show More / Offcanvas Trigger Button *** -->
+                            <td class="align-middle">
+                              <a href="#" class="tile tile-img mr-1">
+                                <span class="tile-text">RB</span>
+                              </a>
+                              <a href="#">Ram Bahadur Thapa</a>
+                            </td>
+                            <td class="align-middle">9845123456</td>
+                            <td class="align-middle">ram.thapa@example.com</td>
+                            <td class="align-middle text-right">
+                              <div class="d-flex flex-column flex-md-row justify-content-md-end align-items-center">
+                                <!-- View Button -->
                                 <button type="button"
-                                        class="btn btn-info btn-sm text-white"
+                                        class="btn btn-sm btn-info text-white mb-2 mb-md-0"
                                         data-toggle="modal"
                                         data-target="#studentDetailsModal"
-                                        onclick="populateModal(this)"
-                                        data-id="1"
                                         data-name="Ram Bahadur Thapa"
                                         data-phone="9845123456"
                                         data-email="ram.thapa@example.com"
                                         data-dob="Jan 01, 1998"
                                         data-address="Kathmandu, Nepal"
                                         data-status="Active"
-                                        data-edit-url="{% url 'UpdateStudent' id=1 %}">Show more</button>
-                                <!-- *** END NEW BUTTON *** -->
-                                <!-- The original Update Button remains, but you can also make it a link inside the offcanvas -->
+                                        data-edit-url="{% url 'UpdateStudent' id=1 %}"
+                                        onclick="populateModal(this)">Show more</button>
+                                <!-- Update Button -->
                                 <a href="{% url 'UpdateStudent' id=1 %}"
-                                   class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                <!-- Delete Trigger Button -->
+                                   class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
+                                <!-- Delete Button -->
                                 <button type="button"
-                                        class="btn btn-danger btn-sm"
+                                        class="btn btn-danger btn-sm ml-md-2"
                                         data-toggle="modal"
                                         data-target="#deleteStudentModal"
                                         data-name="Ram Bahadur Thapa"
                                         data-delete-url="{% url 'DeleteStudent' id=1 %}"
                                         onclick="populateDeleteModal(this)">Delete</button>
                               </div>
-                              <!-- delete Confirmation -->
                             </td>
-                            <!-- ./ for the buttons -->
                           </tr>
-                        </a>
-                        <tr>
-                          <td>Sita Kumari Shrestha</td>
-                          <td>9801122334</td>
-                          <td>sita.shrestha@example.com</td>
-                          <!-- for the buttons -->
-                          <td>
-                            <!-- 1. The Button Group -->
-                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                 role="group">
-                              <!-- Show Button -->
-                              <button type="button"
-                                      class="btn btn-sm btn-icon btn-info text-light"
-                                      data-toggle="modal"
-                                      data-target="#studentDetailsModal"
-                                      data-name="Sita Kumari Shrestha"
-                                      data-phone="9801122334"
-                                      data-email="sita.shrestha@example.com"
-                                      data-dob="Feb 14, 1999"
-                                      data-address="Lalitpur, Nepal"
-                                      data-status="Active"
-                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
-                                      onclick="populateModal(this)">Show more</button>
-                              <!-- Update Button -->
-                              <a href="{% url 'UpdateStudent' id=5 %}"
-                                 class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                              <!-- Delete Trigger Button -->
-                              <button type="button"
-                                      class="btn btn-danger btn-sm"
-                                      data-toggle="modal"
-                                      data-target="#deleteStudentModal"
-                                      data-name="Sita Kumari Shrestha"
-                                      data-delete-url="{% url 'DeleteStudent' id=5 %}"
-                                      onclick="populateDeleteModal(this)">Delete</button>
-                            </div>
-                          </td>
-                          <!-- ./ for the buttons -->
-                        </tr>
-                        <tr>
-                          <td>Bishal Gurung</td>
-                          <td>9865012345</td>
-                          <td>bishal.gurung@example.com</td>
-                          <td>
-                            <!-- 1. The Button Group -->
-                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                 role="group">
-                              <!-- *** UPDATED: DYNAMIC OFFCANVAS BUTTON *** -->
-                              <button type="button"
-                                      class="btn btn-sm btn-icon btn-info text-light"
-                                      data-toggle="modal"
-                                      data-target="#studentDetailsModal"
-                                      data-name="Bishal Gurung"
-                                      data-phone="9865012345"
-                                      data-email="bishal.gurung@example.com"
-                                      data-dob="May 15, 1999"
-                                      data-address="Pokhara, Nepal"
-                                      data-status="Active"
-                                      data-edit-url="{% url 'UpdateStudent' id=2 %}"
-                                      onclick="populateModal(this)">Show more</button>
-                              <!-- *** END UPDATED BUTTON *** -->
-                              <!-- Update Button -->
-                              <a href="{% url 'UpdateStudent' id=2 %}"
-                                 class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                              <!-- Delete Trigger Button -->
-                              <button type="button"
-                                      class="btn btn-danger btn-sm"
-                                      data-toggle="modal"
-                                      data-target="#deleteStudentModal"
-                                      data-name="Bishal Gurung"
-                                      data-delete-url="{% url 'DeleteStudent' id=2 %}"
-                                      onclick="populateDeleteModal(this)">Delete</button>
-                            </div>
-                            <!-- 2. The Confirmation Modal -->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Anisha KC</td>
-                          <td>9812345678</td>
-                          <td>anisha.kc@example.com</td>
-                          <td>
-                            <!-- 1. The Button Group -->
-                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                 role="group">
-                              <!-- Show Button -->
-                              <button type="button"
-                                      class="btn btn-sm btn-icon btn-info text-light"
-                                      data-toggle="modal"
-                                      data-target="#studentDetailsModal"
-                                      data-name="Anisha KC"
-                                      data-phone="9812345678"
-                                      data-email="anisha.kc@example.com"
-                                      data-dob="Mar 10, 2000"
-                                      data-address="Bhaktapur, Nepal"
-                                      data-status="Active"
-                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
-                                      onclick="populateModal(this)">Show more</button>
-                              <!-- Update Button -->
-                              <a href="{% url 'UpdateStudent' id=5 %}"
-                                 class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                              <!-- Delete Trigger Button -->
-                              <button type="button"
-                                      class="btn btn-danger btn-sm"
-                                      data-toggle="modal"
-                                      data-target="#deleteStudentModal"
-                                      data-name="Anisha KC"
-                                      data-delete-url="{% url 'DeleteStudent' id=6 %}"
-                                      onclick="populateDeleteModal(this)">Delete</button>
-                            </div>
-                            <!-- 2. The Confirmation Modal -->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Pratik Sharma</td>
-                          <td>9823456789</td>
-                          <td>pratik.sharma@example.com</td>
-                          <td>
-                            <!-- 1. The Button Group -->
-                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                 role="group">
-                              <!-- Show Button -->
-                              <button type="button"
-                                      class="btn btn-sm btn-icon btn-info text-light"
-                                      data-toggle="modal"
-                                      data-target="#studentDetailsModal"
-                                      data-name="Pratik Sharma"
-                                      data-phone="9823456789"
-                                      data-email="pratik.sharma@example.com"
-                                      data-dob="Aug 22, 2001"
-                                      data-address="Chitwan, Nepal"
-                                      data-status="Active"
-                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
-                                      onclick="populateModal(this)">Show more</button>
-                              <!-- Update Button -->
-                              <a href="{% url 'UpdateStudent' id=5 %}"
-                                 class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                              <!-- Delete Trigger Button -->
-                              <button type="button"
-                                      class="btn btn-danger btn-sm"
-                                      data-toggle="modal"
-                                      data-target="#deleteStudentModal"
-                                      data-name="Pratik Sharma"
-                                      data-delete-url="{% url 'DeleteStudent' id=7 %}"
-                                      onclick="populateDeleteModal(this)">Delete</button>
-                            </div>
-                            <!-- 2. The Confirmation Modal -->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Kritika Basnet</td>
-                          <td>9847654321</td>
-                          <td>kritika.basnet@example.com</td>
-                          <td>
-                            <!-- 1. The Button Group -->
-                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                 role="group">
-                              <!-- Show Button -->
-                              <button type="button"
-                                      class="btn btn-sm btn-icon btn-info text-light"
-                                      data-toggle="modal"
-                                      data-target="#studentDetailsModal"
-                                      data-name="Kritika Basnet"
-                                      data-phone="9847654321"
-                                      data-email="kritika.basnet@example.com"
-                                      data-dob="Dec 05, 2000"
-                                      data-address="Biratnagar, Nepal"
-                                      data-status="Active"
-                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
-                                      onclick="populateModal(this)">Show more</button>
-                              <!-- Update Button -->
-                              <a href="{% url 'UpdateStudent' id=5 %}"
-                                 class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                              <!-- Delete Trigger Button -->
-                              <button type="button"
-                                      class="btn btn-danger btn-sm"
-                                      data-toggle="modal"
-                                      data-target="#deleteStudentModal"
-                                      data-name="Pratik Sharma"
-                                      data-delete-url="{% url 'DeleteStudent' id=7 %}"
-                                      onclick="populateDeleteModal(this)">Delete</button>
-                            </div>
-                            <!-- 2. The Confirmation Modal -->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Sandesh Paudel</td>
-                          <td>9805567890</td>
-                          <td>sandesh.paudel@example.com</td>
-                          <td>
-                            <!-- 1. The Button Group -->
-                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                 role="group">
-                              <!-- Show Button -->
-                              <button type="button"
-                                      class="btn btn-sm btn-icon btn-info text-light"
-                                      data-toggle="modal"
-                                      data-target="#studentDetailsModal"
-                                      data-name="Sandesh Paudel"
-                                      data-phone="9805567890"
-                                      data-email="sandesh.paudel@example.com"
-                                      data-dob="Jul 19, 1999"
-                                      data-address="Butwal, Nepal"
-                                      data-status="Active"
-                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
-                                      onclick="populateModal(this)">Show more</button>
-                              <!-- Update Button -->
-                              <a href="{% url 'UpdateStudent' id=5 %}"
-                                 class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                              <!-- Delete Trigger Button -->
-                              <button type="button"
-                                      class="btn btn-danger btn-sm"
-                                      data-toggle="modal"
-                                      data-target="#deleteStudentModal"
-                                      data-name="Sandesh Paudel"
-                                      data-delete-url="{% url 'DeleteStudent' id=9 %}"
-                                      onclick="populateDeleteModal(this)">Delete</button>
-                            </div>
-                            <!-- 2. The Confirmation Modal -->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Asmita Kunwar</td>
-                          <td>9812445789</td>
-                          <td>asmita.kunwar@example.com</td>
-                          <td>
-                            <!-- 1. The Button Group -->
-                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                 role="group">
-                              <!-- Show Button -->
-                              <button type="button"
-                                      class="btn btn-sm btn-icon btn-info text-light"
-                                      data-toggle="modal"
-                                      data-target="#studentDetailsModal"
-                                      data-name="Asmita Kunwar"
-                                      data-phone="9812445789"
-                                      data-email="asmita.kunwar@example.com"
-                                      data-dob="Sep 30, 2002"
-                                      data-address="Dharan, Nepal"
-                                      data-status="Active"
-                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
-                                      onclick="populateModal(this)">Show more</button>
-                              <!-- Update Button -->
-                              <a href="{% url 'UpdateStudent' id=5 %}"
-                                 class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                              <!-- Delete Trigger Button -->
-                              <button type="button"
-                                      class="btn btn-danger btn-sm"
-                                      data-toggle="modal"
-                                      data-target="#deleteStudentModal"
-                                      data-name="Asmita Kunwar"
-                                      data-delete-url="{% url 'DeleteStudent' id=10 %}"
-                                      onclick="populateDeleteModal(this)">Delete</button>
-                            </div>
-                            <!-- 2. The Confirmation Modal -->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Rohan Khadka</td>
-                          <td>9862341199</td>
-                          <td>rohan.khadka@example.com</td>
-                          <td>
-                            <!-- 1. The Button Group -->
-                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                 role="group">
-                              <!-- Show Button -->
-                              <button type="button"
-                                      class="btn btn-sm btn-icon btn-info text-light"
-                                      data-toggle="modal"
-                                      data-target="#studentDetailsModal"
-                                      data-name="Rohan Khadka"
-                                      data-phone="9862341199"
-                                      data-email="rohan.khadka@example.com"
-                                      data-dob="Nov 11, 2001"
-                                      data-address="Hetauda, Nepal"
-                                      data-status="Active"
-                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
-                                      onclick="populateModal(this)">Show more</button>
-                              <!-- Update Button -->
-                              <a href="{% url 'UpdateStudent' id=5 %}"
-                                 class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                              <!-- Delete Trigger Button -->
-                              <button type="button"
-                                      class="btn btn-danger btn-sm"
-                                      data-toggle="modal"
-                                      data-target="#deleteStudentModal"
-                                      data-name="Rohan Khadka"
-                                      data-delete-url="{% url 'DeleteStudent' id=11 %}"
-                                      onclick="populateDeleteModal(this)">Delete</button>
-                            </div>
-                            <!-- 2. The Confirmation Modal -->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Nikita Maharjan</td>
-                          <td>9821457790</td>
-                          <td>nikita.maharjan@example.com</td>
-                          <td>
-                            <!-- 1. The Button Group -->
-                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                 role="group">
-                              <!-- Show Button -->
-                              <button type="button"
-                                      class="btn btn-sm btn-icon btn-info text-light"
-                                      data-toggle="modal"
-                                      data-target="#studentDetailsModal"
-                                      data-name="Nikita Maharjan"
-                                      data-phone="9821457790"
-                                      data-email="nikita.maharjan@example.com"
-                                      data-dob="Jun 25, 2000"
-                                      data-address="Kirtipur, Nepal"
-                                      data-status="Active"
-                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
-                                      onclick="populateModal(this)">Show more</button>
-                              <!-- Update Button -->
-                              <a href="{% url 'UpdateStudent' id=5 %}"
-                                 class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                              <!-- Delete Trigger Button -->
-                              <button type="button"
-                                      class="btn btn-danger btn-sm"
-                                      data-toggle="modal"
-                                      data-target="#deleteStudentModal"
-                                      data-name="Nikita Maharjan"
-                                      data-delete-url="{% url 'DeleteStudent' id=12 %}"
-                                      onclick="populateDeleteModal(this)">Delete</button>
-                            </div>
-                            <!-- 2. The Confirmation Modal -->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Manoj Thapa Magar</td>
-                          <td>9843234576</td>
-                          <td>manoj.thapa@example.com</td>
-                          <td>
-                            <!-- 1. The Button Group -->
-                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                 role="group">
-                              <!-- Show Button -->
-                              <button type="button"
-                                      class="btn btn-sm btn-icon btn-info text-light"
-                                      data-toggle="modal"
-                                      data-target="#studentDetailsModal"
-                                      data-name="Manoj Thapa Magar"
-                                      data-phone="9843234576"
-                                      data-email="manoj.thapa@example.com"
-                                      data-dob="Apr 04, 1999"
-                                      data-address="Gorkha, Nepal"
-                                      data-status="Active"
-                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
-                                      onclick="populateModal(this)">Show more</button>
-                              <!-- Update Button -->
-                              <a href="{% url 'UpdateStudent' id=5 %}"
-                                 class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                              <!-- Delete Trigger Button -->
-                              <button type="button"
-                                      class="btn btn-danger btn-sm"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#deleteModal6">Delete</button>
-                            </div>
-                            <!-- 2. The Confirmation Modal -->
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Aayusha Kharel</td>
-                          <td>9801239090</td>
-                          <td>aayusha.kharel@example.com</td>
-                          <td>
-                            <!-- 1. The Button Group -->
-                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                 role="group">
-                              <!-- Show Button -->
-                              <button type="button"
-                                      class="btn btn-sm btn-icon btn-info text-light"
-                                      data-toggle="modal"
-                                      data-target="#studentDetailsModal"
-                                      data-name="Aayusha Kharel"
-                                      data-phone="9801239090"
-                                      data-email="aayusha.kharel@example.com"
-                                      data-dob="Oct 12, 2001"
-                                      data-address="Jhapa, Nepal"
-                                      data-status="Active"
-                                      data-edit-url="{% url 'UpdateStudent' id=5 %}"
-                                      onclick="populateModal(this)">Show more</button>
-                              <!-- Update Button -->
-                              <a href="{% url 'UpdateStudent' id=5 %}"
-                                 class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                              <!-- Delete Trigger Button -->
-                              <button type="button"
-                                      class="btn btn-danger btn-sm"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#deleteModal6">Delete</button>
-                            </div>
-                            <!-- 2. The Confirmation Modal -->
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                          <!-- Row 2 -->
+                          <tr>
+                            <td class="align-middle">
+                              <a href="#" class="tile tile-img mr-1">
+                                <span class="tile-text">SK</span>
+                              </a>
+                              <a href="#">Sita Kumari Shrestha</a>
+                            </td>
+                            <td class="align-middle">9801122334</td>
+                            <td class="align-middle">sita.shrestha@example.com</td>
+                            <td class="align-middle text-right">
+                              <div class="d-flex flex-column flex-md-row justify-content-md-end align-items-center">
+                                <!-- View -->
+                                <button type="button"
+                                        class="btn btn-sm btn-info text-white mb-2 mb-md-0"
+                                        data-toggle="modal"
+                                        data-target="#studentDetailsModal"
+                                        data-name="Sita Kumari Shrestha"
+                                        data-phone="9801122334"
+                                        data-email="sita.shrestha@example.com"
+                                        data-dob="Feb 14, 1999"
+                                        data-address="Lalitpur, Nepal"
+                                        data-status="Active"
+                                        data-edit-url="{% url 'UpdateStudent' id=5 %}"
+                                        onclick="populateModal(this)">Show more</button>
+                                <!-- Update -->
+                                <a href="{% url 'UpdateStudent' id=5 %}"
+                                   class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
+                                <!-- Delete -->
+                                <button type="button"
+                                        class="btn btn-danger btn-sm ml-md-2"
+                                        data-toggle="modal"
+                                        data-target="#deleteStudentModal"
+                                        data-name="Sita Kumari Shrestha"
+                                        data-delete-url="{% url 'DeleteStudent' id=5 %}"
+                                        onclick="populateDeleteModal(this)">Delete</button>
+                              </div>
+                            </td>
+                          </tr>
+                          <!-- Row 3 -->
+                          <tr>
+                            <td class="align-middle">
+                              <a href="#" class="tile tile-img mr-1">
+                                <span class="tile-text">BG</span>
+                              </a>
+                              <a href="#">Bishal Gurung</a>
+                            </td>
+                            <td class="align-middle">9865012345</td>
+                            <td class="align-middle">bishal.gurung@example.com</td>
+                            <td class="align-middle text-right">
+                              <div class="d-flex flex-column flex-md-row justify-content-md-end align-items-center">
+                                <!-- View -->
+                                <button type="button"
+                                        class="btn btn-sm btn-info text-white mb-2 mb-md-0"
+                                        data-toggle="modal"
+                                        data-target="#studentDetailsModal"
+                                        data-name="Bishal Gurung"
+                                        data-phone="9865012345"
+                                        data-email="bishal.gurung@example.com"
+                                        data-dob="May 15, 1999"
+                                        data-address="Pokhara, Nepal"
+                                        data-status="Active"
+                                        data-edit-url="{% url 'UpdateStudent' id=2 %}"
+                                        onclick="populateModal(this)">Show more</button>
+                                <!-- Update -->
+                                <a href="{% url 'UpdateStudent' id=2 %}"
+                                   class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
+                                <!-- Delete -->
+                                <button type="button"
+                                        class="btn btn-danger btn-sm ml-md-2"
+                                        data-toggle="modal"
+                                        data-target="#deleteStudentModal"
+                                        data-name="Bishal Gurung"
+                                        data-delete-url="{% url 'DeleteStudent' id=2 %}"
+                                        onclick="populateDeleteModal(this)">Delete</button>
+                              </div>
+                            </td>
+                          </tr>
+                          <!-- Row 4 -->
+                          <tr>
+                            <td class="align-middle">
+                              <a href="#" class="tile tile-img mr-1">
+                                <span class="tile-text">AK</span>
+                              </a>
+                              <a href="#">Anisha KC</a>
+                            </td>
+                            <td class="align-middle">9812345678</td>
+                            <td class="align-middle">anisha.kc@example.com</td>
+                            <td class="align-middle text-right">
+                              <div class="d-flex flex-column flex-md-row justify-content-md-end align-items-center">
+                                <button type="button"
+                                        class="btn btn-sm btn-info text-white mb-2 mb-md-0"
+                                        data-toggle="modal"
+                                        data-target="#studentDetailsModal"
+                                        data-name="Anisha KC"
+                                        data-phone="9812345678"
+                                        data-email="anisha.kc@example.com"
+                                        data-dob="Mar 10, 2000"
+                                        data-address="Bhaktapur, Nepal"
+                                        data-status="Active"
+                                        data-edit-url="{% url 'UpdateStudent' id=6 %}"
+                                        onclick="populateModal(this)">Show more</button>
+                                <a href="{% url 'UpdateStudent' id=6 %}"
+                                   class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
+                                <button type="button"
+                                        class="btn btn-danger btn-sm ml-md-2"
+                                        data-toggle="modal"
+                                        data-target="#deleteStudentModal"
+                                        data-name="Anisha KC"
+                                        data-delete-url="{% url 'DeleteStudent' id=6 %}"
+                                        onclick="populateDeleteModal(this)">Delete</button>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
-              <!-- The right side is now empty of widgets but retains the dashboard margins -->
+              <!-- ================= MODALS & JS ================= -->
+              <!-- Make sure you have the Single Modals and Scripts below this! -->
+              <!-- 1. #studentDetailsModal (View) -->
+              <!-- 2. #deleteStudentModal (Delete) -->
+              <!-- 3. <script> with populateModal() and populateDeleteModal() and search logic -->
             </div>
           </div>
         </div>
-      </div>
-    </main>
-    <!-- /.app-main -->
-  </div>
-  <!-- /.app -->
-  <!-- BEGIN BASE JS -->
-  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-  <!-- END BASE JS -->
-  <!-- BEGIN PLUGINS JS -->
-  <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-  <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-  <!-- END PLUGINS JS -->
-  <!-- BEGIN THEME JS -->
-  <script src="{% static 'javascript/main.min.js' %}"></script>
-  <!-- END THEME JS -->
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async
-          src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-  <script>
+      </main>
+      <!-- /.app-main -->
+    </div>
+    <!-- /.app -->
+    <!-- BEGIN BASE JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+    <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <!-- END PLUGINS JS -->
+    <!-- BEGIN THEME JS -->
+    <script src="{% static 'javascript/main.min.js' %}"></script>
+    <!-- END THEME JS -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+    <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -1197,70 +919,70 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
-  </script>
-  <!-- single normal modal -->
-  <div class="modal fade"
-       id="studentDetailsModal"
-       tabindex="-1"
-       role="dialog"
-       aria-labelledby="studentDetailsModalLabel"
-       aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Students Details</h5>
-        </div>
-        <div class="modal-body">
-          <div class="table-responsive">
-            <table class="table table-bordered mb-0">
-              <tbody>
-                <!-- 1. Name (Blue Header) -->
-                <tr>
-                  <th scope="row"
-                      class="bg-primary text-white"
-                      style="width: 30%;
-                             min-width: 120px">Name</th>
-                  <td id="modal_data_name"></td>
-                </tr>
-                <!-- 2. Address (Light Header) -->
-                <tr>
-                  <th scope="row" class="bg-light text-primary">Address</th>
-                  <td class="text-break" id="modal_data_address"></td>
-                </tr>
-                <!-- 3. DOB (Blue Header) -->
-                <tr>
-                  <th scope="row" class="bg-primary text-white">Date of Birth</th>
-                  <td id="modal_data_dob"></td>
-                </tr>
-                <!-- 4. Email (Light Header) -->
-                <tr>
-                  <th scope="row" class="bg-light text-primary">Email</th>
-                  <td class="text-break" id="modal_data_email"></td>
-                </tr>
-                <!-- 5. Phone (Blue Header) -->
-                <tr>
-                  <th scope="row" class="bg-primary text-white">Phone Number</th>
-                  <td id="modal_data_phone"></td>
-                </tr>
-                <!-- 6. Status (Light Header) -->
-                <tr>
-                  <th scope="row" class="bg-light text-primary">Status</th>
-                  <td>
-                    <span id="modal_data_status" class="badge"></span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+    </script>
+    <!-- single normal modal -->
+    <div class="modal fade"
+         id="studentDetailsModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="studentDetailsModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Students Details</h5>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table table-bordered mb-0">
+                <tbody>
+                  <!-- 1. Name (Blue Header) -->
+                  <tr>
+                    <th scope="row"
+                        class="bg-primary text-white"
+                        style="width: 30%;
+                               min-width: 120px">Name</th>
+                    <td id="modal_data_name"></td>
+                  </tr>
+                  <!-- 2. Address (Light Header) -->
+                  <tr>
+                    <th scope="row" class="bg-light text-primary">Address</th>
+                    <td class="text-break" id="modal_data_address"></td>
+                  </tr>
+                  <!-- 3. DOB (Blue Header) -->
+                  <tr>
+                    <th scope="row" class="bg-primary text-white">Date of Birth</th>
+                    <td id="modal_data_dob"></td>
+                  </tr>
+                  <!-- 4. Email (Light Header) -->
+                  <tr>
+                    <th scope="row" class="bg-light text-primary">Email</th>
+                    <td class="text-break" id="modal_data_email"></td>
+                  </tr>
+                  <!-- 5. Phone (Blue Header) -->
+                  <tr>
+                    <th scope="row" class="bg-primary text-white">Phone Number</th>
+                    <td id="modal_data_phone"></td>
+                  </tr>
+                  <!-- 6. Status (Light Header) -->
+                  <tr>
+                    <th scope="row" class="bg-light text-primary">Status</th>
+                    <td>
+                      <span id="modal_data_status" class="badge"></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- populate off canvas data js  -->
-  <script>
+    <!-- populate off canvas data js  -->
+    <script>
 function populateModal(buttonElement) {
     
     // 1. READ DATA (Same as before)
@@ -1319,43 +1041,43 @@ function populateModal(buttonElement) {
         }
     }
 }
-  </script>
-  <!-- now for the delete confirmation modal , this is sigle one -->
-  <!-- Single Generic Delete Confirmation Modal -->
-  <div class="modal fade"
-       id="deleteStudentModal"
-       tabindex="-1"
-       aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Confirm Deletion</h5>
-          <!-- Added both data-dismiss (BS4) and data-bs-dismiss (BS5) for compatibility -->
-          <button type="button"
-                  class="btn-close"
-                  data-dismiss="modal"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center">
-          Are you sure you want to delete <strong id="delete_modal_student_name"></strong>?
-        </div>
-        <div class="modal-footer justify-content-center">
-          <!-- Cancel Button -->
-          <button type="button"
-                  class="btn btn-muted"
-                  data-dismiss="modal"
-                  data-bs-dismiss="modal">Cancel</button>
-          <!-- The Dynamic Delete Link -->
-          <a href="#"
-             id="delete_modal_confirm_btn"
-             class="btn btn-secondary text-danger">Yes, Delete</a>
+    </script>
+    <!-- now for the delete confirmation modal , this is sigle one -->
+    <!-- Single Generic Delete Confirmation Modal -->
+    <div class="modal fade"
+         id="deleteStudentModal"
+         tabindex="-1"
+         aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirm Deletion</h5>
+            <!-- Added both data-dismiss (BS4) and data-bs-dismiss (BS5) for compatibility -->
+            <button type="button"
+                    class="btn-close"
+                    data-dismiss="modal"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            Are you sure you want to delete <strong id="delete_modal_student_name"></strong>?
+          </div>
+          <div class="modal-footer justify-content-center">
+            <!-- Cancel Button -->
+            <button type="button"
+                    class="btn btn-muted"
+                    data-dismiss="modal"
+                    data-bs-dismiss="modal">Cancel</button>
+            <!-- The Dynamic Delete Link -->
+            <a href="#"
+               id="delete_modal_confirm_btn"
+               class="btn btn-secondary text-danger">Yes, Delete</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- script for the population of the delete modal -->
-  <script>
+    <!-- script for the population of the delete modal -->
+    <script>
 function populateDeleteModal(buttonElement) {
     // 1. Get data from the clicked button
     const studentName = buttonElement.getAttribute('data-name');
@@ -1373,6 +1095,60 @@ function populateDeleteModal(buttonElement) {
         confirmBtn.href = deleteUrl;
     }
 }
+    </script>
+  </body>
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Select the DOM elements based on your IDs
+    const searchInput = document.getElementById('table-search');
+    const clearBtn = document.getElementById('clear-search');
+    const tableRows = document.querySelectorAll('#studentTable tbody tr');
+
+    // 2. Main Search Logic
+    searchInput.addEventListener('keyup', function() {
+        const searchText = this.value.toLowerCase().trim();
+
+        tableRows.forEach(function(row) {
+            // Get all cells (td) in the current row
+            const cells = row.getElementsByTagName('td');
+
+            // We only want to search Name (Index 0), Phone (Index 1), and Email (Index 2)
+            // We purposely ignore Index 3 (Actions) so "Update" or "Delete" text isn't searched
+            let rowData = "";
+            
+            if (cells.length > 2) {
+                const name = cells[0].textContent.toLowerCase();
+                const phone = cells[1].textContent.toLowerCase();
+                const email = cells[2].textContent.toLowerCase();
+                
+                // Combine them for a single check
+                rowData = name + " " + phone + " " + email;
+            }
+
+            // Toggle Visibility
+            if (rowData.includes(searchText)) {
+                row.style.display = ''; // Show
+            } else {
+                row.style.display = 'none'; // Hide
+            }
+        });
+
+        // 3. Toggle the "X" Clear Button visibility
+        if (searchText.length > 0) {
+            clearBtn.style.display = 'block';
+        } else {
+            clearBtn.style.display = 'none';
+        }
+    });
+
+    // 4. Clear Button Logic
+    clearBtn.addEventListener('click', function() {
+        searchInput.value = ''; // Clear input
+        this.style.display = 'none'; // Hide button
+        
+        // Trigger a 'keyup' event to reset the table to show all rows
+        searchInput.dispatchEvent(new Event('keyup'));
+    });
+});
   </script>
-</body>
 </html>

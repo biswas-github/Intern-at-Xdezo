@@ -592,14 +592,14 @@
                                 <!-- ./menuitems -->
                                 <!--  ./finance-->
                                 <!-- .menu-item -->
-                                <li class="menu-item has-child">
+                                <li class="menu-item has-child has-open">
                                     <a href="#" class="menu-link">
                                         <span class="menu-icon oi oi-people"></span>
                                         <span class="menu-text">Finance</span>
                                     </a>
                                     <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="#students" class="menu-link">Payments</a>
+                                        <li class="menu-item has-active">
+                                            <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#courses" class="menu-link">Dues and overdues</a>
@@ -777,7 +777,7 @@
                                                     </div>
                                                     <!-- Action Buttons -->
                                                     <div class="d-flex flex-column mt-4">
-                                                        <button type="submit" class="btn btn-primary w-100">Update Payment</button>
+                                                        <button type="submit" class="btn btn-outline-primary w-100">Update Payment</button>
                                                     </div>
                                                 </fieldset>
                                             </form>

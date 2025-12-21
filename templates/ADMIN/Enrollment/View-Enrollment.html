@@ -584,7 +584,7 @@
                                     </a>
                                     <ul class="menu">
                                         <li class="menu-item">
-                                            <a href="#students" class="menu-link">Payments</a>
+                                            <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#courses" class="menu-link">Dues and overdues</a>
@@ -670,143 +670,155 @@
                             </header>
                             <!-- Add Enrollment Button -->
                             <div class="w-25 ms-0 ms-sm-0 mt-1 mb-3">
-                                <div class="d-block">
-                                    <a href="{% url 'AddEnrollment' %}">
-                                        <button type="button" class="btn btn-primary mb-sm-1">
-                                            <i class="far fa-plus-square fa-3x" aria-hidden="true"></i>
-                                        </button>
-                                    </a>
+                                <div class="mb-3 mt-1">
+                                    <div class="d-block">
+                                        <a href="{% url 'AddEnrollment' %}" class="text-decoration-none">
+                                            <button type="button" class="btn btn-outline-primary shadow-sm">
+                                                <i class="fas fa-plus "></i>
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Page Content Section -->
+                            <!-- Page Content Section -->
                             <div class="page-section">
-                                <!-- Simple Search Bar -->
-                                <form class="top-bar-search w-100 w-md-auto border border-primary rounded mb-3"
-                                      method="get"
-                                      action="">
-                                    <div class="input-group input-group-search">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <span class="oi oi-magnifying-glass"></span>
-                                            </span>
+                                <div class="card card-fluid">
+                                    <div class="card-body">
+                                        <!-- Search & Filter Controls -->
+                                        <div class="form-group">
+                                            <div class="input-group input-group-alt">
+                                                <!-- Filter Dropdown -->
+                                                <div class="input-group-prepend">
+                                                    <select id="filterBy" class="custom-select">
+                                                        <option value="" selected>Filter By</option>
+                                                        <option value="1">Student Name</option>
+                                                        <option value="2">Batch</option>
+                                                        <option value="3">Status</option>
+                                                    </select>
+                                                </div>
+                                                <!-- Search Input -->
+                                                <div class="input-group has-clearable">
+                                                    <button id="clear-search"
+                                                            type="button"
+                                                            class="close"
+                                                            aria-label="Close"
+                                                            style="display:none">
+                                                        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                                    </button>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                                                    </div>
+                                                    <input id="table-search"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Search enrollments...">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <input type="text"
-                                               name="q"
-                                               class="form-control"
-                                               placeholder="Search enrollments..."
-                                               aria-label="Search"
-                                               required />
-                                        <div class="input-group-append d-none d-sm-flex">
-                                            <button class="btn btn-primary" type="submit">Go</button>
+                                        <!-- The Enrollment Table -->
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-striped" id="enrollmentTable">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th style="min-width:200px">Student Name</th>
+                                                        <th>Batch</th>
+                                                        <th>Enrolled On</th>
+                                                        <th>Status</th>
+                                                        <th style="min-width:150px; text-align:right;">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Row 1: Active -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <strong>Ram Bahadur Thapa</strong>
+                                                        </td>
+                                                        <td class="align-middle">Python Jan 2026</td>
+                                                        <td class="align-middle">Jan 15, 2026</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-success">Active</span>
+                                                        </td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
+                                                                <!-- View Details -->
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-icon btn-info text-white mb-2 mb-md-0"
+                                                                        data-toggle="modal"
+                                                                        data-target="#enrollmentDetailsModal"
+                                                                        data-student="Ram Bahadur Thapa"
+                                                                        data-batch="Python Jan 2026"
+                                                                        data-date="Jan 15, 2026"
+                                                                        data-status="Active"
+                                                                        onclick="populateEnrollmentModal(this)">
+                                                                    View more
+                                                                </button>
+                                                                <!-- Update -->
+                                                                <a href="{% url 'UpdateEnrollment' id=1 %}"
+                                                                   class="btn btn-sm btn-icon btn-warning text-dark mb-2 mb-md-0 ml-md-2">
+                                                                    Update
+                                                                </a>
+                                                                <!-- Delete -->
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-icon btn-danger ml-md-2"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deleteEnrollmentModal"
+                                                                        data-name="Ram Bahadur -> Python 2026"
+                                                                        data-delete-url="{% url 'DeleteEnrollment' id=1 %}"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 2: Completed -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <strong>Sita Kumari</strong>
+                                                        </td>
+                                                        <td class="align-middle">Django Dec 2025</td>
+                                                        <td class="align-middle">Dec 01, 2025</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-primary">Completed</span>
+                                                        </td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
+                                                                <!-- View Details -->
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-icon btn-info text-white mb-2 mb-md-0"
+                                                                        data-toggle="modal"
+                                                                        data-target="#enrollmentDetailsModal"
+                                                                        data-student="Sita Kumari"
+                                                                        data-batch="Django Dec 2025"
+                                                                        data-date="Dec 01, 2025"
+                                                                        data-status="Completed"
+                                                                        onclick="populateEnrollmentModal(this)">
+                                                                    View more
+                                                                </button>
+                                                                <!-- Update -->
+                                                                <a href="{% url 'UpdateEnrollment' id=2 %}"
+                                                                   class="btn btn-sm btn-icon btn-warning text-dark mb-2 mb-md-0 ml-md-2">
+                                                                    Update
+                                                                </a>
+                                                                <!-- Delete -->
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-icon btn-danger ml-md-2"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deleteEnrollmentModal"
+                                                                        data-name="Sita Kumari -> Django 2025"
+                                                                        data-delete-url="{% url 'DeleteEnrollment' id=2 %}"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
+                                        <!-- Pagination (Static Placeholder) -->
                                     </div>
-                                </form>
-                                <!-- THE TABLE SECTION (Using your requested structure) -->
-                                <section class="card card-fluid">
-                                    <!-- .table-responsive -->
-                                    <div class="table-responsive">
-                                        <!-- .table -->
-                                        <table class="table table-hover table-striped" id="enrollmentTable">
-                                            <!-- thead -->
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <th style="min-width:200px">Student Name</th>
-                                                    <th>Batch</th>
-                                                    <th>Enrolled On</th>
-                                                    <th>Status</th>
-                                                    <th style="min-width:150px; text-align:center;">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <!-- /thead -->
-                                            <!-- tbody -->
-                                            <tbody>
-                                                <!-- Row 1: Active -->
-                                                <tr>
-                                                    <td>
-                                                        <strong>Ram Bahadur Thapa</strong>
-                                                    </td>
-                                                    <td>Python Jan 2026</td>
-                                                    <td>Jan 15, 2026</td>
-                                                    <td>
-                                                        <span class="badge badge-success">Active</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex flex-column flex-md-row gap-2 justify-content-center">
-                                                            <!-- View Details -->
-                                                            <button type="button"
-                                                                    class="btn btn-sm btn-icon btn-info text-white"
-                                                                    data-toggle="modal"
-                                                                    data-target="#enrollmentDetailsModal"
-                                                                    data-student="Ram Bahadur Thapa"
-                                                                    data-batch="Python Jan 2026"
-                                                                    data-date="Jan 15, 2026"
-                                                                    data-status="Active"
-                                                                    onclick="populateEnrollmentModal(this)">
-                                                                view more
-                                                            </button>
-                                                            <!-- Update -->
-                                                            <a href="{% url 'UpdateEnrollment' id=1 %}"
-                                                               class="btn btn-sm btn-icon btn-warning text-dark ml-1">
-                                                                Update
-                                                            </a>
-                                                            <!-- Delete -->
-                                                            <button type="button"
-                                                                    class="btn btn-sm btn-icon btn-danger ml-1"
-                                                                    data-toggle="modal"
-                                                                    data-target="#deleteEnrollmentModal"
-                                                                    data-name="Ram Bahadur -> Python 2026"
-                                                                    data-delete-url="{% url 'DeleteEnrollment' id=1 %}"
-                                                                    onclick="populateDeleteModal(this)">Delete</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <!-- Row 2: Completed -->
-                                                <tr>
-                                                    <td>
-                                                        <strong>Sita Kumari</strong>
-                                                    </td>
-                                                    <td>Django Dec 2025</td>
-                                                    <td>Dec 01, 2025</td>
-                                                    <td>
-                                                        <span class="badge badge-primary">Completed</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex flex-column flex-md-row gap-2 justify-content-center">
-                                                            <!-- View Details -->
-                                                            <button type="button"
-                                                                    class="btn btn-sm btn-icon btn-info text-white"
-                                                                    data-toggle="modal"
-                                                                    data-target="#enrollmentDetailsModal"
-                                                                    data-student="Sita Kumari"
-                                                                    data-batch="Django Dec 2025"
-                                                                    data-date="Dec 01, 2025"
-                                                                    data-status="Completed"
-                                                                    onclick="populateEnrollmentModal(this)">
-                                                                View more
-                                                            </button>
-                                                            <!-- Update -->
-                                                            <a href="{% url 'UpdateEnrollment' id=2 %}"
-                                                               class="btn btn-sm btn-icon btn-warning text-dark ml-1">
-                                                                Update
-                                                            </a>
-                                                            <!-- Delete -->
-                                                            <button type="button"
-                                                                    class="btn btn-sm btn-icon btn-danger ml-1"
-                                                                    data-toggle="modal"
-                                                                    data-target="#deleteEnrollmentModal"
-                                                                    data-name="Sita Kumari -> Django 2025"
-                                                                    data-delete-url="{% url 'DeleteEnrollment' id=2 %}"
-                                                                    onclick="populateDeleteModal(this)">Delete</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            <!-- /tbody -->
-                                        </table>
-                                        <!-- /.table -->
-                                    </div>
-                                    <!-- /.table-responsive -->
-                                </section>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -961,5 +973,74 @@ function populateDeleteModal(buttonElement) {
         confirmBtn.href = deleteUrl;
     }
 }
+        </script>
+        <script>
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // Column Mapping for Enrollment Table
+    // Index 0: Student Name, Index 1: Batch, Index 3: Status
+    const columnMap = {
+        "1": 0, // Student Name
+        "2": 1, // Batch
+        "3": 3  // Status (Column Index 3)
+    };
+
+    const searchInput = document.getElementById('table-search');
+    const filterSelect = document.getElementById('filterBy');
+    const clearBtn = document.getElementById('clear-search');
+    const tableBody = document.querySelector('#enrollmentTable tbody');
+    const tableRows = tableBody.querySelectorAll('tr');
+
+    function executeFilter() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        const filterValue = filterSelect.value; 
+
+        tableRows.forEach(function(row) {
+            let textToCheck = "";
+            const cells = row.getElementsByTagName('td');
+
+            if (filterValue && columnMap.hasOwnProperty(filterValue)) {
+                // Search in specific column
+                const columnIndex = columnMap[filterValue];
+                if (cells[columnIndex]) {
+                    textToCheck = cells[columnIndex].textContent.toLowerCase();
+                }
+            } else {
+                // Search entire row (excluding Actions column)
+                // Combine Student + Batch + Date + Status
+                if (cells.length > 3) {
+                    textToCheck = cells[0].textContent + " " + 
+                                  cells[1].textContent + " " + 
+                                  cells[2].textContent + " " + 
+                                  cells[3].textContent;
+                    textToCheck = textToCheck.toLowerCase();
+                }
+            }
+
+            if (textToCheck.includes(searchText)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Show/Hide Clear Button
+        if (searchText.length > 0) {
+            clearBtn.style.display = 'block';
+        } else {
+            clearBtn.style.display = 'none';
+        }
+    }
+
+    // Event Listeners
+    searchInput.addEventListener('keyup', executeFilter);
+    filterSelect.addEventListener('change', executeFilter);
+
+    clearBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        this.style.display = 'none';
+        executeFilter();
+    });
+});
         </script>
     </html>

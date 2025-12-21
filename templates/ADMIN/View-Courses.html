@@ -585,7 +585,7 @@
                                     </a>
                                     <ul class="menu">
                                         <li class="menu-item">
-                                            <a href="#students" class="menu-link">Payments</a>
+                                            <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#courses" class="menu-link">Dues and overdues</a>
@@ -672,69 +672,75 @@
                             </header>
                             <!-- add course btn-->
                             <div class="w-25 ms-0 ms-sm-0 mt-1 mb-1 ">
-                                <div class="d-block">
-                                    <a href="{% url 'Course' %}">
-                                        <!-- Button wrapper kept for blue background and clicking area -->
-                                        <button type="button" class="btn btn-primary mb-sm-1">
-                                            <!-- Removed text, added 'fa-2x' to make icon bigger -->
-                                            <i class="far fa-plus-square fa-3x" aria-hidden="true"></i>
-                                        </button>
-                                    </a>
+                                <div class="mb-3 mt-1">
+                                    <div class="d-block">
+                                        <a href="{% url 'Course' %}" class="text-decoration-none">
+                                            <button type="button" class="btn btn-outline-primary shadow-sm">
+                                                <i class="fas fa-plus "></i>
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- ./ add course btn -->
                             <!-- Page Content Section -->
                             <div class="page-section">
-                                <!-- YOUR CONTENT GOES HERE -->
-                                <!-- .table view Course  searchbar -->
-                                <form class="top-bar-search w-100 w-md-auto border border-primary rounded mb-1"
-                                      method="get"
-                                      action="">
-                                    <div class="input-group input-group-search">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <span class="oi oi-magnifying-glass"></span>
-                                            </span>
+                                <div class="card card-fluid">
+                                    <div class="card-body">
+                                        <!-- Search & Filter Controls -->
+                                        <div class="form-group">
+                                            <div class="input-group input-group-alt">
+                                                <!-- Filter Dropdown -->
+                                                <div class="input-group-prepend">
+                                                    <select id="filterBy" class="custom-select">
+                                                        <option value="" selected>Filter By</option>
+                                                        <option value="1">Course Title</option>
+                                                        <option value="2">Course Code</option>
+                                                        <option value="3">Fee</option>
+                                                    </select>
+                                                </div>
+                                                <!-- Search Input -->
+                                                <div class="input-group has-clearable">
+                                                    <button id="clear-search"
+                                                            type="button"
+                                                            class="close"
+                                                            aria-label="Close"
+                                                            style="display:none">
+                                                        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                                    </button>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                                                    </div>
+                                                    <input id="table-search"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Search courses...">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <input type="text"
-                                               name="student"
-                                               class="form-control"
-                                               placeholder="Search for Courses"
-                                               aria-label="Search"
-                                               required />
-                                        <div class="input-group-append d-none d-sm-flex">
-                                            <button class="btn btn-primary" type="submit">Go</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <!-- ./ table view Courses -->
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-lg-12 me-sm-3 rounded">
+                                        <!-- The Course Table -->
                                         <div class="table-responsive">
-                                            <table class="table table-hover table-bordered table-striped"
-                                                   id="coursetable">
-                                                <thead>
+                                            <table class="table table-hover table-striped" id="courseTable">
+                                                <thead class="thead-light">
                                                     <tr>
                                                         <th style="min-width:200px">Title</th>
                                                         <th>Course Code</th>
                                                         <th>Fee</th>
                                                         <th>Duration</th>
-                                                        <th>&nbsp; &nbsp; Actions&nbsp; &nbsp;</th>
+                                                        <th style="min-width:150px; text-align:right;">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <!-- Row 1: Python with Django (Dynamic Offcanvas Button) -->
+                                                    <!-- Row 1: Python with Django -->
                                                     <tr>
-                                                        <td>Python with Django</td>
-                                                        <td>PY-101</td>
-                                                        <td>Rs. 15,000</td>
-                                                        <td>3 Months</td>
-                                                        <td>
-                                                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                                 role="group">
+                                                        <td class="align-middle">Python with Django</td>
+                                                        <td class="align-middle">PY-101</td>
+                                                        <td class="align-middle">Rs. 15,000</td>
+                                                        <td class="align-middle">3 Months</td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
                                                                 <!-- Show More -->
                                                                 <button type="button"
-                                                                        class="btn btn-info btn-sm text-white"
+                                                                        class="btn btn-info btn-sm text-white mb-2 mb-md-0"
                                                                         data-toggle="modal"
                                                                         data-target="#courseDetailsModal"
                                                                         data-title="Python with Django"
@@ -747,10 +753,10 @@
                                                                 </button>
                                                                 <!-- Update -->
                                                                 <a href="{% url 'UpdateCourse' id=1 %}"
-                                                                   class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                                <!-- Delete (Passes full URL) -->
+                                                                   class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
+                                                                <!-- Delete -->
                                                                 <button type="button"
-                                                                        class="btn btn-danger btn-sm"
+                                                                        class="btn btn-danger btn-sm ml-md-2"
                                                                         data-toggle="modal"
                                                                         data-target="#deleteCourseModal"
                                                                         data-title="Python with Django"
@@ -761,18 +767,17 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <!-- Row 2: Graphic Design (Dynamic Offcanvas Button) -->
+                                                    <!-- Row 2: Graphic Design -->
                                                     <tr>
-                                                        <td>Graphic Design</td>
-                                                        <td>GD-205</td>
-                                                        <td>Rs. 12,000</td>
-                                                        <td>2 Months</td>
-                                                        <td>
-                                                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                                 role="group">
+                                                        <td class="align-middle">Graphic Design</td>
+                                                        <td class="align-middle">GD-205</td>
+                                                        <td class="align-middle">Rs. 12,000</td>
+                                                        <td class="align-middle">2 Months</td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
                                                                 <!-- Show More -->
                                                                 <button type="button"
-                                                                        class="btn btn-info btn-sm text-white"
+                                                                        class="btn btn-info btn-sm text-white mb-2 mb-md-0"
                                                                         data-toggle="modal"
                                                                         data-target="#courseDetailsModal"
                                                                         data-title="Graphic Design"
@@ -785,10 +790,10 @@
                                                                 </button>
                                                                 <!-- Update -->
                                                                 <a href="{% url 'UpdateCourse' id=2 %}"
-                                                                   class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
+                                                                   class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
                                                                 <!-- Delete -->
                                                                 <button type="button"
-                                                                        class="btn btn-danger btn-sm"
+                                                                        class="btn btn-danger btn-sm ml-md-2"
                                                                         data-toggle="modal"
                                                                         data-target="#deleteCourseModal"
                                                                         data-title="Graphic Design"
@@ -799,18 +804,17 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <!-- Row 3: Digital Marketing (Using original <a> tag for comparison) -->
+                                                    <!-- Row 3: Digital Marketing -->
                                                     <tr>
-                                                        <td>Digital Marketing</td>
-                                                        <td>DM-300</td>
-                                                        <td>Rs. 10,000</td>
-                                                        <td>6 Weeks</td>
-                                                        <td>
-                                                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                                 role="group">
+                                                        <td class="align-middle">Digital Marketing</td>
+                                                        <td class="align-middle">DM-300</td>
+                                                        <td class="align-middle">Rs. 10,000</td>
+                                                        <td class="align-middle">6 Weeks</td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
                                                                 <!-- Show More -->
                                                                 <button type="button"
-                                                                        class="btn btn-info btn-sm text-white"
+                                                                        class="btn btn-info btn-sm text-white mb-2 mb-md-0"
                                                                         data-toggle="modal"
                                                                         data-target="#courseDetailsModal"
                                                                         data-title="Digital Marketing"
@@ -823,10 +827,10 @@
                                                                 </button>
                                                                 <!-- Update -->
                                                                 <a href="{% url 'UpdateCourse' id=3 %}"
-                                                                   class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
+                                                                   class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
                                                                 <!-- Delete -->
                                                                 <button type="button"
-                                                                        class="btn btn-danger btn-sm"
+                                                                        class="btn btn-danger btn-sm ml-md-2"
                                                                         data-toggle="modal"
                                                                         data-target="#deleteCourseModal"
                                                                         data-title="Digital Marketing"
@@ -837,17 +841,16 @@
                                                             </div>
                                                         </td>
                                                     </tr>
+                                                    <!-- Row 4: Full Stack -->
                                                     <tr>
-                                                        <td>Full Stack Web Development</td>
-                                                        <td>WD-401</td>
-                                                        <td>Rs. 20,000</td>
-                                                        <td>4 Months</td>
-                                                        <td>
-                                                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                                 role="group">
-                                                                <!-- Show More -->
+                                                        <td class="align-middle">Full Stack Web Development</td>
+                                                        <td class="align-middle">WD-401</td>
+                                                        <td class="align-middle">Rs. 20,000</td>
+                                                        <td class="align-middle">4 Months</td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
                                                                 <button type="button"
-                                                                        class="btn btn-info btn-sm text-white"
+                                                                        class="btn btn-info btn-sm text-white mb-2 mb-md-0"
                                                                         data-toggle="modal"
                                                                         data-target="#courseDetailsModal"
                                                                         data-title="Full Stack Web Development"
@@ -858,12 +861,10 @@
                                                                         onclick="populateCourseModal(this)">
                                                                     Show more
                                                                 </button>
-                                                                <!-- Update -->
                                                                 <a href="{% url 'UpdateCourse' id=4 %}"
-                                                                   class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                                <!-- Delete -->
+                                                                   class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
                                                                 <button type="button"
-                                                                        class="btn btn-danger btn-sm"
+                                                                        class="btn btn-danger btn-sm ml-md-2"
                                                                         data-toggle="modal"
                                                                         data-target="#deleteCourseModal"
                                                                         data-title="Full Stack Web Development"
@@ -874,17 +875,16 @@
                                                             </div>
                                                         </td>
                                                     </tr>
+                                                    <!-- Row 5: Data Science -->
                                                     <tr>
-                                                        <td>Data Science with Python</td>
-                                                        <td>DS-500</td>
-                                                        <td>Rs. 25,000</td>
-                                                        <td>5 Months</td>
-                                                        <td>
-                                                            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                                 role="group">
-                                                                <!-- Show More -->
+                                                        <td class="align-middle">Data Science with Python</td>
+                                                        <td class="align-middle">DS-500</td>
+                                                        <td class="align-middle">Rs. 25,000</td>
+                                                        <td class="align-middle">5 Months</td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
                                                                 <button type="button"
-                                                                        class="btn btn-info btn-sm text-white"
+                                                                        class="btn btn-info btn-sm text-white mb-2 mb-md-0"
                                                                         data-toggle="modal"
                                                                         data-target="#courseDetailsModal"
                                                                         data-title="Data Science with Python"
@@ -895,12 +895,10 @@
                                                                         onclick="populateCourseModal(this)">
                                                                     Show more
                                                                 </button>
-                                                                <!-- Update -->
                                                                 <a href="{% url 'UpdateCourse' id=5 %}"
-                                                                   class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                                <!-- Delete -->
+                                                                   class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
                                                                 <button type="button"
-                                                                        class="btn btn-danger btn-sm"
+                                                                        class="btn btn-danger btn-sm ml-md-2"
                                                                         data-toggle="modal"
                                                                         data-target="#deleteCourseModal"
                                                                         data-title="Data Science with Python"
@@ -917,30 +915,28 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- The right side is now empty of widgets but retains the dashboard margins -->
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
-        <!-- /.app-main -->
-        <!-- /.app -->
-        <!-- BEGIN BASE JS -->
-        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-        <!-- END BASE JS -->
-        <!-- BEGIN PLUGINS JS -->
-        <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-        <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-        <!-- END PLUGINS JS -->
-        <!-- BEGIN THEME JS -->
-        <script src="{% static 'javascript/main.min.js' %}"></script>
-        <!-- END THEME JS -->
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async
-                src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-        <script>
+            </main>
+            <!-- /.app-main -->
+            <!-- /.app -->
+            <!-- BEGIN BASE JS -->
+            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+            <!-- END BASE JS -->
+            <!-- BEGIN PLUGINS JS -->
+            <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+            <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+            <!-- END PLUGINS JS -->
+            <!-- BEGIN THEME JS -->
+            <script src="{% static 'javascript/main.min.js' %}"></script>
+            <!-- END THEME JS -->
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async
+                    src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+            <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -948,94 +944,94 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
-        </script>
-    </body>
-    <!-- ================= 1. SINGLE VIEW COURSE MODAL ================= -->
-    <div class="modal fade"
-         id="courseDetailsModal"
-         tabindex="-1"
-         role="dialog"
-         aria-labelledby="courseDetailsModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Course Details</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
-                            <tbody>
-                                <!-- 1. Title (Blue Header) -->
-                                <tr>
-                                    <th scope="row"
-                                        class="bg-primary text-white"
-                                        style="width: 30%;
-                                               min-width: 120px">Course Title</th>
-                                    <td id="modal_course_title"></td>
-                                </tr>
-                                <!-- 2. Code (Light Header) -->
-                                <tr>
-                                    <th scope="row" class="bg-light text-primary">Code</th>
-                                    <td id="modal_course_code"></td>
-                                </tr>
-                                <!-- 3. Fee (Blue Header) -->
-                                <tr>
-                                    <th scope="row" class="bg-primary text-white">Fee</th>
-                                    <td id="modal_course_fee"></td>
-                                </tr>
-                                <!-- 4. Duration (Light Header) -->
-                                <tr>
-                                    <th scope="row" class="bg-light text-primary">Duration</th>
-                                    <td id="modal_course_duration"></td>
-                                </tr>
-                                <!-- 5. Description (Blue Header) -->
-                                <tr>
-                                    <th scope="row" class="bg-primary text-white">Description</th>
-                                    <td class="text-break" id="modal_course_description"></td>
-                                </tr>
-                            </tbody>
-                        </table>
+            </script>
+        </body>
+        <!-- ================= 1. SINGLE VIEW COURSE MODAL ================= -->
+        <div class="modal fade"
+             id="courseDetailsModal"
+             tabindex="-1"
+             role="dialog"
+             aria-labelledby="courseDetailsModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Course Details</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered mb-0">
+                                <tbody>
+                                    <!-- 1. Title (Blue Header) -->
+                                    <tr>
+                                        <th scope="row"
+                                            class="bg-primary text-white"
+                                            style="width: 30%;
+                                                   min-width: 120px">Course Title</th>
+                                        <td id="modal_course_title"></td>
+                                    </tr>
+                                    <!-- 2. Code (Light Header) -->
+                                    <tr>
+                                        <th scope="row" class="bg-light text-primary">Code</th>
+                                        <td id="modal_course_code"></td>
+                                    </tr>
+                                    <!-- 3. Fee (Blue Header) -->
+                                    <tr>
+                                        <th scope="row" class="bg-primary text-white">Fee</th>
+                                        <td id="modal_course_fee"></td>
+                                    </tr>
+                                    <!-- 4. Duration (Light Header) -->
+                                    <tr>
+                                        <th scope="row" class="bg-light text-primary">Duration</th>
+                                        <td id="modal_course_duration"></td>
+                                    </tr>
+                                    <!-- 5. Description (Blue Header) -->
+                                    <tr>
+                                        <th scope="row" class="bg-primary text-white">Description</th>
+                                        <td class="text-break" id="modal_course_description"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- ================= 2. SINGLE DELETE COURSE MODAL ================= -->
+        <div class="modal fade"
+             id="deleteCourseModal"
+             tabindex="-1"
+             role="dialog"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Deletion</h5>
+                        <button type="button"
+                                class="btn-close"
+                                data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        Are you sure you want to delete <strong id="delete_modal_course_title"></strong>?
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
+                        <!-- The Javascript will inject the HREF here -->
+                        <a href="#"
+                           id="delete_modal_confirm_btn"
+                           class="btn btn-secondary text-danger">Yes, Delete</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- ================= 2. SINGLE DELETE COURSE MODAL ================= -->
-    <div class="modal fade"
-         id="deleteCourseModal"
-         tabindex="-1"
-         role="dialog"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirm Deletion</h5>
-                    <button type="button"
-                            class="btn-close"
-                            data-dismiss="modal"
-                            aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-center">
-                    Are you sure you want to delete <strong id="delete_modal_course_title"></strong>?
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
-                    <!-- The Javascript will inject the HREF here -->
-                    <a href="#"
-                       id="delete_modal_confirm_btn"
-                       class="btn btn-secondary text-danger">Yes, Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- scripts -->
-    <script>
+        <!-- scripts -->
+        <script>
 // --- 1. Populate View Course Modal ---
 function populateCourseModal(buttonElement) {
     const data = buttonElement.dataset;
@@ -1065,5 +1061,74 @@ function populateDeleteModal(buttonElement) {
         confirmBtn.href = deleteUrl;
     }
 }
-    </script>
-</html>
+        </script>
+        <script>
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // 1. Column Mapping for Course Table
+    // Index 0: Title, Index 1: Code, Index 2: Fee
+    const columnMap = {
+        "1": 0, // Title
+        "2": 1, // Course Code
+        "3": 2  // Fee
+    };
+
+    const searchInput = document.getElementById('table-search');
+    const filterSelect = document.getElementById('filterBy');
+    const clearBtn = document.getElementById('clear-search');
+    const tableBody = document.querySelector('#courseTable tbody');
+    const tableRows = tableBody.querySelectorAll('tr');
+
+    function executeFilter() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        const filterValue = filterSelect.value; 
+
+        tableRows.forEach(function(row) {
+            let textToCheck = "";
+            const cells = row.getElementsByTagName('td');
+
+            if (filterValue && columnMap.hasOwnProperty(filterValue)) {
+                // Search in specific column
+                const columnIndex = columnMap[filterValue];
+                if (cells[columnIndex]) {
+                    textToCheck = cells[columnIndex].textContent.toLowerCase();
+                }
+            } else {
+                // Search entire row (excluding the Actions column)
+                // We combine Title + Code + Fee + Duration
+                if (cells.length > 3) {
+                    textToCheck = cells[0].textContent + " " + 
+                                  cells[1].textContent + " " + 
+                                  cells[2].textContent + " " + 
+                                  cells[3].textContent;
+                    textToCheck = textToCheck.toLowerCase();
+                }
+            }
+
+            if (textToCheck.includes(searchText)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Show/Hide Clear Button
+        if (searchText.length > 0) {
+            clearBtn.style.display = 'block';
+        } else {
+            clearBtn.style.display = 'none';
+        }
+    }
+
+    // Event Listeners
+    searchInput.addEventListener('keyup', executeFilter);
+    filterSelect.addEventListener('change', executeFilter);
+
+    clearBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        this.style.display = 'none';
+        executeFilter();
+    });
+});
+        </script>
+    </html>

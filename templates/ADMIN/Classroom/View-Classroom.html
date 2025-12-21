@@ -584,7 +584,7 @@
                                     </a>
                                     <ul class="menu">
                                         <li class="menu-item">
-                                            <a href="#students" class="menu-link">Payments</a>
+                                            <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#courses" class="menu-link">Dues and overdues</a>
@@ -673,38 +673,18 @@
                             </header>
                             <!-- Add Classroom Button -->
                             <div class="w-25 ms-0 ms-sm-0 mt-1 mb-3">
-                                <div class="d-block">
-                                    <!-- Replace 'AddClassroom' with your actual URL name -->
-                                    <a href="{% url 'AddClassroom' %}">
-                                        <button type="button" class="btn btn-primary mb-sm-1">
-                                            <i class="far fa-plus-square fa-3x" aria-hidden="true"></i>
-                                        </button>
-                                    </a>
+                                <div class="mb-3 mt-1">
+                                    <div class="d-block">
+                                        <a href="{% url 'AddClassroom' %}" class="text-decoration-none">
+                                            <button type="button" class="btn btn-outline-primary shadow-sm">
+                                                <i class="fas fa-plus "></i>
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Page Content Section -->
                             <div class="page-section">
-                                <!-- Search Bar -->
-                                <form class="top-bar-search w-100 w-md-auto border border-primary rounded "
-                                      method="get"
-                                      action="">
-                                    <div class="input-group input-group-search">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <span class="oi oi-magnifying-glass"></span>
-                                            </span>
-                                        </div>
-                                        <input type="text"
-                                               name="q"
-                                               class="form-control"
-                                               placeholder="Search Classrooms"
-                                               aria-label="Search"
-                                               required />
-                                        <div class="input-group-append d-none d-sm-flex">
-                                            <button class="btn btn-primary" type="submit">Go</button>
-                                        </div>
-                                    </div>
-                                </form>
                                 <!-- Classrooms Table -->
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-lg-12 rounded">

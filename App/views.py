@@ -121,7 +121,9 @@ def AddPayment(request):
 #   UpdatePayment
 def UpdatePayment(request,id):
     return render(request,'ADMIN/Payment/Update-Payment.html')
-
+# DeletePayment
+def DeletePayment(request,id):
+    return render(request,'ADMIN/Payment/Delete-Payment.html')
 
 # first page for the viewer 
 def ViewerDashboard(request):
