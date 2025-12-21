@@ -1,0 +1,1388 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <!-- End Required meta tags -->
+        <!-- Begin SEO tag -->
+        <title>Starter Template | Looper - Bootstrap 4 Admin Theme</title>
+        <meta property="og:title" content="Starter Template" />
+        <meta name="author" content="Beni Arisandi" />
+        <meta property="og:locale" content="en_US" />
+        <meta name="description"
+              content="Responsive admin theme build on top of Bootstrap 4" />
+        <meta property="og:description"
+              content="Responsive admin theme build on top of Bootstrap 4" />
+        <link rel="canonical" href="//uselooper.com" />
+        <meta property="og:url" content="//uselooper.com" />
+        <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme" />
+        <script type="application/ld+json">
+      {
+        "name": "Looper - Bootstrap 4 Admin Theme",
+        "description": "Responsive admin theme build on top of Bootstrap 4",
+        "author": {
+          "@type": "Person",
+          "name": "Beni Arisandi"
+        },
+        "@type": "WebSite",
+        "url": "",
+        "headline": "Starter Template",
+        "@context": "http://schema.org"
+      }
+        </script>
+        <!-- End SEO tag -->
+        <!-- FAVICONS -->
+        <link rel="apple-touch-icon-precomposed"
+              sizes="144x144"
+              href="{% static 'apple-touch-icon.png' %}" />
+        <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
+        <meta name="theme-color" content="#3063A0" />
+        <!-- End FAVICONS -->
+        <script src="{% static 'vendor/pace/pace.min.js' %}"></script>
+        <!-- BEGIN BASE STYLES -->
+        <link rel="stylesheet" href="{% static 'vendor/pace/pace.min.css' %}" />
+        <link rel="stylesheet"
+              href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" />
+        <link rel="stylesheet"
+              href="{% static 'vendor/open-iconic/css/open-iconic-bootstrap.min.css' %}" />
+        <link rel="stylesheet"
+              href="{% static 'vendor/font-awesome/css/fontawesome-all.min.css' %}" />
+        <!-- END BASE STYLES -->
+        <!-- BEGIN THEME STYLES -->
+        <link rel="stylesheet" href="{% static 'css/main.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+        <!-- END THEME STYLES -->
+    </head>
+    <body>
+        <!-- .app -->
+        <div class="app">
+            <!-- .app-header -->
+            <header class="app-header">
+                <!-- .top-bar -->
+                <div class="top-bar">
+                    <!-- .top-bar-brand -->
+                    <div class="top-bar-brand">
+                        <a href="index.html">
+                            <img src="{% static 'images/brand-inverse.png' %}" height="32" alt="" />
+                        </a>
+                    </div>
+                    <!-- /.top-bar-brand -->
+                    <!-- .top-bar-list -->
+                    <div class="top-bar-list">
+                        <!-- .top-bar-item -->
+                        <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+                            <!-- toggle menu -->
+                            <button class="hamburger hamburger-squeeze"
+                                    type="button"
+                                    data-toggle="aside"
+                                    aria-label="Menu"
+                                    aria-controls="navigation">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                            <!-- /toggle menu -->
+                        </div>
+                        <!-- /.top-bar-item -->
+                        <!-- .top-bar-item -->
+                        <div class="top-bar-item top-bar-item-full">
+                            <!-- .top-bar-search -->
+                            <div class="top-bar-search">
+                                <div class="input-group input-group-search">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="oi oi-magnifying-glass"></span>
+                                        </span>
+                                    </div>
+                                    <input type="text"
+                                           class="form-control"
+                                           aria-label="Search"
+                                           placeholder="Search" />
+                                </div>
+                            </div>
+                            <!-- /.top-bar-search -->
+                        </div>
+                        <!-- /.top-bar-item -->
+                        <!-- .top-bar-item -->
+                        <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
+                            <!-- .nav -->
+                            <ul class="header-nav nav">
+                                <!-- .nav-item -->
+                                <li class="nav-item dropdown header-nav-dropdown has-notified">
+                                    <a class="nav-link"
+                                       href="#"
+                                       data-toggle="dropdown"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">
+                                        <span class="oi oi-pulse"></span>
+                                    </a>
+                                    <div class="dropdown-arrow"></div>
+                                    <!-- .dropdown-menu -->
+                                    <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
+                                        <h6 class="dropdown-header stop-propagation">
+                                            <span>Activities
+                                                <span class="badge">(2)</span>
+                                            </span>
+                                        </h6>
+                                        <!-- .dropdown-scroll -->
+                                        <div class="dropdown-scroll has-scrollable">
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item unread">
+                                                <div class="user-avatar">
+                                                    <img src="{% static 'images/avatars/uifaces15.jpg' %}" alt="" />
+                                                </div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="text">Jeffrey Wells created a schedule</p>
+                                                    <span class="date">Just now</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item unread">
+                                                <div class="user-avatar">
+                                                    <img src="{% static 'images/avatars/uifaces16.jpg' %}" alt="" />
+                                                </div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="text">Anna Vargas logged a chat</p>
+                                                    <span class="date">3 hours ago</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item">
+                                                <div class="user-avatar">
+                                                    <img src="{% static 'images/avatars/uifaces17.jpg' %}" alt="" />
+                                                </div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="text">Sara Carr invited to Stilearn Admin</p>
+                                                    <span class="date">5 hours ago</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item">
+                                                <div class="user-avatar">
+                                                    <img src="{% static 'images/avatars/uifaces18.jpg' %}" alt="" />
+                                                </div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="text">Sara Carr updated a project</p>
+                                                    <span class="date">1 day ago</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item">
+                                                <div class="user-avatar">
+                                                    <img src="{% static 'images/avatars/uifaces19.jpg' %}" alt="" />
+                                                </div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="text">Arthur Carroll created a task</p>
+                                                    <span class="date">1 day ago</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item">
+                                                <div class="user-avatar">
+                                                    <img src="{% static 'images/avatars/uifaces20.jpg' %}" alt="" />
+                                                </div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="text">Angela Peterson assign a task to you</p>
+                                                    <span class="date">2 days ago</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item">
+                                                <div class="user-avatar">
+                                                    <img src="{% static 'images/avatars/uifaces21.jpg' %}" alt="" />
+                                                </div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="text">Willie Dixon and 3 others followed you</p>
+                                                    <span class="date">2 days ago</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                        </div>
+                                        <!-- /.dropdown-scroll -->
+                                        <a href="user-activities.html" class="dropdown-footer">All activities
+                                            <i class="fa fa-fw fa-long-arrow-alt-right"></i>
+                                        </a>
+                                    </div>
+                                    <!-- /.dropdown-menu -->
+                                </li>
+                                <!-- /.nav-item -->
+                                <!-- .nav-item -->
+                                <li class="nav-item dropdown header-nav-dropdown has-notified">
+                                    <a class="nav-link"
+                                       href="#"
+                                       data-toggle="dropdown"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">
+                                        <span class="oi oi-envelope-open"></span>
+                                    </a>
+                                    <div class="dropdown-arrow"></div>
+                                    <!-- .dropdown-menu -->
+                                    <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
+                                        <h6 class="dropdown-header stop-propagation">
+                                            <span>Messages</span>
+                                            <a href="#">Mark all as read</a>
+                                        </h6>
+                                        <!-- .dropdown-scroll -->
+                                        <div class="dropdown-scroll has-scrollable">
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item unread">
+                                                <div class="user-avatar">
+                                                    <img src="{% static 'images/avatars/team1.jpg' %}" alt="" />
+                                                </div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="subject">Stilearning</p>
+                                                    <p class="text text-truncate">Invitation: Joe's Dinner @ Fri Aug 22</p>
+                                                    <span class="date">2 hours ago</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item">
+                                                <div class="user-avatar">
+                                                    <img src="{% static 'images/avatars/team3.png' %}" alt="" />
+                                                </div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="subject">Openlane</p>
+                                                    <p class="text text-truncate">Final reminder: Upgrade to Pro</p>
+                                                    <span class="date">23 hours ago</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item">
+                                                <div class="tile tile-circle bg-green">GZ</div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="subject">Gogo Zoom</p>
+                                                    <p class="text text-truncate">Live healthy with this wireless sensor.</p>
+                                                    <span class="date">1 day ago</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item">
+                                                <div class="tile tile-circle bg-teal">GD</div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="subject">Gold Dex</p>
+                                                    <p class="text text-truncate">Invitation: Design Review @ Mon Jul 7</p>
+                                                    <span class="date">1 day ago</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item">
+                                                <div class="user-avatar">
+                                                    <img src="{% static 'images/avatars/team2.png' %}" alt="" />
+                                                </div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="subject">Creative Division</p>
+                                                    <p class="text text-truncate">Need some feedback on this please</p>
+                                                    <span class="date">2 days ago</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                            <!-- .dropdown-item -->
+                                            <a href="#" class="dropdown-item">
+                                                <div class="tile tile-circle bg-pink">LD</div>
+                                                <div class="dropdown-item-body">
+                                                    <p class="subject">Lab Drill</p>
+                                                    <p class="text text-truncate">Our UX exercise is ready</p>
+                                                    <span class="date">6 days ago</span>
+                                                </div>
+                                            </a>
+                                            <!-- /.dropdown-item -->
+                                        </div>
+                                        <!-- /.dropdown-scroll -->
+                                        <a href="app-messages.html" class="dropdown-footer">All messages
+                                            <i class="fa fa-fw fa-long-arrow-alt-right"></i>
+                                        </a>
+                                    </div>
+                                    <!-- /.dropdown-menu -->
+                                </li>
+                                <!-- /.nav-item -->
+                                <!-- .nav-item -->
+                                <li class="nav-item dropdown header-nav-dropdown">
+                                    <a class="nav-link"
+                                       href="#"
+                                       data-toggle="dropdown"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">
+                                        <span class="oi oi-grid-three-up"></span>
+                                    </a>
+                                    <div class="dropdown-arrow"></div>
+                                    <!-- .dropdown-menu -->
+                                    <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
+                                        <!-- .dropdown-sheets -->
+                                        <div class="dropdown-sheets">
+                                            <!-- .dropdown-sheet-item -->
+                                            <div class="dropdown-sheet-item">
+                                                <a href="#" class="tile-wrapper">
+                                                    <span class="tile tile-lg bg-indigo">
+                                                        <i class="oi oi-people"></i>
+                                                    </span>
+                                                    <span class="tile-peek">Teams</span>
+                                                </a>
+                                            </div>
+                                            <!-- /.dropdown-sheet-item -->
+                                            <!-- .dropdown-sheet-item -->
+                                            <div class="dropdown-sheet-item">
+                                                <a href="#" class="tile-wrapper">
+                                                    <span class="tile tile-lg bg-teal">
+                                                        <i class="oi oi-fork"></i>
+                                                    </span>
+                                                    <span class="tile-peek">Projects</span>
+                                                </a>
+                                            </div>
+                                            <!-- /.dropdown-sheet-item -->
+                                            <!-- .dropdown-sheet-item -->
+                                            <div class="dropdown-sheet-item">
+                                                <a href="#" class="tile-wrapper">
+                                                    <span class="tile tile-lg bg-pink">
+                                                        <i class="fa fa-tasks"></i>
+                                                    </span>
+                                                    <span class="tile-peek">Tasks</span>
+                                                </a>
+                                            </div>
+                                            <!-- /.dropdown-sheet-item -->
+                                            <!-- .dropdown-sheet-item -->
+                                            <div class="dropdown-sheet-item">
+                                                <a href="#" class="tile-wrapper">
+                                                    <span class="tile tile-lg bg-yellow">
+                                                        <i class="oi oi-fire"></i>
+                                                    </span>
+                                                    <span class="tile-peek">Feeds</span>
+                                                </a>
+                                            </div>
+                                            <!-- /.dropdown-sheet-item -->
+                                            <!-- .dropdown-sheet-item -->
+                                            <div class="dropdown-sheet-item">
+                                                <a href="#" class="tile-wrapper">
+                                                    <span class="tile tile-lg bg-cyan">
+                                                        <i class="oi oi-document"></i>
+                                                    </span>
+                                                    <span class="tile-peek">Files</span>
+                                                </a>
+                                            </div>
+                                            <!-- /.dropdown-sheet-item -->
+                                        </div>
+                                        <!-- .dropdown-sheets -->
+                                    </div>
+                                    <!-- .dropdown-menu -->
+                                </li>
+                                <!-- /.nav-item -->
+                            </ul>
+                            <!-- /.nav -->
+                            <!-- .btn-account -->
+                            <div class="dropdown">
+                                <button class="btn-account d-none d-md-flex"
+                                        type="button"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <span class="user-avatar">
+                                        <img src="{% static 'images/avatars/profile.jpg' %}" alt="" />
+                                    </span>
+                                    <span class="account-summary pr-lg-4 d-none d-lg-block">
+                                        <span class="account-name">Admim_DEMO</span>
+                                        <span class="account-description">Admin</span>
+                                    </span>
+                                </button>
+                                <div class="dropdown-arrow dropdown-arrow-left"></div>
+                                <!-- .dropdown-menu -->
+                                <div class="dropdown-menu">
+                                    <h6 class="dropdown-header d-none d-md-block d-lg-none">Beni Arisandi</h6>
+                                    <span class="dropdown-icon oi oi-person"></span> Profile</a>
+                                <a class="dropdown-item" href="auth-signin-v1.html">
+                                    <span class="dropdown-icon oi oi-account-logout"></span>
+                                Logout</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Help Center</a>
+                                <a class="dropdown-item" href="#">Ask Forum</a>
+                                <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
+                            </div>
+                            <!-- /.dropdown-menu -->
+                        </div>
+                        <!-- /.btn-account -->
+                    </div>
+                    <!-- /.top-bar-item -->
+                </div>
+                <!-- /.top-bar-list -->
+            </div>
+            <!-- /.top-bar -->
+        </header>
+        <!-- /.app-header -->
+        <!-- .app-aside -->
+        <aside class="app-aside">
+            <!-- .aside-content -->
+            <div class="aside-content">
+                <!-- .aside-header -->
+                <header class="aside-header d-block d-md-none">
+                    <!-- .btn-account -->
+                    <button class="btn-account"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#dropdown-aside">
+                        <span class="user-avatar user-avatar-lg">
+                            <a class="dropdown-item" href="user-profile.html">
+                                <img src="{% static 'images/avatars/profile.jpg' %}" alt="" />
+                            </span>
+                            <span class="account-icon">
+                                <span class="fa fa-caret-down fa-lg"></span>
+                            </span>
+                            <span class="account-summary">
+                                <span class="account-name">Beni Arisandi</span>
+                                <span class="account-description">Marketing Manager</span>
+                            </span>
+                        </button>
+                        <!-- /.btn-account -->
+                        <!-- .dropdown-aside -->
+                        <div id="dropdown-aside" class="dropdown-aside collapse">
+                            <!-- dropdown-items -->
+                            <div class="pb-3">
+                                <a class="dropdown-item" href="user-profile.html">
+                                    <span class="dropdown-icon oi oi-person"></span> Profile</a>
+                                <a class="dropdown-item" href="auth-signin-v1.html">
+                                    <span class="dropdown-icon oi oi-account-logout"></span>
+                                Logout</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Help Center</a>
+                                <a class="dropdown-item" href="#">Ask Forum</a>
+                                <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
+                            </div>
+                            <!-- /dropdown-items -->
+                        </div>
+                        <!-- /.dropdown-aside -->
+                    </header>
+                    <!-- /.aside-header -->
+                    <!-- .aside-menu -->
+                    <section class="aside-menu has-scrollable">
+                        <!-- .stacked-menu -->
+                        <nav id="stacked-menu" class="stacked-menu">
+                            <!-- .menu -->
+                            <ul class="menu">
+                                <!-- .menu-item -->
+                                <li class="menu-item has-active">
+                                    <a href="{% url 'AdminDashboard' %}" class="menu-link">
+                                        <span class="menu-icon oi oi-dashboard"></span>
+                                        <span class="menu-text">Dashboard</span>
+                                    </a>
+                                </li>
+                                <!-- /.menu-item -->
+                                <!-- .menu-item -->
+                                <!-- .menu-header -->
+                                <!-- .menu-header -->
+                                <!-- here intake mgnt insted of the Pages -->
+                                <li class="menu-header">Intake managements</li>
+                                <!-- /.menu-header -->
+                                <!-- .menu-item -->
+                                <li class="menu-item has-child">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-wrench"></span>
+                                        <span class="menu-text">Auth</span>
+                                    </a>
+                                    <!-- child menu -->
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a href="auth-comingsoon-v1.html" class="menu-link">Coming Soon v1</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-comingsoon-v2.html" class="menu-link">Coming Soon v2</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-cookie-consent.html" class="menu-link">Cookie Consent</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-empty-state.html" class="menu-link">Empty State</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-error-v1.html" class="menu-link">Error Page v1</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-error-v2.html" class="menu-link">Error Page v2</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-error-v3.html" class="menu-link">Error Page v3</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-maintenance.html" class="menu-link">Maintenance</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-page-message.html" class="menu-link">Page Message</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-session-timeout.html" class="menu-link">Session Timeout</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-signin-v1.html" class="menu-link">Sign In v1</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-signin-v2.html" class="menu-link">Sign In v2</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-signup.html" class="menu-link">Sign Up</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-recovery-username.html" class="menu-link">Recovery Username</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-recovery-password.html" class="menu-link">Recovery Password</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="auth-lockscreen.html" class="menu-link">Screen Locked</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /child menu -->
+                                </li>
+                                <!-- /.menu-item -->
+                                <!-- datamanagements -->
+                                <!-- .menu-item -->
+                                <li class="menu-item has-child ">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">Data management</span>
+                                    </a>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'ViewCourses' %}" class="menu-link">Course</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'ViewBatches' %}" class="menu-link">Batches</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'ViewClassroom' %}" class="menu-link">Classrooms</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'ViewEnrollment' %}" class="menu-link">Enrollments</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- finance  -->
+                                <!-- .menu-item -->
+                                <li class="menu-item has-child">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">Schedules & Time-tables</span>
+                                    </a>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a href="#students" class="menu-link">View Schedules</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#courses" class="menu-link">Free Rooms</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#courses" class="menu-link">Add Session</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- ./menuitems -->
+                                <!--  ./finance-->
+                                <!-- .menu-item -->
+                                <li class="menu-item has-child">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">Finance</span>
+                                    </a>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a href="#students" class="menu-link">Payments</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#courses" class="menu-link">Dues and overdues</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#batches" class="menu-link">Exports</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- ./menuitems -->
+                                <!-- .analytics -->
+                                <!-- .menu-item -->
+                                <li class="menu-item has-child">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">Analytics</span>
+                                    </a>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a href="#students" class="menu-link">Students per Course</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#courses" class="menu-link">Monthly Revenue</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#courses" class="menu-link">Active Students</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#courses" class="menu-link">Enrollments Trends</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- ./menuitems -->
+                                <!-- ./analytics -->
+                                <!-- System logs -->
+                                <!-- .menu-item -->
+                                <li class="menu-item has-child">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">System Logs</span>
+                                    </a>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a href="#students" class="menu-link">All activities</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#courses" class="menu-link">Export Details</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- ./menuitems -->
+                                <!-- ./System logs  -->
+                                <!-- .menu-item -->
+                                <!-- /.menu-item -->
+                            </ul>
+                            <!-- /.menu -->
+                        </nav>
+                        <!-- /.stacked-menu -->
+                    </section>
+                    <!-- /.aside-menu -->
+                </div>
+                <!-- /.aside-content -->
+            </aside>
+            <!-- /.app-aside -->
+            <!-- .app-main -->
+            <main class="app-main">
+                <div class="wrapper">
+                    <div class="page">
+                        <div class="page-inner">
+                            <!-- Page Header & Breadcrumbs -->
+                            <header class="page-title-bar">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="#">DataManagement</a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <a href="#">Finance</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Payments</li>
+                                    </ol>
+                                </nav>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h1 class="page-title">View Payments</h1>
+                                </div>
+                            </header>
+                            <!-- Add Payment Button -->
+                            <!-- Add Button Section -->
+                            <div class="mb-3 mt-1">
+                                <div class="d-block">
+                                    <a href="{% url 'AddPayment' %}" class="text-decoration-none">
+                                        <button type="button" class="btn btn-outline-primary shadow-sm">
+                                            <i class="fas fa-plus "></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Page Content Section -->
+                            <div class="page-section">
+                                <div class="card card-fluid">
+                                    <div class="card-body">
+                                        <!-- Search & Filter Controls -->
+                                        <div class="form-group">
+                                            <div class="input-group input-group-alt">
+                                                <!-- <div class="input-group-prepend">
+                                                    <select id="filterBy" class="custom-select">
+                                                        <option value="" selected>Filter By</option>
+                                                        <option value="1">Student</option>
+                                                        <option value="2">Method</option>
+                                                        <option value="3">Date</option>
+                                                    </select>
+                                                </div> -->
+                                                <div class="input-group has-clearable">
+                                                    <button id="clear-search"
+                                                            type="button"
+                                                            class="close"
+                                                            aria-label="Close"
+                                                            style="display:none">
+                                                        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                                    </button>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                                                    </div>
+                                                    <!-- ID 'table-search' is used by the JS below -->
+                                                    <input id="table-search"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Search payments...">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- The Table -->
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-striped" id="paymentTable">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th style="min-width:200px">Student</th>
+                                                        <th>Batch</th>
+                                                        <th>Amount</th>
+                                                        <th>Date</th>
+                                                        <th>Method</th>
+                                                        <th style="min-width:150px; text-align:right;">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Row 1 -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#">Ram Bahadur Thapa</a>
+                                                        </td>
+                                                        <td class="align-middle">Python Jan 2026</td>
+                                                        <td class="align-middle font-weight-bold">15,000.00</td>
+                                                        <td class="align-middle">Jan 15, 2026</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-success">ESEWA</span>
+                                                        </td>
+                                                        <td class="align-middle text-right ">
+                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                <!-- View Button -->
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#paymentDetailsModal"
+                                                                        data-student="Ram Bahadur Thapa"
+                                                                        data-batch="Python Jan 2026"
+                                                                        data-amount="15,000.00"
+                                                                        data-date="Jan 15, 2026"
+                                                                        data-method="ESEWA"
+                                                                        data-ref="ESW-987654321"
+                                                                        data-remarks="Full payment for Python course."
+                                                                        onclick="populatePaymentModal(this)">
+                                                                    view more
+                                                                </button>
+                                                                <!-- Update Button -->
+                                                                <a href="#" class="btn btn-sm  btn-warning mx-2">update</a>
+                                                                <!-- Delete Button -->
+                                                                <button type="button"
+                                                                        class="btn btn-sm  btn-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deletePaymentModal"
+                                                                        data-name="Payment of 15,000 by Ram Bahadur"
+                                                                        data-delete-url="/payment/delete/1"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 1: Sita Kumari (BANK) -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#">Sita Kumari</a>
+                                                        </td>
+                                                        <td class="align-middle">Django Dec 2025</td>
+                                                        <td class="align-middle font-weight-bold">5,000.00</td>
+                                                        <td class="align-middle">Dec 20, 2025</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-primary">BANK</span>
+                                                        </td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#paymentDetailsModal"
+                                                                        data-student="Sita Kumari"
+                                                                        data-batch="Django Dec 2025"
+                                                                        data-amount="5,000.00"
+                                                                        data-date="Dec 20, 2025"
+                                                                        data-method="BANK"
+                                                                        data-ref="TXN-882910"
+                                                                        data-remarks="First Installment via Bank Transfer."
+                                                                        onclick="populatePaymentModal(this)">
+                                                                    view more
+                                                                </button>
+                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deletePaymentModal"
+                                                                        data-name="Payment of 5,000 by Sita Kumari"
+                                                                        data-delete-url="/payment/delete/2"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 2: Hari Krishna (CASH) -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#">Hari Krishna</a>
+                                                        </td>
+                                                        <td class="align-middle">Graphic Design</td>
+                                                        <td class="align-middle font-weight-bold">12,000.00</td>
+                                                        <td class="align-middle">Nov 10, 2025</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-info">CASH</span>
+                                                        </td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#paymentDetailsModal"
+                                                                        data-student="Hari Krishna"
+                                                                        data-batch="Graphic Design"
+                                                                        data-amount="12,000.00"
+                                                                        data-date="Nov 10, 2025"
+                                                                        data-method="CASH"
+                                                                        data-ref="N/A"
+                                                                        data-remarks="Paid cash at the front desk."
+                                                                        onclick="populatePaymentModal(this)">
+                                                                    view more
+                                                                </button>
+                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deletePaymentModal"
+                                                                        data-name="Payment of 12,000 by Hari Krishna"
+                                                                        data-delete-url="/payment/delete/3"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 3: Anjali Sherpa (ESEWA) -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#">Anjali Sherpa</a>
+                                                        </td>
+                                                        <td class="align-middle">Web Dev 2026</td>
+                                                        <td class="align-middle font-weight-bold">20,000.00</td>
+                                                        <td class="align-middle">Feb 01, 2026</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-success">ESEWA</span>
+                                                        </td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#paymentDetailsModal"
+                                                                        data-student="Anjali Sherpa"
+                                                                        data-batch="Web Dev 2026"
+                                                                        data-amount="20,000.00"
+                                                                        data-date="Feb 01, 2026"
+                                                                        data-method="ESEWA"
+                                                                        data-ref="ESW-112233"
+                                                                        data-remarks="Full Payment."
+                                                                        onclick="populatePaymentModal(this)">
+                                                                    view more
+                                                                </button>
+                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deletePaymentModal"
+                                                                        data-name="Payment of 20,000 by Anjali Sherpa"
+                                                                        data-delete-url="/payment/delete/4"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 4: Bibek Rana (BANK) -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#">Bibek Rana</a>
+                                                        </td>
+                                                        <td class="align-middle">Python Jan 2026</td>
+                                                        <td class="align-middle font-weight-bold">7,500.00</td>
+                                                        <td class="align-middle">Jan 16, 2026</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-primary">BANK</span>
+                                                        </td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#paymentDetailsModal"
+                                                                        data-student="Bibek Rana"
+                                                                        data-batch="Python Jan 2026"
+                                                                        data-amount="7,500.00"
+                                                                        data-date="Jan 16, 2026"
+                                                                        data-method="BANK"
+                                                                        data-ref="CHQ-998877"
+                                                                        data-remarks="Cheque Payment - Part 1."
+                                                                        onclick="populatePaymentModal(this)">
+                                                                    view more
+                                                                </button>
+                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deletePaymentModal"
+                                                                        data-name="Payment of 7,500 by Bibek Rana"
+                                                                        data-delete-url="/payment/delete/5"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 5: Kabita Joshi (OTHERS) -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#">Kabita Joshi</a>
+                                                        </td>
+                                                        <td class="align-middle">UI/UX Design</td>
+                                                        <td class="align-middle font-weight-bold">15,000.00</td>
+                                                        <td class="align-middle">Mar 05, 2026</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-secondary">OTHERS</span>
+                                                        </td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#paymentDetailsModal"
+                                                                        data-student="Kabita Joshi"
+                                                                        data-batch="UI/UX Design"
+                                                                        data-amount="15,000.00"
+                                                                        data-date="Mar 05, 2026"
+                                                                        data-method="OTHERS"
+                                                                        data-ref="Phonpay-5566"
+                                                                        data-remarks="Paid via PhonePay QR."
+                                                                        onclick="populatePaymentModal(this)">
+                                                                    view more
+                                                                </button>
+                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deletePaymentModal"
+                                                                        data-name="Payment of 15,000 by Kabita Joshi"
+                                                                        data-delete-url="/payment/delete/6"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 6: Amit Sharma (ESEWA) -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#">Amit Sharma</a>
+                                                        </td>
+                                                        <td class="align-middle">Cyber Security</td>
+                                                        <td class="align-middle font-weight-bold">18,000.00</td>
+                                                        <td class="align-middle">Apr 10, 2026</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-success">ESEWA</span>
+                                                        </td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#paymentDetailsModal"
+                                                                        data-student="Amit Sharma"
+                                                                        data-batch="Cyber Security"
+                                                                        data-amount="18,000.00"
+                                                                        data-date="Apr 10, 2026"
+                                                                        data-method="ESEWA"
+                                                                        data-ref="ESW-777888"
+                                                                        data-remarks="Early bird discount applied."
+                                                                        onclick="populatePaymentModal(this)">
+                                                                    view more
+                                                                </button>
+                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deletePaymentModal"
+                                                                        data-name="Payment of 18,000 by Amit Sharma"
+                                                                        data-delete-url="/payment/delete/7"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 7: Rina Tamang (BANK) -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#">Rina Tamang</a>
+                                                        </td>
+                                                        <td class="align-middle">Mobile App Dev</td>
+                                                        <td class="align-middle font-weight-bold">22,000.00</td>
+                                                        <td class="align-middle">May 15, 2026</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-primary">BANK</span>
+                                                        </td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#paymentDetailsModal"
+                                                                        data-student="Rina Tamang"
+                                                                        data-batch="Mobile App Dev"
+                                                                        data-amount="22,000.00"
+                                                                        data-date="May 15, 2026"
+                                                                        data-method="BANK"
+                                                                        data-ref="TXN-443322"
+                                                                        data-remarks="Full Course Fee."
+                                                                        onclick="populatePaymentModal(this)">
+                                                                    view more
+                                                                </button>
+                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deletePaymentModal"
+                                                                        data-name="Payment of 22,000 by Rina Tamang"
+                                                                        data-delete-url="/payment/delete/8"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 8: Saroj Karki (CASH) -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#">Saroj Karki</a>
+                                                        </td>
+                                                        <td class="align-middle">Data Science</td>
+                                                        <td class="align-middle font-weight-bold">25,000.00</td>
+                                                        <td class="align-middle">Jun 20, 2026</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-info">CASH</span>
+                                                        </td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#paymentDetailsModal"
+                                                                        data-student="Saroj Karki"
+                                                                        data-batch="Data Science"
+                                                                        data-amount="25,000.00"
+                                                                        data-date="Jun 20, 2026"
+                                                                        data-method="CASH"
+                                                                        data-ref="N/A"
+                                                                        data-remarks="Paid in full at office."
+                                                                        onclick="populatePaymentModal(this)">
+                                                                    view more
+                                                                </button>
+                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deletePaymentModal"
+                                                                        data-name="Payment of 25,000 by Saroj Karki"
+                                                                        data-delete-url="/payment/delete/9"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 9: Nita Pradhan (ESEWA) -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#">Nita Pradhan</a>
+                                                        </td>
+                                                        <td class="align-middle">Digital Marketing</td>
+                                                        <td class="align-middle font-weight-bold">10,000.00</td>
+                                                        <td class="align-middle">Jul 01, 2026</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-success">ESEWA</span>
+                                                        </td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#paymentDetailsModal"
+                                                                        data-student="Nita Pradhan"
+                                                                        data-batch="Digital Marketing"
+                                                                        data-amount="10,000.00"
+                                                                        data-date="Jul 01, 2026"
+                                                                        data-method="ESEWA"
+                                                                        data-ref="ESW-332211"
+                                                                        data-remarks="Ref ID verified."
+                                                                        onclick="populatePaymentModal(this)">
+                                                                    view more
+                                                                </button>
+                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deletePaymentModal"
+                                                                        data-name="Payment of 10,000 by Nita Pradhan"
+                                                                        data-delete-url="/payment/delete/10"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 10: Deepak Verma (BANK) -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#">Deepak Verma</a>
+                                                        </td>
+                                                        <td class="align-middle">Full Stack Web</td>
+                                                        <td class="align-middle font-weight-bold">20,000.00</td>
+                                                        <td class="align-middle">Aug 12, 2026</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-primary">BANK</span>
+                                                        </td>
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#paymentDetailsModal"
+                                                                        data-student="Deepak Verma"
+                                                                        data-batch="Full Stack Web"
+                                                                        data-amount="20,000.00"
+                                                                        data-date="Aug 12, 2026"
+                                                                        data-method="BANK"
+                                                                        data-ref="TXN-667788"
+                                                                        data-remarks="Mobile Banking Transfer."
+                                                                        onclick="populatePaymentModal(this)">
+                                                                    view more
+                                                                </button>
+                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deletePaymentModal"
+                                                                        data-name="Payment of 20,000 by Deepak Verma"
+                                                                        data-delete-url="/payment/delete/11"
+                                                                        onclick="populateDeleteModal(this)">
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.page-inner -->
+                </div>
+                <!-- /.page -->
+            </div>
+            <!-- /.wrapper -->
+        </main>
+        <!-- /.app-main -->
+        <!-- /.app -->
+        <!-- BEGIN BASE JS -->
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <!-- END BASE JS -->
+        <!-- BEGIN PLUGINS JS -->
+        <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+        <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+        <!-- END PLUGINS JS -->
+        <!-- BEGIN THEME JS -->
+        <script src="{% static 'javascript/main.min.js' %}"></script>
+        <!-- END THEME JS -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async
+                src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+        <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-116692175-1");
+        </script>
+        <!-- ================= 1. PAYMENT DETAILS MODAL ================= -->
+        <div class="modal fade"
+             id="paymentDetailsModal"
+             tabindex="-1"
+             role="dialog"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Payment Receipt</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th class="text-light bg-primary" style="width: 35%;">Student</th>
+                                        <td id="modal_pay_student"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-light text-primary">Batch</th>
+                                        <td id="modal_pay_batch"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-primary text-white">Amount</th>
+                                        <td id="modal_pay_amount" class="font-weight-bold text-success"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-light text-primary">Date</th>
+                                        <td id="modal_pay_date"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-light bg-primary">Method</th>
+                                        <td>
+                                            <span id="modal_pay_method" class="badge"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-light text-primary">Ref No.</th>
+                                        <td id="modal_pay_ref"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-light bg-primary">Remarks</th>
+                                        <td id="modal_pay_remarks" class="text-break"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ================= 2. DELETE PAYMENT MODAL ================= -->
+        <div class="modal fade"
+             id="deletePaymentModal"
+             tabindex="-1"
+             role="dialog"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Deletion</h5>
+                        <button type="button"
+                                class="btn-close"
+                                data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        Are you sure you want to delete <strong id="delete_modal_pay_name"></strong>?
+                        <p class="text-danger small mt-2">This action cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
+                        <a href="#"
+                           id="delete_modal_confirm_btn"
+                           class="btn btn-secondary text-danger">Yes, Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+// --- 1. Client-Side Search Functionality ---
+// This listens for typing in the search box and hides rows that don't match
+document.getElementById('table-search').addEventListener('keyup', function() {
+    var searchText = this.value.toLowerCase();
+    var tableRows = document.querySelectorAll('#paymentTable tbody tr');
+    var clearBtn = document.getElementById('clear-search');
+
+    tableRows.forEach(function(row) {
+        var rowText = row.textContent.toLowerCase();
+        if (rowText.includes(searchText)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    
+    // Show/Hide "X" button
+    if(searchText.length > 0) {
+        clearBtn.style.display = 'block';
+    } else {
+        clearBtn.style.display = 'none';
+    }
+});
+
+// Clear button logic
+document.getElementById('clear-search').addEventListener('click', function() {
+    var searchInput = document.getElementById('table-search');
+    searchInput.value = '';
+    this.style.display = 'none';
+    // Trigger keyup to reset table visibility
+    searchInput.dispatchEvent(new Event('keyup'));
+});
+
+
+// --- 2. Populate View Modal ---
+function populatePaymentModal(buttonElement) {
+    const data = buttonElement.dataset;
+    
+    document.getElementById('modal_pay_student').textContent = data.student || 'N/A';
+    document.getElementById('modal_pay_batch').textContent = data.batch || 'N/A';
+    document.getElementById('modal_pay_amount').textContent = "Rs. " + (data.amount || '0');
+    document.getElementById('modal_pay_date').textContent = data.date || 'N/A';
+    document.getElementById('modal_pay_ref').textContent = data.ref || 'N/A';
+    document.getElementById('modal_pay_remarks').textContent = data.remarks || 'None';
+
+    // Method Badge Logic
+    const methodEl = document.getElementById('modal_pay_method');
+    const method = data.method || '';
+    methodEl.textContent = method;
+    methodEl.className = 'badge'; // Reset classes
+    
+    if (method === 'ESEWA') methodEl.classList.add('badge-success');
+    else if (method === 'BANK') methodEl.classList.add('badge-primary');
+    else if (method === 'CASH') methodEl.classList.add('badge-info');
+    else methodEl.classList.add('badge-secondary');
+}
+
+// --- 3. Populate Delete Modal ---
+function populateDeleteModal(buttonElement) {
+    const name = buttonElement.getAttribute('data-name');
+    const deleteUrl = buttonElement.getAttribute('data-delete-url');
+
+    document.getElementById('delete_modal_pay_name').textContent = name;
+    
+    const confirmBtn = document.getElementById('delete_modal_confirm_btn');
+    if (confirmBtn) {
+        confirmBtn.href = deleteUrl;
+    }
+}
+    </script>
+</html>

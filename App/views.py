@@ -110,8 +110,15 @@ def AddEnrollment(request):
 def DeleteEnrollment(request,id):
     return render(request,'ADMIN/Enrollment/Delete-Enrollment.html')
 
+# ----finance -------#
+# ViewPayment
+def ViewPayment(request):
+    return render(request,'ADMIN/Payment/View-Payments.html')
 
-    
+        # AddPayment
+def AddPayment(request):
+    return render(request,'ADMIN/Payment/Add-Payment.html')
+
 
 # first page for the viewer 
 def ViewerDashboard(request):
