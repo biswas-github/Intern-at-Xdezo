@@ -8,7 +8,7 @@
               content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <!-- End Required meta tags -->
         <!-- Begin SEO tag -->
-        <title>Page Title | Looper - Bootstrap 4 Admin Theme</title>
+        <title>Starter Template | Looper - Bootstrap 4 Admin Theme</title>
         <meta property="og:title" content="Starter Template" />
         <meta name="author" content="Beni Arisandi" />
         <meta property="og:locale" content="en_US" />
@@ -19,6 +19,21 @@
         <link rel="canonical" href="//uselooper.com" />
         <meta property="og:url" content="//uselooper.com" />
         <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme" />
+        <script type="application/ld+json">
+      {
+        "name": "Looper - Bootstrap 4 Admin Theme",
+        "description": "Responsive admin theme build on top of Bootstrap 4",
+        "author": {
+          "@type": "Person",
+          "name": "Beni Arisandi"
+        },
+        "@type": "WebSite",
+        "url": "",
+        "headline": "Starter Template",
+        "@context": "http://schema.org"
+      }
+        </script>
+        <!-- End SEO tag -->
         <!-- FAVICONS -->
         <link rel="apple-touch-icon-precomposed"
               sizes="144x144"
@@ -454,7 +469,7 @@
                             <!-- .menu -->
                             <ul class="menu">
                                 <!-- .menu-item -->
-                                <li class="menu-item ">
+                                <li class="menu-item has-active">
                                     <a href="{% url 'AdminDashboard' %}" class="menu-link">
                                         <span class="menu-icon oi oi-dashboard"></span>
                                         <span class="menu-text">Dashboard</span>
@@ -529,7 +544,7 @@
                                 <!-- /.menu-item -->
                                 <!-- datamanagements -->
                                 <!-- .menu-item -->
-                                <li class="menu-item has-child has-open">
+                                <li class="menu-item has-child ">
                                     <a href="#" class="menu-link">
                                         <span class="menu-icon oi oi-people"></span>
                                         <span class="menu-text">Data management</span>
@@ -544,7 +559,7 @@
                                         <li class="menu-item">
                                             <a href="{% url 'ViewBatches' %}" class="menu-link">Batches</a>
                                         </li>
-                                        <li class="menu-item has-active">
+                                        <li class="menu-item">
                                             <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
                                         </li>
                                         <li class="menu-item">
@@ -577,17 +592,17 @@
                                 <!-- ./menuitems -->
                                 <!--  ./finance-->
                                 <!-- .menu-item -->
-                                <li class="menu-item has-child">
+                                <li class="menu-item has-child has-open">
                                     <a href="#" class="menu-link">
                                         <span class="menu-icon oi oi-people"></span>
                                         <span class="menu-text">Finance</span>
                                     </a>
                                     <ul class="menu">
                                         <li class="menu-item">
-                                           <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
+                                            <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
                                         </li>
-                                        <li class="menu-item">
-                                              <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
+                                        <li class="menu-item has-active">
+                                            <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#batches" class="menu-link">Exports</a>
@@ -656,151 +671,188 @@
                         <div class="page-inner">
                             <!-- Page Header & Breadcrumbs -->
                             <header class="page-title-bar">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h1 class="page-title">Update Instructor Profile</h1>
-                                </div>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item">
                                             <a href="{% url 'AdminDashboard' %}">DataManagement</a>
                                         </li>
                                         <li class="breadcrumb-item">
-                                            <a href="{% url 'Instructor' %}">Instructors</a>
+                                            <a href="#">Finance</a>
                                         </li>
-                                        <li class="breadcrumb-item active" aria-current="page">Update Instructor</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Dues & Overdues</li>
                                     </ol>
                                 </nav>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h1 class="page-title">Financial Status</h1>
+                                </div>
                             </header>
                             <!-- Page Content Section -->
                             <div class="page-section">
-                                <div class="row">
-                                    <!-- Center the form nicely -->
-                                    <div class="col-12 col-sm-10 col-lg-8 border rounded mb-5 mb-sm-5 bg-white">
-                                        <div class="card-body">
-                                            <!-- Form -->
-                                            <form method="post">
-                                                <!-- {% csrf_token %} -->
-                                                <!-- SECTION 1: Personal Information -->
-                                                <fieldset>
-                                                    <legend>Personal Information</legend>
-                                                    <!-- Name Row -->
-                                                    <div class="row">
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="id_first_name">
-                                                                First Name <abbr title="Required">*</abbr>
-                                                            </label>
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   id="id_first_name"
-                                                                   name="first_name"
-                                                                   value="Amit"
-                                                                   required>
-                                                        </div>
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="id_last_name">
-                                                                Last Name <abbr title="Required">*</abbr>
-                                                            </label>
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   id="id_last_name"
-                                                                   name="last_name"
-                                                                   value="Sharma"
-                                                                   required>
-                                                        </div>
+                                <div class="card card-fluid">
+                                    <div class="card-body">
+                                        <!-- Filter & Search Toolbar -->
+                                        <div class="form-group">
+                                            <div class="input-group input-group-alt">
+                                                <!-- 1. Payment Status Filter -->
+                                                <div class="input-group-prepend">
+                                                    <select id="statusFilter" class="custom-select" style="min-width: 170px;">
+                                                        <option value="all" selected>All Students</option>
+                                                        <option value="pending">Has Dues</option>
+                                                        <option value="overdue">Has Overdues</option>
+                                                        <option value="cleared">Cleared</option>
+                                                    </select>
+                                                </div>
+                                                <!-- 2. Search Input -->
+                                                <div class="input-group has-clearable">
+                                                    <button id="clear-search"
+                                                            type="button"
+                                                            class="close"
+                                                            aria-label="Close"
+                                                            style="display:none">
+                                                        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                                    </button>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                                     </div>
-                                                    <!-- Contact Row -->
-                                                    <div class="row">
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="id_email">
-                                                                Email Address <abbr title="Required">*</abbr>
-                                                            </label>
-                                                            <input type="email"
-                                                                   class="form-control"
-                                                                   id="id_email"
-                                                                   name="email"
-                                                                   value="a.sharma@example.com"
-                                                                   required>
-                                                        </div>
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="id_phone">Phone Number</label>
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   id="id_phone"
-                                                                   name="phone"
-                                                                   value="9841234567">
-                                                        </div>
-                                                    </div>
-                                                    <!-- Address Row -->
-                                                    <div class="form-group">
-                                                        <label for="id_address">Address</label>
-                                                        <input type="text"
-                                                               class="form-control"
-                                                               id="id_address"
-                                                               name="address"
-                                                               value="Kathmandu, Nepal">
-                                                    </div>
-                                                </fieldset>
-                                                <hr class="my-4">
-                                                <!-- SECTION 2: Professional Details -->
-                                                <fieldset>
-                                                    <legend>Professional Details</legend>
-                                                    <!-- Specialization -->
-                                                    <div class="form-group">
-                                                        <label for="id_specialization">Specialization</label>
-                                                        <input type="text"
-                                                               class="form-control"
-                                                               id="id_specialization"
-                                                               name="specialization"
-                                                               value="Python, Django, Machine Learning"
-                                                               placeholder="e.g. Python, Django">
-                                                    </div>
-                                                    <!-- Status (Is Active) -->
-                                                    <div class="form-group">
-                                                        <label for="id_is_active">Account Status</label>
-                                                        <select class="form-control" id="id_is_active" name="is_active">
-                                                            <option value="True" selected>Active</option>
-                                                            <option value="False">Inactive</option>
-                                                        </select>
-                                                    </div>
-                                                    <!-- Bio -->
-                                                    <div class="form-group">
-                                                        <label for="id_bio">Biography / Notes</label>
-                                                        <textarea class="form-control" id="id_bio" name="bio" rows="4">Senior Python Developer with 5 years of teaching experience.</textarea>
-                                                    </div>
-                                                    <!-- Action Buttons -->
-                                                    <div class="d-flex justify-content-between align-items-center mt-4">
-                                                        <button type="submit" class="btn btn-outline-primary px-5 w-100 w-sm-100">Update Instructor</button>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                            <!-- /.form -->
+                                                    <input id="table-search"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Search by name or batch...">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- The Table -->
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-striped" id="duesTable">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th style="min-width:250px">Student Name</th>
+                                                        <th>Batch</th>
+                                                        <th>Total Paid</th>
+                                                        <th>Status</th>
+                                                        <th>Due Amount</th>
+                                                        <th style="min-width:100px; text-align:right;">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Row 1: CLEARED -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#" class="tile tile-img mr-1">
+                                                                <span class="tile-text">RB</span>
+                                                            </a>
+                                                            <a href="#">Ram Bahadur Thapa</a>
+                                                        </td>
+                                                        <td class="align-middle">Python Jan 2026</td>
+                                                        <td class="align-middle text-success">Rs. 15,000</td>
+                                                        <td class="align-middle">
+                                                            <!-- JS looks at data-filter-status on this span -->
+                                                            <span class="badge badge-subtle badge-success" data-filter-status="cleared">Cleared</span>
+                                                        </td>
+                                                        <td class="align-middle font-weight-bold">-</td>
+                                                        <td class="align-middle text-right">
+                                                            <button type="button"
+                                                                    class="btn btn-sm btn-info text-white"
+                                                                    data-toggle="modal"
+                                                                    data-target="#dueDetailsModal"
+                                                                    data-student="Ram Bahadur Thapa"
+                                                                    data-course="Python Development"
+                                                                    data-batch="Python Jan 2026"
+                                                                    data-fee="15000"
+                                                                    data-paid="15000"
+                                                                    data-due="0"
+                                                                    data-status="Cleared"
+                                                                    onclick="populateDueModal(this)">View More</button>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 2: HAS DUE (Pending) -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#" class="tile tile-img mr-1">
+                                                                <span class="tile-text">SK</span>
+                                                            </a>
+                                                            <a href="#">Sita Kumari</a>
+                                                        </td>
+                                                        <td class="align-middle">Django Dec 2025</td>
+                                                        <td class="align-middle text-success">Rs. 10,000</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-subtle badge-warning" data-filter-status="pending">Pending</span>
+                                                        </td>
+                                                        <td class="align-middle text-warning font-weight-bold">Rs. 5,000</td>
+                                                        <td class="align-middle text-right">
+                                                            <button type="button"
+                                                                    class="btn btn-sm btn-info text-white"
+                                                                    data-toggle="modal"
+                                                                    data-target="#dueDetailsModal"
+                                                                    data-student="Sita Kumari"
+                                                                    data-course="Django Development"
+                                                                    data-batch="Django Dec 2025"
+                                                                    data-fee="15000"
+                                                                    data-paid="10000"
+                                                                    data-due="5000"
+                                                                    data-status="Pending"
+                                                                    onclick="populateDueModal(this)">View More</button>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Row 3: HAS OVERDUE -->
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <a href="#" class="tile tile-img mr-1">
+                                                                <span class="tile-text">BG</span>
+                                                            </a>
+                                                            <a href="#">Bishal Gurung</a>
+                                                        </td>
+                                                        <td class="align-middle">Graphic Design</td>
+                                                        <td class="align-middle text-success">Rs. 0</td>
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-subtle badge-danger" data-filter-status="overdue">Overdue</span>
+                                                            <i class="fas fa-exclamation-circle text-danger ml-1"
+                                                               title="Payment Date Exceeded"></i>
+                                                        </td>
+                                                        <td class="align-middle text-danger font-weight-bold">Rs. 12,000</td>
+                                                        <td class="align-middle text-right">
+                                                            <button type="button"
+                                                                    class="btn btn-sm btn-info text-white"
+                                                                    data-toggle="modal"
+                                                                    data-target="#dueDetailsModal"
+                                                                    data-student="Bishal Gurung"
+                                                                    data-course="Graphic Design"
+                                                                    data-batch="Graphic Design Morning"
+                                                                    data-fee="12000"
+                                                                    data-paid="0"
+                                                                    data-due="12000"
+                                                                    data-status="Overdue"
+                                                                    onclick="populateDueModal(this)">View More</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
+                                    <!-- /.page-inner -->
                                 </div>
+                                <!-- /.page -->
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <!-- /.app-main -->
-        </div>
-        <!-- /.app -->
-        <!-- BEGIN BASE JS -->
-        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-        <!-- END BASE JS -->
-        <!-- BEGIN PLUGINS JS -->
-        <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-        <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-        <!-- END PLUGINS JS -->
-        <!-- BEGIN THEME JS -->
-        <script src="{% static 'javascript/main.min.js' %}"></script>
-        <!-- END THEME JS -->
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async
-                src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-        <script>
+                            <!-- /.wrapper -->
+                        </main>
+                        <!-- /.app-main -->
+                        <!-- /.app -->
+                        <!-- BEGIN BASE JS -->
+                        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+                        <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+                        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+                        <!-- END BASE JS -->
+                        <!-- BEGIN PLUGINS JS -->
+                        <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+                        <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+                        <!-- END PLUGINS JS -->
+                        <!-- BEGIN THEME JS -->
+                        <script src="{% static 'javascript/main.min.js' %}"></script>
+                        <!-- END THEME JS -->
+                        <!-- Global site tag (gtag.js) - Google Analytics -->
+                        <script async
+                                src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+                        <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -808,6 +860,169 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
-        </script>
-    </body>
-</html>
+                        </script>
+                        <!-- single modal  -->
+                        <div class="modal fade"
+                             id="dueDetailsModal"
+                             tabindex="-1"
+                             role="dialog"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Financial Breakdown</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                data-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <th class="bg-primary text-white" style="width: 40%;">Student Name</th>
+                                                        <td id="modal_due_student"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="bg-light text-primary">Course</th>
+                                                        <td id="modal_due_course"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="bg-primary text-white">Batch</th>
+                                                        <td id="modal_due_batch"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="bg-light text-primary">Total Fee</th>
+                                                        <td id="modal_due_fee" class="font-weight-bold"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="bg-primary text-white">Total Paid</th>
+                                                        <td id="modal_due_paid" class="text-success font-weight-bold"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="bg-light text-danger">Balance Due</th>
+                                                        <td id="modal_due_amount"
+                                                            class="text-danger font-weight-bold"
+                                                            style="font-size: 1.1em"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="bg-primary text-white">Status</th>
+                                                        <td>
+                                                            <span id="modal_due_status" class="badge"></span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- js -->
+                        <script>
+document.addEventListener("DOMContentLoaded", function() {
+    
+    const searchInput = document.getElementById('table-search');
+    const statusFilter = document.getElementById('statusFilter');
+    const clearBtn = document.getElementById('clear-search');
+    const tableRows = document.querySelectorAll('#duesTable tbody tr');
+
+    // --- 1. Filter Logic ---
+    function filterData() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        const filterType = statusFilter.value; // all, pending, overdue, cleared
+
+        tableRows.forEach(function(row) {
+            // A. Search Logic
+            const textContent = row.textContent.toLowerCase();
+            const matchesSearch = textContent.includes(searchText);
+
+            // B. Status Logic (Extract from inner SPAN, not TR)
+            // We look for the badge element inside the row
+            const statusBadge = row.querySelector('[data-filter-status]');
+            const statusValue = statusBadge ? statusBadge.getAttribute('data-filter-status') : '';
+            
+            let matchesStatus = false;
+
+            if (filterType === 'all') {
+                matchesStatus = true;
+            } else if (filterType === statusValue) {
+                // Exact match (overdue == overdue, cleared == cleared)
+                matchesStatus = true;
+            } else if (filterType === 'pending' && (statusValue === 'pending' || statusValue === 'overdue')) {
+                // "Has Dues" logic covers both 'pending' and 'overdue' statuses
+                matchesStatus = true;
+            }
+
+            // Combine Results
+            if (matchesSearch && matchesStatus) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Toggle Clear Button
+        if (searchText.length > 0) {
+            clearBtn.style.display = 'block';
+        } else {
+            clearBtn.style.display = 'none';
+        }
+    }
+
+    // --- 2. Listeners ---
+    searchInput.addEventListener('keyup', filterData);
+    statusFilter.addEventListener('change', filterData);
+
+    clearBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        this.style.display = 'none';
+        filterData();
+    });
+});
+
+// --- 3. Populate Modal ---
+function populateDueModal(buttonElement) {
+    // Standard dataset extraction
+    const data = buttonElement.dataset;
+    
+    document.getElementById('modal_due_student').textContent = data.student || 'N/A';
+    document.getElementById('modal_due_course').textContent = data.course || 'N/A';
+    document.getElementById('modal_due_batch').textContent = data.batch || 'N/A';
+    document.getElementById('modal_due_fee').textContent = "Rs. " + data.fee;
+    document.getElementById('modal_due_paid').textContent = "Rs. " + data.paid;
+    
+    // Balance Styling
+    const dueEl = document.getElementById('modal_due_amount');
+    const dueVal = parseFloat(data.due);
+    if (dueVal > 0) {
+        dueEl.textContent = "Rs. " + dueVal;
+        dueEl.className = "text-danger font-weight-bold";
+    } else {
+        dueEl.textContent = "Cleared";
+        dueEl.className = "text-success font-weight-bold";
+    }
+
+    // Status Badge Styling
+    const statusEl = document.getElementById('modal_due_status');
+    const statusText = data.status || '';
+    
+    statusEl.textContent = statusText;
+    statusEl.className = "badge"; 
+
+    if(statusText.toLowerCase() === 'overdue') {
+        statusEl.classList.add('badge-danger');
+    } else if(statusText.toLowerCase() === 'pending') {
+        statusEl.classList.add('badge-warning');
+    } else {
+        statusEl.classList.add('badge-success');
+    }
+}
+                        </script>
+                    </html>

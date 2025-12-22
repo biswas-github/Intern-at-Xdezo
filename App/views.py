@@ -124,6 +124,10 @@ def UpdatePayment(request,id):
 # DeletePayment
 def DeletePayment(request,id):
     return render(request,'ADMIN/Payment/Delete-Payment.html')
+# dues and overdues 
+def DuesAndOverDues(request):
+    return render(request,'ADMIN/Payment/Dues_overdues/OverDue.html')
+
 
 # first page for the viewer 
 def ViewerDashboard(request):

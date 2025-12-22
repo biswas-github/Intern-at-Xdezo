@@ -602,7 +602,7 @@
                                             <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Dues and overdues</a>
+                                             <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#batches" class="menu-link">Exports</a>
@@ -712,7 +712,7 @@
                                                     </div>
                                                     <!-- Enrollment Selection (Optional but recommended) -->
                                                     <div class="form-group">
-                                                        <label for="id_enrollment">Linked Enrollment (Batch)</label>
+                                                        <label for="id_enrollment">Linked Enrollment</label>
                                                         <select class="form-control" id="id_enrollment" name="enrollment">
                                                             <option value="" selected>-- General Payment (No specific batch) --</option>
                                                             <option value="10">Python Jan 2026</option>
