@@ -578,14 +578,14 @@
                                         <span class="menu-text">Schedules & Time-tables</span>
                                     </a>
                                     <ul class="menu">
-                                        <li class="menu-item has-active">
+                                        <li class="menu-item ">
                                             <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#courses" class="menu-link">Free Rooms</a>
                                         </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Add Session</a>
+                                        <li class="menu-item has-active">
+                                            <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -695,7 +695,6 @@
                                         <div class="card-body">
                                             <!-- 1. TOGGLE BUTTONS (Switcher) -->
                                             <div class="text-center mb-4 pb-3 border-bottom">
-                                                <label class="d-block text-muted small text-uppercase font-weight-bold mb-3">Select Schedule Mode</label>
                                                 <div class="btn-group" role="group">
                                                     <button type="button"
                                                             class="btn btn-primary"
@@ -715,7 +714,7 @@
                                                 </p>
                                             </div>
                                             <!-- ================= FORM A: RECURRING SCHEDULE (Default) ================= -->
-                                            <form id="form-recurring" method="post"  <!-- {% csrf_token %} -->
+                                            <form id="form-recurring" method="post"  {% csrf_token %}
                                                 <fieldset>
                                                     <legend>Recurring Settings</legend>
                                                     <!-- Batch -->
@@ -829,9 +828,7 @@
                                                     <!-- Submit -->
                                                     <div class="d-flex flex-column mt-4">
                                                         <button type="submit" class="btn btn-outline-primary w-100">Generate Schedules</button>
-                                                        <div class="text-center mt-3">
-                                                            <a href="#" class="text-muted small">Cancel</a>
-                                                        </div>
+                                                        <div class="text-center mt-3"></div>
                                                     </div>
                                                 </fieldset>
                                             </form>
@@ -912,9 +909,7 @@
                                                     <!-- Submit -->
                                                     <div class="d-flex flex-column mt-4">
                                                         <button type="submit" class="btn btn-outline-primary w-100">Add Single Session</button>
-                                                        <div class="text-center mt-3">
-                                                            <a href="#" class="text-muted small">Cancel</a>
-                                                        </div>
+                                                        <div class="text-center mt-3"></div>
                                                     </div>
                                                 </fieldset>
                                             </form>
