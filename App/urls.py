@@ -1,5 +1,5 @@
 from django.urls import path,include
-from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom,ViewEnrollment,UpdateEnrollment,AddEnrollment,DeleteEnrollment,ViewPayment,AddPayment,UpdatePayment,DeletePayment,DuesAndOverDues,ViewSchedule,DeleteSchedule
+from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom,ViewEnrollment,UpdateEnrollment,AddEnrollment,DeleteEnrollment,ViewPayment,AddPayment,UpdatePayment,DeletePayment,DuesAndOverDues,ViewSchedule,DeleteSchedule,AddSchedule
 
 
 # url patterns for the app
@@ -93,9 +93,11 @@ urlpatterns = [
 
 # --------Schedule-----------#
 # ViewSchedule
-    path('AdminDashboard/Scchedule/ViewSchedule',ViewSchedule,name="ViewSchedule"),
+    path('AdminDashboard/Schedule/ViewSchedule',ViewSchedule,name="ViewSchedule"),
 # Delete-Schedule
-    path('AdminDashboard/Scchedule/DeleteSchedule/<int:id>',DeleteSchedule,name="DeleteSchedule"),
+    path('AdminDashboard/Schedule/DeleteSchedule/<int:id>',DeleteSchedule,name="DeleteSchedule"),
+# AddSchedule
+    path('AdminDashboard/Schedule/AddSchedule/',AddSchedule,name="AddSchedule"),
 
 
 

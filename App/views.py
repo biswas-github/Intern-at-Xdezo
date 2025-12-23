@@ -136,6 +136,9 @@ def ViewSchedule(request):
 # DeleteSchedule
 def DeleteSchedule(request,id):
     return render(request,'ADMIN/Schedule/Delete-Schedule.html')
+# AddSchedule
+def AddSchedule(request):
+    return render(request,'ADMIN/Schedule/Add-Schedule.html')
 
 
 
