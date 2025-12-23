@@ -128,6 +128,16 @@ def DeletePayment(request,id):
 def DuesAndOverDues(request):
     return render(request,'ADMIN/Payment/Dues_overdues/OverDue.html')
 
+#-------Schedule 
+# ViewSchedule
+def ViewSchedule(request):
+    return render(request,'ADMIN/Schedule/View-Schedule.html')
+
+# DeleteSchedule
+def DeleteSchedule(request,id):
+    return render(request,'ADMIN/Schedule/Delete-Schedule.html')
+
+
 
 # first page for the viewer 
 def ViewerDashboard(request):
