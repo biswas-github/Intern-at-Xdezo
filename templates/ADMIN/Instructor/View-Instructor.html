@@ -567,10 +567,10 @@
                                             <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Free Rooms</a>
+                                            <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
                                         </li>
                                         <li class="menu-item">
-                                          <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
+                                            <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -589,253 +589,252 @@
                                         <li class="menu-item">
                                             <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
                                         </li>
-                                     
                                     </ul>
                                 </li>
                                 <!-- ./menuitems -->
-                                 <!-- .exports -->
-                <li class="menu-item has-child" style="">
-                  <a href="#" class="menu-link">
-                    <span class="menu-icon oi oi-list-rich"></span>
-                    <span class="menu-text">Exports</span>
-                  </a>
-                  <!-- child menu -->
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
-                    </li>
-                  </ul>
-                  <!-- /child menu -->
-                                <!-- .analytics -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
+                                <!-- .exports -->
+                                <li class="menu-item has-child" style="">
                                     <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-people"></span>
-                                        <span class="menu-text">Analytics</span>
+                                        <span class="menu-icon oi oi-list-rich"></span>
+                                        <span class="menu-text">Exports</span>
                                     </a>
+                                    <!-- child menu -->
                                     <ul class="menu">
                                         <li class="menu-item">
-                                            <a href="#students" class="menu-link">Students per Course</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Monthly Revenue</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Active Students</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Enrollments Trends</a>
+                                            <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
                                         </li>
                                     </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- ./analytics -->
-                                <!-- System logs -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-people"></span>
-                                        <span class="menu-text">System Logs</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="#students" class="menu-link">All activities</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Export Details</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- ./System logs  -->
-                                <!-- .menu-item -->
-                                <!-- /.menu-item -->
-                            </ul>
-                            <!-- /.menu -->
-                        </nav>
-                        <!-- /.stacked-menu -->
-                    </section>
-                    <!-- /.aside-menu -->
-                </div>
-                <!-- /.aside-content -->
-            </aside>
-            <!-- /.app-aside -->
-            <!-- .app-main -->
-            <main class="app-main">
-                <div class="wrapper">
-                    <div class="page">
-                        <div class="page-inner ms-2">
-                            <!-- Page header -->
-                            <header class="">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h1 class="page-title">View Instructors</h1>
-                                        <p class="text-muted mb-0">
-                                            <a style="text-decoration: none"
-                                               class="text-muted"
-                                               href="{% url 'AdminDashboard' %}">AdminDashboard</a> / Instructor/ <span class="text-primary">View instructors</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- add Instructor btn-->
-                                <div class="w-25 ms-0 ms-sm-0 mt-1 mb-1 ">
-                                    <div class="mb-3 mt-1">
-                                        <div class="d-block">
-                                            <a href="{% url 'AddInstructor' %}" class="text-decoration-none">
-                                                <button type="button" class="btn btn-outline-primary shadow-sm">
-                                                    <i class="fas fa-plus "></i>
-                                                </button>
-                                            </a>
+                                    <!-- /child menu -->
+                                    <!-- .analytics -->
+                                    <!-- .menu-item -->
+                                    <li class="menu-item has-child">
+                                        <a href="#" class="menu-link">
+                                            <span class="menu-icon oi oi-people"></span>
+                                            <span class="menu-text">Analytics</span>
+                                        </a>
+                                        <ul class="menu">
+                                            <li class="menu-item">
+                                                <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#courses" class="menu-link">Active Students</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#courses" class="menu-link">Enrollments Trends</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- ./menuitems -->
+                                    <!-- ./analytics -->
+                                    <!-- System logs -->
+                                    <!-- .menu-item -->
+                                    <li class="menu-item has-child">
+                                        <a href="#" class="menu-link">
+                                            <span class="menu-icon oi oi-people"></span>
+                                            <span class="menu-text">System Logs</span>
+                                        </a>
+                                        <ul class="menu">
+                                            <li class="menu-item">
+                                                <a href="#students" class="menu-link">All activities</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#courses" class="menu-link">Export Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- ./menuitems -->
+                                    <!-- ./System logs  -->
+                                    <!-- .menu-item -->
+                                    <!-- /.menu-item -->
+                                </ul>
+                                <!-- /.menu -->
+                            </nav>
+                            <!-- /.stacked-menu -->
+                        </section>
+                        <!-- /.aside-menu -->
+                    </div>
+                    <!-- /.aside-content -->
+                </aside>
+                <!-- /.app-aside -->
+                <!-- .app-main -->
+                <main class="app-main">
+                    <div class="wrapper">
+                        <div class="page">
+                            <div class="page-inner ms-2">
+                                <!-- Page header -->
+                                <header class="">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h1 class="page-title">View Instructors</h1>
+                                            <p class="text-muted mb-0">
+                                                <a style="text-decoration: none"
+                                                   class="text-muted"
+                                                   href="{% url 'AdminDashboard' %}">AdminDashboard</a> / Instructor/ <span class="text-primary">View instructors</span>
+                                            </p>
                                         </div>
                                     </div>
+                                    <!-- add Instructor btn-->
+                                    <div class="w-25 ms-0 ms-sm-0 mt-1 mb-1 ">
+                                        <div class="mb-3 mt-1">
+                                            <div class="d-block">
+                                                <a href="{% url 'AddInstructor' %}" class="text-decoration-none">
+                                                    <button type="button" class="btn btn-outline-primary shadow-sm">
+                                                        <i class="fas fa-plus "></i>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </header>
+                                <!-- content goes here -->
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered table-striped"
+                                           id="instructortable">
+                                        <thead>
+                                            <tr>
+                                                <th style="min-width:200px">Name</th>
+                                                <th>Specialization</th>
+                                                <th>Phone Number</th>
+                                                <th>&nbsp; &nbsp; Actions&nbsp; &nbsp;</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Row 1 -->
+                                            <tr>
+                                                <td>Mr. A. Sharma</td>
+                                                <td>Python & Django</td>
+                                                <td>9841234567</td>
+                                                <td>
+                                                    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
+                                                         role="group">
+                                                        <!-- View Button -->
+                                                        <button type="button"
+                                                                class="btn btn-info btn-sm text-white"
+                                                                data-toggle="modal"
+                                                                data-target="#instructorDetailsModal"
+                                                                data-name="{{ data.name }}"
+                                                                data-email="{{ instructor.user.email }}"
+                                                                data-phone="{{ instructor.phone }}"
+                                                                data-specialization="{{ instructor.specialization }}"
+                                                                data-bio="Hello this is a bio of the mr . A sharma"
+                                                                data-status="True"
+                                                                onclick="populateInstructorModal(this)">
+                                                            View Details
+                                                        </button>
+                                                        <!-- Update Button -->
+                                                        <a href="{% url 'UpdateInstructor' id=1 %}"
+                                                           class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
+                                                        <!-- Delete Button -->
+                                                        <button type="button"
+                                                                class="btn btn-danger btn-sm"
+                                                                data-toggle="modal"
+                                                                data-target="#deleteInstructorModal"
+                                                                data-name="Mr. A. Sharma"
+                                                                data-delete-url="{% url 'DeleteInstructor' id=1 %}"
+                                                                onclick="populateDeleteModal(this)">Delete</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Row 2 -->
+                                            <tr>
+                                                <td>Ms. S. Karki</td>
+                                                <td>Graphic Design</td>
+                                                <td>9801987654</td>
+                                                <td>
+                                                    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
+                                                         role="group">
+                                                        <!-- View Button -->
+                                                        <button type="button"
+                                                                class="btn btn-info btn-sm text-white"
+                                                                data-toggle="modal"
+                                                                data-target="#instructorDetailsModal"
+                                                                data-name="Ms. S. Karki"
+                                                                data-specialization="Graphic Design (Ps, Ai, Id)"
+                                                                data-phone="9801987654"
+                                                                data-email="s.karki@example.com"
+                                                                data-address="Lalitpur, Nepal"
+                                                                onclick="populateInstructorModal(this)">
+                                                            View Details
+                                                        </button>
+                                                        <!-- Update Button -->
+                                                        <a href="{% url 'UpdateInstructor' id=2 %}"
+                                                           class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
+                                                        <!-- Delete Button -->
+                                                        <button type="button"
+                                                                class="btn btn-danger btn-sm"
+                                                                data-toggle="modal"
+                                                                data-target="#deleteInstructorModal"
+                                                                data-name="Ms. S. Karki"
+                                                                data-delete-url="{% url 'DeleteInstructor' id=2 %}"
+                                                                onclick="populateDeleteModal(this)">Delete</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Row 3 -->
+                                            <tr>
+                                                <td>Mr. B. Rana</td>
+                                                <td>Digital Marketing</td>
+                                                <td>9860112233</td>
+                                                <td>
+                                                    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
+                                                         role="group">
+                                                        <!-- View Button -->
+                                                        <button type="button"
+                                                                class="btn btn-info btn-sm text-white"
+                                                                data-toggle="modal"
+                                                                data-target="#instructorDetailsModal"
+                                                                data-name="Mr. B. Rana"
+                                                                data-specialization="SEO & Social Media"
+                                                                data-phone="9860112233"
+                                                                data-email="b.rana@example.com"
+                                                                data-address="Bhaktapur, Nepal"
+                                                                onclick="populateInstructorModal(this)">
+                                                            View Details
+                                                        </button>
+                                                        <!-- Update Button -->
+                                                        <a href="{% url 'UpdateInstructor' id=3 %}"
+                                                           class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
+                                                        <!-- Delete Button -->
+                                                        <button type="button"
+                                                                class="btn btn-danger btn-sm"
+                                                                data-toggle="modal"
+                                                                data-target="#deleteInstructorModal"
+                                                                data-name="Mr. B. Rana"
+                                                                data-delete-url="{% url 'DeleteInstructor' id=3 %}"
+                                                                onclick="populateDeleteModal(this)">Delete</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </header>
-                            <!-- content goes here -->
-                            <div class="table-responsive">
-                                <table class="table table-hover table-bordered table-striped"
-                                       id="instructortable">
-                                    <thead>
-                                        <tr>
-                                            <th style="min-width:200px">Name</th>
-                                            <th>Specialization</th>
-                                            <th>Phone Number</th>
-                                            <th>&nbsp; &nbsp; Actions&nbsp; &nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- Row 1 -->
-                                        <tr>
-                                            <td>Mr. A. Sharma</td>
-                                            <td>Python & Django</td>
-                                            <td>9841234567</td>
-                                            <td>
-                                                <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                     role="group">
-                                                    <!-- View Button -->
-                                                    <button type="button"
-                                                            class="btn btn-info btn-sm text-white"
-                                                            data-toggle="modal"
-                                                            data-target="#instructorDetailsModal"
-                                                            data-name="{{ data.name }}"
-                                                            data-email="{{ instructor.user.email }}"
-                                                            data-phone="{{ instructor.phone }}"
-                                                            data-specialization="{{ instructor.specialization }}"
-                                                            data-bio="Hello this is a bio of the mr . A sharma"
-                                                            data-status="True"
-                                                            onclick="populateInstructorModal(this)">
-                                                        View Details
-                                                    </button>
-                                                    <!-- Update Button -->
-                                                    <a href="{% url 'UpdateInstructor' id=1 %}"
-                                                       class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                    <!-- Delete Button -->
-                                                    <button type="button"
-                                                            class="btn btn-danger btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#deleteInstructorModal"
-                                                            data-name="Mr. A. Sharma"
-                                                            data-delete-url="{% url 'DeleteInstructor' id=1 %}"
-                                                            onclick="populateDeleteModal(this)">Delete</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <!-- Row 2 -->
-                                        <tr>
-                                            <td>Ms. S. Karki</td>
-                                            <td>Graphic Design</td>
-                                            <td>9801987654</td>
-                                            <td>
-                                                <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                     role="group">
-                                                    <!-- View Button -->
-                                                    <button type="button"
-                                                            class="btn btn-info btn-sm text-white"
-                                                            data-toggle="modal"
-                                                            data-target="#instructorDetailsModal"
-                                                            data-name="Ms. S. Karki"
-                                                            data-specialization="Graphic Design (Ps, Ai, Id)"
-                                                            data-phone="9801987654"
-                                                            data-email="s.karki@example.com"
-                                                            data-address="Lalitpur, Nepal"
-                                                            onclick="populateInstructorModal(this)">
-                                                        View Details
-                                                    </button>
-                                                    <!-- Update Button -->
-                                                    <a href="{% url 'UpdateInstructor' id=2 %}"
-                                                       class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                    <!-- Delete Button -->
-                                                    <button type="button"
-                                                            class="btn btn-danger btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#deleteInstructorModal"
-                                                            data-name="Ms. S. Karki"
-                                                            data-delete-url="{% url 'DeleteInstructor' id=2 %}"
-                                                            onclick="populateDeleteModal(this)">Delete</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <!-- Row 3 -->
-                                        <tr>
-                                            <td>Mr. B. Rana</td>
-                                            <td>Digital Marketing</td>
-                                            <td>9860112233</td>
-                                            <td>
-                                                <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                     role="group">
-                                                    <!-- View Button -->
-                                                    <button type="button"
-                                                            class="btn btn-info btn-sm text-white"
-                                                            data-toggle="modal"
-                                                            data-target="#instructorDetailsModal"
-                                                            data-name="Mr. B. Rana"
-                                                            data-specialization="SEO & Social Media"
-                                                            data-phone="9860112233"
-                                                            data-email="b.rana@example.com"
-                                                            data-address="Bhaktapur, Nepal"
-                                                            onclick="populateInstructorModal(this)">
-                                                        View Details
-                                                    </button>
-                                                    <!-- Update Button -->
-                                                    <a href="{% url 'UpdateInstructor' id=3 %}"
-                                                       class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                    <!-- Delete Button -->
-                                                    <button type="button"
-                                                            class="btn btn-danger btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#deleteInstructorModal"
-                                                            data-name="Mr. B. Rana"
-                                                            data-delete-url="{% url 'DeleteInstructor' id=3 %}"
-                                                            onclick="populateDeleteModal(this)">Delete</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <!-- ------ -->
                             </div>
-                            <!-- ------ -->
                         </div>
                     </div>
-                </div>
-            </main>
-            <!-- /.app-main -->
-        </div>
-        <!-- /.app -->
-        <!-- BEGIN BASE JS -->
-        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-        <!-- END BASE JS -->
-        <!-- BEGIN PLUGINS JS -->
-        <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-        <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-        <!-- END PLUGINS JS -->
-        <!-- BEGIN THEME JS -->
-        <script src="{% static 'javascript/main.min.js' %}"></script>
-        <!-- END THEME JS -->
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async
-                src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-        <script>
+                </main>
+                <!-- /.app-main -->
+            </div>
+            <!-- /.app -->
+            <!-- BEGIN BASE JS -->
+            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+            <!-- END BASE JS -->
+            <!-- BEGIN PLUGINS JS -->
+            <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+            <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+            <!-- END PLUGINS JS -->
+            <!-- BEGIN THEME JS -->
+            <script src="{% static 'javascript/main.min.js' %}"></script>
+            <!-- END THEME JS -->
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async
+                    src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+            <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -843,102 +842,102 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
-        </script>
-        <!-- Single modals  -->
-        <!-- ================= SINGLE VIEW INSTRUCTOR MODAL ================= -->
-        <div class="modal fade"
-             id="instructorDetailsModal"
-             tabindex="-1"
-             role="dialog"
-             aria-labelledby="instructorDetailsLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Instructor Profile</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered mb-0">
-                                <tbody>
-                                    <!-- 1. Name (Blue) -->
-                                    <tr>
-                                        <th scope="row"
-                                            class="bg-primary text-white"
-                                            style="width: 30%;
-                                                   min-width: 130px">Name</th>
-                                        <td id="modal_inst_name"></td>
-                                    </tr>
-                                    <!-- 2. Email (Light) -->
-                                    <tr>
-                                        <th scope="row" class="bg-light text-primary">Email</th>
-                                        <td id="modal_inst_email" class="text-break"></td>
-                                    </tr>
-                                    <!-- 3. Phone (Blue) -->
-                                    <tr>
-                                        <th scope="row" class="bg-primary text-white">Phone</th>
-                                        <td id="modal_inst_phone"></td>
-                                    </tr>
-                                    <!-- 4. Specialization (Light) -->
-                                    <tr>
-                                        <th scope="row" class="bg-light text-primary">Specialization</th>
-                                        <td id="modal_inst_spec"></td>
-                                    </tr>
-                                    <!-- 5. Status (Blue) -->
-                                    <tr>
-                                        <th scope="row" class="bg-primary text-white">Status</th>
-                                        <td>
-                                            <span id="modal_inst_status" class="badge"></span>
-                                        </td>
-                                    </tr>
-                                    <!-- 6. Bio (Light) -->
-                                    <tr>
-                                        <th scope="row" class="bg-light text-primary">Bio</th>
-                                        <td id="modal_inst_bio" class="text-break" style="white-space: pre-wrap;"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+            </script>
+            <!-- Single modals  -->
+            <!-- ================= SINGLE VIEW INSTRUCTOR MODAL ================= -->
+            <div class="modal fade"
+                 id="instructorDetailsModal"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-labelledby="instructorDetailsLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Instructor Profile</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered mb-0">
+                                    <tbody>
+                                        <!-- 1. Name (Blue) -->
+                                        <tr>
+                                            <th scope="row"
+                                                class="bg-primary text-white"
+                                                style="width: 30%;
+                                                       min-width: 130px">Name</th>
+                                            <td id="modal_inst_name"></td>
+                                        </tr>
+                                        <!-- 2. Email (Light) -->
+                                        <tr>
+                                            <th scope="row" class="bg-light text-primary">Email</th>
+                                            <td id="modal_inst_email" class="text-break"></td>
+                                        </tr>
+                                        <!-- 3. Phone (Blue) -->
+                                        <tr>
+                                            <th scope="row" class="bg-primary text-white">Phone</th>
+                                            <td id="modal_inst_phone"></td>
+                                        </tr>
+                                        <!-- 4. Specialization (Light) -->
+                                        <tr>
+                                            <th scope="row" class="bg-light text-primary">Specialization</th>
+                                            <td id="modal_inst_spec"></td>
+                                        </tr>
+                                        <!-- 5. Status (Blue) -->
+                                        <tr>
+                                            <th scope="row" class="bg-primary text-white">Status</th>
+                                            <td>
+                                                <span id="modal_inst_status" class="badge"></span>
+                                            </td>
+                                        </tr>
+                                        <!-- 6. Bio (Light) -->
+                                        <tr>
+                                            <th scope="row" class="bg-light text-primary">Bio</th>
+                                            <td id="modal_inst_bio" class="text-break" style="white-space: pre-wrap;"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- ================= 2. SINGLE DELETE INSTRUCTOR MODAL ================= -->
+            <div class="modal fade"
+                 id="deleteInstructorModal"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirm Deletion</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-dismiss="modal"
+                                    aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            Are you sure you want to delete <strong id="delete_modal_inst_name"></strong>?
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
+                            <!-- Link will be updated via JS -->
+                            <a href="#"
+                               id="delete_modal_confirm_btn"
+                               class="btn btn-secondary text-danger">Yes, Delete</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- ================= 2. SINGLE DELETE INSTRUCTOR MODAL ================= -->
-        <div class="modal fade"
-             id="deleteInstructorModal"
-             tabindex="-1"
-             role="dialog"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm Deletion</h5>
-                        <button type="button"
-                                class="btn-close"
-                                data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-                        Are you sure you want to delete <strong id="delete_modal_inst_name"></strong>?
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
-                        <!-- Link will be updated via JS -->
-                        <a href="#"
-                           id="delete_modal_confirm_btn"
-                           class="btn btn-secondary text-danger">Yes, Delete</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-    <!-- js for the models population of the data -->
-    <script>
+        </body>
+        <!-- js for the models population of the data -->
+        <script>
 // --- 1. Populate View Instructor Modal ---
 function populateInstructorModal(buttonElement) {
     const data = buttonElement.dataset;
@@ -977,5 +976,5 @@ function populateDeleteModal(buttonElement) {
     const confirmBtn = document.getElementById('delete_modal_confirm_btn');
     if (confirmBtn) confirmBtn.href = deleteUrl;
 }
-    </script>
-</html>
+        </script>
+    </html>

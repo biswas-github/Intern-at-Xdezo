@@ -579,13 +579,13 @@
                                     </a>
                                     <ul class="menu">
                                         <li class="menu-item">
-                                             <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
+                                            <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Free Rooms</a>
+                                            <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
                                         </li>
                                         <li class="menu-item">
-                                           <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
+                                            <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -602,120 +602,119 @@
                                             <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
                                         </li>
                                         <li class="menu-item">
-                                   <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
+                                            <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
                                         </li>
-                                     
                                     </ul>
                                 </li>
                                 <!-- ./menuitems -->
-                                 <!-- .exports -->
-                <li class="menu-item has-child" style="">
-                  <a href="#" class="menu-link">
-                    <span class="menu-icon oi oi-list-rich"></span>
-                    <span class="menu-text">Exports</span>
-                  </a>
-                  <!-- child menu -->
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
-                    </li>
-                  </ul>
-                  <!-- /child menu -->
-                                <!-- .analytics -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
+                                <!-- .exports -->
+                                <li class="menu-item has-child" style="">
                                     <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-people"></span>
-                                        <span class="menu-text">Analytics</span>
+                                        <span class="menu-icon oi oi-list-rich"></span>
+                                        <span class="menu-text">Exports</span>
                                     </a>
+                                    <!-- child menu -->
                                     <ul class="menu">
                                         <li class="menu-item">
-                                            <a href="#students" class="menu-link">Students per Course</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Monthly Revenue</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Active Students</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Enrollments Trends</a>
+                                            <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
                                         </li>
                                     </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- ./analytics -->
-                                <!-- System logs -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-people"></span>
-                                        <span class="menu-text">System Logs</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="#students" class="menu-link">All activities</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Export Details</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- ./System logs  -->
-                                <!-- .menu-item -->
-                                <!-- /.menu-item -->
-                            </ul>
-                            <!-- /.menu -->
-                        </nav>
-                        <!-- /.stacked-menu -->
-                    </section>
-                    <!-- /.aside-menu -->
-                </div>
-                <!-- /.aside-content -->
-            </aside>
-            <!-- /.app-aside -->
-            <!-- .app-main -->
-            <main class="app-main">
-                <div class="wrapper">
-                    <div class="page">
-                        <div class="page-inner">
-                            <!-- Page Header & Breadcrumbs -->
-                            <header class="page-title-bar">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item">
-                                            <a href="#">DataManagement</a>
-                                        </li>
-                                        <li class="breadcrumb-item">
-                                            <a href="#">Finance</a>
-                                        </li>
-                                        <li class="breadcrumb-item active" aria-current="page">Payments</li>
-                                    </ol>
-                                </nav>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h1 class="page-title">View Payments</h1>
+                                    <!-- /child menu -->
+                                    <!-- .analytics -->
+                                    <!-- .menu-item -->
+                                    <li class="menu-item has-child">
+                                        <a href="#" class="menu-link">
+                                            <span class="menu-icon oi oi-people"></span>
+                                            <span class="menu-text">Analytics</span>
+                                        </a>
+                                        <ul class="menu">
+                                            <li class="menu-item">
+                                                <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#courses" class="menu-link">Active Students</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#courses" class="menu-link">Enrollments Trends</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- ./menuitems -->
+                                    <!-- ./analytics -->
+                                    <!-- System logs -->
+                                    <!-- .menu-item -->
+                                    <li class="menu-item has-child">
+                                        <a href="#" class="menu-link">
+                                            <span class="menu-icon oi oi-people"></span>
+                                            <span class="menu-text">System Logs</span>
+                                        </a>
+                                        <ul class="menu">
+                                            <li class="menu-item">
+                                                <a href="#students" class="menu-link">All activities</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#courses" class="menu-link">Export Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- ./menuitems -->
+                                    <!-- ./System logs  -->
+                                    <!-- .menu-item -->
+                                    <!-- /.menu-item -->
+                                </ul>
+                                <!-- /.menu -->
+                            </nav>
+                            <!-- /.stacked-menu -->
+                        </section>
+                        <!-- /.aside-menu -->
+                    </div>
+                    <!-- /.aside-content -->
+                </aside>
+                <!-- /.app-aside -->
+                <!-- .app-main -->
+                <main class="app-main">
+                    <div class="wrapper">
+                        <div class="page">
+                            <div class="page-inner">
+                                <!-- Page Header & Breadcrumbs -->
+                                <header class="page-title-bar">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item">
+                                                <a href="#">DataManagement</a>
+                                            </li>
+                                            <li class="breadcrumb-item">
+                                                <a href="#">Finance</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">Payments</li>
+                                        </ol>
+                                    </nav>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h1 class="page-title">View Payments</h1>
+                                    </div>
+                                </header>
+                                <!-- Add Payment Button -->
+                                <!-- Add Button Section -->
+                                <div class="mb-3 mt-1">
+                                    <div class="d-block">
+                                        <a href="{% url 'AddPayment' %}" class="text-decoration-none">
+                                            <button type="button" class="btn btn-outline-primary shadow-sm">
+                                                <i class="fas fa-plus "></i>
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
-                            </header>
-                            <!-- Add Payment Button -->
-                            <!-- Add Button Section -->
-                            <div class="mb-3 mt-1">
-                                <div class="d-block">
-                                    <a href="{% url 'AddPayment' %}" class="text-decoration-none">
-                                        <button type="button" class="btn btn-outline-primary shadow-sm">
-                                            <i class="fas fa-plus "></i>
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- Page Content Section -->
-                            <div class="page-section">
-                                <div class="card card-fluid">
-                                    <div class="card-body">
-                                        <!-- Search & Filter Controls -->
-                                        <div class="form-group">
-                                            <div class="input-group input-group-alt">
-                                                <!-- <div class="input-group-prepend">
+                                <!-- Page Content Section -->
+                                <div class="page-section">
+                                    <div class="card card-fluid">
+                                        <div class="card-body">
+                                            <!-- Search & Filter Controls -->
+                                            <div class="form-group">
+                                                <div class="input-group input-group-alt">
+                                                    <!-- <div class="input-group-prepend">
                                                     <select id="filterBy" class="custom-select">
                                                         <option value="" selected>Filter By</option>
                                                         <option value="1">Student</option>
@@ -723,516 +722,516 @@
                                                         <option value="3">Date</option>
                                                     </select>
                                                 </div> -->
-                                                <div class="input-group has-clearable">
-                                                    <button id="clear-search"
-                                                            type="button"
-                                                            class="close"
-                                                            aria-label="Close"
-                                                            style="display:none">
-                                                        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
-                                                    </button>
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                                                    <div class="input-group has-clearable">
+                                                        <button id="clear-search"
+                                                                type="button"
+                                                                class="close"
+                                                                aria-label="Close"
+                                                                style="display:none">
+                                                            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                                        </button>
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                                                        </div>
+                                                        <!-- ID 'table-search' is used by the JS below -->
+                                                        <input id="table-search"
+                                                               type="text"
+                                                               class="form-control"
+                                                               placeholder="Search payments...">
                                                     </div>
-                                                    <!-- ID 'table-search' is used by the JS below -->
-                                                    <input id="table-search"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Search payments...">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- The Table -->
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-striped" id="paymentTable">
-                                                <thead class="thead-light">
-                                                    <tr>
-                                                        <th style="min-width:200px">Student</th>
-                                                        <th>Batch</th>
-                                                        <th>Amount</th>
-                                                        <th>Date</th>
-                                                        <th>Method</th>
-                                                        <th style="min-width:150px; text-align:right;">Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <!-- Row 1 -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <a href="#">Ram Bahadur Thapa</a>
-                                                        </td>
-                                                        <td class="align-middle">Python Jan 2026</td>
-                                                        <td class="align-middle font-weight-bold">15,000.00</td>
-                                                        <td class="align-middle">Jan 15, 2026</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-success">ESEWA</span>
-                                                        </td>
-                                                        <td class="align-middle text-right ">
-                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                                                <!-- View Button -->
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#paymentDetailsModal"
-                                                                        data-student="Ram Bahadur Thapa"
-                                                                        data-batch="Python Jan 2026"
-                                                                        data-amount="15,000.00"
-                                                                        data-date="Jan 15, 2026"
-                                                                        data-method="ESEWA"
-                                                                        data-ref="ESW-987654321"
-                                                                        data-remarks="Full payment for Python course."
-                                                                        onclick="populatePaymentModal(this)">
-                                                                    view more
-                                                                </button>
-                                                                <!-- Update Button -->
-                                                                <a href="{% url 'UpdatePayment' id=1 %}"
-                                                                   class="btn btn-sm  btn-warning mx-2">update</a>
-                                                                <!-- Delete Button -->
-                                                                <button type="button"
-                                                                        class="btn btn-sm  btn-danger"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deletePaymentModal"
-                                                                        data-name="Payment of 15,000 by Ram Bahadur"
-                                                                        data-delete-url="{% url 'DeletePayment' id=2 %}"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- Row 1: Sita Kumari (BANK) -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <a href="#">Sita Kumari</a>
-                                                        </td>
-                                                        <td class="align-middle">Django Dec 2025</td>
-                                                        <td class="align-middle font-weight-bold">5,000.00</td>
-                                                        <td class="align-middle">Dec 20, 2025</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-primary">BANK</span>
-                                                        </td>
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#paymentDetailsModal"
-                                                                        data-student="Sita Kumari"
-                                                                        data-batch="Django Dec 2025"
-                                                                        data-amount="5,000.00"
-                                                                        data-date="Dec 20, 2025"
-                                                                        data-method="BANK"
-                                                                        data-ref="TXN-882910"
-                                                                        data-remarks="First Installment via Bank Transfer."
-                                                                        onclick="populatePaymentModal(this)">
-                                                                    view more
-                                                                </button>
-                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-danger"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deletePaymentModal"
-                                                                        data-name="Payment of 5,000 by Sita Kumari"
-                                                                        data-delete-url="{% url 'DeletePayment' id=3 %}"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- Row 2: Hari Krishna (CASH) -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <a href="#">Hari Krishna</a>
-                                                        </td>
-                                                        <td class="align-middle">Graphic Design</td>
-                                                        <td class="align-middle font-weight-bold">12,000.00</td>
-                                                        <td class="align-middle">Nov 10, 2025</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-info">CASH</span>
-                                                        </td>
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#paymentDetailsModal"
-                                                                        data-student="Hari Krishna"
-                                                                        data-batch="Graphic Design"
-                                                                        data-amount="12,000.00"
-                                                                        data-date="Nov 10, 2025"
-                                                                        data-method="CASH"
-                                                                        data-ref="N/A"
-                                                                        data-remarks="Paid cash at the front desk."
-                                                                        onclick="populatePaymentModal(this)">
-                                                                    view more
-                                                                </button>
-                                                                <a href="{% url 'UpdatePayment' id=1 %}"
-                                                                   class="btn btn-sm btn-warning mx-2">update</a>
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-danger"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deletePaymentModal"
-                                                                        data-name="Payment of 12,000 by Hari Krishna"
-                                                                        data-delete-url="{% url 'DeletePayment' id=3 %}"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- Row 3: Anjali Sherpa (ESEWA) -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <a href="#">Anjali Sherpa</a>
-                                                        </td>
-                                                        <td class="align-middle">Web Dev 2026</td>
-                                                        <td class="align-middle font-weight-bold">20,000.00</td>
-                                                        <td class="align-middle">Feb 01, 2026</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-success">ESEWA</span>
-                                                        </td>
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#paymentDetailsModal"
-                                                                        data-student="Anjali Sherpa"
-                                                                        data-batch="Web Dev 2026"
-                                                                        data-amount="20,000.00"
-                                                                        data-date="Feb 01, 2026"
-                                                                        data-method="ESEWA"
-                                                                        data-ref="ESW-112233"
-                                                                        data-remarks="Full Payment."
-                                                                        onclick="populatePaymentModal(this)">
-                                                                    view more
-                                                                </button>
-                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-danger"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deletePaymentModal"
-                                                                        data-name="Payment of 20,000 by Anjali Sherpa"
-                                                                        data-delete-url="{% url 'DeletePayment' id=4 %}"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- Row 4: Bibek Rana (BANK) -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <a href="#">Bibek Rana</a>
-                                                        </td>
-                                                        <td class="align-middle">Python Jan 2026</td>
-                                                        <td class="align-middle font-weight-bold">7,500.00</td>
-                                                        <td class="align-middle">Jan 16, 2026</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-primary">BANK</span>
-                                                        </td>
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#paymentDetailsModal"
-                                                                        data-student="Bibek Rana"
-                                                                        data-batch="Python Jan 2026"
-                                                                        data-amount="7,500.00"
-                                                                        data-date="Jan 16, 2026"
-                                                                        data-method="BANK"
-                                                                        data-ref="CHQ-998877"
-                                                                        data-remarks="Cheque Payment - Part 1."
-                                                                        onclick="populatePaymentModal(this)">
-                                                                    view more
-                                                                </button>
-                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-danger"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deletePaymentModal"
-                                                                        data-name="Payment of 7,500 by Bibek Rana"
-                                                                        data-delete-url="{% url 'DeletePayment' id=6 %}"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- Row 5: Kabita Joshi (OTHERS) -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <a href="#">Kabita Joshi</a>
-                                                        </td>
-                                                        <td class="align-middle">UI/UX Design</td>
-                                                        <td class="align-middle font-weight-bold">15,000.00</td>
-                                                        <td class="align-middle">Mar 05, 2026</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-secondary">OTHERS</span>
-                                                        </td>
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#paymentDetailsModal"
-                                                                        data-student="Kabita Joshi"
-                                                                        data-batch="UI/UX Design"
-                                                                        data-amount="15,000.00"
-                                                                        data-date="Mar 05, 2026"
-                                                                        data-method="OTHERS"
-                                                                        data-ref="Phonpay-5566"
-                                                                        data-remarks="Paid via PhonePay QR."
-                                                                        onclick="populatePaymentModal(this)">
-                                                                    view more
-                                                                </button>
-                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-danger"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deletePaymentModal"
-                                                                        data-name="Payment of 15,000 by Kabita Joshi"
-                                                                        data-delete-url="/payment/delete/6"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- Row 6: Amit Sharma (ESEWA) -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <a href="#">Amit Sharma</a>
-                                                        </td>
-                                                        <td class="align-middle">Cyber Security</td>
-                                                        <td class="align-middle font-weight-bold">18,000.00</td>
-                                                        <td class="align-middle">Apr 10, 2026</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-success">ESEWA</span>
-                                                        </td>
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#paymentDetailsModal"
-                                                                        data-student="Amit Sharma"
-                                                                        data-batch="Cyber Security"
-                                                                        data-amount="18,000.00"
-                                                                        data-date="Apr 10, 2026"
-                                                                        data-method="ESEWA"
-                                                                        data-ref="ESW-777888"
-                                                                        data-remarks="Early bird discount applied."
-                                                                        onclick="populatePaymentModal(this)">
-                                                                    view more
-                                                                </button>
-                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-danger"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deletePaymentModal"
-                                                                        data-name="Payment of 18,000 by Amit Sharma"
-                                                                        data-delete-url="/payment/delete/7"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- Row 7: Rina Tamang (BANK) -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <a href="#">Rina Tamang</a>
-                                                        </td>
-                                                        <td class="align-middle">Mobile App Dev</td>
-                                                        <td class="align-middle font-weight-bold">22,000.00</td>
-                                                        <td class="align-middle">May 15, 2026</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-primary">BANK</span>
-                                                        </td>
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#paymentDetailsModal"
-                                                                        data-student="Rina Tamang"
-                                                                        data-batch="Mobile App Dev"
-                                                                        data-amount="22,000.00"
-                                                                        data-date="May 15, 2026"
-                                                                        data-method="BANK"
-                                                                        data-ref="TXN-443322"
-                                                                        data-remarks="Full Course Fee."
-                                                                        onclick="populatePaymentModal(this)">
-                                                                    view more
-                                                                </button>
-                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-danger"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deletePaymentModal"
-                                                                        data-name="Payment of 22,000 by Rina Tamang"
-                                                                        data-delete-url="/payment/delete/8"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- Row 8: Saroj Karki (CASH) -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <a href="#">Saroj Karki</a>
-                                                        </td>
-                                                        <td class="align-middle">Data Science</td>
-                                                        <td class="align-middle font-weight-bold">25,000.00</td>
-                                                        <td class="align-middle">Jun 20, 2026</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-info">CASH</span>
-                                                        </td>
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#paymentDetailsModal"
-                                                                        data-student="Saroj Karki"
-                                                                        data-batch="Data Science"
-                                                                        data-amount="25,000.00"
-                                                                        data-date="Jun 20, 2026"
-                                                                        data-method="CASH"
-                                                                        data-ref="N/A"
-                                                                        data-remarks="Paid in full at office."
-                                                                        onclick="populatePaymentModal(this)">
-                                                                    view more
-                                                                </button>
-                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-danger"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deletePaymentModal"
-                                                                        data-name="Payment of 25,000 by Saroj Karki"
-                                                                        data-delete-url="/payment/delete/9"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- Row 9: Nita Pradhan (ESEWA) -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <a href="#">Nita Pradhan</a>
-                                                        </td>
-                                                        <td class="align-middle">Digital Marketing</td>
-                                                        <td class="align-middle font-weight-bold">10,000.00</td>
-                                                        <td class="align-middle">Jul 01, 2026</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-success">ESEWA</span>
-                                                        </td>
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#paymentDetailsModal"
-                                                                        data-student="Nita Pradhan"
-                                                                        data-batch="Digital Marketing"
-                                                                        data-amount="10,000.00"
-                                                                        data-date="Jul 01, 2026"
-                                                                        data-method="ESEWA"
-                                                                        data-ref="ESW-332211"
-                                                                        data-remarks="Ref ID verified."
-                                                                        onclick="populatePaymentModal(this)">
-                                                                    view more
-                                                                </button>
-                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-danger"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deletePaymentModal"
-                                                                        data-name="Payment of 10,000 by Nita Pradhan"
-                                                                        data-delete-url="/payment/delete/10"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- Row 10: Deepak Verma (BANK) -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <a href="#">Deepak Verma</a>
-                                                        </td>
-                                                        <td class="align-middle">Full Stack Web</td>
-                                                        <td class="align-middle font-weight-bold">20,000.00</td>
-                                                        <td class="align-middle">Aug 12, 2026</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-primary">BANK</span>
-                                                        </td>
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#paymentDetailsModal"
-                                                                        data-student="Deepak Verma"
-                                                                        data-batch="Full Stack Web"
-                                                                        data-amount="20,000.00"
-                                                                        data-date="Aug 12, 2026"
-                                                                        data-method="BANK"
-                                                                        data-ref="TXN-667788"
-                                                                        data-remarks="Mobile Banking Transfer."
-                                                                        onclick="populatePaymentModal(this)">
-                                                                    view more
-                                                                </button>
-                                                                <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-danger"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deletePaymentModal"
-                                                                        data-name="Payment of 20,000 by Deepak Verma"
-                                                                        data-delete-url="/payment/delete/11"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                            <!-- The Table -->
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-striped" id="paymentTable">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th style="min-width:200px">Student</th>
+                                                            <th>Batch</th>
+                                                            <th>Amount</th>
+                                                            <th>Date</th>
+                                                            <th>Method</th>
+                                                            <th style="min-width:150px; text-align:right;">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- Row 1 -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <a href="#">Ram Bahadur Thapa</a>
+                                                            </td>
+                                                            <td class="align-middle">Python Jan 2026</td>
+                                                            <td class="align-middle font-weight-bold">15,000.00</td>
+                                                            <td class="align-middle">Jan 15, 2026</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-success">ESEWA</span>
+                                                            </td>
+                                                            <td class="align-middle text-right ">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <!-- View Button -->
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-primary"
+                                                                            data-toggle="modal"
+                                                                            data-target="#paymentDetailsModal"
+                                                                            data-student="Ram Bahadur Thapa"
+                                                                            data-batch="Python Jan 2026"
+                                                                            data-amount="15,000.00"
+                                                                            data-date="Jan 15, 2026"
+                                                                            data-method="ESEWA"
+                                                                            data-ref="ESW-987654321"
+                                                                            data-remarks="Full payment for Python course."
+                                                                            onclick="populatePaymentModal(this)">
+                                                                        view more
+                                                                    </button>
+                                                                    <!-- Update Button -->
+                                                                    <a href="{% url 'UpdatePayment' id=1 %}"
+                                                                       class="btn btn-sm  btn-warning mx-2">update</a>
+                                                                    <!-- Delete Button -->
+                                                                    <button type="button"
+                                                                            class="btn btn-sm  btn-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deletePaymentModal"
+                                                                            data-name="Payment of 15,000 by Ram Bahadur"
+                                                                            data-delete-url="{% url 'DeletePayment' id=2 %}"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Row 1: Sita Kumari (BANK) -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <a href="#">Sita Kumari</a>
+                                                            </td>
+                                                            <td class="align-middle">Django Dec 2025</td>
+                                                            <td class="align-middle font-weight-bold">5,000.00</td>
+                                                            <td class="align-middle">Dec 20, 2025</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-primary">BANK</span>
+                                                            </td>
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-primary"
+                                                                            data-toggle="modal"
+                                                                            data-target="#paymentDetailsModal"
+                                                                            data-student="Sita Kumari"
+                                                                            data-batch="Django Dec 2025"
+                                                                            data-amount="5,000.00"
+                                                                            data-date="Dec 20, 2025"
+                                                                            data-method="BANK"
+                                                                            data-ref="TXN-882910"
+                                                                            data-remarks="First Installment via Bank Transfer."
+                                                                            onclick="populatePaymentModal(this)">
+                                                                        view more
+                                                                    </button>
+                                                                    <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deletePaymentModal"
+                                                                            data-name="Payment of 5,000 by Sita Kumari"
+                                                                            data-delete-url="{% url 'DeletePayment' id=3 %}"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Row 2: Hari Krishna (CASH) -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <a href="#">Hari Krishna</a>
+                                                            </td>
+                                                            <td class="align-middle">Graphic Design</td>
+                                                            <td class="align-middle font-weight-bold">12,000.00</td>
+                                                            <td class="align-middle">Nov 10, 2025</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-info">CASH</span>
+                                                            </td>
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-primary"
+                                                                            data-toggle="modal"
+                                                                            data-target="#paymentDetailsModal"
+                                                                            data-student="Hari Krishna"
+                                                                            data-batch="Graphic Design"
+                                                                            data-amount="12,000.00"
+                                                                            data-date="Nov 10, 2025"
+                                                                            data-method="CASH"
+                                                                            data-ref="N/A"
+                                                                            data-remarks="Paid cash at the front desk."
+                                                                            onclick="populatePaymentModal(this)">
+                                                                        view more
+                                                                    </button>
+                                                                    <a href="{% url 'UpdatePayment' id=1 %}"
+                                                                       class="btn btn-sm btn-warning mx-2">update</a>
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deletePaymentModal"
+                                                                            data-name="Payment of 12,000 by Hari Krishna"
+                                                                            data-delete-url="{% url 'DeletePayment' id=3 %}"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Row 3: Anjali Sherpa (ESEWA) -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <a href="#">Anjali Sherpa</a>
+                                                            </td>
+                                                            <td class="align-middle">Web Dev 2026</td>
+                                                            <td class="align-middle font-weight-bold">20,000.00</td>
+                                                            <td class="align-middle">Feb 01, 2026</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-success">ESEWA</span>
+                                                            </td>
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-primary"
+                                                                            data-toggle="modal"
+                                                                            data-target="#paymentDetailsModal"
+                                                                            data-student="Anjali Sherpa"
+                                                                            data-batch="Web Dev 2026"
+                                                                            data-amount="20,000.00"
+                                                                            data-date="Feb 01, 2026"
+                                                                            data-method="ESEWA"
+                                                                            data-ref="ESW-112233"
+                                                                            data-remarks="Full Payment."
+                                                                            onclick="populatePaymentModal(this)">
+                                                                        view more
+                                                                    </button>
+                                                                    <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deletePaymentModal"
+                                                                            data-name="Payment of 20,000 by Anjali Sherpa"
+                                                                            data-delete-url="{% url 'DeletePayment' id=4 %}"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Row 4: Bibek Rana (BANK) -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <a href="#">Bibek Rana</a>
+                                                            </td>
+                                                            <td class="align-middle">Python Jan 2026</td>
+                                                            <td class="align-middle font-weight-bold">7,500.00</td>
+                                                            <td class="align-middle">Jan 16, 2026</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-primary">BANK</span>
+                                                            </td>
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-primary"
+                                                                            data-toggle="modal"
+                                                                            data-target="#paymentDetailsModal"
+                                                                            data-student="Bibek Rana"
+                                                                            data-batch="Python Jan 2026"
+                                                                            data-amount="7,500.00"
+                                                                            data-date="Jan 16, 2026"
+                                                                            data-method="BANK"
+                                                                            data-ref="CHQ-998877"
+                                                                            data-remarks="Cheque Payment - Part 1."
+                                                                            onclick="populatePaymentModal(this)">
+                                                                        view more
+                                                                    </button>
+                                                                    <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deletePaymentModal"
+                                                                            data-name="Payment of 7,500 by Bibek Rana"
+                                                                            data-delete-url="{% url 'DeletePayment' id=6 %}"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Row 5: Kabita Joshi (OTHERS) -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <a href="#">Kabita Joshi</a>
+                                                            </td>
+                                                            <td class="align-middle">UI/UX Design</td>
+                                                            <td class="align-middle font-weight-bold">15,000.00</td>
+                                                            <td class="align-middle">Mar 05, 2026</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-secondary">OTHERS</span>
+                                                            </td>
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-primary"
+                                                                            data-toggle="modal"
+                                                                            data-target="#paymentDetailsModal"
+                                                                            data-student="Kabita Joshi"
+                                                                            data-batch="UI/UX Design"
+                                                                            data-amount="15,000.00"
+                                                                            data-date="Mar 05, 2026"
+                                                                            data-method="OTHERS"
+                                                                            data-ref="Phonpay-5566"
+                                                                            data-remarks="Paid via PhonePay QR."
+                                                                            onclick="populatePaymentModal(this)">
+                                                                        view more
+                                                                    </button>
+                                                                    <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deletePaymentModal"
+                                                                            data-name="Payment of 15,000 by Kabita Joshi"
+                                                                            data-delete-url="/payment/delete/6"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Row 6: Amit Sharma (ESEWA) -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <a href="#">Amit Sharma</a>
+                                                            </td>
+                                                            <td class="align-middle">Cyber Security</td>
+                                                            <td class="align-middle font-weight-bold">18,000.00</td>
+                                                            <td class="align-middle">Apr 10, 2026</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-success">ESEWA</span>
+                                                            </td>
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-primary"
+                                                                            data-toggle="modal"
+                                                                            data-target="#paymentDetailsModal"
+                                                                            data-student="Amit Sharma"
+                                                                            data-batch="Cyber Security"
+                                                                            data-amount="18,000.00"
+                                                                            data-date="Apr 10, 2026"
+                                                                            data-method="ESEWA"
+                                                                            data-ref="ESW-777888"
+                                                                            data-remarks="Early bird discount applied."
+                                                                            onclick="populatePaymentModal(this)">
+                                                                        view more
+                                                                    </button>
+                                                                    <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deletePaymentModal"
+                                                                            data-name="Payment of 18,000 by Amit Sharma"
+                                                                            data-delete-url="/payment/delete/7"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Row 7: Rina Tamang (BANK) -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <a href="#">Rina Tamang</a>
+                                                            </td>
+                                                            <td class="align-middle">Mobile App Dev</td>
+                                                            <td class="align-middle font-weight-bold">22,000.00</td>
+                                                            <td class="align-middle">May 15, 2026</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-primary">BANK</span>
+                                                            </td>
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-primary"
+                                                                            data-toggle="modal"
+                                                                            data-target="#paymentDetailsModal"
+                                                                            data-student="Rina Tamang"
+                                                                            data-batch="Mobile App Dev"
+                                                                            data-amount="22,000.00"
+                                                                            data-date="May 15, 2026"
+                                                                            data-method="BANK"
+                                                                            data-ref="TXN-443322"
+                                                                            data-remarks="Full Course Fee."
+                                                                            onclick="populatePaymentModal(this)">
+                                                                        view more
+                                                                    </button>
+                                                                    <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deletePaymentModal"
+                                                                            data-name="Payment of 22,000 by Rina Tamang"
+                                                                            data-delete-url="/payment/delete/8"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Row 8: Saroj Karki (CASH) -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <a href="#">Saroj Karki</a>
+                                                            </td>
+                                                            <td class="align-middle">Data Science</td>
+                                                            <td class="align-middle font-weight-bold">25,000.00</td>
+                                                            <td class="align-middle">Jun 20, 2026</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-info">CASH</span>
+                                                            </td>
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-primary"
+                                                                            data-toggle="modal"
+                                                                            data-target="#paymentDetailsModal"
+                                                                            data-student="Saroj Karki"
+                                                                            data-batch="Data Science"
+                                                                            data-amount="25,000.00"
+                                                                            data-date="Jun 20, 2026"
+                                                                            data-method="CASH"
+                                                                            data-ref="N/A"
+                                                                            data-remarks="Paid in full at office."
+                                                                            onclick="populatePaymentModal(this)">
+                                                                        view more
+                                                                    </button>
+                                                                    <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deletePaymentModal"
+                                                                            data-name="Payment of 25,000 by Saroj Karki"
+                                                                            data-delete-url="/payment/delete/9"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Row 9: Nita Pradhan (ESEWA) -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <a href="#">Nita Pradhan</a>
+                                                            </td>
+                                                            <td class="align-middle">Digital Marketing</td>
+                                                            <td class="align-middle font-weight-bold">10,000.00</td>
+                                                            <td class="align-middle">Jul 01, 2026</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-success">ESEWA</span>
+                                                            </td>
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-primary"
+                                                                            data-toggle="modal"
+                                                                            data-target="#paymentDetailsModal"
+                                                                            data-student="Nita Pradhan"
+                                                                            data-batch="Digital Marketing"
+                                                                            data-amount="10,000.00"
+                                                                            data-date="Jul 01, 2026"
+                                                                            data-method="ESEWA"
+                                                                            data-ref="ESW-332211"
+                                                                            data-remarks="Ref ID verified."
+                                                                            onclick="populatePaymentModal(this)">
+                                                                        view more
+                                                                    </button>
+                                                                    <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deletePaymentModal"
+                                                                            data-name="Payment of 10,000 by Nita Pradhan"
+                                                                            data-delete-url="/payment/delete/10"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Row 10: Deepak Verma (BANK) -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <a href="#">Deepak Verma</a>
+                                                            </td>
+                                                            <td class="align-middle">Full Stack Web</td>
+                                                            <td class="align-middle font-weight-bold">20,000.00</td>
+                                                            <td class="align-middle">Aug 12, 2026</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-primary">BANK</span>
+                                                            </td>
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-primary"
+                                                                            data-toggle="modal"
+                                                                            data-target="#paymentDetailsModal"
+                                                                            data-student="Deepak Verma"
+                                                                            data-batch="Full Stack Web"
+                                                                            data-amount="20,000.00"
+                                                                            data-date="Aug 12, 2026"
+                                                                            data-method="BANK"
+                                                                            data-ref="TXN-667788"
+                                                                            data-remarks="Mobile Banking Transfer."
+                                                                            onclick="populatePaymentModal(this)">
+                                                                        view more
+                                                                    </button>
+                                                                    <a href="#" class="btn btn-sm btn-warning mx-2">update</a>
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deletePaymentModal"
+                                                                            data-name="Payment of 20,000 by Deepak Verma"
+                                                                            data-delete-url="/payment/delete/11"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /.page-inner -->
                     </div>
-                    <!-- /.page-inner -->
+                    <!-- /.page -->
                 </div>
-                <!-- /.page -->
-            </div>
-            <!-- /.wrapper -->
-        </main>
-        <!-- /.app-main -->
-        <!-- /.app -->
-        <!-- BEGIN BASE JS -->
-        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-        <!-- END BASE JS -->
-        <!-- BEGIN PLUGINS JS -->
-        <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-        <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-        <!-- END PLUGINS JS -->
-        <!-- BEGIN THEME JS -->
-        <script src="{% static 'javascript/main.min.js' %}"></script>
-        <!-- END THEME JS -->
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async
-                src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-        <script>
+                <!-- /.wrapper -->
+            </main>
+            <!-- /.app-main -->
+            <!-- /.app -->
+            <!-- BEGIN BASE JS -->
+            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+            <!-- END BASE JS -->
+            <!-- BEGIN PLUGINS JS -->
+            <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+            <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+            <!-- END PLUGINS JS -->
+            <!-- BEGIN THEME JS -->
+            <script src="{% static 'javascript/main.min.js' %}"></script>
+            <!-- END THEME JS -->
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async
+                    src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+            <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -1240,94 +1239,94 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
-        </script>
-        <!-- ================= 1. PAYMENT DETAILS MODAL ================= -->
-        <div class="modal fade"
-             id="paymentDetailsModal"
-             tabindex="-1"
-             role="dialog"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Payment Receipt</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered mb-0">
-                                <tbody>
-                                    <tr>
-                                        <th class="text-light bg-primary" style="width: 35%;">Student</th>
-                                        <td id="modal_pay_student"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="bg-light text-primary">Batch</th>
-                                        <td id="modal_pay_batch"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="bg-primary text-white">Amount</th>
-                                        <td id="modal_pay_amount" class="font-weight-bold text-success"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="bg-light text-primary">Date</th>
-                                        <td id="modal_pay_date"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-light bg-primary">Method</th>
-                                        <td>
-                                            <span id="modal_pay_method" class="badge"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="bg-light text-primary">Ref No.</th>
-                                        <td id="modal_pay_ref"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-light bg-primary">Remarks</th>
-                                        <td id="modal_pay_remarks" class="text-break"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+            </script>
+            <!-- ================= 1. PAYMENT DETAILS MODAL ================= -->
+            <div class="modal fade"
+                 id="paymentDetailsModal"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Payment Receipt</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered mb-0">
+                                    <tbody>
+                                        <tr>
+                                            <th class="text-light bg-primary" style="width: 35%;">Student</th>
+                                            <td id="modal_pay_student"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light text-primary">Batch</th>
+                                            <td id="modal_pay_batch"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-primary text-white">Amount</th>
+                                            <td id="modal_pay_amount" class="font-weight-bold text-success"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light text-primary">Date</th>
+                                            <td id="modal_pay_date"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-light bg-primary">Method</th>
+                                            <td>
+                                                <span id="modal_pay_method" class="badge"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light text-primary">Ref No.</th>
+                                            <td id="modal_pay_ref"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-light bg-primary">Remarks</th>
+                                            <td id="modal_pay_remarks" class="text-break"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- ================= 2. DELETE PAYMENT MODAL ================= -->
+            <div class="modal fade"
+                 id="deletePaymentModal"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirm Deletion</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-dismiss="modal"
+                                    aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            Are you sure you want to delete <strong id="delete_modal_pay_name"></strong>?
+                            <p class="text-danger small mt-2">This action cannot be undone.</p>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
+                            <a href="#"
+                               id="delete_modal_confirm_btn"
+                               class="btn btn-secondary text-danger">Yes, Delete</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- ================= 2. DELETE PAYMENT MODAL ================= -->
-        <div class="modal fade"
-             id="deletePaymentModal"
-             tabindex="-1"
-             role="dialog"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm Deletion</h5>
-                        <button type="button"
-                                class="btn-close"
-                                data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-                        Are you sure you want to delete <strong id="delete_modal_pay_name"></strong>?
-                        <p class="text-danger small mt-2">This action cannot be undone.</p>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
-                        <a href="#"
-                           id="delete_modal_confirm_btn"
-                           class="btn btn-secondary text-danger">Yes, Delete</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-    <script>
+        </body>
+        <script>
 // --- 1. Client-Side Search Functionality ---
 // This listens for typing in the search box and hides rows that don't match
 document.getElementById('table-search').addEventListener('keyup', function() {
@@ -1397,5 +1396,5 @@ function populateDeleteModal(buttonElement) {
         confirmBtn.href = deleteUrl;
     }
 }
-    </script>
-</html>
+        </script>
+    </html>

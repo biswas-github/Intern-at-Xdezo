@@ -567,7 +567,7 @@
                                             <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Free Rooms</a>
+                                            <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
@@ -584,234 +584,233 @@
                                     </a>
                                     <ul class="menu">
                                         <li class="menu-item">
-                                           <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
+                                            <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
                                         </li>
                                         <li class="menu-item">
-                                              <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
+                                            <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
                                         </li>
-                                       
                                     </ul>
                                 </li>
                                 <!-- ./menuitems -->
-                                 <!-- .exports -->
-                <li class="menu-item has-child" style="">
-                  <a href="#" class="menu-link">
-                    <span class="menu-icon oi oi-list-rich"></span>
-                    <span class="menu-text">Exports</span>
-                  </a>
-                  <!-- child menu -->
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
-                    </li>
-                  </ul>
-                  <!-- /child menu -->
-                                <!-- .analytics -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
+                                <!-- .exports -->
+                                <li class="menu-item has-child" style="">
                                     <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-people"></span>
-                                        <span class="menu-text">Analytics</span>
+                                        <span class="menu-icon oi oi-list-rich"></span>
+                                        <span class="menu-text">Exports</span>
                                     </a>
+                                    <!-- child menu -->
                                     <ul class="menu">
                                         <li class="menu-item">
-                                            <a href="#students" class="menu-link">Students per Course</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Monthly Revenue</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Active Students</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Enrollments Trends</a>
+                                            <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
                                         </li>
                                     </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- ./analytics -->
-                                <!-- System logs -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-people"></span>
-                                        <span class="menu-text">System Logs</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="#students" class="menu-link">All activities</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Export Details</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- ./System logs  -->
-                                <!-- .menu-item -->
-                                <!-- /.menu-item -->
-                            </ul>
-                            <!-- /.menu -->
-                        </nav>
-                        <!-- /.stacked-menu -->
-                    </section>
-                    <!-- /.aside-menu -->
-                </div>
-                <!-- /.aside-content -->
-            </aside>
-            <!-- /.app-aside -->
-            <!-- .app-main -->
-            <main class="app-main">
-                <div class="wrapper">
-                    <div class="page">
-                        <div class="page-inner">
-                            <!-- Page Header & Breadcrumbs -->
-                            <header class="page-title-bar">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h1 class="page-title">Update Instructor Profile</h1>
-                                </div>
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item">
-                                            <a href="{% url 'AdminDashboard' %}">DataManagement</a>
-                                        </li>
-                                        <li class="breadcrumb-item">
-                                            <a href="{% url 'Instructor' %}">Instructors</a>
-                                        </li>
-                                        <li class="breadcrumb-item active" aria-current="page">Update Instructor</li>
-                                    </ol>
-                                </nav>
-                            </header>
-                            <!-- Page Content Section -->
-                            <div class="page-section">
-                                <div class="row">
-                                    <!-- Center the form nicely -->
-                                    <div class="col-12 col-sm-10 col-lg-8 border rounded mb-5 mb-sm-5 bg-white">
-                                        <div class="card-body">
-                                            <!-- Form -->
-                                            <form method="post">
-                                                <!-- {% csrf_token %} -->
-                                                <!-- SECTION 1: Personal Information -->
-                                                <fieldset>
-                                                    <legend>Personal Information</legend>
-                                                    <!-- Name Row -->
-                                                    <div class="row">
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="id_first_name">
-                                                                First Name <abbr title="Required">*</abbr>
-                                                            </label>
+                                    <!-- /child menu -->
+                                    <!-- .analytics -->
+                                    <!-- .menu-item -->
+                                    <li class="menu-item has-child">
+                                        <a href="#" class="menu-link">
+                                            <span class="menu-icon oi oi-people"></span>
+                                            <span class="menu-text">Analytics</span>
+                                        </a>
+                                        <ul class="menu">
+                                            <li class="menu-item">
+                                                <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#courses" class="menu-link">Active Students</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#courses" class="menu-link">Enrollments Trends</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- ./menuitems -->
+                                    <!-- ./analytics -->
+                                    <!-- System logs -->
+                                    <!-- .menu-item -->
+                                    <li class="menu-item has-child">
+                                        <a href="#" class="menu-link">
+                                            <span class="menu-icon oi oi-people"></span>
+                                            <span class="menu-text">System Logs</span>
+                                        </a>
+                                        <ul class="menu">
+                                            <li class="menu-item">
+                                                <a href="#students" class="menu-link">All activities</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#courses" class="menu-link">Export Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- ./menuitems -->
+                                    <!-- ./System logs  -->
+                                    <!-- .menu-item -->
+                                    <!-- /.menu-item -->
+                                </ul>
+                                <!-- /.menu -->
+                            </nav>
+                            <!-- /.stacked-menu -->
+                        </section>
+                        <!-- /.aside-menu -->
+                    </div>
+                    <!-- /.aside-content -->
+                </aside>
+                <!-- /.app-aside -->
+                <!-- .app-main -->
+                <main class="app-main">
+                    <div class="wrapper">
+                        <div class="page">
+                            <div class="page-inner">
+                                <!-- Page Header & Breadcrumbs -->
+                                <header class="page-title-bar">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h1 class="page-title">Update Instructor Profile</h1>
+                                    </div>
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item">
+                                                <a href="{% url 'AdminDashboard' %}">DataManagement</a>
+                                            </li>
+                                            <li class="breadcrumb-item">
+                                                <a href="{% url 'Instructor' %}">Instructors</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">Update Instructor</li>
+                                        </ol>
+                                    </nav>
+                                </header>
+                                <!-- Page Content Section -->
+                                <div class="page-section">
+                                    <div class="row">
+                                        <!-- Center the form nicely -->
+                                        <div class="col-12 col-sm-10 col-lg-8 border rounded mb-5 mb-sm-5 bg-white">
+                                            <div class="card-body">
+                                                <!-- Form -->
+                                                <form method="post">
+                                                    <!-- {% csrf_token %} -->
+                                                    <!-- SECTION 1: Personal Information -->
+                                                    <fieldset>
+                                                        <legend>Personal Information</legend>
+                                                        <!-- Name Row -->
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="id_first_name">
+                                                                    First Name <abbr title="Required">*</abbr>
+                                                                </label>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       id="id_first_name"
+                                                                       name="first_name"
+                                                                       value="Amit"
+                                                                       required>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="id_last_name">
+                                                                    Last Name <abbr title="Required">*</abbr>
+                                                                </label>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       id="id_last_name"
+                                                                       name="last_name"
+                                                                       value="Sharma"
+                                                                       required>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Contact Row -->
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="id_email">
+                                                                    Email Address <abbr title="Required">*</abbr>
+                                                                </label>
+                                                                <input type="email"
+                                                                       class="form-control"
+                                                                       id="id_email"
+                                                                       name="email"
+                                                                       value="a.sharma@example.com"
+                                                                       required>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="id_phone">Phone Number</label>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       id="id_phone"
+                                                                       name="phone"
+                                                                       value="9841234567">
+                                                            </div>
+                                                        </div>
+                                                        <!-- Address Row -->
+                                                        <div class="form-group">
+                                                            <label for="id_address">Address</label>
                                                             <input type="text"
                                                                    class="form-control"
-                                                                   id="id_first_name"
-                                                                   name="first_name"
-                                                                   value="Amit"
-                                                                   required>
+                                                                   id="id_address"
+                                                                   name="address"
+                                                                   value="Kathmandu, Nepal">
                                                         </div>
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="id_last_name">
-                                                                Last Name <abbr title="Required">*</abbr>
-                                                            </label>
+                                                    </fieldset>
+                                                    <hr class="my-4">
+                                                    <!-- SECTION 2: Professional Details -->
+                                                    <fieldset>
+                                                        <legend>Professional Details</legend>
+                                                        <!-- Specialization -->
+                                                        <div class="form-group">
+                                                            <label for="id_specialization">Specialization</label>
                                                             <input type="text"
                                                                    class="form-control"
-                                                                   id="id_last_name"
-                                                                   name="last_name"
-                                                                   value="Sharma"
-                                                                   required>
+                                                                   id="id_specialization"
+                                                                   name="specialization"
+                                                                   value="Python, Django, Machine Learning"
+                                                                   placeholder="e.g. Python, Django">
                                                         </div>
-                                                    </div>
-                                                    <!-- Contact Row -->
-                                                    <div class="row">
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="id_email">
-                                                                Email Address <abbr title="Required">*</abbr>
-                                                            </label>
-                                                            <input type="email"
-                                                                   class="form-control"
-                                                                   id="id_email"
-                                                                   name="email"
-                                                                   value="a.sharma@example.com"
-                                                                   required>
+                                                        <!-- Status (Is Active) -->
+                                                        <div class="form-group">
+                                                            <label for="id_is_active">Account Status</label>
+                                                            <select class="form-control" id="id_is_active" name="is_active">
+                                                                <option value="True" selected>Active</option>
+                                                                <option value="False">Inactive</option>
+                                                            </select>
                                                         </div>
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="id_phone">Phone Number</label>
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   id="id_phone"
-                                                                   name="phone"
-                                                                   value="9841234567">
+                                                        <!-- Bio -->
+                                                        <div class="form-group">
+                                                            <label for="id_bio">Biography / Notes</label>
+                                                            <textarea class="form-control" id="id_bio" name="bio" rows="4">Senior Python Developer with 5 years of teaching experience.</textarea>
                                                         </div>
-                                                    </div>
-                                                    <!-- Address Row -->
-                                                    <div class="form-group">
-                                                        <label for="id_address">Address</label>
-                                                        <input type="text"
-                                                               class="form-control"
-                                                               id="id_address"
-                                                               name="address"
-                                                               value="Kathmandu, Nepal">
-                                                    </div>
-                                                </fieldset>
-                                                <hr class="my-4">
-                                                <!-- SECTION 2: Professional Details -->
-                                                <fieldset>
-                                                    <legend>Professional Details</legend>
-                                                    <!-- Specialization -->
-                                                    <div class="form-group">
-                                                        <label for="id_specialization">Specialization</label>
-                                                        <input type="text"
-                                                               class="form-control"
-                                                               id="id_specialization"
-                                                               name="specialization"
-                                                               value="Python, Django, Machine Learning"
-                                                               placeholder="e.g. Python, Django">
-                                                    </div>
-                                                    <!-- Status (Is Active) -->
-                                                    <div class="form-group">
-                                                        <label for="id_is_active">Account Status</label>
-                                                        <select class="form-control" id="id_is_active" name="is_active">
-                                                            <option value="True" selected>Active</option>
-                                                            <option value="False">Inactive</option>
-                                                        </select>
-                                                    </div>
-                                                    <!-- Bio -->
-                                                    <div class="form-group">
-                                                        <label for="id_bio">Biography / Notes</label>
-                                                        <textarea class="form-control" id="id_bio" name="bio" rows="4">Senior Python Developer with 5 years of teaching experience.</textarea>
-                                                    </div>
-                                                    <!-- Action Buttons -->
-                                                    <div class="d-flex justify-content-between align-items-center mt-4">
-                                                        <button type="submit" class="btn btn-outline-primary px-5 w-100 w-sm-100">Update Instructor</button>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                            <!-- /.form -->
+                                                        <!-- Action Buttons -->
+                                                        <div class="d-flex justify-content-between align-items-center mt-4">
+                                                            <button type="submit" class="btn btn-outline-primary px-5 w-100 w-sm-100">Update Instructor</button>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                                <!-- /.form -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </main>
-            <!-- /.app-main -->
-        </div>
-        <!-- /.app -->
-        <!-- BEGIN BASE JS -->
-        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-        <!-- END BASE JS -->
-        <!-- BEGIN PLUGINS JS -->
-        <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-        <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-        <!-- END PLUGINS JS -->
-        <!-- BEGIN THEME JS -->
-        <script src="{% static 'javascript/main.min.js' %}"></script>
-        <!-- END THEME JS -->
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async
-                src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-        <script>
+                </main>
+                <!-- /.app-main -->
+            </div>
+            <!-- /.app -->
+            <!-- BEGIN BASE JS -->
+            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+            <!-- END BASE JS -->
+            <!-- BEGIN PLUGINS JS -->
+            <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+            <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+            <!-- END PLUGINS JS -->
+            <!-- BEGIN THEME JS -->
+            <script src="{% static 'javascript/main.min.js' %}"></script>
+            <!-- END THEME JS -->
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async
+                    src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+            <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -819,6 +818,6 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
-        </script>
-    </body>
-</html>
+            </script>
+        </body>
+    </html>

@@ -567,10 +567,10 @@
                                             <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Free Rooms</a>
+                                            <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
                                         </li>
                                         <li class="menu-item">
-                                           <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
+                                            <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -589,272 +589,271 @@
                                         <li class="menu-item">
                                             <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
                                         </li>
-                                      
                                     </ul>
                                 </li>
                                 <!-- ./menuitems -->
-                                 <!-- .exports -->
-                <li class="menu-item has-child" style="">
-                  <a href="#" class="menu-link">
-                    <span class="menu-icon oi oi-list-rich"></span>
-                    <span class="menu-text">Exports</span>
-                  </a>
-                  <!-- child menu -->
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
-                    </li>
-                  </ul>
-                  <!-- /child menu -->
-                                <!-- .analytics -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
+                                <!-- .exports -->
+                                <li class="menu-item has-child" style="">
                                     <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-people"></span>
-                                        <span class="menu-text">Analytics</span>
+                                        <span class="menu-icon oi oi-list-rich"></span>
+                                        <span class="menu-text">Exports</span>
                                     </a>
+                                    <!-- child menu -->
                                     <ul class="menu">
                                         <li class="menu-item">
-                                            <a href="#students" class="menu-link">Students per Course</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Monthly Revenue</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Active Students</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Enrollments Trends</a>
+                                            <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
                                         </li>
                                     </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- ./analytics -->
-                                <!-- System logs -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-people"></span>
-                                        <span class="menu-text">System Logs</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="#students" class="menu-link">All activities</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Export Details</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- ./System logs  -->
-                                <!-- .menu-item -->
-                                <!-- /.menu-item -->
-                            </ul>
-                            <!-- /.menu -->
-                        </nav>
-                        <!-- /.stacked-menu -->
-                    </section>
-                    <!-- /.aside-menu -->
-                </div>
-                <!-- /.aside-content -->
-            </aside>
-            <!-- /.app-aside -->
-            <!-- .app-main -->
-            <main class="app-main">
-                <div class="wrapper">
-                    <div class="page">
-                        <div class="page-inner">
-                            <!-- Page Header & Breadcrumbs -->
-                            <header class="page-title-bar">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item">
-                                            <a href="{% url 'AdminDashboard' %}">DataManagement</a>
-                                        </li>
-                                        <li class="breadcrumb-item active" aria-current="page">Enrollments</li>
-                                    </ol>
-                                </nav>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h1 class="page-title">View Enrollments</h1>
-                                </div>
-                            </header>
-                            <!-- Add Enrollment Button -->
-                            <div class="w-25 ms-0 ms-sm-0 mt-1 mb-3">
-                                <div class="mb-3 mt-1">
-                                    <div class="d-block">
-                                        <a href="{% url 'AddEnrollment' %}" class="text-decoration-none">
-                                            <button type="button" class="btn btn-outline-primary shadow-sm">
-                                                <i class="fas fa-plus "></i>
-                                            </button>
+                                    <!-- /child menu -->
+                                    <!-- .analytics -->
+                                    <!-- .menu-item -->
+                                    <li class="menu-item has-child">
+                                        <a href="#" class="menu-link">
+                                            <span class="menu-icon oi oi-people"></span>
+                                            <span class="menu-text">Analytics</span>
                                         </a>
+                                        <ul class="menu">
+                                            <li class="menu-item">
+                                                <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#courses" class="menu-link">Active Students</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#courses" class="menu-link">Enrollments Trends</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- ./menuitems -->
+                                    <!-- ./analytics -->
+                                    <!-- System logs -->
+                                    <!-- .menu-item -->
+                                    <li class="menu-item has-child">
+                                        <a href="#" class="menu-link">
+                                            <span class="menu-icon oi oi-people"></span>
+                                            <span class="menu-text">System Logs</span>
+                                        </a>
+                                        <ul class="menu">
+                                            <li class="menu-item">
+                                                <a href="#students" class="menu-link">All activities</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#courses" class="menu-link">Export Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- ./menuitems -->
+                                    <!-- ./System logs  -->
+                                    <!-- .menu-item -->
+                                    <!-- /.menu-item -->
+                                </ul>
+                                <!-- /.menu -->
+                            </nav>
+                            <!-- /.stacked-menu -->
+                        </section>
+                        <!-- /.aside-menu -->
+                    </div>
+                    <!-- /.aside-content -->
+                </aside>
+                <!-- /.app-aside -->
+                <!-- .app-main -->
+                <main class="app-main">
+                    <div class="wrapper">
+                        <div class="page">
+                            <div class="page-inner">
+                                <!-- Page Header & Breadcrumbs -->
+                                <header class="page-title-bar">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item">
+                                                <a href="{% url 'AdminDashboard' %}">DataManagement</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">Enrollments</li>
+                                        </ol>
+                                    </nav>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h1 class="page-title">View Enrollments</h1>
+                                    </div>
+                                </header>
+                                <!-- Add Enrollment Button -->
+                                <div class="w-25 ms-0 ms-sm-0 mt-1 mb-3">
+                                    <div class="mb-3 mt-1">
+                                        <div class="d-block">
+                                            <a href="{% url 'AddEnrollment' %}" class="text-decoration-none">
+                                                <button type="button" class="btn btn-outline-primary shadow-sm">
+                                                    <i class="fas fa-plus "></i>
+                                                </button>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Page Content Section -->
-                            <!-- Page Content Section -->
-                            <div class="page-section">
-                                <div class="card card-fluid">
-                                    <div class="card-body">
-                                        <!-- Search & Filter Controls -->
-                                        <div class="form-group">
-                                            <div class="input-group input-group-alt">
-                                                <!-- Filter Dropdown -->
-                                                <div class="input-group-prepend">
-                                                    <select id="filterBy" class="custom-select">
-                                                        <option value="" selected>Filter By</option>
-                                                        <option value="1">Student Name</option>
-                                                        <option value="2">Batch</option>
-                                                        <option value="3">Status</option>
-                                                    </select>
-                                                </div>
-                                                <!-- Search Input -->
-                                                <div class="input-group has-clearable">
-                                                    <button id="clear-search"
-                                                            type="button"
-                                                            class="close"
-                                                            aria-label="Close"
-                                                            style="display:none">
-                                                        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
-                                                    </button>
+                                <!-- Page Content Section -->
+                                <!-- Page Content Section -->
+                                <div class="page-section">
+                                    <div class="card card-fluid">
+                                        <div class="card-body">
+                                            <!-- Search & Filter Controls -->
+                                            <div class="form-group">
+                                                <div class="input-group input-group-alt">
+                                                    <!-- Filter Dropdown -->
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                                                        <select id="filterBy" class="custom-select">
+                                                            <option value="" selected>Filter By</option>
+                                                            <option value="1">Student Name</option>
+                                                            <option value="2">Batch</option>
+                                                            <option value="3">Status</option>
+                                                        </select>
                                                     </div>
-                                                    <input id="table-search"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Search enrollments...">
+                                                    <!-- Search Input -->
+                                                    <div class="input-group has-clearable">
+                                                        <button id="clear-search"
+                                                                type="button"
+                                                                class="close"
+                                                                aria-label="Close"
+                                                                style="display:none">
+                                                            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                                        </button>
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                                                        </div>
+                                                        <input id="table-search"
+                                                               type="text"
+                                                               class="form-control"
+                                                               placeholder="Search enrollments...">
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <!-- The Enrollment Table -->
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-striped" id="enrollmentTable">
+                                                    <thead class="thead-dark">
+                                                        <tr>
+                                                            <th style="min-width:200px">Student Name</th>
+                                                            <th>Batch</th>
+                                                            <th>Enrolled On</th>
+                                                            <th>Status</th>
+                                                            <th style="min-width:150px; text-align:right;">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- Row 1: Active -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <strong>Ram Bahadur Thapa</strong>
+                                                            </td>
+                                                            <td class="align-middle">Python Jan 2026</td>
+                                                            <td class="align-middle">Jan 15, 2026</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-success">Active</span>
+                                                            </td>
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
+                                                                    <!-- View Details -->
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-icon btn-info text-white mb-2 mb-md-0"
+                                                                            data-toggle="modal"
+                                                                            data-target="#enrollmentDetailsModal"
+                                                                            data-student="Ram Bahadur Thapa"
+                                                                            data-batch="Python Jan 2026"
+                                                                            data-date="Jan 15, 2026"
+                                                                            data-status="Active"
+                                                                            onclick="populateEnrollmentModal(this)">
+                                                                        View more
+                                                                    </button>
+                                                                    <!-- Update -->
+                                                                    <a href="{% url 'UpdateEnrollment' id=1 %}"
+                                                                       class="btn btn-sm btn-icon btn-warning text-dark mb-2 mb-md-0 ml-md-2">
+                                                                        Update
+                                                                    </a>
+                                                                    <!-- Delete -->
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-icon btn-danger ml-md-2"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deleteEnrollmentModal"
+                                                                            data-name="Ram Bahadur -> Python 2026"
+                                                                            data-delete-url="{% url 'DeleteEnrollment' id=1 %}"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Row 2: Completed -->
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <strong>Sita Kumari</strong>
+                                                            </td>
+                                                            <td class="align-middle">Django Dec 2025</td>
+                                                            <td class="align-middle">Dec 01, 2025</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-primary">Completed</span>
+                                                            </td>
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
+                                                                    <!-- View Details -->
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-icon btn-info text-white mb-2 mb-md-0"
+                                                                            data-toggle="modal"
+                                                                            data-target="#enrollmentDetailsModal"
+                                                                            data-student="Sita Kumari"
+                                                                            data-batch="Django Dec 2025"
+                                                                            data-date="Dec 01, 2025"
+                                                                            data-status="Completed"
+                                                                            onclick="populateEnrollmentModal(this)">
+                                                                        View more
+                                                                    </button>
+                                                                    <!-- Update -->
+                                                                    <a href="{% url 'UpdateEnrollment' id=2 %}"
+                                                                       class="btn btn-sm btn-icon btn-warning text-dark mb-2 mb-md-0 ml-md-2">
+                                                                        Update
+                                                                    </a>
+                                                                    <!-- Delete -->
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-icon btn-danger ml-md-2"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deleteEnrollmentModal"
+                                                                            data-name="Sita Kumari -> Django 2025"
+                                                                            data-delete-url="{% url 'DeleteEnrollment' id=2 %}"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- Pagination (Static Placeholder) -->
                                         </div>
-                                        <!-- The Enrollment Table -->
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-striped" id="enrollmentTable">
-                                                <thead class="thead-dark">
-                                                    <tr>
-                                                        <th style="min-width:200px">Student Name</th>
-                                                        <th>Batch</th>
-                                                        <th>Enrolled On</th>
-                                                        <th>Status</th>
-                                                        <th style="min-width:150px; text-align:right;">Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <!-- Row 1: Active -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <strong>Ram Bahadur Thapa</strong>
-                                                        </td>
-                                                        <td class="align-middle">Python Jan 2026</td>
-                                                        <td class="align-middle">Jan 15, 2026</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-success">Active</span>
-                                                        </td>
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                <!-- View Details -->
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-icon btn-info text-white mb-2 mb-md-0"
-                                                                        data-toggle="modal"
-                                                                        data-target="#enrollmentDetailsModal"
-                                                                        data-student="Ram Bahadur Thapa"
-                                                                        data-batch="Python Jan 2026"
-                                                                        data-date="Jan 15, 2026"
-                                                                        data-status="Active"
-                                                                        onclick="populateEnrollmentModal(this)">
-                                                                    View more
-                                                                </button>
-                                                                <!-- Update -->
-                                                                <a href="{% url 'UpdateEnrollment' id=1 %}"
-                                                                   class="btn btn-sm btn-icon btn-warning text-dark mb-2 mb-md-0 ml-md-2">
-                                                                    Update
-                                                                </a>
-                                                                <!-- Delete -->
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-icon btn-danger ml-md-2"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deleteEnrollmentModal"
-                                                                        data-name="Ram Bahadur -> Python 2026"
-                                                                        data-delete-url="{% url 'DeleteEnrollment' id=1 %}"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- Row 2: Completed -->
-                                                    <tr>
-                                                        <td class="align-middle">
-                                                            <strong>Sita Kumari</strong>
-                                                        </td>
-                                                        <td class="align-middle">Django Dec 2025</td>
-                                                        <td class="align-middle">Dec 01, 2025</td>
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-primary">Completed</span>
-                                                        </td>
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                <!-- View Details -->
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-icon btn-info text-white mb-2 mb-md-0"
-                                                                        data-toggle="modal"
-                                                                        data-target="#enrollmentDetailsModal"
-                                                                        data-student="Sita Kumari"
-                                                                        data-batch="Django Dec 2025"
-                                                                        data-date="Dec 01, 2025"
-                                                                        data-status="Completed"
-                                                                        onclick="populateEnrollmentModal(this)">
-                                                                    View more
-                                                                </button>
-                                                                <!-- Update -->
-                                                                <a href="{% url 'UpdateEnrollment' id=2 %}"
-                                                                   class="btn btn-sm btn-icon btn-warning text-dark mb-2 mb-md-0 ml-md-2">
-                                                                    Update
-                                                                </a>
-                                                                <!-- Delete -->
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-icon btn-danger ml-md-2"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deleteEnrollmentModal"
-                                                                        data-name="Sita Kumari -> Django 2025"
-                                                                        data-delete-url="{% url 'DeleteEnrollment' id=2 %}"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- Pagination (Static Placeholder) -->
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /.page-inner -->
                     </div>
-                    <!-- /.page-inner -->
+                    <!-- /.page -->
                 </div>
-                <!-- /.page -->
-            </div>
-            <!-- /.wrapper -->
-            <!-- /.app -->
-            <!-- BEGIN BASE JS -->
-            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-            <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-            <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-            <!-- END BASE JS -->
-            <!-- BEGIN PLUGINS JS -->
-            <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-            <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-            <!-- END PLUGINS JS -->
-            <!-- BEGIN THEME JS -->
-            <script src="{% static 'javascript/main.min.js' %}"></script>
-            <!-- END THEME JS -->
-            <!-- Global site tag (gtag.js) - Google Analytics -->
-            <script async
-                    src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-            <script>
+                <!-- /.wrapper -->
+                <!-- /.app -->
+                <!-- BEGIN BASE JS -->
+                <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+                <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+                <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+                <!-- END BASE JS -->
+                <!-- BEGIN PLUGINS JS -->
+                <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+                <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+                <!-- END PLUGINS JS -->
+                <!-- BEGIN THEME JS -->
+                <script src="{% static 'javascript/main.min.js' %}"></script>
+                <!-- END THEME JS -->
+                <!-- Global site tag (gtag.js) - Google Analytics -->
+                <script async
+                        src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+                <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -862,87 +861,87 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
-            </script>
-        </body>
-        <!-- ================= 1. VIEW ENROLLMENT MODAL ================= -->
-        <div class="modal fade"
-             id="enrollmentDetailsModal"
-             tabindex="-1"
-             role="dialog"
-             aria-labelledby="enrollmentDetailsLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Enrollment Details</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered mb-0">
-                                <tbody>
-                                    <!-- 1. Student (Blue) -->
-                                    <tr>
-                                        <th scope="row" class="bg-primary text-white" style="width: 35%;">Student Name</th>
-                                        <td id="modal_enroll_student"></td>
-                                    </tr>
-                                    <!-- 2. Batch (Light) -->
-                                    <tr>
-                                        <th scope="row" class="bg-light text-primary">Batch</th>
-                                        <td id="modal_enroll_batch"></td>
-                                    </tr>
-                                    <!-- 3. Enrolled On (Blue) -->
-                                    <tr>
-                                        <th scope="row" class="bg-primary text-white">Enrolled Date</th>
-                                        <td id="modal_enroll_date"></td>
-                                    </tr>
-                                    <!-- 4. Status (Light) -->
-                                    <tr>
-                                        <th scope="row" class="bg-light text-primary">Status</th>
-                                        <td>
-                                            <span id="modal_enroll_status" class="badge"></span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                </script>
+            </body>
+            <!-- ================= 1. VIEW ENROLLMENT MODAL ================= -->
+            <div class="modal fade"
+                 id="enrollmentDetailsModal"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-labelledby="enrollmentDetailsLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Enrollment Details</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered mb-0">
+                                    <tbody>
+                                        <!-- 1. Student (Blue) -->
+                                        <tr>
+                                            <th scope="row" class="bg-primary text-white" style="width: 35%;">Student Name</th>
+                                            <td id="modal_enroll_student"></td>
+                                        </tr>
+                                        <!-- 2. Batch (Light) -->
+                                        <tr>
+                                            <th scope="row" class="bg-light text-primary">Batch</th>
+                                            <td id="modal_enroll_batch"></td>
+                                        </tr>
+                                        <!-- 3. Enrolled On (Blue) -->
+                                        <tr>
+                                            <th scope="row" class="bg-primary text-white">Enrolled Date</th>
+                                            <td id="modal_enroll_date"></td>
+                                        </tr>
+                                        <!-- 4. Status (Light) -->
+                                        <tr>
+                                            <th scope="row" class="bg-light text-primary">Status</th>
+                                            <td>
+                                                <span id="modal_enroll_status" class="badge"></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- ================= 2. DELETE CONFIRMATION MODAL ================= -->
+            <div class="modal fade"
+                 id="deleteEnrollmentModal"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirm Deletion</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-dismiss="modal"
+                                    aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            Are you sure you want to delete the enrollment for <strong id="delete_modal_enroll_name"></strong>?
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
+                            <!-- The Javascript will inject the HREF here -->
+                            <a href="#"
+                               id="delete_modal_confirm_btn"
+                               class="btn btn-secondary text-danger">Yes, Delete</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- ================= 2. DELETE CONFIRMATION MODAL ================= -->
-        <div class="modal fade"
-             id="deleteEnrollmentModal"
-             tabindex="-1"
-             role="dialog"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm Deletion</h5>
-                        <button type="button"
-                                class="btn-close"
-                                data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-                        Are you sure you want to delete the enrollment for <strong id="delete_modal_enroll_name"></strong>?
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
-                        <!-- The Javascript will inject the HREF here -->
-                        <a href="#"
-                           id="delete_modal_confirm_btn"
-                           class="btn btn-secondary text-danger">Yes, Delete</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script>
+            <script>
 // --- 1. Populate View Enrollment Modal ---
 function populateEnrollmentModal(buttonElement) {
     const data = buttonElement.dataset;
@@ -984,8 +983,8 @@ function populateDeleteModal(buttonElement) {
         confirmBtn.href = deleteUrl;
     }
 }
-        </script>
-        <script>
+            </script>
+            <script>
 document.addEventListener("DOMContentLoaded", function() {
     
     // Column Mapping for Enrollment Table
@@ -1053,5 +1052,5 @@ document.addEventListener("DOMContentLoaded", function() {
         executeFilter();
     });
 });
-        </script>
-    </html>
+            </script>
+        </html>
