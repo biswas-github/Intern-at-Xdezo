@@ -104,6 +104,8 @@ def DeleteClassroom(request,id):
 def ViewEnrollment(request):
     return render(request,'ADMIN/Enrollment/View-Enrollment.html')
 def UpdateEnrollment(request,id):
+    if request.method=='POST':
+        return redirect('ViewEnrollment')
     return render(request,'ADMIN/Enrollment/Update-Enrollment.html')
 def AddEnrollment(request):
     return render(request,'ADMIN/Enrollment/Add-Enrollment.html')
@@ -139,6 +141,9 @@ def DeleteSchedule(request,id):
 # AddSchedule
 def AddSchedule(request):
     return render(request,'ADMIN/Schedule/Add-Schedule.html')
+# FreeRoom
+def FreeRoom(request):
+    return render(request,'ADMIN/Schedule/Free-Room.html')
 
 
 

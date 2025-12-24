@@ -1,5 +1,5 @@
 from django.urls import path,include
-from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom,ViewEnrollment,UpdateEnrollment,AddEnrollment,DeleteEnrollment,ViewPayment,AddPayment,UpdatePayment,DeletePayment,DuesAndOverDues,ViewSchedule,DeleteSchedule,AddSchedule
+from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom,ViewEnrollment,UpdateEnrollment,AddEnrollment,DeleteEnrollment,ViewPayment,AddPayment,UpdatePayment,DeletePayment,DuesAndOverDues,ViewSchedule,DeleteSchedule,AddSchedule,FreeRoom
 
 
 # url patterns for the app
@@ -98,6 +98,8 @@ urlpatterns = [
     path('AdminDashboard/Schedule/DeleteSchedule/<int:id>',DeleteSchedule,name="DeleteSchedule"),
 # AddSchedule
     path('AdminDashboard/Schedule/AddSchedule/',AddSchedule,name="AddSchedule"),
+# FreeRoom
+    path('AdminDashboard/Schedule/FreeRoom/',FreeRoom,name="FreeRoom"),
 
 
 

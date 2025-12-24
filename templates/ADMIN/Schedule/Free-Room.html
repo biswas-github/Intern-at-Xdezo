@@ -572,7 +572,7 @@
                                 </li>
                                 <!-- finance  -->
                                 <!-- .menu-item -->
-                                <li class="menu-item has-child">
+                                <li class="menu-item has-child has-open">
                                     <a href="#" class="menu-link">
                                         <span class="menu-icon oi oi-people"></span>
                                         <span class="menu-text">Schedules & Time-tables</span>
@@ -581,8 +581,8 @@
                                         <li class="menu-item">
                                             <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
                                         </li>
-                                        <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Free Rooms</a>
+                                        <li class="menu-item has-active">
+                                            <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
@@ -604,9 +604,7 @@
                                         <li class="menu-item">
                                             <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
                                         </li>
-                                        <li class="menu-item">
-                                            <a href="#batches" class="menu-link">Exports</a>
-                                        </li>
+                                       
                                     </ul>
                                 </li>
                                 <!-- ./menuitems -->
@@ -668,7 +666,139 @@
             <main class="app-main">
                 <div class="wrapper">
                     <div class="page">
-                        <div class="page-inner ms-2 me-2"></div>
+                        <div class="page-inner">
+                            <!-- Page Header & Breadcrumbs -->
+                            <header class="page-title-bar">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="{% url 'AdminDashboard' %}">DataManagement</a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <a href="#">Schedules</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Free Rooms</li>
+                                    </ol>
+                                </nav>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h1 class="page-title">Check Room Availability</h1>
+                                </div>
+                            </header>
+                            <!-- Page Content Section -->
+                            <div class="page-section">
+                                <!-- 1. SEARCH FILTER CARD -->
+                                <div class="card card-fluid">
+                                    <div class="card-body">
+                                        <h6 class="card-title mb-4">Find an Empty Classroom</h6>
+                                        <!-- The Search Form -->
+                                        <!-- We use method="GET" so data appears in URL and we can read it in views -->
+                                        <form method="get" action=".">
+                                            <div class="form-row align-items-end">
+                                                <!-- Input A: Date -->
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="check_date"
+                                                           class="font-weight-bold text-muted small text-uppercase">
+                                                        Target Date <abbr title="Required">*</abbr>
+                                                    </label>
+                                                    <input type="date"
+                                                           class="form-control"
+                                                           id="check_date"
+                                                           name="date"
+                                                           required
+                                                           value="{{ request.GET.date }}">
+                                                    <!-- Keeps value after refresh -->
+                                                </div>
+                                                <!-- Input B: Start Time -->
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="check_start"
+                                                           class="font-weight-bold text-muted small text-uppercase">
+                                                        Start Time <abbr title="Required">*</abbr>
+                                                    </label>
+                                                    <input type="time"
+                                                           class="form-control"
+                                                           id="check_start"
+                                                           name="start_time"
+                                                           required
+                                                           value="{{ request.GET.start_time }}">
+                                                </div>
+                                                <!-- Input C: End Time -->
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="check_end"
+                                                           class="font-weight-bold text-muted small text-uppercase">
+                                                        End Time <abbr title="Required">*</abbr>
+                                                    </label>
+                                                    <input type="time"
+                                                           class="form-control"
+                                                           id="check_end"
+                                                           name="end_time"
+                                                           required
+                                                           value="{{ request.GET.end_time }}">
+                                                </div>
+                                                <!-- Submit Button -->
+                                                <div class="col-md-3 mb-3">
+                                                    <button type="submit" class="btn btn-outline-primary btn-block">
+                                                        <i class="fas fa-search mr-2"></i> Check Availability
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- 2. RESULTS TABLE (Only shows if search is performed) -->
+                                {% if request.GET.date %}
+                                    <div class="card card-fluid">
+                                        <div class="card-header border-0">
+                                            <div class="d-flex align-items-center">
+                                                <span class="mr-auto">
+                                                    Results for: <strong>{{ request.GET.date }}</strong>
+                                                    <span class="text-muted mx-2">|</span>
+                                                    {{ request.GET.start_time }} - {{ request.GET.end_time }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-striped">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th style="min-width:200px">Room Name</th>
+                                                        <th>Capacity</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Loop through the 'free_rooms' context sent from View -->
+                                                    {% for room in free_rooms %}
+                                                        <tr>
+                                                            <td class="align-middle">
+                                                                <span class="tile tile-circle bg-indigo text-white mr-2">
+                                                                    <i class="fas fa-door-open"></i>
+                                                                </span>
+                                                                <strong>{{ room.name }}</strong>
+                                                            </td>
+                                                            <td class="align-middle">{{ room.capacity }} Seats</td>
+                                                            <td class="align-middle">
+                                                                <span class="badge badge-success">Available</span>
+                                                            </td>
+                                                        </tr>
+                                                    {% empty %}
+                                                        <!-- Empty State if no rooms found -->
+                                                        <tr>
+                                                            <td colspan="4" class="text-center py-5">
+                                                                <div class="text-muted">
+                                                                    <i class="fas fa-exclamation-circle fa-2x mb-2"></i>
+                                                                    <p class="mb-0">No rooms are available for this specific time slot.</p>
+                                                                    <small>Try changing the time range or selecting a different date.</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                     <!-- /.page-inner -->
                 </div>

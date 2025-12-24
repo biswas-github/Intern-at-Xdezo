@@ -582,7 +582,7 @@
                       <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
                     </li>
                     <li class="menu-item">
-                      <a href="#courses" class="menu-link">Free Rooms</a>
+                      <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
                     </li>
                     <li class="menu-item">
                       <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
@@ -603,9 +603,6 @@
                     </li>
                     <li class="menu-item">
                       <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="#batches" class="menu-link">Exports</a>
                     </li>
                   </ul>
                 </li>
@@ -676,21 +673,7 @@
                     <h1 class="page-title">Dashboard</h1>
                     <p class="text-muted mb-0">Intake overview</p>
                   </div>
-                  <div>
-                    <form>
-                      <label for="course">Time</label>
-                      <select id="course" name="course">
-                        <option value="">-- Select --</option>
-                        <option value="Today">Today</option>
-                        <option value="Week">This week</option>
-                        <option value="Month">This months</option>
-                        <option value="3month">3 months</option>
-                      </select>
-                      <button type="submit">Submit</button>
-                      <br>
-                      <br>
-                    </form>
-                  </div>
+                  <div></div>
                 </div>
               </header>
               <!-- First row: KPI cards -->
@@ -746,7 +729,7 @@
                     <div class="card card-fluid">
                       <div class="card-header d-flex justify-content-between align-items-center">
                         <span class="card-title">Upcoming schedules</span>
-                        <a href="#" class="card-header-action">View timetable</a>
+                        <a href="{% url 'ViewSchedule' %}" class="card-header-action">View timetable</a>
                       </div>
                       <div class="table-responsive">
                         <table class="table table-striped table-hover mb-0">
@@ -804,7 +787,7 @@
                           <div class="card card-fluid">
                             <div class="card-header d-flex justify-content-between align-items-center ">
                               <span class="card-title">Recent payments</span>
-                              <a href="#" class="card-header-action">Go to Finance</a>
+                              <a href="{% url 'ViewPayment' %}" class="card-header-action">Go to Finance</a>
                             </div>
                             <div class="table-responsive">
                               <table class="table table-sm table-striped mb-0">

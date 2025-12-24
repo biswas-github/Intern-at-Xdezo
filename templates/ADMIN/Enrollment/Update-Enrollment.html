@@ -570,7 +570,7 @@
                                             <a href="#courses" class="menu-link">Free Rooms</a>
                                         </li>
                                         <li class="menu-item">
-                                  <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
+                                            <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -589,9 +589,7 @@
                                         <li class="menu-item">
                                             <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
                                         </li>
-                                        <li class="menu-item">
-                                            <a href="#batches" class="menu-link">Exports</a>
-                                        </li>
+                                      
                                     </ul>
                                 </li>
                                 <!-- ./menuitems -->
@@ -680,7 +678,7 @@
                                         <div class="card-body">
                                             <!-- Form -->
                                             <form method="post">
-                                                <!-- {% csrf_token %} -->
+                                                {% csrf_token %}
                                                 <fieldset>
                                                     <legend>Edit Enrollment</legend>
                                                     <!-- Student (Pre-selected) -->
