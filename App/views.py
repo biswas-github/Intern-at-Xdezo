@@ -148,7 +148,10 @@ def FreeRoom(request):
 def Downloads(request):
     return render(request,'ADMIN/Exports/Export.html')
 
-
+# -----Analytics---------#
+# studentpercourse
+def studentpercourse(request):
+    return render(request,'ADMIN/Analytic/Student-Per-Course.html')
 
 # first page for the viewer 
 def ViewerDashboard(request):
