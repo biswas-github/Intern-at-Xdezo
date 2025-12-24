@@ -144,6 +144,9 @@ def AddSchedule(request):
 # FreeRoom
 def FreeRoom(request):
     return render(request,'ADMIN/Schedule/Free-Room.html')
+# -----Downloads-----#
+def Downloads(request):
+    return render(request,'ADMIN/Exports/Export.html')
 
 
 
