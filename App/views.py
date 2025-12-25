@@ -18,6 +18,91 @@ def LoginPage(request):
         elif username=='viewer_demo' and password=="viewer123":
             print("viewer  hit ")
             return redirect(request,'ViewerDashboard')
+# Signup
+def Signup(request):
+    return render(request,'auth/Signup.html')
+# ---------User management---------------#
+#  ViewSystemUser
+def ViewSystemUser(request):
+      # In a real model, you don't need this helper, the template calls user.get_full_name
+    from datetime import datetime, timedelta
+    users_list = [
+        {
+            "id": 1,
+            "username": "admin_master",
+            "email": "admin@college.edu",
+            "first_name": "System",
+            "last_name": "Admin",
+            "get_full_name": "System Admin",
+            "role": "ADMIN",          # Options: ADMIN, INSTRUCTOR, ACCOUNTANT, VIEWER
+            "is_active": True,
+            "date_joined": datetime(2024, 1, 1),
+            "last_login": datetime.now() - timedelta(minutes=5)
+        },
+        {
+            "id": 2,
+            "username": "amit_py",
+            "email": "amit.sharma@college.edu",
+            "first_name": "Amit",
+            "last_name": "Sharma",
+            "get_full_name": "Amit Sharma",
+            "role": "INSTRUCTOR",
+            "is_active": True,
+            "date_joined": datetime(2024, 2, 15),
+            "last_login": datetime.now() - timedelta(hours=2)
+        },
+        {
+            "id": 3,
+            "username": "sarah_acct",
+            "email": "sarah.accounts@college.edu",
+            "first_name": "Sarah",
+            "last_name": "Koirala",
+            "get_full_name": "Sarah Koirala",
+            "role": "ACCOUNTANT",
+            "is_active": True,
+            "date_joined": datetime(2024, 3, 10),
+            "last_login": datetime.now() - timedelta(days=1)
+        },
+        {
+            "id": 4,
+            "username": "john_viewer",
+            "email": "john.staff@college.edu",
+            "first_name": "John",
+            "last_name": "Doe",
+            "get_full_name": "John Doe",
+            "role": "VIEWER",
+            "is_active": False,       # Simulating an inactive user
+            "date_joined": datetime(2024, 5, 20),
+            "last_login": datetime(2024, 12, 1)
+        },
+        {
+            "id": 5,
+            "username": "sita_graphic",
+            "email": "sita.karki@college.edu",
+            "first_name": "Sita",
+            "last_name": "Karki",
+            "get_full_name": "Sita Karki",
+            "role": "INSTRUCTOR",
+            "is_active": True,
+            "date_joined": datetime(2024, 6, 1),
+            "last_login": datetime.now() - timedelta(minutes=30)
+        }
+    ]
+
+    context = {
+        'users': users_list
+    }
+
+    return render(request,'ADMIN/UserManagement/View-System-User.html',context)
+# AddSystemUser
+def AddSystemUser(request):
+    return render(request,'ADMIN/UserManagement/Add-System-User.html')
+# EditUser
+def EditUser(request,id):
+    return render(request,'ADMIN/UserManagement/Edit-System-User.html')
+# DeleteUser
+def DeleteUser(request,id):
+    return render(request,'ADMIN/UserManagement/Delete-System-User.html')
 
 # admin dashboard after login 
 def AdminDashboard(request):

@@ -1,13 +1,32 @@
 from django.urls import path,include
-from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom,ViewEnrollment,UpdateEnrollment,AddEnrollment,DeleteEnrollment,ViewPayment,AddPayment,UpdatePayment,DeletePayment,DuesAndOverDues,ViewSchedule,DeleteSchedule,AddSchedule,FreeRoom,Downloads,studentpercourse,MonthlyRevenue,ActiveStudent,analytics_enrollment_trends
-
+from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,ShowStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom,ViewEnrollment,UpdateEnrollment,AddEnrollment,DeleteEnrollment,ViewPayment,AddPayment,UpdatePayment,DeletePayment,DuesAndOverDues,ViewSchedule,DeleteSchedule,AddSchedule,FreeRoom,Downloads,studentpercourse,MonthlyRevenue,ActiveStudent,analytics_enrollment_trends,Signup
+from .views import ViewSystemUser,AddSystemUser,EditUser,DeleteUser
 
 # url patterns for the app
 urlpatterns = [
     path('login/',LoginPage,name='login'),
+    # Signup
+    path('Signup/',Signup,name='Signup'),
+
+
     path('',LoginPage,name='login'),
     # for admindashboard
     path('AdminDashboard/',AdminDashboard,name='AdminDashboard'),
+
+    # -------System User management-------#
+    # ViewSystemUser
+    path('AdminDashboard/UserManagement/ViewSystemUser',ViewSystemUser,name='ViewSystemUser'),
+    path('AdminDashboard/UserManagement/AddSystemUser',AddSystemUser,name='AddSystemUser'),
+    # EditUser
+    path('AdminDashboard/UserManagement/EditUser/<int:id>',EditUser,name='EditUser'),
+    # DeleteUser
+    path('AdminDashboard/UserManagement/DeleteUser/<int:id>',DeleteUser,name='DeleteUser'),
+
+
+
+
+
+
         # datamanagement 
           #student
     path('AdminDashboard/DataManagementStudent/AddStudent',DataManagementStudent,name='DataManagementStudent'),

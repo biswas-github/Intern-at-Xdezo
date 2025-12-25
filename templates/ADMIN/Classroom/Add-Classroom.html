@@ -468,63 +468,19 @@
                                 <li class="menu-header">Intake managements</li>
                                 <!-- /.menu-header -->
                                 <!-- .menu-item -->
-                                <li class="menu-item has-child">
+                                <li class="menu-item has-child ">
                                     <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-wrench"></span>
-                                        <span class="menu-text">Auth</span>
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">User management</span>
                                     </a>
-                                    <!-- child menu -->
                                     <ul class="menu">
                                         <li class="menu-item">
-                                            <a href="auth-comingsoon-v1.html" class="menu-link">Coming Soon v1</a>
+                                            <a class="menu-link" href="{% url 'ViewSystemUser' %}">View system Users</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="auth-comingsoon-v2.html" class="menu-link">Coming Soon v2</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-cookie-consent.html" class="menu-link">Cookie Consent</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-empty-state.html" class="menu-link">Empty State</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-error-v1.html" class="menu-link">Error Page v1</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-error-v2.html" class="menu-link">Error Page v2</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-error-v3.html" class="menu-link">Error Page v3</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-maintenance.html" class="menu-link">Maintenance</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-page-message.html" class="menu-link">Page Message</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-session-timeout.html" class="menu-link">Session Timeout</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-signin-v1.html" class="menu-link">Sign In v1</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-signin-v2.html" class="menu-link">Sign In v2</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-signup.html" class="menu-link">Sign Up</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-recovery-username.html" class="menu-link">Recovery Username</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-recovery-password.html" class="menu-link">Recovery Password</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="auth-lockscreen.html" class="menu-link">Screen Locked</a>
+                                            <a class="menu-link" href="{% url 'AddSystemUser' %}">Add system Users</a>
                                         </li>
                                     </ul>
-                                    <!-- /child menu -->
                                 </li>
                                 <!-- /.menu-item -->
                                 <!-- datamanagements -->
@@ -690,7 +646,7 @@
                                             <div class="card-body">
                                                 <!-- Form -->
                                                 <form method="post">
-                                                    <!-- {% csrf_token %} -->
+                                                    {% csrf_token %}
                                                     <fieldset>
                                                         <legend>Classroom Details</legend>
                                                         <!-- Room Name -->

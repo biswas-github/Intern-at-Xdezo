@@ -8,7 +8,7 @@
               content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <!-- End Required meta tags -->
         <!-- Begin SEO tag -->
-        <title>Page Title | Looper - Bootstrap 4 Admin Theme</title>
+        <title>Starter Template | Looper - Bootstrap 4 Admin Theme</title>
         <meta property="og:title" content="Starter Template" />
         <meta name="author" content="Beni Arisandi" />
         <meta property="og:locale" content="en_US" />
@@ -19,6 +19,21 @@
         <link rel="canonical" href="//uselooper.com" />
         <meta property="og:url" content="//uselooper.com" />
         <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme" />
+        <script type="application/ld+json">
+      {
+        "name": "Looper - Bootstrap 4 Admin Theme",
+        "description": "Responsive admin theme build on top of Bootstrap 4",
+        "author": {
+          "@type": "Person",
+          "name": "Beni Arisandi"
+        },
+        "@type": "WebSite",
+        "url": "",
+        "headline": "Starter Template",
+        "@context": "http://schema.org"
+      }
+        </script>
+        <!-- End SEO tag -->
         <!-- FAVICONS -->
         <link rel="apple-touch-icon-precomposed"
               sizes="144x144"
@@ -454,7 +469,7 @@
                             <!-- .menu -->
                             <ul class="menu">
                                 <!-- .menu-item -->
-                                <li class="menu-item ">
+                                <li class="menu-item has-active">
                                     <a href="{% url 'AdminDashboard' %}" class="menu-link">
                                         <span class="menu-icon oi oi-dashboard"></span>
                                         <span class="menu-text">Dashboard</span>
@@ -467,29 +482,33 @@
                                 <!-- here intake mgnt insted of the Pages -->
                                 <li class="menu-header">Intake managements</li>
                                 <!-- /.menu-header -->
-                                <li class="menu-item has-child ">
+                                <!-- SYSTem users -->
+                                <li class="menu-item has-child has-open ">
                                     <a href="#" class="menu-link">
                                         <span class="menu-icon oi oi-people"></span>
                                         <span class="menu-text">User management</span>
                                     </a>
                                     <ul class="menu">
                                         <li class="menu-item">
-                                            <a class="menu-link" href="{% url 'ViewSystemUser' %}">View system Users</a>
+                                            <a class="menu-link " href="{% url 'ViewSystemUser' %}">View system Users</a>
                                         </li>
-                                        <li class="menu-item">
+                                        <li class="menu-item ">
                                             <a class="menu-link" href="{% url 'AddSystemUser' %}">Add system Users</a>
+                                        </li>
+                                        <li class="menu-item has-active">
+                                            <a class="menu-link">Delete system Users</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <!-- datamanagements -->
                                 <!-- .menu-item -->
-                                <li class="menu-item has-child has-open">
+                                <li class="menu-item has-child ">
                                     <a href="#" class="menu-link">
                                         <span class="menu-icon oi oi-people"></span>
                                         <span class="menu-text">Data management</span>
                                     </a>
                                     <ul class="menu">
-                                        <li class="menu-item has-active">
+                                        <li class="menu-item">
                                             <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
                                         </li>
                                         <li class="menu-item">
@@ -511,13 +530,13 @@
                                 </li>
                                 <!-- finance  -->
                                 <!-- .menu-item -->
-                                <li class="menu-item has-child">
+                                <li class="menu-item has-child ">
                                     <a href="#" class="menu-link">
                                         <span class="menu-icon oi oi-people"></span>
                                         <span class="menu-text">Schedules & Time-tables</span>
                                     </a>
                                     <ul class="menu">
-                                        <li class="menu-item">
+                                        <li class="menu-item ">
                                             <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
                                         </li>
                                         <li class="menu-item">
@@ -617,111 +636,47 @@
                 <main class="app-main">
                     <div class="wrapper">
                         <div class="page">
-                            <div class="page-inner ms-2">
-                                <!-- Page header -->
-                                <!-- back -->
-                                <!-- ./back -->
-                                <header class="">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h1 class="page-title">Update Students</h1>
-                                            <p class="text-muted mb-0">
-                                                <a style="text-decoration: none"
-                                                   class="text-muted"
-                                                   href="{% url 'AdminDashboard' %}">Datamanagement</a>/ <a style="text-decoration: none"
-    class="text-muted"
-    href="{% url 'ViewStudent' %}">Students</a> / <span class='text-primary'>Update Students</span>
-                                            </p>
+                            <div class="page-inner ms-2 me-2">
+                                <div class="page-section">
+                                    <!-- .empty-state -->
+                                    <div class="empty-state container pb-4 d-flex flex-column justify-content-center"
+                                         style="min-height: 70vh">
+                                        <!-- 1. The Icon (Visual Confirmation) -->
+                                        <!-- Using a large Trash icon with a success check overlay look, or just a simple Success Circle -->
+                                        <div class="state-figure mb-4">
+                                            <span class="fa-stack fa-4x">
+                                                <i class="far fa-circle fa-stack-2x text-success"></i>
+                                                <i class="fa fa-check fa-stack-1x text-success"></i>
+                                            </span>
+                                        </div>
+                                        <!-- 2. The Title -->
+                                        <h3 class="state-header">Deleted Successfully!</h3>
+                                        <!-- 3. The Description -->
+                                        <p class="state-description lead text-muted">
+                                            The record has been permanently removed from the system.
+                                            <br>
+                                            This action cannot be undone.
+                                        </p>
+                                        <!-- 4. Action Buttons -->
+                                        <div class="state-action mt-3">
+                                            <!-- Primary Action: Go Back to List -->
+                                            <!-- Replace 'AdminDashboard' with the specific view you want (e.g., 'ViewStudent') -->
+                                            <a href="{% url 'ViewSystemUser' %}" class="btn btn-primary px-5">
+                                                <i class="fa fa-arrow-left mr-2"></i> Back
+                                            </a>
                                         </div>
                                     </div>
-                                </header>
-                                <!-- Page Content Section -->
-                                <!-- .form -->
-                                <form>
-                                    <!-- .fieldset -->
-                                    <fieldset>
-                                        <legend>Student Registration form</legend>
-                                        <!-- .form-group -->
-                                        <div class="form-group">
-                                            <label for="lbl1">
-                                                Student name
-                                                <abbr title="Required">*</abbr>
-                                            </label>
-                                            <input type="text"
-                                                   class="form-control placeholder-shown"
-                                                   id="lbl1"
-                                                   placeholder="Enter your name"
-                                                   value="Ram Bahadur Thapa	"
-                                                   required>
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- .form-group -->
-                                        <div class="form-group">
-                                            <label for="lbl1">
-                                                Email
-                                                <abbr title="Required">*</abbr>
-                                            </label>
-                                            <input type="email"
-                                                   class="form-control placeholder-shown"
-                                                   id="lbl1"
-                                                   placeholder="example@gmail.com"
-                                                   value="ram.thapa@example.com"
-                                                   required>
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- .form-group -->
-                                        <div class="form-group">
-                                            <label for="lbl1">
-                                                Phone Number
-                                                <abbr title="Required">*</abbr>
-                                            </label>
-                                            <input type="text"
-                                                   class="form-control placeholder-shown"
-                                                   id="lbl1"
-                                                   placeholder="eg :9849554478"
-                                                   value="9845123456"
-                                                   required>
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- .form-group -->
-                                        <div class="form-group">
-                                            <label for="lbl1">
-                                                Address
-                                                <abbr title="Required">*</abbr>
-                                            </label>
-                                            <input type="text"
-                                                   class="form-control placeholder-shown"
-                                                   id="lbl1"
-                                                   placeholder="Enter the place you reside"
-                                                   value='pokhara'
-                                                   required>
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- select-element -->
-                                        <div class="form-group">
-                                            <label for="sel3">Status</label>
-                                            <select class="custom-select" id="sel3" required>
-                                                <option value="">Choose...</option>
-                                                <option value="ACTIVE">Active</option>
-                                                <option value="Inactive">Inactive</option>
-                                                <option value="Completed">Completed</option>
-                                                <option value="Completed">Dropped</option>
-                                            </select>
-                                        </div>
-                                        <button type="submit"
-                                                class="btn btn-outline-primary d-flex justify-content-center w-100">
-                                            Register Student
-                                        </button>
-                                    </fieldset>
-                                    <!-- /.fieldset -->
-                                </form>
-                                <!-- /.form -->
+                                    <!-- /.empty-state -->
+                                </div>
                             </div>
                         </div>
+                        <!-- /.page-inner -->
                     </div>
-                </main>
-                <!-- /.app-main -->
-            </div>
+                    <!-- /.page -->
+                </div>
+                <!-- /.wrapper -->
+            </main>
+            <!-- /.app-main -->
             <!-- /.app -->
             <!-- BEGIN BASE JS -->
             <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
