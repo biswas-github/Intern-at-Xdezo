@@ -678,7 +678,8 @@
                                                     </p>
                                                 </div>
                                                 <!-- ================= FORM A: RECURRING SCHEDULE (Default) ================= -->
-                                                <form id="form-recurring" method="post"  {% csrf_token %}
+                                                <form id="form-recurring" method="post">
+                                                    {% csrf_token %}
                                                     <fieldset>
                                                         <legend>Recurring Settings</legend>
                                                         <!-- Batch -->
@@ -798,7 +799,7 @@
                                                 </form>
                                                 <!-- ================= FORM B: SINGLE SESSION (Hidden) ================= -->
                                                 <form id="form-single" method="post"  style="display: none">
-                                                    <!-- {% csrf_token %} -->
+                                                    {% csrf_token %}
                                                     <fieldset>
                                                         <legend>Single Session Details</legend>
                                                         <!-- Batch -->
