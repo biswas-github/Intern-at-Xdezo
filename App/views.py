@@ -226,6 +226,10 @@ def DeleteSchedule(request,id):
 # AddSchedule
 def AddSchedule(request):
     return render(request,'ADMIN/Schedule/Add-Schedule.html')
+# EditSchedule
+def EditSchedule(request,id):
+    return render(request,'ADMIN/Schedule/Edit-Schedule.html')
+
 # FreeRoom
 def FreeRoom(request):
     return render(request,'ADMIN/Schedule/Free-Room.html')
