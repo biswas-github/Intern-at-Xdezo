@@ -484,20 +484,20 @@
                                 <!-- /.menu-header -->
                                 <!-- .menu-item -->
                                 <!-- /.menu-item -->
-                                  <li class="menu-item has-child ">
-                  <a href="#" class="menu-link">
-                    <span class="menu-icon oi oi-people"></span>
-                    <span class="menu-text">User management</span>
-                  </a>
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a class="menu-link" href="{% url 'ViewSystemUser' %}">View system Users</a>
-                    </li>
-                    <li class="menu-item">
-                      <a class="menu-link" href="{% url 'AddSystemUser' %}">Add system Users</a>
-                    </li>
-                  </ul>
-                </li>
+                                <li class="menu-item has-child ">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">User management</span>
+                                    </a>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="{% url 'ViewSystemUser' %}">View system Users</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="{% url 'AddSystemUser' %}">Add system Users</a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <!-- datamanagements -->
                                 <!-- .menu-item -->
                                 <li class="menu-item has-child ">
@@ -610,10 +610,10 @@
                                     </a>
                                     <ul class="menu">
                                         <li class="menu-item">
-                                            <a href="#students" class="menu-link">All activities</a>
+                                            <a href="{% url 'AllActivities' %}" class="menu-link">All activities</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#courses" class="menu-link">Export Details</a>
+                                            <a href="{% url 'Export-Details' %}" class="menu-link">Export Details</a>
                                         </li>
                                     </ul>
                                 </li>

@@ -482,6 +482,9 @@
                                 <!-- here intake mgnt insted of the Pages -->
                                 <li class="menu-header">Intake managements</li>
                                 <!-- /.menu-header -->
+                                <!-- .menu-item -->
+                                <!-- /.menu-item -->
+                                <!-- user managements -->
                                 <li class="menu-item has-child ">
                                     <a href="#" class="menu-link">
                                         <span class="menu-icon oi oi-people"></span>
@@ -496,6 +499,7 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <!-- ./user managements -->
                                 <!-- datamanagements -->
                                 <!-- .menu-item -->
                                 <li class="menu-item has-child ">
@@ -526,13 +530,13 @@
                                 </li>
                                 <!-- finance  -->
                                 <!-- .menu-item -->
-                                <li class="menu-item has-child has-open">
+                                <li class="menu-item has-child">
                                     <a href="#" class="menu-link">
                                         <span class="menu-icon oi oi-people"></span>
                                         <span class="menu-text">Schedules & Time-tables</span>
                                     </a>
                                     <ul class="menu">
-                                        <li class="menu-item has-active">
+                                        <li class="menu-item">
                                             <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
                                         </li>
                                         <li class="menu-item">
@@ -574,336 +578,160 @@
                                         </li>
                                     </ul>
                                     <!-- /child menu -->
-                                    <!-- .analytics -->
-                                    <!-- .menu-item -->
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon oi oi-people"></span>
-                                            <span class="menu-text">Analytics</span>
-                                        </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'ActiveStudent' %}" class="menu-link">Active Students</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'analytics_enrollment_trends' %}" class="menu-link">Enrollments Trends</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- ./menuitems -->
-                                    <!-- ./analytics -->
-                                    <!-- System logs -->
-                                    <!-- .menu-item -->
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon oi oi-people"></span>
-                                            <span class="menu-text">System Logs</span>
-                                        </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="{% url 'AllActivities' %}" class="menu-link">All activities</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'Export-Details' %}" class="menu-link">Export Details</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- ./menuitems -->
-                                    <!-- ./System logs  -->
-                                    <!-- .menu-item -->
-                                    <!-- /.menu-item -->
-                                </ul>
-                                <!-- /.menu -->
-                            </nav>
-                            <!-- /.stacked-menu -->
-                        </section>
-                        <!-- /.aside-menu -->
-                    </div>
-                    <!-- /.aside-content -->
-                </aside>
-                <!-- /.app-aside -->
-                <!-- .app-main -->
-                <main class="app-main">
-                    <div class="wrapper">
-                        <div class="page">
-                            <div class="page-inner ms-2 me-2">
-                                <!-- Page Header & Breadcrumbs -->
-                                <header class="page-title-bar">
-                                    <nav aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item">
-                                                <a href="{% url 'AdminDashboard' %}">DataManagement</a>
-                                            </li>
-                                            <li class="breadcrumb-item">
-                                                <a href="{% url 'ViewSchedule' %}">Schedules</a>
-                                            </li>
-                                            <li class="breadcrumb-item active" aria-current="page">View Schedules</li>
-                                        </ol>
-                                    </nav>
-                                    <div style="" class="d-flex justify-content-between align-items-center">
-                                        <h1 class="page-title">Class Schedules</h1>
-                                    </div>
-                                </header>
-                                <!-- Add Session Button -->
-                                <div class="mb-2 mt-0">
-                                    <div class="d-block">
-                                        <a href="{% url 'AddSchedule' %}" class="text-decoration-none">
-                                            <button type="button" class="btn btn-outline-dark shadow-sm">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Page Content Section -->
-                                <div class="page-section">
-                                    <section class="card card-fluid">
-                                        <div class="card-body">
-                                            <!-- ================= FILTER TOOLBAR (Top Row) ================= -->
-                                            <div class="form-group mb-4">
-                                                <label class="text-muted small text-uppercase font-weight-bold">Filter Options</label>
-                                                <div class="row">
-                                                    <!-- Date Filter -->
-                                                    <div class="col-12 col-md-6 col-lg-3 mb-2">
-                                                        <select id="filterDate" class="custom-select">
-                                                            <option value="all" selected>Date: All</option>
-                                                            <option value="today">Today</option>
-                                                            <option value="upcoming">Upcoming</option>
-                                                        </select>
-                                                    </div>
-                                                    <!-- Status Filter -->
-                                                    <div class="col-12 col-md-6 col-lg-3 mb-2">
-                                                        <select id="filterStatus" class="custom-select">
-                                                            <option value="all" selected>Status: All</option>
-                                                            <option value="SCHEDULED">Scheduled</option>
-                                                            <option value="COMPLETED">Completed</option>
-                                                            <option value="CANCELLED">Cancelled</option>
-                                                        </select>
-                                                    </div>
-                                                    <!-- Instructor Filter -->
-                                                    <div class="col-12 col-md-6 col-lg-3 mb-2">
-                                                        <select id="filterInstructor" class="custom-select">
-                                                            <option value="all" selected>Instructor: All</option>
-                                                            <option value="Mr. A. Sharma">Mr. A. Sharma</option>
-                                                            <option value="Ms. S. Karki">Ms. S. Karki</option>
-                                                        </select>
-                                                    </div>
-                                                    <!-- Classroom Filter -->
-                                                    <div class="col-12 col-md-6 col-lg-3 mb-2">
-                                                        <select id="filterClassroom" class="custom-select">
-                                                            <option value="all" selected>Room: All</option>
-                                                            <option value="Room 101">Room 101</option>
-                                                            <option value="Lab A">Lab A</option>
-                                                        </select>
-                                                    </div>
+                                </li>
+                                <!-- .analytics -->
+                                <!-- .menu-item -->
+                                <li class="menu-item has-child">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">Analytics</span>
+                                    </a>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'ActiveStudent' %}" class="menu-link">Active Students</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'analytics_enrollment_trends' %}" class="menu-link">Enrollments Trends</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- ./menuitems -->
+                                <!-- ./analytics -->
+                                <!-- System logs -->
+                                <!-- .menu-item -->
+                                <li class="menu-item has-child has-open">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">System Logs</span>
+                                    </a>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a href="{% url 'AllActivities' %}" class="menu-link">All activities</a>
+                                        </li>
+                                        <li class="menu-item has-active">
+                                            <a href="{% url 'Export-Details' %}" class="menu-link">Export Details</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- ./menuitems -->
+                                <!-- ./System logs  -->
+                                <!-- .menu-item -->
+                                <!-- /.menu-item -->
+                            </ul>
+                            <!-- /.menu -->
+                        </nav>
+                        <!-- /.stacked-menu -->
+                    </section>
+                    <!-- /.aside-menu -->
+                </div>
+                <!-- /.aside-content -->
+            </aside>
+            <!-- /.app-aside -->
+            <!-- .app-main -->
+            <main class="app-main">
+                <div class="wrapper">
+                    <div class="page">
+                        <div class="page-inner ms-2 me-2">
+                            <!-- Page Header & Breadcrumbs -->
+                            <header class="page-title-bar">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="{% url 'AdminDashboard' %}">Dashboard</a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <a href="#">System Logs</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Export Details</li>
+                                    </ol>
+                                </nav>
+                            </header>
+                            <!-- Page Content Section -->
+                            <div class="page-section">
+                                <div class="card card-fluid">
+                                    <!-- Toolbar: Search (Optional) -->
+                                    <div class="card-header border-0">
+                                        <div class="d-flex align-items-center">
+                                            <span class="mr-auto font-weight-bold">Recent Exports</span>
+                                            <div class="input-group input-group-alt" style="max-width: 250px;">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                                 </div>
-                                            </div>
-                                            <!-- ================= SEARCH BAR (Bottom Row) ================= -->
-                                            <div class="form-group border-bottom pb-4">
-                                                <div class="input-group input-group-alt">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                                    </div>
-                                                    <input id="table-search"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Search by Batch or Course...">
-                                                    <div class="input-group-append">
-                                                        <button id="clear-search"
-                                                                type="button"
-                                                                class="close"
-                                                                aria-label="Close"
-                                                                style="display:none;
-                                                                       position: absolute;
-                                                                       right: 10px;
-                                                                       top: 10px;
-                                                                       z-index: 5">
-                                                            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- ================= TABLE SECTION ================= -->
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-striped" id="scheduleTable">
-                                                    <thead class="thead-light">
-                                                        <tr>
-                                                            <th style="min-width:120px">Date</th>
-                                                            <th style="min-width:120px">Time</th>
-                                                            <th style="min-width:180px">Batch</th>
-                                                            <th>Room</th>
-                                                            <th>Status</th>
-                                                            <th style="min-width:150px; text-align:right;">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Row 1: Scheduled -->
-                                                        <!-- Note: Hidden data (Course, Instructor) is stored in data attributes for filtering -->
-                                                        <tr data-date="2026-01-15"
-                                                            data-status="SCHEDULED"
-                                                            data-instructor="Mr. A. Sharma"
-                                                            data-classroom="Room 101"
-                                                            data-course="Python with Django">
-                                                            <td class="align-middle">Jan 15, 2026</td>
-                                                            <td class="align-middle">07:00 - 09:00</td>
-                                                            <td class="align-middle font-weight-bold">Python Jan 2026</td>
-                                                            <td class="align-middle">Room 101</td>
-                                                            <td class="align-middle">
-                                                                <span class="badge badge-primary">Scheduled</span>
-                                                            </td>
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <button type="button"
-                                                                            class="btn btn-sm btn-info text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#scheduleDetailsModal"
-                                                                            data-batch="Python Jan 2026"
-                                                                            data-course="Python with Django"
-                                                                            data-instructor="Mr. A. Sharma"
-                                                                            data-classroom="Room 101"
-                                                                            data-date="Jan 15, 2026"
-                                                                            data-time="07:00 - 09:00"
-                                                                            data-status="SCHEDULED"
-                                                                            onclick="populateScheduleModal(this)">
-                                                                        View
-                                                                    </button>
-                                                                    <a href="{% url 'EditSchedule' id=1 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Edit</a>
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteScheduleModal"
-                                                                            data-name="Python Jan 2026 on Jan 15"
-                                                                            data-delete-url="{% url 'DeleteSchedule' id=1 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <!-- Row 2: Completed -->
-                                                        <tr data-date="2025-12-01"
-                                                            data-status="COMPLETED"
-                                                            data-instructor="Ms. S. Karki"
-                                                            data-classroom="Lab A"
-                                                            data-course="Graphic Design Masterclass">
-                                                            <td class="align-middle">Dec 01, 2025</td>
-                                                            <td class="align-middle">10:00 - 12:00</td>
-                                                            <td class="align-middle font-weight-bold">Graphic Design A</td>
-                                                            <td class="align-middle">Lab A</td>
-                                                            <td class="align-middle">
-                                                                <span class="badge badge-success">Completed</span>
-                                                            </td>
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <button type="button"
-                                                                            class="btn btn-sm btn-info text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#scheduleDetailsModal"
-                                                                            data-batch="Graphic Design A"
-                                                                            data-course="Graphic Design Masterclass"
-                                                                            data-instructor="Ms. S. Karki"
-                                                                            data-classroom="Lab A"
-                                                                            data-date="Dec 01, 2025"
-                                                                            data-time="10:00 - 12:00"
-                                                                            data-status="COMPLETED"
-                                                                            onclick="populateScheduleModal(this)">
-                                                                        View
-                                                                    </button>
-                                                                    <a href="{% url 'EditSchedule' id=2 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Edit</a>
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteScheduleModal"
-                                                                            data-name="Graphic Design on Dec 01"
-                                                                            data-delete-url="{% url 'DeleteSchedule' id=2 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <!-- Row 3: Cancelled -->
-                                                        <tr data-date="2026-01-20"
-                                                            data-status="CANCELLED"
-                                                            data-instructor="Mr. A. Sharma"
-                                                            data-classroom="Room 101"
-                                                            data-course="Python with Django">
-                                                            <td class="align-middle">Jan 20, 2026</td>
-                                                            <td class="align-middle">07:00 - 09:00</td>
-                                                            <td class="align-middle font-weight-bold">Python Jan 2026</td>
-                                                            <td class="align-middle">Room 101</td>
-                                                            <td class="align-middle">
-                                                                <span class="badge badge-warning">Cancelled</span>
-                                                            </td>
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <button type="button"
-                                                                            class="btn btn-sm btn-info text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#scheduleDetailsModal"
-                                                                            data-batch="Python Jan 2026"
-                                                                            data-course="Python with Django"
-                                                                            data-instructor="Mr. A. Sharma"
-                                                                            data-classroom="Room 101"
-                                                                            data-date="Jan 20, 2026"
-                                                                            data-time="07:00 - 09:00"
-                                                                            data-status="CANCELLED"
-                                                                            onclick="populateScheduleModal(this)">
-                                                                        View
-                                                                    </button>
-                                                                    <a href="{% url 'EditSchedule' id=1 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Edit</a>
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteScheduleModal"
-                                                                            data-name="Python Jan 2026 on Jan 20"
-                                                                            data-delete-url="{% url 'DeleteSchedule' id=3 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                <input type="text"
+                                                       id="searchLog"
+                                                       class="form-control"
+                                                       placeholder="Search log...">
                                             </div>
                                         </div>
-                                    </section>
+                                    </div>
+                                    <!-- The Export Table -->
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-striped" id="exportTable">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th style="min-width:200px">Exported By (Who)</th>
+                                                    <th>Data Content (What)</th>
+                                                    <th>Exported On (Date)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for log in exports %}
+                                                    <tr>
+                                                        <!-- 1. Who -->
+                                                        <td class="align-middle">
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="">{{ log.user }}</span>
+                                                            </div>
+                                                        </td>
+                                                        <!-- 2. What -->
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-subtle badge-dark">{{ log.type }}</span>
+                                                        </td>
+                                                        <!-- 3. Date -->
+                                                        <td class="align-middle">{{ log.date|date:"M d, Y H:i" }}</td>
+                                                    </tr>
+                                                {% empty %}
+                                                    <tr>
+                                                        <td colspan="4" class="text-center py-4 text-muted">No export history found.</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- /.page-inner -->
                     </div>
-                    <!-- /.page -->
+                    <!-- /.page-inner -->
                 </div>
-                <!-- /.wrapper -->
-            </main>
-            <!-- /.app-main -->
-            <!-- /.app -->
-            <!-- BEGIN BASE JS -->
-            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-            <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-            <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-            <!-- END BASE JS -->
-            <!-- BEGIN PLUGINS JS -->
-            <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-            <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-            <!-- END PLUGINS JS -->
-            <!-- BEGIN THEME JS -->
-            <script src="{% static 'javascript/main.min.js' %}"></script>
-            <!-- END THEME JS -->
-            <!-- Global site tag (gtag.js) - Google Analytics -->
-            <script async
-                    src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-            <script>
+                <!-- /.page -->
+            </div>
+            <!-- /.wrapper -->
+        </main>
+        <!-- /.app-main -->
+        <!-- /.app -->
+        <!-- BEGIN BASE JS -->
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <!-- END BASE JS -->
+        <!-- BEGIN PLUGINS JS -->
+        <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+        <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+        <!-- END PLUGINS JS -->
+        <!-- BEGIN THEME JS -->
+        <script src="{% static 'javascript/main.min.js' %}"></script>
+        <!-- END THEME JS -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async
+                src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+        <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -911,197 +739,37 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
-            </script>
-            <!-- ================= VIEW DETAILS MODAL ================= -->
-            <div class="modal fade"
-                 id="scheduleDetailsModal"
-                 tabindex="-1"
-                 role="dialog"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Session Details</h5>
-                            <button type="button"
-                                    class="btn-close"
-                                    data-dismiss="modal"
-                                    aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered mb-0">
-                                    <tbody>
-                                        <tr>
-                                            <th class="bg-primary text-white" style="width: 35%;">Batch</th>
-                                            <td id="modal_sch_batch"></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light text-primary">Course</th>
-                                            <td id="modal_sch_course"></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-primary text-white">Date</th>
-                                            <td id="modal_sch_date"></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light text-primary">Time</th>
-                                            <td id="modal_sch_time" class="font-weight-bold"></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-primary text-white">Instructor</th>
-                                            <td id="modal_sch_instructor"></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light text-primary">Classroom</th>
-                                            <td id="modal_sch_classroom"></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-primary text-white">Status</th>
-                                            <td>
-                                                <span id="modal_sch_status" class="badge"></span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ================= DELETE CONFIRMATION MODAL ================= -->
-            <div class="modal fade"
-                 id="deleteScheduleModal"
-                 tabindex="-1"
-                 role="dialog"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Confirm Deletion</h5>
-                            <button type="button"
-                                    class="btn-close"
-                                    data-dismiss="modal"
-                                    aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body text-center">
-                            Are you sure you want to delete session for <strong id="delete_modal_sch_name"></strong>?
-                        </div>
-                        <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
-                            <a href="#"
-                               id="delete_modal_confirm_btn"
-                               class="btn btn-secondary text-danger">Yes, Delete</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- scripts -->
-            <script>
+        </script>
+    </body>
+    <script>
 document.addEventListener("DOMContentLoaded", function() {
     
-    // Selectors
-    const searchInput = document.getElementById('table-search');
-    const filterDate = document.getElementById('filterDate');
-    const filterStatus = document.getElementById('filterStatus');
-    const filterInstructor = document.getElementById('filterInstructor');
-    const filterClassroom = document.getElementById('filterClassroom');
-    const clearBtn = document.getElementById('clear-search');
-    const tableRows = document.querySelectorAll('#scheduleTable tbody tr');
+    // 1. Select Elements
+    const searchInput = document.getElementById('searchLog');
+    // Select all rows inside the Table Body
+    const tableRows = document.querySelectorAll('#exportTable tbody tr');
 
-    const today = new Date().toISOString().split('T')[0];
+    // 2. Add Event Listener
+    searchInput.addEventListener('keyup', function() {
+        // Get the value typed by user and convert to lowercase
+        const searchText = this.value.toLowerCase().trim();
 
-    // --- Filter Function ---
-    function filterTable() {
-        const searchText = searchInput.value.toLowerCase().trim();
-        const dateVal = filterDate.value;
-        const statusVal = filterStatus.value;
-        const instVal = filterInstructor.value;
-        const roomVal = filterClassroom.value;
+        // Loop through every row
+        tableRows.forEach(row => {
+            // Helper: Check if this is a "No records found" row (optional safety)
+            if (row.classList.contains('no-records')) return;
 
-        tableRows.forEach(function(row) {
-            // 1. Search Logic
-            // We search Batch Name (Visible) AND Course Name (Hidden in data attribute)
-            const batchText = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-            const courseAttr = row.getAttribute('data-course').toLowerCase();
-            const matchesSearch = batchText.includes(searchText) || courseAttr.includes(searchText);
+            // Get ALL text inside this row (Who + What + Date)
+            const rowContent = row.textContent.toLowerCase();
 
-            // 2. Filter Logic (Using data attributes)
-            const rowDate = row.getAttribute('data-date');
-            const rowStatus = row.getAttribute('data-status');
-            const rowInstructor = row.getAttribute('data-instructor');
-            const rowClassroom = row.getAttribute('data-classroom');
-
-            // Date
-            let matchesDate = true;
-            if (dateVal === 'today') matchesDate = (rowDate === today);
-            else if (dateVal === 'upcoming') matchesDate = (rowDate >= today);
-
-            // Dropdowns
-            let matchesStatus = (statusVal === 'all') || (rowStatus === statusVal);
-            let matchesInst = (instVal === 'all') || (rowInstructor === instVal);
-            let matchesRoom = (roomVal === 'all') || (rowClassroom === roomVal);
-
-            // 3. Final Decision
-            if (matchesSearch && matchesDate && matchesStatus && matchesInst && matchesRoom) {
-                row.style.display = '';
+            // If the row content contains the search text, Show it. Else, Hide it.
+            if (rowContent.includes(searchText)) {
+                row.style.display = ''; // Shows the row
             } else {
-                row.style.display = 'none';
+                row.style.display = 'none'; // Hides the row
             }
         });
-
-        clearBtn.style.display = (searchText.length > 0) ? 'block' : 'none';
-    }
-
-    // Attach Listeners
-    searchInput.addEventListener('keyup', filterTable);
-    filterDate.addEventListener('change', filterTable);
-    filterStatus.addEventListener('change', filterTable);
-    filterInstructor.addEventListener('change', filterTable);
-    filterClassroom.addEventListener('change', filterTable);
-
-    clearBtn.addEventListener('click', function() {
-        searchInput.value = '';
-        this.style.display = 'none';
-        filterTable();
     });
 });
-
-// --- Populate View Modal ---
-function populateScheduleModal(buttonElement) {
-    const data = buttonElement.dataset;
-    document.getElementById('modal_sch_batch').textContent = data.batch;
-    document.getElementById('modal_sch_course').textContent = data.course;
-    document.getElementById('modal_sch_instructor').textContent = data.instructor;
-    document.getElementById('modal_sch_classroom').textContent = data.classroom;
-    document.getElementById('modal_sch_date').textContent = data.date;
-    document.getElementById('modal_sch_time').textContent = data.time;
-
-    const statusEl = document.getElementById('modal_sch_status');
-    statusEl.textContent = data.status;
-    statusEl.className = 'badge'; 
-    if (data.status === 'SCHEDULED') statusEl.classList.add('badge-primary');
-    else if (data.status === 'COMPLETED') statusEl.classList.add('badge-success');
-    else if (data.status === 'CANCELLED') statusEl.classList.add('badge-warning');
-    else statusEl.classList.add('badge-secondary');
-}
-
-// --- Populate Delete Modal ---
-function populateDeleteModal(buttonElement) {
-    const name = buttonElement.getAttribute('data-name');
-    const deleteUrl = buttonElement.getAttribute('data-delete-url');
-    
-    document.getElementById('delete_modal_sch_name').textContent = name;
-    
-    const confirmBtn = document.getElementById('delete_modal_confirm_btn');
-    if(confirmBtn) confirmBtn.href = deleteUrl;
-}
-            </script>
-        </body>
-    </html>
+    </script>
+</html>
