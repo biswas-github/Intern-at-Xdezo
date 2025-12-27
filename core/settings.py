@@ -137,3 +137,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# private file settings 
+import os
+PRIVATE_ROOT=os.path.join(BASE_DIR,'private_files')

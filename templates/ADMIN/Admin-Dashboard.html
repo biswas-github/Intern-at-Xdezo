@@ -158,20 +158,51 @@
           <!-- .aside-header -->
           <header class="aside-header d-block d-md-none">
             <!-- .btn-account -->
+            <button class="btn-account"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#dropdown-aside">
+              <!-- 1. User Avatar (Generic Icon) -->
+              <span class="user-avatar user-avatar-lg">
+                <span class="tile tile-circle bg-primary">
+                  <span class="oi oi-person text-white"></span>
+                </span>
+              </span>
+              <span class="account-icon">
+                <span class="fa fa-caret-down fa-lg"></span>
+              </span>
+              <!-- 2. User Name and Role -->
+              <span class="account-summary">
+                <span class="account-name">
+                  {% if request.user.is_authenticated %}
+                    {{ request.user.get_full_name|default:request.user.username }}
+                  {% else %}
+                    Admin_DEMO
+                  {% endif %}
+                </span>
+                <span class="account-description">
+                  {% if request.user.is_authenticated %}
+                    {{ request.user.get_role_display }}
+                  {% else %}
+                    Admin
+                  {% endif %}
+                </span>
+              </span>
+            </button>
             <!-- /.btn-account -->
             <!-- .dropdown-aside -->
             <div id="dropdown-aside" class="dropdown-aside collapse">
               <!-- dropdown-items -->
               <div class="pb-3">
-                <a class="dropdown-item" href="user-profile.html">
-                  <span class="dropdown-icon oi oi-person"></span> Profile</a>
-                <a class="dropdown-item" href="auth-signin-v1.html">
-                  <span class="dropdown-icon oi oi-account-logout"></span>
-                Logout</a>
+                <!-- Logout Link -->
+                <a class="dropdown-item" href="{% url 'login' %}">
+                  <span class="dropdown-icon oi oi-account-logout"></span> Logout
+                </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Help Center</a>
-                <a class="dropdown-item" href="#">Ask Forum</a>
-                <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
+                <!-- Delete Account Link -->
+                <a class="dropdown-item text-danger" href="{% url 'login' %}">
+                  <span class="dropdown-icon oi oi-trash"></span> Delete Account
+                </a>
               </div>
               <!-- /dropdown-items -->
             </div>

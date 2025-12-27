@@ -38,13 +38,18 @@
                 <div class="top-bar">
                     <!-- .top-bar-brand -->
                     <div class="top-bar-brand">
-                        <a href="index.html">
-                            <img src="{% static 'images/brand-inverse.png' %}" height="32" alt="" />
+                        <a href="{% url 'AdminDashboard' %}">
+                            <img src="{% static 'images/brand-inverse.png' %}"
+                                 height="42"
+                                 width="150"
+                                 class="rounded"
+                                 alt="Brand Logo" />
                         </a>
                     </div>
+                    <!-- /.top-bar-brand -->
                     <!-- .top-bar-list -->
                     <div class="top-bar-list">
-                        <!-- .top-bar-item (Mobile Menu) -->
+                        <!-- Mobile Menu Toggle -->
                         <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
                             <button class="hamburger hamburger-squeeze"
                                     type="button"
@@ -56,72 +61,67 @@
                                 </span>
                             </button>
                         </div>
-                        <!-- .top-bar-item (Search) -->
-                        <div class="top-bar-item top-bar-item-full">
-                            <div class="top-bar-search">
-                                <div class="input-group input-group-search">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <span class="oi oi-magnifying-glass"></span>
-                                        </span>
-                                    </div>
-                                    <input type="text"
-                                           class="form-control"
-                                           aria-label="Search"
-                                           placeholder="Search" />
-                                </div>
-                            </div>
-                        </div>
-                        <!-- .top-bar-item (Right Actions) -->
+                        <!-- Spacer -->
+                        <div class="top-bar-item top-bar-item-full"></div>
+                        <!-- .top-bar-item: The Right Side User Menu -->
                         <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
-                            <ul class="header-nav nav">
-                                <!-- Notifications / Messages omitted for brevity, kept structure -->
-                                <li class="nav-item dropdown header-nav-dropdown">
-                                    <a class="nav-link"
-                                       href="#"
-                                       data-toggle="dropdown"
-                                       aria-haspopup="true"
-                                       aria-expanded="false">
-                                        <span class="oi oi-grid-three-up"></span>
-                                    </a>
-                                    <div class="dropdown-arrow"></div>
-                                    <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
-                                        <div class="dropdown-sheets">
-                                            <div class="dropdown-sheet-item">
-                                                <a href="#" class="tile-wrapper">
-                                                    <span class="tile tile-lg bg-indigo"><i class="oi oi-people"></i></span>
-                                                    <span class="tile-peek">Teams</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!-- User Account -->
+                            <!-- Dropdown -->
                             <div class="dropdown">
                                 <button class="btn-account d-none d-md-flex"
                                         type="button"
                                         data-toggle="dropdown"
                                         aria-haspopup="true"
                                         aria-expanded="false">
+                                    <!-- User Avatar (UPDATED: Generic Icon) -->
                                     <span class="user-avatar">
-                                        <img src="{% static 'images/avatars/profile.jpg' %}" alt="" />
+                                        <span class="tile tile-circle bg-primary">
+                                            <span class="oi oi-person text-white"></span>
+                                        </span>
                                     </span>
-                                    <span class="account-summary pr-lg-4 d-none d-lg-block">
-                                        <span class="account-name">Admim_DEMO</span>
-                                        <span class="account-description">Admin</span>
-                                    </span>
+                                    <!-- User Name and Role -->
+                                    {% if request.user.is_authenticated %}
+                                        <span class="account-summary pr-lg-4 d-none d-lg-block">
+                                            <span class="account-name">{{ request.user.get_full_name|default:request.user.username }}</span>
+                                            <span class="account-description">{{ request.user.get_role_display }}</span>
+                                        </span>
+                                    {% else %}
+                                        <span class="account-summary pr-lg-4 d-none d-lg-block">
+                                            <span class="account-name">Admin_demo</span>
+                                            <span class="account-description">Admin</span>
+                                        </span>
+                                    {% endif %}
                                 </button>
                                 <div class="dropdown-arrow dropdown-arrow-left"></div>
+                                <!-- Dropdown Menu -->
                                 <div class="dropdown-menu">
-                                    <h6 class="dropdown-header d-none d-md-block d-lg-none">Beni Arisandi</h6>
-                                    <a class="dropdown-item" href="user-profile.html"><span class="dropdown-icon oi oi-person"></span> Profile</a>
-                                    <a class="dropdown-item" href="auth-signin-v1.html"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
+                                    {% if request.user.is_authenticated %}
+                                        <h6 class="dropdown-header d-flex flex-column">
+                                            <span class="font-weight-bold">{{ request.user.get_full_name|default:request.user.username }}</span>
+                                            <small class="text-muted">{{ request.user.get_role_display }}</small>
+                                        </h6>
+                                    {% else %}
+                                        <h6>
+                                            <span class="font-weight-bold ps-1">Admin_demo</span>
+                                            <small class="text-muted">admin</small>
+                                        </h6>
+                                    {% endif %}
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'login' %}">
+                                        <span class="dropdown-icon oi oi-account-logout"></span> Logout
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" href="{% url 'login' %}">
+                                        <span class="dropdown-icon oi oi-trash"></span> Delete Account
+                                    </a>
                                 </div>
                             </div>
+                            <!-- /.dropdown -->
                         </div>
+                        <!-- /.top-bar-item -->
                     </div>
+                    <!-- /.top-bar-list -->
                 </div>
+                <!-- /.top-bar -->
             </header>
             <!-- /.app-header -->
             <!-- .app-aside -->
@@ -135,345 +135,360 @@
                                 type="button"
                                 data-toggle="collapse"
                                 data-target="#dropdown-aside">
+                            <!-- 1. User Avatar (Generic Icon) -->
                             <span class="user-avatar user-avatar-lg">
-                                <a class="dropdown-item" href="user-profile.html">
-                                    <img src="{% static 'images/avatars/profile.jpg' %}" alt="" />
+                                <span class="tile tile-circle bg-primary">
+                                    <span class="oi oi-person text-white"></span>
                                 </span>
-                                <span class="account-icon">
-                                    <span class="fa fa-caret-down fa-lg"></span>
+                            </span>
+                            <span class="account-icon">
+                                <span class="fa fa-caret-down fa-lg"></span>
+                            </span>
+                            <!-- 2. User Name and Role -->
+                            <span class="account-summary">
+                                <span class="account-name">
+                                    {% if request.user.is_authenticated %}
+                                        {{ request.user.get_full_name|default:request.user.username }}
+                                    {% else %}
+                                        Admin_DEMO
+                                    {% endif %}
                                 </span>
-                                <span class="account-summary">
-                                    <span class="account-name">Beni Arisandi</span>
-                                    <span class="account-description">Marketing Manager</span>
+                                <span class="account-description">
+                                    {% if request.user.is_authenticated %}
+                                        {{ request.user.get_role_display }}
+                                    {% else %}
+                                        Admin
+                                    {% endif %}
                                 </span>
-                            </button>
-                            <!-- /.btn-account -->
-                            <!-- .dropdown-aside -->
-                            <div id="dropdown-aside" class="dropdown-aside collapse">
-                                <!-- dropdown-items -->
-                                <div class="pb-3">
-                                    <a class="dropdown-item" href="user-profile.html">
-                                        <span class="dropdown-icon oi oi-person"></span> Profile</a>
-                                    <a class="dropdown-item" href="auth-signin-v1.html">
-                                        <span class="dropdown-icon oi oi-account-logout"></span>
-                                    Logout</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Help Center</a>
-                                    <a class="dropdown-item" href="#">Ask Forum</a>
-                                    <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
-                                </div>
-                                <!-- /dropdown-items -->
+                            </span>
+                        </button>
+                        <!-- /.btn-account -->
+                        <!-- .dropdown-aside -->
+                        <div id="dropdown-aside" class="dropdown-aside collapse">
+                            <!-- dropdown-items -->
+                            <div class="pb-3">
+                                <!-- Logout Link -->
+                                <a class="dropdown-item" href="{% url 'login' %}">
+                                    <span class="dropdown-icon oi oi-account-logout"></span> Logout
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <!-- Delete Account Link -->
+                                <a class="dropdown-item text-danger" href="{% url 'login' %}">
+                                    <span class="dropdown-icon oi oi-trash"></span> Delete Account
+                                </a>
                             </div>
-                            <!-- /.dropdown-aside -->
-                        </header>
-                        <!-- /.aside-header -->
-                        <!-- .aside-menu -->
-                        <section class="aside-menu has-scrollable">
-                            <!-- .stacked-menu -->
-                            <nav id="stacked-menu" class="stacked-menu">
-                                <!-- .menu -->
-                                <ul class="menu">
-                                    <!-- .menu-item -->
-                                    <li class="menu-item ">
-                                        <a href="{% url 'AdminDashboard' %}" class="menu-link">
-                                            <span class="menu-icon oi oi-dashboard"></span>
-                                            <span class="menu-text">Dashboard</span>
-                                        </a>
-                                    </li>
-                                    <!-- /.menu-item -->
-                                    <!-- .menu-item -->
-                                    <!-- .menu-header -->
-                                    <!-- .menu-header -->
-                                    <!-- here intake mgnt insted of the Pages -->
-                                    <li class="menu-header">Intake managements</li>
-                                    <!-- /.menu-header -->
-                                    <!-- .menu-item -->
-                                    <!-- /.menu-item -->
-                                    <li class="menu-item has-child ">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon oi oi-people"></span>
-                                            <span class="menu-text">User management</span>
-                                        </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a class="menu-link" href="{% url 'ViewSystemUser' %}">View system Users</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a class="menu-link" href="{% url 'AddSystemUser' %}">Add system Users</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- datamanagements -->
-                                    <!-- .menu-item -->
-                                    <li class="menu-item has-child has-open">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon oi oi-people"></span>
-                                            <span class="menu-text">Data management</span>
-                                        </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'ViewCourses' %}" class="menu-link">Course</a>
-                                            </li>
-                                            <li class="menu-item has-active">
-                                                <a href="{% url 'ViewBatches' %}" class="menu-link">Batches</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'ViewClassroom' %}" class="menu-link">Classrooms</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'ViewEnrollment' %}" class="menu-link">Enrollments</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- finance  -->
-                                    <!-- .menu-item -->
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon oi oi-people"></span>
-                                            <span class="menu-text">Schedules & Time-tables</span>
-                                        </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- ./menuitems -->
-                                    <!--  ./finance-->
-                                    <!-- .menu-item -->
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon oi oi-people"></span>
-                                            <span class="menu-text">Finance</span>
-                                        </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- ./menuitems -->
-                                    <!-- .exports -->
-                                    <li class="menu-item has-child" style="">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon oi oi-list-rich"></span>
-                                            <span class="menu-text">Exports</span>
-                                        </a>
-                                        <!-- child menu -->
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
-                                            </li>
-                                        </ul>
-                                        <!-- /child menu -->
-                                        <!-- .analytics -->
-                                        <!-- .menu-item -->
-                                        <li class="menu-item has-child">
-                                            <a href="#" class="menu-link">
-                                                <span class="menu-icon oi oi-people"></span>
-                                                <span class="menu-text">Analytics</span>
-                                            </a>
-                                            <ul class="menu">
-                                                <li class="menu-item">
-                                                    <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="{% url 'ActiveStudent' %}" class="menu-link">Active Students</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="{% url 'analytics_enrollment_trends' %}" class="menu-link">Enrollments Trends</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <!-- ./menuitems -->
-                                        <!-- ./analytics -->
-                                        <!-- System logs -->
-                                        <!-- .menu-item -->
-                                        <li class="menu-item has-child">
-                                            <a href="#" class="menu-link">
-                                                <span class="menu-icon oi oi-people"></span>
-                                                <span class="menu-text">System Logs</span>
-                                            </a>
-                                            <ul class="menu">
-                                                <li class="menu-item">
-                                                    <a href="{% url 'AllActivities' %}" class="menu-link">All activities</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="{% url 'Export-Details' %}" class="menu-link">Export Details</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <!-- ./menuitems -->
-                                        <!-- ./System logs  -->
-                                        <!-- .menu-item -->
-                                        <!-- /.menu-item -->
-                                    </ul>
-                                    <!-- /.menu -->
-                                </nav>
-                                <!-- /.stacked-menu -->
-                            </section>
-                            <!-- /.aside-menu -->
+                            <!-- /dropdown-items -->
                         </div>
-                        <!-- /.aside-content -->
-                    </aside>
-                    <!-- /.app-aside -->
-                    <!-- .app-main -->
-                    <main class="app-main">
-                        <div class="wrapper">
-                            <div class="page">
-                                <div class="page-inner ms-2">
-                                    <!-- Page Header & Breadcrumbs -->
-                                    <header class="page-title-bar">
-                                        <nav aria-label="breadcrumb">
-                                            <ol class="breadcrumb">
-                                                <li class="breadcrumb-item">
-                                                    <a href="{% url 'AdminDashboard' %}">DataManagement</a>
-                                                </li>
-                                                <li class="breadcrumb-item">
-                                                    <a href="{% url 'ViewBatches' %}">Batches</a>
-                                                </li>
-                                                <li class="breadcrumb-item active" aria-current="page">Update Batch</li>
-                                            </ol>
-                                        </nav>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h1 class="page-title">Update Batch Details</h1>
-                                        </div>
-                                    </header>
-                                    <!-- Page Content (Form) -->
-                                    <div class="page-section">
-                                        <div class="row">
-                                            <div class="col-12 col-sm-8 col-lg-8 border rounded mb-5 mb-sm-5">
-                                                <div class="card-body">
-                                                    <!-- Form -->
-                                                    <form method="post">
-                                                        <!-- {% csrf_token %} -->
-                                                        <fieldset>
-                                                            <legend>Edit Information</legend>
-                                                            <!-- Batch Name (Pre-filled) -->
-                                                            <div class="form-group">
-                                                                <label for="id_name">
-                                                                    Batch Name <abbr title="Required">*</abbr>
+                        <!-- /.dropdown-aside -->
+                    </header>
+                    <!-- /.aside-header -->
+                    <!-- .aside-menu -->
+                    <section class="aside-menu has-scrollable">
+                        <!-- .stacked-menu -->
+                        <nav id="stacked-menu" class="stacked-menu">
+                            <!-- .menu -->
+                            <ul class="menu">
+                                <!-- .menu-item -->
+                                <li class="menu-item ">
+                                    <a href="{% url 'AdminDashboard' %}" class="menu-link">
+                                        <span class="menu-icon oi oi-dashboard"></span>
+                                        <span class="menu-text">Dashboard</span>
+                                    </a>
+                                </li>
+                                <!-- /.menu-item -->
+                                <!-- .menu-item -->
+                                <!-- .menu-header -->
+                                <!-- .menu-header -->
+                                <!-- here intake mgnt insted of the Pages -->
+                                <li class="menu-header">Intake managements</li>
+                                <!-- /.menu-header -->
+                                <!-- .menu-item -->
+                                <!-- /.menu-item -->
+                                <li class="menu-item has-child ">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">User management</span>
+                                    </a>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="{% url 'ViewSystemUser' %}">View system Users</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="{% url 'AddSystemUser' %}">Add system Users</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- datamanagements -->
+                                <!-- .menu-item -->
+                                <li class="menu-item has-child has-open">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">Data management</span>
+                                    </a>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'ViewCourses' %}" class="menu-link">Course</a>
+                                        </li>
+                                        <li class="menu-item has-active">
+                                            <a href="{% url 'ViewBatches' %}" class="menu-link">Batches</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'ViewClassroom' %}" class="menu-link">Classrooms</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'ViewEnrollment' %}" class="menu-link">Enrollments</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- finance  -->
+                                <!-- .menu-item -->
+                                <li class="menu-item has-child">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">Schedules & Time-tables</span>
+                                    </a>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- ./menuitems -->
+                                <!--  ./finance-->
+                                <!-- .menu-item -->
+                                <li class="menu-item has-child">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-text">Finance</span>
+                                    </a>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- ./menuitems -->
+                                <!-- .exports -->
+                                <li class="menu-item has-child" style="">
+                                    <a href="#" class="menu-link">
+                                        <span class="menu-icon oi oi-list-rich"></span>
+                                        <span class="menu-text">Exports</span>
+                                    </a>
+                                    <!-- child menu -->
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /child menu -->
+                                    <!-- .analytics -->
+                                    <!-- .menu-item -->
+                                    <li class="menu-item has-child">
+                                        <a href="#" class="menu-link">
+                                            <span class="menu-icon oi oi-people"></span>
+                                            <span class="menu-text">Analytics</span>
+                                        </a>
+                                        <ul class="menu">
+                                            <li class="menu-item">
+                                                <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{% url 'ActiveStudent' %}" class="menu-link">Active Students</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{% url 'analytics_enrollment_trends' %}" class="menu-link">Enrollments Trends</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- ./menuitems -->
+                                    <!-- ./analytics -->
+                                    <!-- System logs -->
+                                    <!-- .menu-item -->
+                                    <li class="menu-item has-child">
+                                        <a href="#" class="menu-link">
+                                            <span class="menu-icon oi oi-people"></span>
+                                            <span class="menu-text">System Logs</span>
+                                        </a>
+                                        <ul class="menu">
+                                            <li class="menu-item">
+                                                <a href="{% url 'AllActivities' %}" class="menu-link">All activities</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{% url 'Export-Details' %}" class="menu-link">Export Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- ./menuitems -->
+                                    <!-- ./System logs  -->
+                                    <!-- .menu-item -->
+                                    <!-- /.menu-item -->
+                                </ul>
+                                <!-- /.menu -->
+                            </nav>
+                            <!-- /.stacked-menu -->
+                        </section>
+                        <!-- /.aside-menu -->
+                    </div>
+                    <!-- /.aside-content -->
+                </aside>
+                <!-- /.app-aside -->
+                <!-- .app-main -->
+                <main class="app-main">
+                    <div class="wrapper">
+                        <div class="page">
+                            <div class="page-inner ms-2">
+                                <!-- Page Header & Breadcrumbs -->
+                                <header class="page-title-bar">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item">
+                                                <a href="{% url 'AdminDashboard' %}">DataManagement</a>
+                                            </li>
+                                            <li class="breadcrumb-item">
+                                                <a href="{% url 'ViewBatches' %}">Batches</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">Update Batch</li>
+                                        </ol>
+                                    </nav>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h1 class="page-title">Update Batch Details</h1>
+                                    </div>
+                                </header>
+                                <!-- Page Content (Form) -->
+                                <div class="page-section">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-8 col-lg-8 border rounded mb-5 mb-sm-5">
+                                            <div class="card-body">
+                                                <!-- Form -->
+                                                <form method="post">
+                                                    <!-- {% csrf_token %} -->
+                                                    <fieldset>
+                                                        <legend>Edit Information</legend>
+                                                        <!-- Batch Name (Pre-filled) -->
+                                                        <div class="form-group">
+                                                            <label for="id_name">
+                                                                Batch Name <abbr title="Required">*</abbr>
+                                                            </label>
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   id="id_name"
+                                                                   name="name"
+                                                                   value="Python Jan 2026 Morning"
+                                                                   required>
+                                                        </div>
+                                                        <!-- Course (Pre-selected) -->
+                                                        <div class="form-group">
+                                                            <label for="id_course">
+                                                                Course <abbr title="Required">*</abbr>
+                                                            </label>
+                                                            <select class="form-control" id="id_course" name="course" required>
+                                                                <option value="" disabled>Select a Course</option>
+                                                                <!-- Pre-selected value -->
+                                                                <option value="1" selected>Course A (CODE101)</option>
+                                                                <option value="2">Course B (CODE202)</option>
+                                                            </select>
+                                                        </div>
+                                                        <!-- Instructor (Pre-selected) -->
+                                                        <div class="form-group">
+                                                            <label for="id_instructor">Instructor</label>
+                                                            <select class="form-control" id="id_instructor" name="instructor">
+                                                                <option value="">No Instructor Assigned (Optional)</option>
+                                                                <!-- Pre-selected value -->
+                                                                <option value="10" selected>Instructor John Doe</option>
+                                                                <option value="11">Instructor Jane Smith</option>
+                                                            </select>
+                                                        </div>
+                                                        <!-- Dates (Pre-filled) -->
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <label for="id_start_date">
+                                                                    Start Date <abbr title="Required">*</abbr>
                                                                 </label>
-                                                                <input type="text"
+                                                                <input type="date"
                                                                        class="form-control"
-                                                                       id="id_name"
-                                                                       name="name"
-                                                                       value="Python Jan 2026 Morning"
+                                                                       id="id_start_date"
+                                                                       name="start_date"
+                                                                       value="2026-01-15"
                                                                        required>
                                                             </div>
-                                                            <!-- Course (Pre-selected) -->
-                                                            <div class="form-group">
-                                                                <label for="id_course">
-                                                                    Course <abbr title="Required">*</abbr>
+                                                            <div class="form-group col-md-6">
+                                                                <label for="id_end_date">
+                                                                    End Date <abbr title="Required">*</abbr>
                                                                 </label>
-                                                                <select class="form-control" id="id_course" name="course" required>
-                                                                    <option value="" disabled>Select a Course</option>
-                                                                    <!-- Pre-selected value -->
-                                                                    <option value="1" selected>Course A (CODE101)</option>
-                                                                    <option value="2">Course B (CODE202)</option>
-                                                                </select>
+                                                                <input type="date"
+                                                                       class="form-control"
+                                                                       id="id_end_date"
+                                                                       name="end_date"
+                                                                       value="2026-04-15"
+                                                                       required>
                                                             </div>
-                                                            <!-- Instructor (Pre-selected) -->
-                                                            <div class="form-group">
-                                                                <label for="id_instructor">Instructor</label>
-                                                                <select class="form-control" id="id_instructor" name="instructor">
-                                                                    <option value="">No Instructor Assigned (Optional)</option>
-                                                                    <!-- Pre-selected value -->
-                                                                    <option value="10" selected>Instructor John Doe</option>
-                                                                    <option value="11">Instructor Jane Smith</option>
-                                                                </select>
-                                                            </div>
-                                                            <!-- Dates (Pre-filled) -->
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="id_start_date">
-                                                                        Start Date <abbr title="Required">*</abbr>
-                                                                    </label>
-                                                                    <input type="date"
-                                                                           class="form-control"
-                                                                           id="id_start_date"
-                                                                           name="start_date"
-                                                                           value="2026-01-15"
-                                                                           required>
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="id_end_date">
-                                                                        End Date <abbr title="Required">*</abbr>
-                                                                    </label>
-                                                                    <input type="date"
-                                                                           class="form-control"
-                                                                           id="id_end_date"
-                                                                           name="end_date"
-                                                                           value="2026-04-15"
-                                                                           required>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Status (Pre-selected) -->
-                                                            <div class="form-group">
-                                                                <label for="id_status">
-                                                                    Status <abbr title="Required">*</abbr>
-                                                                </label>
-                                                                <select class="form-control" id="id_status" name="status" required>
-                                                                    <option value="UPCOMING">Upcoming</option>
-                                                                    <!-- Pre-selected value -->
-                                                                    <option value="ONGOING" selected>Ongoing</option>
-                                                                    <option value="COMPLETED">Completed</option>
-                                                                    <option value="CANCELLED">Cancelled</option>
-                                                                </select>
-                                                            </div>
-                                                            <!-- Update Button -->
-                                                            <button type="submit"
-                                                                    class="btn btn-primary d-flex justify-content-center w-100 mt-4">
-                                                                Update Batch
-                                                            </button>
-                                                            <!-- Optional Cancel Link -->
-                                                            <div class="text-center mt-2">
-                                                                <a href="{% url 'ViewBatches' %}" class="text-muted small">Cancel</a>
-                                                            </div>
-                                                        </fieldset>
-                                                    </form>
-                                                    <!-- /.form -->
-                                                </div>
+                                                        </div>
+                                                        <!-- Status (Pre-selected) -->
+                                                        <div class="form-group">
+                                                            <label for="id_status">
+                                                                Status <abbr title="Required">*</abbr>
+                                                            </label>
+                                                            <select class="form-control" id="id_status" name="status" required>
+                                                                <option value="UPCOMING">Upcoming</option>
+                                                                <!-- Pre-selected value -->
+                                                                <option value="ONGOING" selected>Ongoing</option>
+                                                                <option value="COMPLETED">Completed</option>
+                                                                <option value="CANCELLED">Cancelled</option>
+                                                            </select>
+                                                        </div>
+                                                        <!-- Update Button -->
+                                                        <button type="submit"
+                                                                class="btn btn-primary d-flex justify-content-center w-100 mt-4">
+                                                            Update Batch
+                                                        </button>
+                                                        <!-- Optional Cancel Link -->
+                                                        <div class="text-center mt-2">
+                                                            <a href="{% url 'ViewBatches' %}" class="text-muted small">Cancel</a>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                                <!-- /.form -->
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- /.page-section -->
                                 </div>
+                                <!-- /.page-section -->
                             </div>
                         </div>
-                    </main>
-                    <!-- /.app-main -->
-                </div>
-                <!-- /.app -->
-                <!-- BEGIN BASE JS -->
-                <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-                <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-                <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-                <!-- END BASE JS -->
-                <!-- BEGIN PLUGINS JS -->
-                <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-                <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-                <!-- END PLUGINS JS -->
-                <!-- BEGIN THEME JS -->
-                <script src="{% static 'javascript/main.min.js' %}"></script>
-                <!-- END THEME JS -->
-            </body>
-        </html>
+                    </div>
+                </main>
+                <!-- /.app-main -->
+            </div>
+            <!-- /.app -->
+            <!-- BEGIN BASE JS -->
+            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+            <!-- END BASE JS -->
+            <!-- BEGIN PLUGINS JS -->
+            <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+            <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+            <!-- END PLUGINS JS -->
+            <!-- BEGIN THEME JS -->
+            <script src="{% static 'javascript/main.min.js' %}"></script>
+            <!-- END THEME JS -->
+        </body>
+    </html>

@@ -611,3 +611,26 @@ def ExportDetails(request):
 # first page for the viewer 
 def ViewerDashboard(request):
     return render(request,'ADMIN/Viewer-Dashboard.html')
+
+
+# DOwnload files 
+def download_report(request):
+    import os
+    from django.conf import settings
+    from django.http import FileResponse, Http404, HttpResponseForbidden
+    from django.contrib.auth.decorators import login_required
+    # Optional: restrict to staff/admin only
+  
+
+    file_path = os.path.join(settings.PRIVATE_ROOT, "data.csv")
+    print("abc")
+    if not os.path.exists(file_path):
+        raise Http404("File not found.")
+
+    # 'as_attachment=True' forces download
+    # 'filename=' controls the downloaded name
+    return FileResponse(
+        open(file_path, "rb"),
+        as_attachment=True,
+        filename="data.csv"
+    )
