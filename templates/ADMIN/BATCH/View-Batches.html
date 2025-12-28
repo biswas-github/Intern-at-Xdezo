@@ -46,6 +46,42 @@
               href="https://cdn.jsdelivr.net/gh/williamtroup/Calendar.js@main/dist/calendar.js.css">
         <!-- calander js  -->
         <script src="https://cdn.jsdelivr.net/gh/williamtroup/Calendar.js@main/dist/calendar.js"></script>
+        <!-- flatpicker  -->
+        <!-- Flatpickr CSS (Airbnb Style for a clean look) -->
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
+        <!-- Flatpickr JS -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <!-- calander styles -->
+        <style>
+    /* 1. The Start and End Dates (Dark Green) */
+    .flatpickr-day.selected, 
+    .flatpickr-day.startRange, 
+    .flatpickr-day.endRange, 
+    .flatpickr-day.selected.inRange, 
+    .flatpickr-day.startRange.inRange, 
+    .flatpickr-day.endRange.inRange {
+        background: #28a745 !important;
+        border-color: #28a745 !important;
+        color: white !important;
+    }
+
+    /* 2. The Days In Between (Light Green) */
+    .flatpickr-day.inRange {
+        background: #d4edda !important;
+        border-color: #d4edda !important;
+        box-shadow: -5px 0 0 #d4edda, 5px 0 0 #d4edda !important; /* Fills gaps */
+        color: #155724 !important; /* Dark green text for readability */
+    }
+
+    /* 3. Focus states (removes blue outline) */
+    .flatpickr-day.selected:focus, 
+    .flatpickr-day.startRange:focus, 
+    .flatpickr-day.endRange:focus {
+        background: #218838 !important;
+        border-color: #218838 !important;
+    }
+        </style>
     </head>
     <body>
         <!-- .app -->
@@ -624,7 +660,14 @@
                             </div>
                             <!-- Calendar Container -->
                             <h6 class="text-muted border-bottom pb-2">Schedule Visualization</h6>
-                            <div id="modal_calendar" style="min-height: 300px;"></div>
+                            <!-- Flatpickr will render inside here -->
+                            <div style="display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        flex-wrap: wrap">
+                                <div id="modal_calendar"
+                                     class="d-flex justify-content-center align-items-center"></div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -666,62 +709,54 @@
         </body>
         <script>
 // --- 1. POPULATE VIEW BATCH MODAL ---
-// --- 1. POPULATE VIEW BATCH MODAL ---
-function populateBatchModal(buttonElement) {
 
+
+function populateBatchModal(buttonElement) {
     const data = buttonElement.dataset;
     
-    // A. Fill Text Data
+    // 1. Fill Text Data
     document.getElementById('modal_batch_name').textContent = data.batchname || 'N/A';
     document.getElementById('modal_batch_course').textContent = data.course || 'N/A';
     document.getElementById('modal_batch_instructor').textContent = data.instructor || 'N/A';
-    
     document.getElementById('modal_batch_start').textContent = data.start_date || 'N/A';
     document.getElementById('modal_batch_end').textContent = data.end_date || 'N/A';
 
-    // B. Status Badge Logic
+    // 2. Status Badge Logic
     const statusEl = document.getElementById('modal_batch_status');
     const status = data.status || '';
     statusEl.textContent = status;
     statusEl.className = 'badge'; 
     
-    if (status.toLowerCase() === 'active' || status.toLowerCase() === 'upcoming') {
+    if (status.toLowerCase().includes('active') || status.toLowerCase().includes('upcoming')) {
         statusEl.classList.add('badge-success');
-    } else if (status.toLowerCase() === 'completed') {
+    } else if (status.toLowerCase().includes('completed')) {
         statusEl.classList.add('badge-primary');
     } else {
         statusEl.classList.add('badge-secondary');
     }
 
-    // C. Calendar Logic
-    const calendarDiv = document.getElementById("modal_calendar");
-    // Clear previous calendar to prevent duplicates
-    calendarDiv.innerHTML = ""; 
+    // 3. FLATPICKR CALENDAR LOGIC
+    const calendarEl = document.getElementById("modal_calendar");
+    
+    // Clear any previous instance
+    calendarEl.innerHTML = ""; 
 
-    // Only init calendar if dates exist
     if (data.start_date && data.end_date) {
         
-        // 1. Create the instance with the 'date' option
-        const calendarInstance = new calendarJs("modal_calendar", {
-            exportEventsEnabled: false,
-            useAmPmForTimeDisplays: true,
-            isResponsive: true,
-            date: new Date(data.start_date) // <--- THIS SETS THE STARTING VIEW
+        flatpickr(calendarEl, {
+            inline: true,        // Displays as a static widget
+            mode: "range",       // Highlights the period between start and end
+            dateFormat: "Y-m-d", // Matches your data format
+            
+            // THE FIX: This automatically centers the calendar on the start date
+            defaultDate: [data.start_date, data.end_date],
+            
+            // Optional: Make it read-only so users can't click to change it
+            clickOpens: false,
+            allowInput: false,
         });
-
-        // 2. Add the Event
-        const event = {
-            from: new Date(data.start_date),
-            to: new Date(data.end_date),
-            title: data.batchname,
-            description: data.course
-        };
-
-        calendarInstance.addEvent(event);
-       
     }
-}
-
+}+
 
 
 
