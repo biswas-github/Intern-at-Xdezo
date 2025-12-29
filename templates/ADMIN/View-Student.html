@@ -396,204 +396,154 @@
                 </div>
                 <!-- Page Content Section -->
                 <div class="page-section">
-                  <div class="card card-fluid">
-                    <div class="card-body">
-                      <!-- Search Filter -->
-                      <div class="form-group">
-                        <div class="input-group input-group-alt">
+                  <section class="card card-fluid">
+                    <!-- Toolbar: Search & Filters -->
+                    <header class="card-header border-bottom-0">
+                      <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+                        <!-- Group 1: Filter (Optional - e.g., Status) -->
+                        <div class="form-group mb-3 mb-md-0">
+                          <select id="filterStatus" class="custom-select" style="min-width: 150px;">
+                            <option value="all" selected>Status: All</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="dropped">Dropped</option>
+                            <option value="completed">Completed</option>
+                          </select>
+                        </div>
+                        <!-- Group 2: Search -->
+                        <div class="input-group input-group-alt" style="max-width: 300px;">
                           <div class="input-group-prepend">
                             <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                           </div>
-                          <!-- The Search Logic -->
                           <input id="table-search"
                                  type="text"
                                  class="form-control"
-                                 placeholder="Search students...">
+                                 placeholder="Search name, phone, or email...">
                           <div class="input-group-append">
                             <button id="clear-search"
                                     type="button"
-                                    class="close"
-                                    aria-label="Close"
-                                    style="display:none;
-                                           position: absolute;
-                                           right: 10px;
-                                           top: 10px;
-                                           z-index: 5">
-                              <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                    class="btn btn-secondary"
+                                    style="display:none">
+                              <i class="fa fa-times"></i>
                             </button>
                           </div>
                         </div>
                       </div>
-                      <!-- The Student Table -->
-                      <div class="table-responsive">
-                        <table class="table table-hover table-striped" id="studentTable">
-                          <thead class="thead-light">
-                            <tr>
-                              <th style="min-width:200px">Name</th>
-                              <th>Phone No</th>
-                              <th>Email</th>
-                              <th style="min-width:150px; text-align:right;">Actions</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <!-- Row 1 -->
-                            <tr>
+                    </header>
+                    <!-- .table-responsive -->
+                    <div class="table-responsive">
+                      <table class="table table-hover" id="studentTable">
+                        <thead class="thead-light">
+                          <tr>
+                            <!-- 1. Name: Visible Always -->
+                            <th style="min-width:200px">Name</th>
+                            <!-- 2. Phone: Hidden on Mobile (XS) -->
+                            <th class="d-none d-sm-table-cell">Phone No</th>
+                            <!-- 3. Email: Hidden on Mobile & Tablet (XS/SM/MD) -->
+                            <th class="d-none d-lg-table-cell">Email</th>
+                            <!-- 4. Status: Hidden on Mobile (XS) -->
+                            <th class="d-none d-sm-table-cell">Status</th>
+                            <!-- 5. Actions: Visible Always -->
+                            <th style="min-width:100px; text-align:right;">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody id="studentTableBody">
+                          {% for student in students %}
+                            <tr class="student-row"
+                                data-search="{{ student.name }} {{ student.phone }} {{ student.email }}"
+                                data-status="{{ student.status }}">
+                              <!-- 1. Name -->
                               <td class="align-middle">
-                                <a href="#" class="tile tile-img mr-1">
-                                  <span class="tile-text">RB</span>
-                                </a>
-                                <a href="#">Ram Bahadur Thapa</a>
+                                
+                                <a href="#" class="text-dark font-weight-bold">{{ student.name }}</a>
+                                <!-- Mobile Only Details -->
+                                <div class="d-block d-sm-none mt-1 small">
+                                  <div class="text-muted">
+                                    <i class="fas fa-phone mr-1"></i>{{ student.phone }}
+                                  </div>
+                                  <div class="mt-1">
+                                    {% if student.status|lower == 'active' %}
+                                      <span class="text-success font-weight-bold">Active</span>
+                                    {% elif student.status|lower == 'inactive' %}
+                                      <span class="text-warning font-weight-bold">Inactive</span>
+                                    {% elif student.status|lower == 'dropped' %}
+                                      <span class="text-danger font-weight-bold">Dropped</span>
+                                    {% else %}
+                                      <span class="text-secondary font-weight-bold">{{ student.status }}</span>
+                                    {% endif %}
+                                  </div>
+                                </div>
                               </td>
-                              <td class="align-middle">9845123456</td>
-                              <td class="align-middle">ram.thapa@example.com</td>
+                              <!-- 2. Phone -->
+                              <td class="align-middle d-none d-sm-table-cell">{{ student.phone }}</td>
+                              <!-- 3. Email -->
+                              <td class="align-middle d-none d-lg-table-cell">{{ student.email }}</td>
+                              <!-- 4. Status -->
+                              <td class="align-middle d-none d-sm-table-cell">
+                                {% if student.status|lower == 'active' %}
+                                  <span class="badge badge-subtle badge-success">Active</span>
+                                {% elif student.status|lower == 'inactive' %}
+                                  <span class="badge badge-subtle badge-warning">Inactive</span>
+                                {% elif student.status|lower == 'dropped' %}
+                                  <span class="badge badge-subtle badge-danger">Dropped</span>
+                                {% elif student.status|lower == 'completed' %}
+                                  <span class="badge badge-subtle badge-primary">Completed</span>
+                                {% else %}
+                                  <span class="badge badge-subtle badge-secondary">{{ student.status }}</span>
+                                {% endif %}
+                              </td>
+                              <!-- 5. Actions -->
                               <td class="align-middle text-right">
-                                <div class="d-flex flex-column flex-md-row justify-content-md-end align-items-center">
+                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
                                   <!-- View Button -->
                                   <button type="button"
-                                          class="btn btn-sm btn-info text-white mb-2 mb-md-0"
+                                          class="btn btn-sm btn-subtle-info"
                                           data-toggle="modal"
                                           data-target="#studentDetailsModal"
-                                          data-name="Ram Bahadur Thapa"
-                                          data-phone="9845123456"
-                                          data-email="ram.thapa@example.com"
-                                          data-dob="Jan 01, 1998"
-                                          data-address="Kathmandu, Nepal"
-                                          data-status="Active"
-                                          data-edit-url="{% url 'UpdateStudent' id=1 %}"
-                                          onclick="populateModal(this)">Show more</button>
+                                          data-name="{{ student.name }}"
+                                          data-phone="{{ student.phone }}"
+                                          data-email="{{ student.email }}"
+                                          data-dob="{{ student.dob|date:'M d, Y' }}"
+                                          data-address="{{ student.address }}"
+                                          data-status="{{ student.status }}"
+                                          onclick="populateModal(this)">View</button>
                                   <!-- Update Button -->
-                                  <a href="{% url 'UpdateStudent' id=1 %}"
-                                     class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
+                                  <a href="{% url 'UpdateStudent' id=student.id %}"
+                                     class="btn btn-sm btn-subtle-warning mx-md-1">Edit</a>
                                   <!-- Delete Button -->
                                   <button type="button"
-                                          class="btn btn-danger btn-sm ml-md-2"
+                                          class="btn btn-sm btn-subtle-danger"
                                           data-toggle="modal"
                                           data-target="#deleteStudentModal"
-                                          data-name="Ram Bahadur Thapa"
-                                          data-delete-url="{% url 'DeleteStudent' id=1 %}"
-                                          onclick="populateDeleteModal(this)">Delete</button>
+                                          data-name="{{ student.name }}"
+                                          data-delete-url="{% url 'DeleteStudent' id=student.id %}"
+                                          onclick="populateDeleteModal(this)">
+                                    <i class="oi oi-trash"></i>
+                                  </button>
                                 </div>
                               </td>
                             </tr>
-                            <!-- Row 2 -->
+                          {% empty %}
                             <tr>
-                              <td class="align-middle">
-                                <a href="#" class="tile tile-img mr-1">
-                                  <span class="tile-text">SK</span>
-                                </a>
-                                <a href="#">Sita Kumari Shrestha</a>
-                              </td>
-                              <td class="align-middle">9801122334</td>
-                              <td class="align-middle">sita.shrestha@example.com</td>
-                              <td class="align-middle text-right">
-                                <div class="d-flex flex-column flex-md-row justify-content-md-end align-items-center">
-                                  <!-- View -->
-                                  <button type="button"
-                                          class="btn btn-sm btn-info text-white mb-2 mb-md-0"
-                                          data-toggle="modal"
-                                          data-target="#studentDetailsModal"
-                                          data-name="Sita Kumari Shrestha"
-                                          data-phone="9801122334"
-                                          data-email="sita.shrestha@example.com"
-                                          data-dob="Feb 14, 1999"
-                                          data-address="Lalitpur, Nepal"
-                                          data-status="Active"
-                                          data-edit-url="{% url 'UpdateStudent' id=5 %}"
-                                          onclick="populateModal(this)">Show more</button>
-                                  <!-- Update -->
-                                  <a href="{% url 'UpdateStudent' id=5 %}"
-                                     class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
-                                  <!-- Delete -->
-                                  <button type="button"
-                                          class="btn btn-danger btn-sm ml-md-2"
-                                          data-toggle="modal"
-                                          data-target="#deleteStudentModal"
-                                          data-name="Sita Kumari Shrestha"
-                                          data-delete-url="{% url 'DeleteStudent' id=5 %}"
-                                          onclick="populateDeleteModal(this)">Delete</button>
-                                </div>
+                              <td colspan="5" class="text-center py-5 text-muted">
+                                <i class="fas fa-user-slash fa-3x mb-3"></i>
+                                <br>
+                                No students found.
                               </td>
                             </tr>
-                            <!-- Row 3 -->
-                            <tr>
-                              <td class="align-middle">
-                                <a href="#" class="tile tile-img mr-1">
-                                  <span class="tile-text">BG</span>
-                                </a>
-                                <a href="#">Bishal Gurung</a>
-                              </td>
-                              <td class="align-middle">9865012345</td>
-                              <td class="align-middle">bishal.gurung@example.com</td>
-                              <td class="align-middle text-right">
-                                <div class="d-flex flex-column flex-md-row justify-content-md-end align-items-center">
-                                  <!-- View -->
-                                  <button type="button"
-                                          class="btn btn-sm btn-info text-white mb-2 mb-md-0"
-                                          data-toggle="modal"
-                                          data-target="#studentDetailsModal"
-                                          data-name="Bishal Gurung"
-                                          data-phone="9865012345"
-                                          data-email="bishal.gurung@example.com"
-                                          data-dob="May 15, 1999"
-                                          data-address="Pokhara, Nepal"
-                                          data-status="Active"
-                                          data-edit-url="{% url 'UpdateStudent' id=2 %}"
-                                          onclick="populateModal(this)">Show more</button>
-                                  <!-- Update -->
-                                  <a href="{% url 'UpdateStudent' id=2 %}"
-                                     class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
-                                  <!-- Delete -->
-                                  <button type="button"
-                                          class="btn btn-danger btn-sm ml-md-2"
-                                          data-toggle="modal"
-                                          data-target="#deleteStudentModal"
-                                          data-name="Bishal Gurung"
-                                          data-delete-url="{% url 'DeleteStudent' id=2 %}"
-                                          onclick="populateDeleteModal(this)">Delete</button>
-                                </div>
-                              </td>
-                            </tr>
-                            <!-- Row 4 -->
-                            <tr>
-                              <td class="align-middle">
-                                <a href="#" class="tile tile-img mr-1">
-                                  <span class="tile-text">AK</span>
-                                </a>
-                                <a href="#">Anisha KC</a>
-                              </td>
-                              <td class="align-middle">9812345678</td>
-                              <td class="align-middle">anisha.kc@example.com</td>
-                              <td class="align-middle text-right">
-                                <div class="d-flex flex-column flex-md-row justify-content-md-end align-items-center">
-                                  <button type="button"
-                                          class="btn btn-sm btn-info text-white mb-2 mb-md-0"
-                                          data-toggle="modal"
-                                          data-target="#studentDetailsModal"
-                                          data-name="Anisha KC"
-                                          data-phone="9812345678"
-                                          data-email="anisha.kc@example.com"
-                                          data-dob="Mar 10, 2000"
-                                          data-address="Bhaktapur, Nepal"
-                                          data-status="Active"
-                                          data-edit-url="{% url 'UpdateStudent' id=6 %}"
-                                          onclick="populateModal(this)">Show more</button>
-                                  <a href="{% url 'UpdateStudent' id=6 %}"
-                                     class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
-                                  <button type="button"
-                                          class="btn btn-danger btn-sm ml-md-2"
-                                          data-toggle="modal"
-                                          data-target="#deleteStudentModal"
-                                          data-name="Anisha KC"
-                                          data-delete-url="{% url 'DeleteStudent' id=6 %}"
-                                          onclick="populateDeleteModal(this)">Delete</button>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                          {% endfor %}
+                          <!-- No Results Row -->
+                          <tr id="no-search-results" style="display: none;">
+                            <td colspan="5" class="text-center py-5 text-muted">
+                              <i class="fas fa-search mb-2"></i>
+                              <br>
+                              No students found matching your criteria.
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
-                  </div>
+                  </section>
                 </div>
                 <!-- ================= MODALS & JS ================= -->
                 <!-- Make sure you have the Single Modals and Scripts below this! -->
@@ -692,174 +642,128 @@
           </div>
         </div>
       </div>
-      <!-- populate off canvas data js  -->
-      <script>
-function populateModal(buttonElement) {
-    
-    // 1. READ DATA (Same as before)
-    const data = buttonElement.dataset; 
-    
-    const studentName = data.name;
-    const studentPhone = data.phone;
-    const studentEmail = data.email;
-    const studentDOB = data.dob;
-    const studentAddress = data.address;
-    const studentStatus = data.status;
-    const editUrl = data.editUrl;
-    
-    // 2. WRITE THE DATA (Updated IDs to match the Modal)
-    document.getElementById('modal_data_name').textContent = studentName || 'N/A';
-    document.getElementById('modal_data_phone').textContent = studentPhone || 'N/A';
-    document.getElementById('modal_data_email').textContent = studentEmail || 'N/A';
-    document.getElementById('modal_data_dob').textContent = studentDOB || 'N/A';
-    document.getElementById('modal_data_address').textContent = studentAddress || 'N/A';
-    
-    // 3. Status Badge Update
-    const statusElement = document.getElementById('modal_data_status');
-    if (statusElement) {
-        // Set the text
-        statusElement.textContent = studentStatus || 'N/A';
-        
-        // Dynamic badge color logic
-        let badgeClass = 'bg-secondary'; // Default
-
-        if (studentStatus) {
-            const statusLower = studentStatus.toLowerCase();
-            
-            if (statusLower === 'active') {
-                 badgeClass = 'bg-success';
-            } else if (statusLower === 'completed') {
-                 badgeClass = 'bg-primary';
-            } else if (statusLower === 'inactive') {
-                 badgeClass = 'bg-warning';
-            } else if (statusLower === 'dropped') {
-                 badgeClass = 'bg-danger';
-            }
-        }
-        
-        // Reset classes and apply new ones
-        statusElement.className = 'badge ' + badgeClass; 
-    }
-
-    // 4. Update Edit Button (Optional, if you want the footer button to do something)
-    const editBtn = document.getElementById('modal_data_edit_btn');
-    if (editBtn) {
-        if (editUrl) {
-            editBtn.href = editUrl;
-            editBtn.style.display = 'inline-block';
-        } else {
-            editBtn.style.display = 'none'; // Hide if no URL provided
-        }
-    }
-}
-      </script>
-      <!-- now for the delete confirmation modal , this is sigle one -->
+      <!-- single delete modal -->
       <!-- Single Generic Delete Confirmation Modal -->
       <div class="modal fade"
            id="deleteStudentModal"
            tabindex="-1"
+           role="dialog"
+           aria-labelledby="deleteModalLabel"
            aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Confirm Deletion</h5>
-              <!-- Added both data-dismiss (BS4) and data-bs-dismiss (BS5) for compatibility -->
-              <button type="button"
-                      class="btn-close"
-                      data-dismiss="modal"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"></button>
+              <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
             <div class="modal-body text-center">
-              Are you sure you want to delete <strong id="delete_modal_student_name"></strong>?
+              <p>
+                Are you sure you want to delete <strong id="delete_modal_student_name">this item</strong>?
+              </p>
+              <p class="small text-danger mb-0">This action cannot be undone.</p>
             </div>
             <div class="modal-footer justify-content-center">
-              <!-- Cancel Button -->
-              <button type="button"
-                      class="btn btn-muted"
-                      data-dismiss="modal"
-                      data-bs-dismiss="modal">Cancel</button>
-              <!-- The Dynamic Delete Link -->
-              <a href="#"
-                 id="delete_modal_confirm_btn"
-                 class="btn btn-secondary text-danger">Yes, Delete</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <a href="#" id="delete_modal_confirm_btn" class="btn btn-danger">Yes, Delete</a>
             </div>
           </div>
         </div>
       </div>
-      <!-- script for the population of the delete modal -->
-      <script>
-function populateDeleteModal(buttonElement) {
-    // 1. Get data from the clicked button
-    const studentName = buttonElement.getAttribute('data-name');
-    const deleteUrl = buttonElement.getAttribute('data-delete-url');
-
-    // 2. Populate the Modal Name
-    const nameSpan = document.getElementById('delete_modal_student_name');
-    if (nameSpan) {
-        nameSpan.textContent = studentName || 'this student';
-    }
-
-    // 3. Update the "Yes, Delete" Link href
-    const confirmBtn = document.getElementById('delete_modal_confirm_btn');
-    if (confirmBtn) {
-        confirmBtn.href = deleteUrl;
-    }
-}
-      </script>
     </body>
     <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // 1. Select the DOM elements based on your IDs
+    
+    // Selectors
     const searchInput = document.getElementById('table-search');
+    const filterStatus = document.getElementById('filterStatus');
     const clearBtn = document.getElementById('clear-search');
-    const tableRows = document.querySelectorAll('#studentTable tbody tr');
+    const tableRows = document.querySelectorAll('.student-row');
+    const noResultsRow = document.getElementById('no-search-results');
 
-    // 2. Main Search Logic
-    searchInput.addEventListener('keyup', function() {
-        const searchText = this.value.toLowerCase().trim();
+    // --- Filter Function ---
+    function filterTable() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        const statusVal = filterStatus.value.toLowerCase(); // active, inactive, etc.
+        let visibleCount = 0;
 
         tableRows.forEach(function(row) {
-            // Get all cells (td) in the current row
-            const cells = row.getElementsByTagName('td');
+            // 1. Get Data
+            const rowSearch = (row.getAttribute('data-search') || '').toLowerCase();
+            const rowStatus = (row.getAttribute('data-status') || '').toLowerCase();
 
-            // We only want to search Name (Index 0), Phone (Index 1), and Email (Index 2)
-            // We purposely ignore Index 3 (Actions) so "Update" or "Delete" text isn't searched
-            let rowData = "";
-            
-            if (cells.length > 2) {
-                const name = cells[0].textContent.toLowerCase();
-                const phone = cells[1].textContent.toLowerCase();
-                const email = cells[2].textContent.toLowerCase();
-                
-                // Combine them for a single check
-                rowData = name + " " + phone + " " + email;
-            }
+            // 2. Check Search
+            const matchesSearch = rowSearch.includes(searchText);
 
-            // Toggle Visibility
-            if (rowData.includes(searchText)) {
-                row.style.display = ''; // Show
+            // 3. Check Filter
+            const matchesStatus = (statusVal === 'all') || (rowStatus === statusVal);
+
+            // 4. Final Toggle
+            if (matchesSearch && matchesStatus) {
+                row.style.display = '';
+                visibleCount++;
             } else {
-                row.style.display = 'none'; // Hide
+                row.style.display = 'none';
             }
         });
 
-        // 3. Toggle the "X" Clear Button visibility
-        if (searchText.length > 0) {
-            clearBtn.style.display = 'block';
+        // Toggle No Results
+        if (visibleCount === 0 && tableRows.length > 0) {
+            if(noResultsRow) noResultsRow.style.display = '';
         } else {
-            clearBtn.style.display = 'none';
+            if(noResultsRow) noResultsRow.style.display = 'none';
         }
-    });
 
-    // 4. Clear Button Logic
-    clearBtn.addEventListener('click', function() {
-        searchInput.value = ''; // Clear input
-        this.style.display = 'none'; // Hide button
-        
-        // Trigger a 'keyup' event to reset the table to show all rows
-        searchInput.dispatchEvent(new Event('keyup'));
-    });
+        // Toggle Clear Button
+        if(clearBtn) clearBtn.style.display = (searchText.length > 0) ? 'block' : 'none';
+    }
+
+    // Attach Listeners
+    if(searchInput) searchInput.addEventListener('keyup', filterTable);
+    if(filterStatus) filterStatus.addEventListener('change', filterTable);
+
+    if(clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterTable();
+        });
+    }
 });
+
+// --- Populate View Modal ---
+function populateModal(buttonElement) {
+    const data = buttonElement.dataset;
+    
+    document.getElementById('modal_data_name').textContent = data.name || 'N/A';
+    document.getElementById('modal_data_phone').textContent = data.phone || 'N/A';
+    document.getElementById('modal_data_email').textContent = data.email || 'N/A';
+    document.getElementById('modal_data_dob').textContent = data.dob || 'N/A';
+    document.getElementById('modal_data_address').textContent = data.address || 'N/A';
+    
+    const statusEl = document.getElementById('modal_data_status');
+    const statusText = data.status || '';
+    
+    statusEl.textContent = statusText;
+    statusEl.className = 'badge'; 
+    
+    const sLower = statusText.toLowerCase();
+    if (sLower === 'active') statusEl.classList.add('bg-success');
+    else if (sLower === 'completed') statusEl.classList.add('bg-primary');
+    else if (sLower === 'inactive') statusEl.classList.add('bg-warning');
+    else if (sLower === 'dropped') statusEl.classList.add('bg-danger');
+    else statusEl.classList.add('bg-secondary');
+}
+
+// --- Populate Delete Modal ---
+function populateDeleteModal(buttonElement) {
+    const name = buttonElement.getAttribute('data-name');
+    const deleteUrl = buttonElement.getAttribute('data-delete-url');
+    
+    document.getElementById('delete_modal_student_name').textContent = name;
+    
+    const confirmBtn = document.getElementById('delete_modal_confirm_btn');
+    if(confirmBtn) confirmBtn.href = deleteUrl;
+}
     </script>
   </html>

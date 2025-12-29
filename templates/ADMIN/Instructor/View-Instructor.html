@@ -390,129 +390,137 @@
                                         </div>
                                     </div>
                                 </header>
-                                <!-- content goes here -->
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-bordered table-striped"
-                                           id="instructortable">
-                                        <thead>
-                                            <tr>
-                                                <th style="min-width:200px">Name</th>
-                                                <th>Specialization</th>
-                                                <th>Phone Number</th>
-                                                <th>&nbsp; &nbsp; Actions&nbsp; &nbsp;</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Row 1 -->
-                                            <tr>
-                                                <td>Mr. A. Sharma</td>
-                                                <td>Python & Django</td>
-                                                <td>9841234567</td>
-                                                <td>
-                                                    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                         role="group">
-                                                        <!-- View Button -->
-                                                        <button type="button"
-                                                                class="btn btn-info btn-sm text-white"
-                                                                data-toggle="modal"
-                                                                data-target="#instructorDetailsModal"
-                                                                data-name="{{ data.name }}"
-                                                                data-email="{{ instructor.user.email }}"
-                                                                data-phone="{{ instructor.phone }}"
-                                                                data-specialization="{{ instructor.specialization }}"
-                                                                data-bio="Hello this is a bio of the mr . A sharma"
-                                                                data-status="True"
-                                                                onclick="populateInstructorModal(this)">
-                                                            View Details
-                                                        </button>
-                                                        <!-- Update Button -->
-                                                        <a href="{% url 'UpdateInstructor' id=1 %}"
-                                                           class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                        <!-- Delete Button -->
-                                                        <button type="button"
-                                                                class="btn btn-danger btn-sm"
-                                                                data-toggle="modal"
-                                                                data-target="#deleteInstructorModal"
-                                                                data-name="Mr. A. Sharma"
-                                                                data-delete-url="{% url 'DeleteInstructor' id=1 %}"
-                                                                onclick="populateDeleteModal(this)">Delete</button>
+                                <!-- Page Content Section -->
+                                <div class="page-section">
+                                    <section class="card card-fluid">
+                                        <!-- Toolbar: Search -->
+                                        <header class="card-header border-bottom-0">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <span class="d-none d-md-block text-muted">All Instructors</span>
+                                                <!-- Search Input -->
+                                                <div class="input-group input-group-alt"
+                                                     style="max-width: 300px;
+                                                            margin-left: auto">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                            <!-- Row 2 -->
-                                            <tr>
-                                                <td>Ms. S. Karki</td>
-                                                <td>Graphic Design</td>
-                                                <td>9801987654</td>
-                                                <td>
-                                                    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                         role="group">
-                                                        <!-- View Button -->
-                                                        <button type="button"
-                                                                class="btn btn-info btn-sm text-white"
-                                                                data-toggle="modal"
-                                                                data-target="#instructorDetailsModal"
-                                                                data-name="Ms. S. Karki"
-                                                                data-specialization="Graphic Design (Ps, Ai, Id)"
-                                                                data-phone="9801987654"
-                                                                data-email="s.karki@example.com"
-                                                                data-address="Lalitpur, Nepal"
-                                                                onclick="populateInstructorModal(this)">
-                                                            View Details
+                                                    <input id="table-search"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Search name or specialization...">
+                                                    <div class="input-group-append">
+                                                        <button id="clear-search"
+                                                                type="button"
+                                                                class="btn btn-secondary"
+                                                                style="display:none">
+                                                            <i class="fa fa-times"></i>
                                                         </button>
-                                                        <!-- Update Button -->
-                                                        <a href="{% url 'UpdateInstructor' id=2 %}"
-                                                           class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                        <!-- Delete Button -->
-                                                        <button type="button"
-                                                                class="btn btn-danger btn-sm"
-                                                                data-toggle="modal"
-                                                                data-target="#deleteInstructorModal"
-                                                                data-name="Ms. S. Karki"
-                                                                data-delete-url="{% url 'DeleteInstructor' id=2 %}"
-                                                                onclick="populateDeleteModal(this)">Delete</button>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                            <!-- Row 3 -->
-                                            <tr>
-                                                <td>Mr. B. Rana</td>
-                                                <td>Digital Marketing</td>
-                                                <td>9860112233</td>
-                                                <td>
-                                                    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                         role="group">
-                                                        <!-- View Button -->
-                                                        <button type="button"
-                                                                class="btn btn-info btn-sm text-white"
-                                                                data-toggle="modal"
-                                                                data-target="#instructorDetailsModal"
-                                                                data-name="Mr. B. Rana"
-                                                                data-specialization="SEO & Social Media"
-                                                                data-phone="9860112233"
-                                                                data-email="b.rana@example.com"
-                                                                data-address="Bhaktapur, Nepal"
-                                                                onclick="populateInstructorModal(this)">
-                                                            View Details
-                                                        </button>
-                                                        <!-- Update Button -->
-                                                        <a href="{% url 'UpdateInstructor' id=3 %}"
-                                                           class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                        <!-- Delete Button -->
-                                                        <button type="button"
-                                                                class="btn btn-danger btn-sm"
-                                                                data-toggle="modal"
-                                                                data-target="#deleteInstructorModal"
-                                                                data-name="Mr. B. Rana"
-                                                                data-delete-url="{% url 'DeleteInstructor' id=3 %}"
-                                                                onclick="populateDeleteModal(this)">Delete</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                </div>
+                                            </div>
+                                        </header>
+                                        <!-- .table-responsive -->
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" id="instructorTable">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <!-- 1. Name: Visible Always -->
+                                                        <th style="min-width:200px">Name</th>
+                                                        <!-- 2. Specialization: Hidden on Mobile (XS) -->
+                                                        <th class="d-none d-sm-table-cell">Specialization</th>
+                                                        <!-- 3. Phone: Hidden on Mobile & Tablet (XS/SM) -->
+                                                        <th class="d-none d-md-table-cell">Phone</th>
+                                                        <!-- 4. Actions: Visible Always -->
+                                                        <th style="min-width:100px; text-align:right;">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="instructorTableBody">
+                                                    {% for instructor in instructors %}
+                                                        <tr class="instructor-row"
+                                                            data-search="{{ instructor.user.get_full_name }} {{ instructor.specialization }}">
+                                                            <!-- 1. Name & Mobile Details -->
+                                                            <td class="align-middle">
+                                                                <div class="d-flex align-items-center">
+                                                                    <!-- Initials Avatar -->
+                                                                    <div>
+                                                                        <a href="#" class="text-dark font-weight-bold">{{ instructor.user.get_full_name }}</a>
+                                                                        <!-- Mobile Only Details -->
+                                                                        <div class="d-block d-sm-none mt-1 small text-muted">
+                                                                            <div class="text-truncate" style="max-width: 150px;">{{ instructor.specialization }}</div>
+                                                                            <div class="mt-1">
+                                                                                {% if instructor.is_active %}
+                                                                                    <span class="text-success font-weight-bold">Active</span>
+                                                                                {% else %}
+                                                                                    <span class="text-secondary font-weight-bold">Inactive</span>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <!-- 2. Specialization -->
+                                                            <td class="align-middle d-none d-sm-table-cell">
+                                                                <span class="badge badge-subtle badge-dark">{{ instructor.specialization }}</span>
+                                                            </td>
+                                                            <!-- 3. Phone -->
+                                                            <td class="align-middle d-none d-md-table-cell">{{ instructor.phone }}</td>
+                                                            <!-- 4. Actions -->
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <!-- View Button -->
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-subtle-info"
+                                                                            data-toggle="modal"
+                                                                            data-target="#instructorDetailsModal"
+                                                                            data-name="{{ instructor.user.get_full_name }}"
+                                                                            data-email="{{ instructor.user.email }}"
+                                                                            data-phone="{{ instructor.phone }}"
+                                                                            data-specialization="{{ instructor.specialization }}"
+                                                                            data-bio="{{ instructor.bio }}"
+                                                                            data-status="{{ instructor.is_active }}"
+                                                                            onclick="populateInstructorModal(this)">
+                                                                        View
+                                                                    </button>
+                                                                    <!-- Update Button -->
+                                                                    <a href="{% url 'UpdateInstructor' id=instructor.id %}"
+                                                                       class="btn btn-sm btn-subtle-warning mx-md-1">
+                                                                        Edit
+                                                                    </a>
+                                                                    <!-- Delete Button -->
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-subtle-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deleteInstructorModal"
+                                                                            data-name="{{ instructor.user.get_full_name }}"
+                                                                            data-delete-url="{% url 'DeleteInstructor' id=instructor.id %}"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        <i class="oi oi-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    {% empty %}
+                                                        <tr>
+                                                            <td colspan="4" class="text-center py-5 text-muted">
+                                                                <i class="fas fa-user-tie fa-3x mb-3"></i>
+                                                                <br>
+                                                                No instructors found.
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    <!-- No Results Row -->
+                                                    <tr id="no-search-results" style="display: none;">
+                                                        <td colspan="4" class="text-center py-5 text-muted">
+                                                            <i class="fas fa-search mb-2"></i>
+                                                            <br>
+                                                            No instructors found matching your criteria.
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
                                 </div>
-                                <!-- ------ -->
                             </div>
                         </div>
                     </div>
@@ -639,43 +647,89 @@
         </body>
         <!-- js for the models population of the data -->
         <script>
-// --- 1. Populate View Instructor Modal ---
+            document.addEventListener("DOMContentLoaded", function() {
+    
+    // Selectors
+    const searchInput = document.getElementById('table-search');
+    const clearBtn = document.getElementById('clear-search');
+    const tableRows = document.querySelectorAll('.instructor-row');
+    const noResultsRow = document.getElementById('no-search-results');
+
+    // --- Search Function ---
+    function filterTable() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        tableRows.forEach(function(row) {
+            // Get Data Attribute (Name + Specialization)
+            const rowSearch = (row.getAttribute('data-search') || '').toLowerCase();
+
+            // Check Search
+            if (rowSearch.includes(searchText)) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Toggle No Results
+        if (visibleCount === 0 && tableRows.length > 0) {
+            if(noResultsRow) noResultsRow.style.display = '';
+        } else {
+            if(noResultsRow) noResultsRow.style.display = 'none';
+        }
+
+        // Toggle Clear Button
+        if(clearBtn) clearBtn.style.display = (searchText.length > 0) ? 'block' : 'none';
+    }
+
+    // Attach Listeners
+    if(searchInput) searchInput.addEventListener('keyup', filterTable);
+
+    if(clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterTable();
+        });
+    }
+});
+
+// --- Populate View Modal ---
 function populateInstructorModal(buttonElement) {
     const data = buttonElement.dataset;
     
-    // 1. Basic Text Fields
     document.getElementById('modal_inst_name').textContent = data.name || 'N/A';
     document.getElementById('modal_inst_email').textContent = data.email || 'N/A';
     document.getElementById('modal_inst_phone').textContent = data.phone || 'N/A';
     document.getElementById('modal_inst_spec').textContent = data.specialization || 'N/A';
     document.getElementById('modal_inst_bio').textContent = data.bio || 'No biography available.';
 
-    // 2. Status Badge Logic
-    // Django boolean usually comes as "True" or "False" string in data attributes
+    // Status Badge Logic
+    // In Django templates, boolean True often renders as "True" (string) or "1"
     const statusEl = document.getElementById('modal_inst_status');
-    const isActive = data.status === "True" || data.status === "true";
-    
-    if (isActive) {
+    const statusVal = data.status; // "True" or "False"
+
+    if (statusVal === "True" || statusVal === "true") {
         statusEl.textContent = "Active";
-        statusEl.className = "badge badge-success"; // Green
+        statusEl.className = "badge badge-success";
     } else {
         statusEl.textContent = "Inactive";
-        statusEl.className = "badge badge-secondary"; // Grey
+        statusEl.className = "badge badge-secondary";
     }
 }
-// --- 2. Populate Delete Instructor Modal ---
+
+// --- Populate Delete Modal ---
 function populateDeleteModal(buttonElement) {
-    // Get data
     const name = buttonElement.getAttribute('data-name');
     const deleteUrl = buttonElement.getAttribute('data-delete-url');
 
-    // Set Text
-    const nameSpan = document.getElementById('delete_modal_inst_name');
-    if (nameSpan) nameSpan.textContent = name;
+    document.getElementById('delete_modal_inst_name').textContent = name;
 
-    // Set URL
     const confirmBtn = document.getElementById('delete_modal_confirm_btn');
-    if (confirmBtn) confirmBtn.href = deleteUrl;
+    if (confirmBtn) {
+         confirmBtn.href = deleteUrl;
+    }
 }
         </script>
     </html>

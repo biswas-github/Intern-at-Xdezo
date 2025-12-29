@@ -394,142 +394,153 @@
                                 <!-- Page Content Section -->
                                 <!-- Page Content Section -->
                                 <div class="page-section">
-                                    <div class="card card-fluid">
-                                        <div class="card-body">
-                                            <!-- Search & Filter Controls -->
-                                            <div class="form-group">
-                                                <div class="input-group input-group-alt">
-                                                    <!-- Filter Dropdown -->
+                                    <section class="card card-fluid">
+                                        <!-- Toolbar: Search & Filter -->
+                                        <header class="card-header border-bottom-0">
+                                            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+                                                <!-- Filter Dropdown -->
+                                                <div class="form-group mb-3 mb-md-0">
+                                                    <select id="filterStatus" class="custom-select" style="min-width: 150px;">
+                                                        <option value="all" selected>Status: All</option>
+                                                        <option value="active">Active</option>
+                                                        <option value="completed">Completed</option>
+                                                        <option value="dropped">Dropped</option>
+                                                    </select>
+                                                </div>
+                                                <!-- Search Input -->
+                                                <div class="input-group input-group-alt" style="max-width: 300px;">
                                                     <div class="input-group-prepend">
-                                                        <select id="filterBy" class="custom-select">
-                                                            <option value="" selected>Filter By</option>
-                                                            <option value="1">Student Name</option>
-                                                            <option value="2">Batch</option>
-                                                            <option value="3">Status</option>
-                                                        </select>
+                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                                     </div>
-                                                    <!-- Search Input -->
-                                                    <div class="input-group has-clearable">
+                                                    <input id="table-search"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Search student or batch...">
+                                                    <div class="input-group-append">
                                                         <button id="clear-search"
                                                                 type="button"
-                                                                class="close"
-                                                                aria-label="Close"
+                                                                class="btn btn-secondary"
                                                                 style="display:none">
-                                                            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                                            <i class="fa fa-times"></i>
                                                         </button>
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                                        </div>
-                                                        <input id="table-search"
-                                                               type="text"
-                                                               class="form-control"
-                                                               placeholder="Search enrollments...">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- The Enrollment Table -->
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-striped" id="enrollmentTable">
-                                                    <thead class="thead-dark">
-                                                        <tr>
-                                                            <th style="min-width:200px">Student Name</th>
-                                                            <th>Batch</th>
-                                                            <th>Enrolled On</th>
-                                                            <th>Status</th>
-                                                            <th style="min-width:150px; text-align:right;">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Row 1: Active -->
-                                                        <tr>
+                                        </header>
+                                        <!-- .table-responsive -->
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" id="enrollmentTable">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <!-- 1. Student Name: Visible Always -->
+                                                        <th style="min-width:200px">Student Name</th>
+                                                        <!-- 2. Batch: Hidden on Mobile (XS) -->
+                                                        <th class="d-none d-sm-table-cell">Batch</th>
+                                                        <!-- 3. Date: Hidden on Mobile & Tablet (XS/SM) -->
+                                                        <th class="d-none d-md-table-cell">Enrolled On</th>
+                                                        <!-- 4. Status: Hidden on Mobile (XS) -->
+                                                        <th class="d-none d-sm-table-cell">Status</th>
+                                                        <!-- 5. Actions: Visible Always -->
+                                                        <th style="min-width:100px; text-align:right;">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="enrollmentTableBody">
+                                                    {% for enrollment in enrollments %}
+                                                        <tr class="enrollment-row"
+                                                            data-search="{{ enrollment.student_name }} {{ enrollment.batch_name }}"
+                                                            data-status="{{ enrollment.status }}">
+                                                            <!-- 1. Student Name -->
                                                             <td class="align-middle">
-                                                                <strong>Ram Bahadur Thapa</strong>
+                                                                <span class="d-block text-dark font-weight-bold">{{ enrollment.student_name }}</span>
+                                                                <!-- Mobile Only Details: Batch, Date, Status -->
+                                                                <div class="d-block d-sm-none mt-1 small text-muted">
+                                                                    <div>{{ enrollment.batch_name }}</div>
+                                                                    <div class="mt-1">
+                                                                        <i class="far fa-calendar-alt mr-1"></i>{{ enrollment.enrolled_date }}
+                                                                    </div>
+                                                                    <div class="mt-1">
+                                                                        {% if enrollment.status|lower == 'active' %}
+                                                                            <span class="text-success font-weight-bold">Active</span>
+                                                                        {% elif enrollment.status|lower == 'completed' %}
+                                                                            <span class="text-primary font-weight-bold">Completed</span>
+                                                                        {% elif enrollment.status|lower == 'dropped' %}
+                                                                            <span class="text-danger font-weight-bold">Dropped</span>
+                                                                        {% else %}
+                                                                            <span class="text-secondary font-weight-bold">{{ enrollment.status }}</span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </div>
                                                             </td>
-                                                            <td class="align-middle">Python Jan 2026</td>
-                                                            <td class="align-middle">Jan 15, 2026</td>
-                                                            <td class="align-middle">
-                                                                <span class="badge badge-success">Active</span>
+                                                            <!-- 2. Batch -->
+                                                            <td class="align-middle d-none d-sm-table-cell">{{ enrollment.batch_name }}</td>
+                                                            <!-- 3. Enrolled Date -->
+                                                            <td class="align-middle d-none d-md-table-cell">{{ enrollment.enrolled_date }}</td>
+                                                            <!-- 4. Status -->
+                                                            <td class="align-middle d-none d-sm-table-cell">
+                                                                {% if enrollment.status|lower == 'active' %}
+                                                                    <span class="badge badge-subtle badge-success">Active</span>
+                                                                {% elif enrollment.status|lower == 'completed' %}
+                                                                    <span class="badge badge-subtle badge-primary">Completed</span>
+                                                                {% elif enrollment.status|lower == 'dropped' %}
+                                                                    <span class="badge badge-subtle badge-danger">Dropped</span>
+                                                                {% else %}
+                                                                    <span class="badge badge-subtle badge-secondary">{{ enrollment.status }}</span>
+                                                                {% endif %}
                                                             </td>
+                                                            <!-- 5. Actions -->
                                                             <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <!-- View Details -->
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <!-- View Button -->
                                                                     <button type="button"
-                                                                            class="btn btn-sm btn-icon btn-info text-white mb-2 mb-md-0"
+                                                                            class="btn btn-sm btn-subtle-info"
                                                                             data-toggle="modal"
                                                                             data-target="#enrollmentDetailsModal"
-                                                                            data-student="Ram Bahadur Thapa"
-                                                                            data-batch="Python Jan 2026"
-                                                                            data-date="Jan 15, 2026"
-                                                                            data-status="Active"
+                                                                            data-student="{{ enrollment.student_name }}"
+                                                                            data-batch="{{ enrollment.batch_name }}"
+                                                                            data-date="{{ enrollment.enrolled_date }}"
+                                                                            data-status="{{ enrollment.status }}"
                                                                             onclick="populateEnrollmentModal(this)">
-                                                                        View more
+                                                                        View
                                                                     </button>
-                                                                    <!-- Update -->
-                                                                    <a href="{% url 'UpdateEnrollment' id=1 %}"
-                                                                       class="btn btn-sm btn-icon btn-warning text-dark mb-2 mb-md-0 ml-md-2">
-                                                                        Update
+                                                                    <!-- Update Button -->
+                                                                    <a href="{% url 'UpdateEnrollment' id=enrollment.id %}"
+                                                                       class="btn btn-sm btn-subtle-warning mx-md-1">
+                                                                        Edit
                                                                     </a>
-                                                                    <!-- Delete -->
+                                                                    <!-- Delete Button -->
                                                                     <button type="button"
-                                                                            class="btn btn-sm btn-icon btn-danger ml-md-2"
+                                                                            class="btn btn-sm btn-subtle-danger"
                                                                             data-toggle="modal"
                                                                             data-target="#deleteEnrollmentModal"
-                                                                            data-name="Ram Bahadur -> Python 2026"
-                                                                            data-delete-url="{% url 'DeleteEnrollment' id=1 %}"
+                                                                            data-name="{{ enrollment.student_name }} -> {{ enrollment.batch_name }}"
+                                                                            data-delete-url="{% url 'DeleteEnrollment' id=enrollment.id %}"
                                                                             onclick="populateDeleteModal(this)">
-                                                                        Delete
+                                                                        <i class="oi oi-trash"></i>
                                                                     </button>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <!-- Row 2: Completed -->
+                                                    {% empty %}
                                                         <tr>
-                                                            <td class="align-middle">
-                                                                <strong>Sita Kumari</strong>
-                                                            </td>
-                                                            <td class="align-middle">Django Dec 2025</td>
-                                                            <td class="align-middle">Dec 01, 2025</td>
-                                                            <td class="align-middle">
-                                                                <span class="badge badge-primary">Completed</span>
-                                                            </td>
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <!-- View Details -->
-                                                                    <button type="button"
-                                                                            class="btn btn-sm btn-icon btn-info text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#enrollmentDetailsModal"
-                                                                            data-student="Sita Kumari"
-                                                                            data-batch="Django Dec 2025"
-                                                                            data-date="Dec 01, 2025"
-                                                                            data-status="Completed"
-                                                                            onclick="populateEnrollmentModal(this)">
-                                                                        View more
-                                                                    </button>
-                                                                    <!-- Update -->
-                                                                    <a href="{% url 'UpdateEnrollment' id=2 %}"
-                                                                       class="btn btn-sm btn-icon btn-warning text-dark mb-2 mb-md-0 ml-md-2">
-                                                                        Update
-                                                                    </a>
-                                                                    <!-- Delete -->
-                                                                    <button type="button"
-                                                                            class="btn btn-sm btn-icon btn-danger ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteEnrollmentModal"
-                                                                            data-name="Sita Kumari -> Django 2025"
-                                                                            data-delete-url="{% url 'DeleteEnrollment' id=2 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
+                                                            <td colspan="5" class="text-center py-5 text-muted">
+                                                                <i class="fas fa-user-graduate fa-3x mb-3"></i>
+                                                                <br>
+                                                                No enrollments found.
                                                             </td>
                                                         </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- Pagination (Static Placeholder) -->
+                                                    {% endfor %}
+                                                    <!-- No Results Row -->
+                                                    <tr id="no-search-results" style="display: none;">
+                                                        <td colspan="5" class="text-center py-5 text-muted">
+                                                            <i class="fas fa-search mb-2"></i>
+                                                            <br>
+                                                            No enrollments found matching your criteria.
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    </div>
+                                    </section>
                                 </div>
                             </div>
                         </div>
@@ -643,11 +654,68 @@
                 </div>
             </div>
             <script>
-// --- 1. Populate View Enrollment Modal ---
+                document.addEventListener("DOMContentLoaded", function() {
+    
+    // Selectors
+    const searchInput = document.getElementById('table-search');
+    const filterStatus = document.getElementById('filterStatus');
+    const clearBtn = document.getElementById('clear-search');
+    const tableRows = document.querySelectorAll('.enrollment-row');
+    const noResultsRow = document.getElementById('no-search-results');
+
+    // --- Filter Function ---
+    function filterTable() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        const statusVal = filterStatus.value.toLowerCase();
+        let visibleCount = 0;
+
+        tableRows.forEach(function(row) {
+            // 1. Get Data
+            const rowSearch = (row.getAttribute('data-search') || '').toLowerCase();
+            const rowStatus = (row.getAttribute('data-status') || '').toLowerCase();
+
+            // 2. Check Search
+            const matchesSearch = rowSearch.includes(searchText);
+
+            // 3. Check Filter
+            const matchesStatus = (statusVal === 'all') || (rowStatus === statusVal);
+
+            // 4. Final Toggle
+            if (matchesSearch && matchesStatus) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Toggle No Results
+        if (visibleCount === 0 && tableRows.length > 0) {
+            if(noResultsRow) noResultsRow.style.display = '';
+        } else {
+            if(noResultsRow) noResultsRow.style.display = 'none';
+        }
+
+        // Toggle Clear Button
+        if(clearBtn) clearBtn.style.display = (searchText.length > 0) ? 'block' : 'none';
+    }
+
+    // Attach Listeners
+    if(searchInput) searchInput.addEventListener('keyup', filterTable);
+    if(filterStatus) filterStatus.addEventListener('change', filterTable);
+
+    if(clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterTable();
+        });
+    }
+});
+
+// --- Populate View Enrollment Modal ---
 function populateEnrollmentModal(buttonElement) {
     const data = buttonElement.dataset;
     
-    // Text Fields
     document.getElementById('modal_enroll_student').textContent = data.student || 'N/A';
     document.getElementById('modal_enroll_batch').textContent = data.batch || 'N/A';
     document.getElementById('modal_enroll_date').textContent = data.date || 'N/A';
@@ -655,103 +723,28 @@ function populateEnrollmentModal(buttonElement) {
     // Status Badge Logic
     const statusEl = document.getElementById('modal_enroll_status');
     const status = data.status || '';
-    statusEl.textContent = status;
-    statusEl.className = 'badge'; // Reset
     
-    if (status.toLowerCase() === 'active') {
-        statusEl.classList.add('badge-success');
-    } else if (status.toLowerCase() === 'completed') {
-        statusEl.classList.add('badge-primary');
-    } else if (status.toLowerCase() === 'dropped') {
-        statusEl.classList.add('badge-danger');
-    } else {
-        statusEl.classList.add('badge-secondary');
-    }
+    statusEl.textContent = status;
+    statusEl.className = 'badge'; 
+    
+    const sLower = status.toLowerCase();
+    if (sLower === 'active') statusEl.classList.add('badge-success');
+    else if (sLower === 'completed') statusEl.classList.add('badge-primary');
+    else if (sLower === 'dropped') statusEl.classList.add('badge-danger');
+    else statusEl.classList.add('badge-secondary');
 }
 
-// --- 2. Populate Delete Modal ---
+// --- Populate Delete Modal ---
 function populateDeleteModal(buttonElement) {
-    // Get Data
     const name = buttonElement.getAttribute('data-name');
     const deleteUrl = buttonElement.getAttribute('data-delete-url');
 
-    // Update Modal Text
     document.getElementById('delete_modal_enroll_name').textContent = name;
     
-    // Update Delete Button Link
     const confirmBtn = document.getElementById('delete_modal_confirm_btn');
     if (confirmBtn) {
         confirmBtn.href = deleteUrl;
     }
 }
-            </script>
-            <script>
-document.addEventListener("DOMContentLoaded", function() {
-    
-    // Column Mapping for Enrollment Table
-    // Index 0: Student Name, Index 1: Batch, Index 3: Status
-    const columnMap = {
-        "1": 0, // Student Name
-        "2": 1, // Batch
-        "3": 3  // Status (Column Index 3)
-    };
-
-    const searchInput = document.getElementById('table-search');
-    const filterSelect = document.getElementById('filterBy');
-    const clearBtn = document.getElementById('clear-search');
-    const tableBody = document.querySelector('#enrollmentTable tbody');
-    const tableRows = tableBody.querySelectorAll('tr');
-
-    function executeFilter() {
-        const searchText = searchInput.value.toLowerCase().trim();
-        const filterValue = filterSelect.value; 
-
-        tableRows.forEach(function(row) {
-            let textToCheck = "";
-            const cells = row.getElementsByTagName('td');
-
-            if (filterValue && columnMap.hasOwnProperty(filterValue)) {
-                // Search in specific column
-                const columnIndex = columnMap[filterValue];
-                if (cells[columnIndex]) {
-                    textToCheck = cells[columnIndex].textContent.toLowerCase();
-                }
-            } else {
-                // Search entire row (excluding Actions column)
-                // Combine Student + Batch + Date + Status
-                if (cells.length > 3) {
-                    textToCheck = cells[0].textContent + " " + 
-                                  cells[1].textContent + " " + 
-                                  cells[2].textContent + " " + 
-                                  cells[3].textContent;
-                    textToCheck = textToCheck.toLowerCase();
-                }
-            }
-
-            if (textToCheck.includes(searchText)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-
-        // Show/Hide Clear Button
-        if (searchText.length > 0) {
-            clearBtn.style.display = 'block';
-        } else {
-            clearBtn.style.display = 'none';
-        }
-    }
-
-    // Event Listeners
-    searchInput.addEventListener('keyup', executeFilter);
-    filterSelect.addEventListener('change', executeFilter);
-
-    clearBtn.addEventListener('click', function() {
-        searchInput.value = '';
-        this.style.display = 'none';
-        executeFilter();
-    });
-});
             </script>
         </html>

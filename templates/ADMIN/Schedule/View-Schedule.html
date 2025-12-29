@@ -410,218 +410,181 @@
                                 <!-- Page Content Section -->
                                 <div class="page-section">
                                     <section class="card card-fluid">
-                                        <div class="card-body">
-                                            <!-- ================= FILTER TOOLBAR (Top Row) ================= -->
-                                            <div class="form-group mb-4">
-                                                <label class="text-muted small text-uppercase font-weight-bold">Filter Options</label>
-                                                <div class="row">
-                                                    <!-- Date Filter -->
-                                                    <div class="col-12 col-md-6 col-lg-3 mb-2">
-                                                        <select id="filterDate" class="custom-select">
-                                                            <option value="all" selected>Date: All</option>
-                                                            <option value="today">Today</option>
-                                                            <option value="upcoming">Upcoming</option>
-                                                        </select>
-                                                    </div>
+                                        <!-- Toolbar: Filters & Search -->
+                                        <header class="card-header border-bottom-0">
+                                            <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between">
+                                                <!-- Group 1: Filters (Wrapped) -->
+                                                <div class="form-group mb-3 mb-xl-0 d-flex flex-wrap gap-2 align-items-center">
                                                     <!-- Status Filter -->
-                                                    <div class="col-12 col-md-6 col-lg-3 mb-2">
-                                                        <select id="filterStatus" class="custom-select">
-                                                            <option value="all" selected>Status: All</option>
-                                                            <option value="SCHEDULED">Scheduled</option>
-                                                            <option value="COMPLETED">Completed</option>
-                                                            <option value="CANCELLED">Cancelled</option>
-                                                        </select>
-                                                    </div>
-                                                    <!-- Instructor Filter -->
-                                                    <div class="col-12 col-md-6 col-lg-3 mb-2">
-                                                        <select id="filterInstructor" class="custom-select">
-                                                            <option value="all" selected>Instructor: All</option>
-                                                            <option value="Mr. A. Sharma">Mr. A. Sharma</option>
-                                                            <option value="Ms. S. Karki">Ms. S. Karki</option>
-                                                        </select>
-                                                    </div>
-                                                    <!-- Classroom Filter -->
-                                                    <div class="col-12 col-md-6 col-lg-3 mb-2">
-                                                        <select id="filterClassroom" class="custom-select">
-                                                            <option value="all" selected>Room: All</option>
-                                                            <option value="Room 101">Room 101</option>
-                                                            <option value="Lab A">Lab A</option>
-                                                        </select>
-                                                    </div>
+                                                    <select id="filterStatus"
+                                                            class="custom-select mr-2 mb-2 mb-sm-0"
+                                                            style="width: auto;
+                                                                   min-width: 140px">
+                                                        <option value="all" selected>Status: All</option>
+                                                        <option value="SCHEDULED">Scheduled</option>
+                                                        <option value="COMPLETED">Completed</option>
+                                                        <option value="CANCELLED">Cancelled</option>
+                                                    </select>
+                                                    <!-- Date Filter -->
+                                                    <select id="filterDate"
+                                                            class="custom-select mr-2 mb-2 mb-sm-0"
+                                                            style="width: auto;
+                                                                   min-width: 130px">
+                                                        <option value="all" selected>Date: All</option>
+                                                        <option value="today">Today</option>
+                                                        <option value="upcoming">Upcoming</option>
+                                                    </select>
+                                                    <!-- Instructor Filter (Optional) -->
+                                                    <select id="filterInstructor"
+                                                            class="custom-select mr-2 mb-2 mb-sm-0"
+                                                            style="width: auto;
+                                                                   min-width: 150px">
+                                                        <option value="all" selected>Instructor: All</option>
+                                                        <!-- Ideally populate from DB -->
+                                                        {% for inst in instructors %}<option value="{{ inst }}">{{ inst }}</option>{% endfor %}
+                                                    </select>
                                                 </div>
-                                            </div>
-                                            <!-- ================= SEARCH BAR (Bottom Row) ================= -->
-                                            <div class="form-group border-bottom pb-4">
-                                                <div class="input-group input-group-alt">
+                                                <!-- Group 2: Search -->
+                                                <div class="input-group input-group-alt" style="max-width: 300px;">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                                     </div>
                                                     <input id="table-search"
                                                            type="text"
                                                            class="form-control"
-                                                           placeholder="Search by Batch or Course...">
+                                                           placeholder="Search batch or course...">
                                                     <div class="input-group-append">
                                                         <button id="clear-search"
                                                                 type="button"
-                                                                class="close"
-                                                                aria-label="Close"
-                                                                style="display:none;
-                                                                       position: absolute;
-                                                                       right: 10px;
-                                                                       top: 10px;
-                                                                       z-index: 5">
-                                                            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                                                class="btn btn-secondary"
+                                                                style="display:none">
+                                                            <i class="fa fa-times"></i>
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- ================= TABLE SECTION ================= -->
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-striped" id="scheduleTable">
-                                                    <thead class="thead-light">
+                                        </header>
+                                        <!-- .table-responsive -->
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" id="scheduleTable">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <!-- 1. Date: Visible Always -->
+                                                        <th style="min-width:110px">Date</th>
+                                                        <!-- 2. Time: Hidden on Mobile (XS/SM) -->
+                                                        <th class="d-none d-md-table-cell">Time</th>
+                                                        <!-- 3. Batch: Visible Always -->
+                                                        <th style="min-width:180px">Batch / Course</th>
+                                                        <!-- 4. Room: Hidden on Mobile & Tablet (XS/SM/MD) -->
+                                                        <th class="d-none d-lg-table-cell">Room</th>
+                                                        <!-- 5. Status: Hidden on Mobile (XS) -->
+                                                        <th class="d-none d-sm-table-cell">Status</th>
+                                                        <!-- 6. Actions: Visible Always -->
+                                                        <th style="min-width:100px; text-align:right;">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="scheduleTableBody">
+                                                    {% for schedule in schedules %}
+                                                        <tr class="schedule-row"
+                                                            data-date="{{ schedule.date|date:'Y-m-d' }}"
+                                                            data-status="{{ schedule.status }}"
+                                                            data-instructor="{{ schedule.instructor }}"
+                                                            data-classroom="{{ schedule.classroom }}"
+                                                            data-search="{{ schedule.batch }} {{ schedule.course }}">
+                                                            <!-- 1. Date -->
+                                                            <td class="align-middle text-muted">{{ schedule.date|date:"M d, Y" }}</td>
+                                                            <!-- 2. Time -->
+                                                            <td class="align-middle d-none d-md-table-cell">{{ schedule.start_time }} - {{ schedule.end_time }}</td>
+                                                            <!-- 3. Batch -->
+                                                            <td class="align-middle">
+                                                                <span class="d-block font-weight-bold text-dark">{{ schedule.batch }}</span>
+                                                                <small class="text-muted">{{ schedule.course }}</small>
+                                                                <!-- Mobile Only Details: Time, Room, Status -->
+                                                                <div class="d-block d-md-none mt-1 small">
+                                                                    <span class="text-dark"><i class="far fa-clock mr-1"></i>{{ schedule.start_time }}</span>
+                                                                    <span class="mx-1 text-muted">|</span>
+                                                                    <span class="text-muted">{{ schedule.classroom }}</span>
+                                                                    <div class="mt-1">
+                                                                        {% if schedule.status == 'SCHEDULED' %}
+                                                                            <span class="text-primary font-weight-bold">Scheduled</span>
+                                                                        {% elif schedule.status == 'COMPLETED' %}
+                                                                            <span class="text-success font-weight-bold">Completed</span>
+                                                                        {% elif schedule.status == 'CANCELLED' %}
+                                                                            <span class="text-warning font-weight-bold">Cancelled</span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <!-- 4. Room -->
+                                                            <td class="align-middle d-none d-lg-table-cell">{{ schedule.classroom }}</td>
+                                                            <!-- 5. Status -->
+                                                            <td class="align-middle d-none d-sm-table-cell">
+                                                                {% if schedule.status == 'SCHEDULED' %}
+                                                                    <span class="badge badge-subtle badge-primary">Scheduled</span>
+                                                                {% elif schedule.status == 'COMPLETED' %}
+                                                                    <span class="badge badge-subtle badge-success">Completed</span>
+                                                                {% elif schedule.status == 'CANCELLED' %}
+                                                                    <span class="badge badge-subtle badge-warning">Cancelled</span>
+                                                                {% else %}
+                                                                    <span class="badge badge-subtle badge-secondary">{{ schedule.status }}</span>
+                                                                {% endif %}
+                                                            </td>
+                                                            <!-- 6. Actions -->
+                                                            <!-- 6. Actions -->
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <!-- View Button -->
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-subtle-info"
+                                                                            data-toggle="modal"
+                                                                            data-target="#scheduleDetailsModal"
+                                                                            data-batch="{{ schedule.batch }}"
+                                                                            data-course="{{ schedule.course }}"
+                                                                            data-instructor="{{ schedule.instructor }}"
+                                                                            data-classroom="{{ schedule.classroom }}"
+                                                                            data-date="{{ schedule.date|date:'M d, Y' }}"
+                                                                            data-time="{{ schedule.start_time }} - {{ schedule.end_time }}"
+                                                                            data-status="{{ schedule.status }}"
+                                                                            onclick="populateScheduleModal(this)">
+                                                                        View
+                                                                    </button>
+                                                                    <!-- Update Button -->
+                                                                    <a href="{% url 'EditSchedule' id=schedule.id %}"
+                                                                       class="btn btn-sm btn-subtle-warning mx-md-1">
+                                                                        Edit
+                                                                    </a>
+                                                                    <!-- Delete Button -->
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-subtle-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deleteScheduleModal"
+                                                                            data-name="{{ schedule.batch }} on {{ schedule.date|date:'M d' }}"
+                                                                            data-delete-url="{% url 'DeleteSchedule' id=schedule.id %}"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        <i class="oi oi-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    {% empty %}
                                                         <tr>
-                                                            <th style="min-width:120px">Date</th>
-                                                            <th style="min-width:120px">Time</th>
-                                                            <th style="min-width:180px">Batch</th>
-                                                            <th>Room</th>
-                                                            <th>Status</th>
-                                                            <th style="min-width:150px; text-align:right;">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Row 1: Scheduled -->
-                                                        <!-- Note: Hidden data (Course, Instructor) is stored in data attributes for filtering -->
-                                                        <tr data-date="2026-01-15"
-                                                            data-status="SCHEDULED"
-                                                            data-instructor="Mr. A. Sharma"
-                                                            data-classroom="Room 101"
-                                                            data-course="Python with Django">
-                                                            <td class="align-middle">Jan 15, 2026</td>
-                                                            <td class="align-middle">07:00 - 09:00</td>
-                                                            <td class="align-middle font-weight-bold">Python Jan 2026</td>
-                                                            <td class="align-middle">Room 101</td>
-                                                            <td class="align-middle">
-                                                                <span class="badge badge-primary">Scheduled</span>
-                                                            </td>
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <button type="button"
-                                                                            class="btn btn-sm btn-info text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#scheduleDetailsModal"
-                                                                            data-batch="Python Jan 2026"
-                                                                            data-course="Python with Django"
-                                                                            data-instructor="Mr. A. Sharma"
-                                                                            data-classroom="Room 101"
-                                                                            data-date="Jan 15, 2026"
-                                                                            data-time="07:00 - 09:00"
-                                                                            data-status="SCHEDULED"
-                                                                            onclick="populateScheduleModal(this)">
-                                                                        View
-                                                                    </button>
-                                                                    <a href="{% url 'EditSchedule' id=1 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Edit</a>
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteScheduleModal"
-                                                                            data-name="Python Jan 2026 on Jan 15"
-                                                                            data-delete-url="{% url 'DeleteSchedule' id=1 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
+                                                            <td colspan="6" class="text-center py-5 text-muted">
+                                                                <i class="fas fa-calendar-times fa-3x mb-3"></i>
+                                                                <br>
+                                                                No schedules found.
                                                             </td>
                                                         </tr>
-                                                        <!-- Row 2: Completed -->
-                                                        <tr data-date="2025-12-01"
-                                                            data-status="COMPLETED"
-                                                            data-instructor="Ms. S. Karki"
-                                                            data-classroom="Lab A"
-                                                            data-course="Graphic Design Masterclass">
-                                                            <td class="align-middle">Dec 01, 2025</td>
-                                                            <td class="align-middle">10:00 - 12:00</td>
-                                                            <td class="align-middle font-weight-bold">Graphic Design A</td>
-                                                            <td class="align-middle">Lab A</td>
-                                                            <td class="align-middle">
-                                                                <span class="badge badge-success">Completed</span>
-                                                            </td>
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <button type="button"
-                                                                            class="btn btn-sm btn-info text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#scheduleDetailsModal"
-                                                                            data-batch="Graphic Design A"
-                                                                            data-course="Graphic Design Masterclass"
-                                                                            data-instructor="Ms. S. Karki"
-                                                                            data-classroom="Lab A"
-                                                                            data-date="Dec 01, 2025"
-                                                                            data-time="10:00 - 12:00"
-                                                                            data-status="COMPLETED"
-                                                                            onclick="populateScheduleModal(this)">
-                                                                        View
-                                                                    </button>
-                                                                    <a href="{% url 'EditSchedule' id=2 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Edit</a>
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteScheduleModal"
-                                                                            data-name="Graphic Design on Dec 01"
-                                                                            data-delete-url="{% url 'DeleteSchedule' id=2 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <!-- Row 3: Cancelled -->
-                                                        <tr data-date="2026-01-20"
-                                                            data-status="CANCELLED"
-                                                            data-instructor="Mr. A. Sharma"
-                                                            data-classroom="Room 101"
-                                                            data-course="Python with Django">
-                                                            <td class="align-middle">Jan 20, 2026</td>
-                                                            <td class="align-middle">07:00 - 09:00</td>
-                                                            <td class="align-middle font-weight-bold">Python Jan 2026</td>
-                                                            <td class="align-middle">Room 101</td>
-                                                            <td class="align-middle">
-                                                                <span class="badge badge-warning">Cancelled</span>
-                                                            </td>
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <button type="button"
-                                                                            class="btn btn-sm btn-info text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#scheduleDetailsModal"
-                                                                            data-batch="Python Jan 2026"
-                                                                            data-course="Python with Django"
-                                                                            data-instructor="Mr. A. Sharma"
-                                                                            data-classroom="Room 101"
-                                                                            data-date="Jan 20, 2026"
-                                                                            data-time="07:00 - 09:00"
-                                                                            data-status="CANCELLED"
-                                                                            onclick="populateScheduleModal(this)">
-                                                                        View
-                                                                    </button>
-                                                                    <a href="{% url 'EditSchedule' id=1 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Edit</a>
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteScheduleModal"
-                                                                            data-name="Python Jan 2026 on Jan 20"
-                                                                            data-delete-url="{% url 'DeleteSchedule' id=3 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    {% endfor %}
+                                                    <!-- No Results Row -->
+                                                    <tr id="no-search-results" style="display: none;">
+                                                        <td colspan="6" class="text-center py-5 text-muted">
+                                                            <i class="fas fa-search mb-2"></i>
+                                                            <br>
+                                                            No schedules found matching your criteria.
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </section>
                                 </div>
@@ -751,17 +714,18 @@
             </div>
             <!-- scripts -->
             <script>
-document.addEventListener("DOMContentLoaded", function() {
+            document.addEventListener("DOMContentLoaded", function() {
     
     // Selectors
     const searchInput = document.getElementById('table-search');
     const filterDate = document.getElementById('filterDate');
     const filterStatus = document.getElementById('filterStatus');
-    const filterInstructor = document.getElementById('filterInstructor');
-    const filterClassroom = document.getElementById('filterClassroom');
+    const filterInstructor = document.getElementById('filterInstructor'); // Optional
     const clearBtn = document.getElementById('clear-search');
-    const tableRows = document.querySelectorAll('#scheduleTable tbody tr');
+    const tableRows = document.querySelectorAll('.schedule-row');
+    const noResultsRow = document.getElementById('no-search-results');
 
+    // Helper: Get Today's Date in YYYY-MM-DD
     const today = new Date().toISOString().split('T')[0];
 
     // --- Filter Function ---
@@ -769,73 +733,85 @@ document.addEventListener("DOMContentLoaded", function() {
         const searchText = searchInput.value.toLowerCase().trim();
         const dateVal = filterDate.value;
         const statusVal = filterStatus.value;
-        const instVal = filterInstructor.value;
-        const roomVal = filterClassroom.value;
+        const instVal = filterInstructor ? filterInstructor.value : 'all';
+        let visibleCount = 0;
 
         tableRows.forEach(function(row) {
-            // 1. Search Logic
-            // We search Batch Name (Visible) AND Course Name (Hidden in data attribute)
-            const batchText = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-            const courseAttr = row.getAttribute('data-course').toLowerCase();
-            const matchesSearch = batchText.includes(searchText) || courseAttr.includes(searchText);
-
-            // 2. Filter Logic (Using data attributes)
-            const rowDate = row.getAttribute('data-date');
+            // 1. Get Data
+            const rowSearch = (row.getAttribute('data-search') || '').toLowerCase();
+            const rowDate = row.getAttribute('data-date'); // YYYY-MM-DD
             const rowStatus = row.getAttribute('data-status');
-            const rowInstructor = row.getAttribute('data-instructor');
-            const rowClassroom = row.getAttribute('data-classroom');
+            const rowInst = row.getAttribute('data-instructor');
 
+            // 2. Search Logic
+            const matchesSearch = rowSearch.includes(searchText);
+
+            // 3. Filter Logic
             // Date
             let matchesDate = true;
             if (dateVal === 'today') matchesDate = (rowDate === today);
             else if (dateVal === 'upcoming') matchesDate = (rowDate >= today);
 
-            // Dropdowns
-            let matchesStatus = (statusVal === 'all') || (rowStatus === statusVal);
-            let matchesInst = (instVal === 'all') || (rowInstructor === instVal);
-            let matchesRoom = (roomVal === 'all') || (rowClassroom === roomVal);
+            // Status
+            const matchesStatus = (statusVal === 'all') || (rowStatus === statusVal);
+            
+            // Instructor
+            const matchesInst = (instVal === 'all') || (rowInst === instVal);
 
-            // 3. Final Decision
-            if (matchesSearch && matchesDate && matchesStatus && matchesInst && matchesRoom) {
+            // 4. Final Toggle
+            if (matchesSearch && matchesDate && matchesStatus && matchesInst) {
                 row.style.display = '';
+                visibleCount++;
             } else {
                 row.style.display = 'none';
             }
         });
 
-        clearBtn.style.display = (searchText.length > 0) ? 'block' : 'none';
+        // Toggle No Results
+        if (visibleCount === 0 && tableRows.length > 0) {
+            if(noResultsRow) noResultsRow.style.display = '';
+        } else {
+            if(noResultsRow) noResultsRow.style.display = 'none';
+        }
+
+        // Toggle Clear Button
+        if(clearBtn) clearBtn.style.display = (searchText.length > 0) ? 'block' : 'none';
     }
 
     // Attach Listeners
-    searchInput.addEventListener('keyup', filterTable);
-    filterDate.addEventListener('change', filterTable);
-    filterStatus.addEventListener('change', filterTable);
-    filterInstructor.addEventListener('change', filterTable);
-    filterClassroom.addEventListener('change', filterTable);
+    if(searchInput) searchInput.addEventListener('keyup', filterTable);
+    if(filterDate) filterDate.addEventListener('change', filterTable);
+    if(filterStatus) filterStatus.addEventListener('change', filterTable);
+    if(filterInstructor) filterInstructor.addEventListener('change', filterTable);
 
-    clearBtn.addEventListener('click', function() {
-        searchInput.value = '';
-        this.style.display = 'none';
-        filterTable();
-    });
+    if(clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterTable();
+        });
+    }
 });
 
 // --- Populate View Modal ---
 function populateScheduleModal(buttonElement) {
     const data = buttonElement.dataset;
-    document.getElementById('modal_sch_batch').textContent = data.batch;
-    document.getElementById('modal_sch_course').textContent = data.course;
-    document.getElementById('modal_sch_instructor').textContent = data.instructor;
-    document.getElementById('modal_sch_classroom').textContent = data.classroom;
-    document.getElementById('modal_sch_date').textContent = data.date;
-    document.getElementById('modal_sch_time').textContent = data.time;
+    
+    document.getElementById('modal_sch_batch').textContent = data.batch || 'N/A';
+    document.getElementById('modal_sch_course').textContent = data.course || 'N/A';
+    document.getElementById('modal_sch_instructor').textContent = data.instructor || 'N/A';
+    document.getElementById('modal_sch_classroom').textContent = data.classroom || 'N/A';
+    document.getElementById('modal_sch_date').textContent = data.date || 'N/A';
+    document.getElementById('modal_sch_time').textContent = data.time || 'N/A';
 
     const statusEl = document.getElementById('modal_sch_status');
-    statusEl.textContent = data.status;
+    const statusText = data.status || '';
+    
+    statusEl.textContent = statusText;
     statusEl.className = 'badge'; 
-    if (data.status === 'SCHEDULED') statusEl.classList.add('badge-primary');
-    else if (data.status === 'COMPLETED') statusEl.classList.add('badge-success');
-    else if (data.status === 'CANCELLED') statusEl.classList.add('badge-warning');
+    
+    if (statusText === 'SCHEDULED') statusEl.classList.add('badge-primary');
+    else if (statusText === 'COMPLETED') statusEl.classList.add('badge-success');
+    else if (statusText === 'CANCELLED') statusEl.classList.add('badge-warning');
     else statusEl.classList.add('badge-secondary');
 }
 

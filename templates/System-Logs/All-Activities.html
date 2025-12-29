@@ -435,10 +435,69 @@
                                     </div>
                                     <!-- THE LOGS LIST CONTAINER -->
                                     <!-- We removed the hardcoded items. JS will fill this div. -->
-                                    <div id="logsContainer"
-                                         class="list-group list-group-flush list-group-divider px-3 py-1">
-                                        <!-- Javascript will populate rows here -->
+                                    <!-- .table-responsive -->
+                                    <div class="table-responsive">
+                                        <!-- .table -->
+                                        <table class="table table-hover">
+                                            <!-- thead -->
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th style="min-width:100px">Action</th>
+                                                    <th style="min-width:300px">Description</th>
+                                                    <th>User</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- /tbody -->
+                                            <tbody id="logsTableBody">
+                                                {% for log in activities %}
+                                                    <!-- We add data-type and data-search attributes for the JS filter to read -->
+                                                    <tr class="log-row"
+                                                        data-type="{{ log.type }}"
+                                                        data-search="{{ log.description }} {{ log.target|default:'' }} {{ log.user }}">
+                                                        <td class="align-middle">
+                                                            <span class="badge badge-subtle {{ log.badge_class }}">{{ log.action_text }}</span>
+                                                        </td>
+                                                        <td class="align-middle">
+                                                            {{ log.description }}:
+                                                            {% if log.target %}<strong>{{ log.target }}</strong>{% endif %}
+                                                        </td>
+                                                        <td class="align-middle">
+                                                            <span class="text-dark font-weight-bold">{{ log.user }}</span>
+                                                            <div class="small text-muted d-block d-md-none">
+                                                                {% if log.type == 'login' %}
+                                                                    User
+                                                                {% else %}
+                                                                    Performed by
+                                                                {% endif %}
+                                                            </div>
+                                                        </td>
+                                                        <td class="align-middle text-muted">{{ log.date }}</td>
+                                                    </tr>
+                                                {% empty %}
+                                                    <!-- Initial Empty State (if database is empty) -->
+                                                    <tr>
+                                                        <td colspan="4" class="text-center py-4 text-muted">
+                                                            <i class="fas fa-info-circle mb-2"></i>
+                                                            <br>
+                                                            No activity logs found in the database.
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                <!-- Hidden "No Results" row for JS Search -->
+                                                <tr id="no-search-results" style="display: none;">
+                                                    <td colspan="4" class="text-center py-4 text-muted">
+                                                        <i class="fas fa-search mb-2"></i>
+                                                        <br>
+                                                        No activities found matching your criteria.
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <!-- /tbody -->
+                                        </table>
+                                        <!-- /.table -->
                                     </div>
+                                    <!-- /.table-responsive -->
                                 </div>
                             </div>
                             <!-- ========================================== -->
@@ -481,93 +540,42 @@
             </script>
         </body>
         <script>
-document.addEventListener("DOMContentLoaded", function() {
-    
-    // 1. GET DATA FROM DJANGO
-    // We parse the JSON script tag defined above
-    const rawData = document.getElementById('activity-data').textContent;
-    const allLogs = JSON.parse(rawData);
-
-    // DOM Elements
-    const container = document.getElementById('logsContainer');
-    const searchInput = document.getElementById('logSearch');
-    const filterSelect = document.getElementById('logFilter');
-
-    // 2. RENDER FUNCTION
-    // This function takes a list of data and creates the HTML
-    function renderLogs(logs) {
-        // Clear current content
-        container.innerHTML = '';
-
-        if (logs.length === 0) {
-            container.innerHTML = `
-                <div class="list-group-item text-center py-4 text-muted">
-                    <i class="fas fa-search mb-2"></i><br>
-                    No activities found matching your criteria.
-                </div>`;
-            return;
-        }
-
-        logs.forEach(log => {
-            // Check if there is a target (bold text), handle empty target for logins
-            const targetHtml = log.target ? `<strong>${log.target}</strong>` : '';
-
-            const itemHtml = `
-                <div class="list-group-item list-group-item-action mb-2">
-                    <div class="d-flex w-100 justify-content-between align-items-center">
-                        <div>
-                            <!-- The Task -->
-                            <h6 class="list-group-item-title mb-1">
-                                <span class="badge badge-subtle ${log.badge_class} mr-2">${log.action_text}</span>
-                                ${log.description}: ${targetHtml}
-                            </h6>
-                            <!-- The Metadata -->
-                            <p class="list-group-item-text text-muted mb-0 small">
-                                ${log.type === 'login' ? 'User:' : 'Performed by'} 
-                                <span class="text-dark font-weight-bold">${log.user}</span>
-                                &nbsp;•&nbsp; ${log.date}
-                            </p>
-                        </div>
-                     
-                       
-                    </div>
-                </div>
-            `;
-            // Append to container
-            container.insertAdjacentHTML('beforeend', itemHtml);
-        });
-    }
-
-    // 3. FILTER & SEARCH LOGIC
-    function applyFilters() {
+        document.addEventListener("DOMContentLoaded", function() {
+        // DOM Elements
+        const searchInput = document.getElementById('logSearch');
+        const filterSelect = document.getElementById('logFilter');
+        const tableRows = document.querySelectorAll('.log-row'); // The rows created by Django
+        const noResultsRow = document.getElementById('no-search-results');
+        function applyFilters() {
         const searchText = searchInput.value.toLowerCase().trim();
         const filterType = filterSelect.value;
-
-        // Filter the 'allLogs' array
-        const filteredLogs = allLogs.filter(log => {
-            
-            // A. Check Dropdown Type
-            // If filter is 'all', matches everything. Else match log.type
-            const matchesType = (filterType === 'all') || (log.type === filterType);
-
-            // B. Check Search Text
-            // We search in Description, Target Name, and User Name
-            const searchString = `${log.description} ${log.target} ${log.user}`.toLowerCase();
-            const matchesSearch = searchString.includes(searchText);
-
-            return matchesType && matchesSearch;
+        let visibleCount = 0;
+        tableRows.forEach(row => {
+        // Read the data attributes we added in HTML
+        const rowType = row.getAttribute('data-type');
+        const rowSearchText = row.getAttribute('data-search').toLowerCase();
+        // 1. Check Type (exact match or 'all')
+        const matchesType = (filterType === 'all') || (rowType === filterType);
+        // 2. Check Search (includes text)
+        const matchesSearch = rowSearchText.includes(searchText);
+        // Toggle Visibility
+        if (matchesType && matchesSearch) {
+        row.style.display = ''; // Show
+        visibleCount++;
+        } else {
+        row.style.display = 'none'; // Hide
+        }
         });
-
-        // Re-render with filtered data
-        renderLogs(filteredLogs);
-    }
-
-    // 4. EVENT LISTENERS
-    searchInput.addEventListener('keyup', applyFilters);
-    filterSelect.addEventListener('change', applyFilters);
-
-    // 5. INITIAL LOAD
-    renderLogs(allLogs);
-});
+        // Toggle the "No Results" message based on visible rows
+        if (visibleCount === 0 && tableRows.length > 0) {
+        noResultsRow.style.display = '';
+        } else {
+        noResultsRow.style.display = 'none';
+        }
+        }
+        // Event Listeners
+        if(searchInput) searchInput.addEventListener('keyup', applyFilters);
+        if(filterSelect) filterSelect.addEventListener('change', applyFilters);
+        });
         </script>
     </html>

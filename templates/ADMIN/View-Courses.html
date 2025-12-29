@@ -397,236 +397,125 @@
                                 </div>
                                 <!-- Page Content Section -->
                                 <div class="page-section">
-                                    <div class="card card-fluid">
-                                        <div class="card-body">
-                                            <!-- Search & Filter Controls -->
-                                            <div class="form-group">
-                                                <div class="input-group input-group-alt">
-                                                    <!-- Filter Dropdown -->
+                                    <section class="card card-fluid">
+                                        <!-- Toolbar: Search -->
+                                        <header class="card-header border-bottom-0">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <span class="d-none d-md-block text-muted">All Courses</span>
+                                                <!-- Search Input -->
+                                                <div class="input-group input-group-alt"
+                                                     style="max-width: 300px;
+                                                            margin-left: auto">
                                                     <div class="input-group-prepend">
-                                                        <select id="filterBy" class="custom-select">
-                                                            <option value="" selected>Filter By</option>
-                                                            <option value="1">Course Title</option>
-                                                            <option value="2">Course Code</option>
-                                                            <option value="3">Fee</option>
-                                                        </select>
+                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                                     </div>
-                                                    <!-- Search Input -->
-                                                    <div class="input-group has-clearable">
+                                                    <input id="table-search"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Search title or code...">
+                                                    <div class="input-group-append">
                                                         <button id="clear-search"
                                                                 type="button"
-                                                                class="close"
-                                                                aria-label="Close"
+                                                                class="btn btn-secondary"
                                                                 style="display:none">
-                                                            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                                            <i class="fa fa-times"></i>
                                                         </button>
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                                        </div>
-                                                        <input id="table-search"
-                                                               type="text"
-                                                               class="form-control"
-                                                               placeholder="Search courses...">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- The Course Table -->
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-striped" id="courseTable">
-                                                    <thead class="thead-light">
-                                                        <tr>
-                                                            <th style="min-width:200px">Title</th>
-                                                            <th>Course Code</th>
-                                                            <th>Fee</th>
-                                                            <th>Duration</th>
-                                                            <th style="min-width:150px; text-align:right;">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Row 1: Python with Django -->
-                                                        <tr>
-                                                            <td class="align-middle">Python with Django</td>
-                                                            <td class="align-middle">PY-101</td>
-                                                            <td class="align-middle">Rs. 15,000</td>
-                                                            <td class="align-middle">3 Months</td>
+                                        </header>
+                                        <!-- .table-responsive -->
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" id="courseTable">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <!-- 1. Title: Visible Always -->
+                                                        <th style="min-width:200px">Title</th>
+                                                        <!-- 2. Code: Hidden on Mobile (XS) -->
+                                                        <th class="d-none d-sm-table-cell">Course Code</th>
+                                                        <!-- 3. Fee: Hidden on Mobile & Tablet (XS/SM) -->
+                                                        <th class="d-none d-md-table-cell">Fee</th>
+                                                        <!-- 4. Duration: Hidden on Mobile/Tablet (XS/SM/MD) -->
+                                                        <th class="d-none d-lg-table-cell">Duration</th>
+                                                        <!-- 5. Actions: Visible Always -->
+                                                        <th style="min-width:100px; text-align:right;">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="courseTableBody">
+                                                    {% for course in courses %}
+                                                        <tr class="course-row" data-search="{{ course.title }} {{ course.code }}">
+                                                            <!-- 1. Title -->
+                                                            <td class="align-middle">
+                                                                <span class="d-block text-dark font-weight-bold">{{ course.title }}</span>
+                                                                <!-- Mobile Only Details: Code, Fee, Duration -->
+                                                                <div class="d-block d-sm-none mt-1 small text-muted">
+                                                                    <span>{{ course.code }}</span>
+                                                                    <span class="mx-1">|</span>
+                                                                </div>
+                                                            </td>
+                                                            <!-- 2. Code -->
+                                                            <td class="align-middle d-none d-sm-table-cell">
+                                                                <span class="badge badge-subtle badge-dark">{{ course.code }}</span>
+                                                            </td>
+                                                            <!-- 3. Fee -->
+                                                            <td class="align-middle d-none d-md-table-cell font-weight-bold text-dark">Rs. {{ course.fee }}</td>
+                                                            <!-- 4. Duration -->
+                                                            <td class="align-middle d-none d-lg-table-cell">{{ course.duration }}</td>
+                                                            <!-- 5. Actions -->
                                                             <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <!-- Show More -->
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <!-- View Button -->
                                                                     <button type="button"
-                                                                            class="btn btn-info btn-sm text-white mb-2 mb-md-0"
+                                                                            class="btn btn-sm btn-subtle-info"
                                                                             data-toggle="modal"
                                                                             data-target="#courseDetailsModal"
-                                                                            data-title="Python with Django"
-                                                                            data-code="PY-101"
-                                                                            data-fee="Rs. 15,000"
-                                                                            data-duration="3 Months"
-                                                                            data-description="The course focuses on full-stack development using the Django framework."
+                                                                            data-title="{{ course.title }}"
+                                                                            data-code="{{ course.code }}"
+                                                                            data-fee="Rs. {{ course.fee }}"
+                                                                            data-duration="{{ course.duration }}"
+                                                                            data-description="{{ course.description }}"
                                                                             onclick="populateCourseModal(this)">
-                                                                        Show more
+                                                                        View
                                                                     </button>
-                                                                    <!-- Update -->
-                                                                    <a href="{% url 'UpdateCourse' id=1 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
-                                                                    <!-- Delete -->
+                                                                    <!-- Update Button -->
+                                                                    <a href="{% url 'UpdateCourse' id=course.id %}"
+                                                                       class="btn btn-sm btn-subtle-warning mx-md-1">
+                                                                        Edit
+                                                                    </a>
+                                                                    <!-- Delete Button -->
                                                                     <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
+                                                                            class="btn btn-sm btn-subtle-danger"
                                                                             data-toggle="modal"
                                                                             data-target="#deleteCourseModal"
-                                                                            data-title="Python with Django"
-                                                                            data-delete-url="{% url 'DeleteCourse' id=1 %}"
+                                                                            data-title="{{ course.title }}"
+                                                                            data-delete-url="{% url 'DeleteCourse' id=course.id %}"
                                                                             onclick="populateDeleteModal(this)">
-                                                                        Delete
+                                                                        <i class="oi oi-trash"></i>
                                                                     </button>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <!-- Row 2: Graphic Design -->
+                                                    {% empty %}
                                                         <tr>
-                                                            <td class="align-middle">Graphic Design</td>
-                                                            <td class="align-middle">GD-205</td>
-                                                            <td class="align-middle">Rs. 12,000</td>
-                                                            <td class="align-middle">2 Months</td>
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <!-- Show More -->
-                                                                    <button type="button"
-                                                                            class="btn btn-info btn-sm text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#courseDetailsModal"
-                                                                            data-title="Graphic Design"
-                                                                            data-code="GD-205"
-                                                                            data-fee="Rs. 12,000"
-                                                                            data-duration="2 Months"
-                                                                            data-description="Learn fundamentals of visual communication, Photoshop and Illustrator."
-                                                                            onclick="populateCourseModal(this)">
-                                                                        Show more
-                                                                    </button>
-                                                                    <!-- Update -->
-                                                                    <a href="{% url 'UpdateCourse' id=2 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
-                                                                    <!-- Delete -->
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteCourseModal"
-                                                                            data-title="Graphic Design"
-                                                                            data-delete-url="{% url 'DeleteCourse' id=2 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
+                                                            <td colspan="5" class="text-center py-5 text-muted">
+                                                                <i class="fas fa-book-open fa-3x mb-3"></i>
+                                                                <br>
+                                                                No courses found.
                                                             </td>
                                                         </tr>
-                                                        <!-- Row 3: Digital Marketing -->
-                                                        <tr>
-                                                            <td class="align-middle">Digital Marketing</td>
-                                                            <td class="align-middle">DM-300</td>
-                                                            <td class="align-middle">Rs. 10,000</td>
-                                                            <td class="align-middle">6 Weeks</td>
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <!-- Show More -->
-                                                                    <button type="button"
-                                                                            class="btn btn-info btn-sm text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#courseDetailsModal"
-                                                                            data-title="Digital Marketing"
-                                                                            data-code="DM-300"
-                                                                            data-fee="Rs. 10,000"
-                                                                            data-duration="6 Weeks"
-                                                                            data-description="Master SEO, Social Media Marketing, and Content Strategy."
-                                                                            onclick="populateCourseModal(this)">
-                                                                        Show more
-                                                                    </button>
-                                                                    <!-- Update -->
-                                                                    <a href="{% url 'UpdateCourse' id=3 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
-                                                                    <!-- Delete -->
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteCourseModal"
-                                                                            data-title="Digital Marketing"
-                                                                            data-delete-url="{% url 'DeleteCourse' id=3 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <!-- Row 4: Full Stack -->
-                                                        <tr>
-                                                            <td class="align-middle">Full Stack Web Development</td>
-                                                            <td class="align-middle">WD-401</td>
-                                                            <td class="align-middle">Rs. 20,000</td>
-                                                            <td class="align-middle">4 Months</td>
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <button type="button"
-                                                                            class="btn btn-info btn-sm text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#courseDetailsModal"
-                                                                            data-title="Full Stack Web Development"
-                                                                            data-code="WD-401"
-                                                                            data-fee="Rs. 20,000"
-                                                                            data-duration="4 Months"
-                                                                            data-description="Comprehensive training in HTML, CSS, JavaScript, React, Node.js, and MongoDB."
-                                                                            onclick="populateCourseModal(this)">
-                                                                        Show more
-                                                                    </button>
-                                                                    <a href="{% url 'UpdateCourse' id=4 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteCourseModal"
-                                                                            data-title="Full Stack Web Development"
-                                                                            data-delete-url="{% url 'DeleteCourse' id=4 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <!-- Row 5: Data Science -->
-                                                        <tr>
-                                                            <td class="align-middle">Data Science with Python</td>
-                                                            <td class="align-middle">DS-500</td>
-                                                            <td class="align-middle">Rs. 25,000</td>
-                                                            <td class="align-middle">5 Months</td>
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <button type="button"
-                                                                            class="btn btn-info btn-sm text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#courseDetailsModal"
-                                                                            data-title="Data Science with Python"
-                                                                            data-code="DS-500"
-                                                                            data-fee="Rs. 25,000"
-                                                                            data-duration="5 Months"
-                                                                            data-description="Learn data analysis, visualization, machine learning algorithms, and Pandas/NumPy."
-                                                                            onclick="populateCourseModal(this)">
-                                                                        Show more
-                                                                    </button>
-                                                                    <a href="{% url 'UpdateCourse' id=5 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteCourseModal"
-                                                                            data-title="Data Science with Python"
-                                                                            data-delete-url="{% url 'DeleteCourse' id=5 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    {% endfor %}
+                                                    <!-- No Results Row -->
+                                                    <tr id="no-search-results" style="display: none;">
+                                                        <td colspan="5" class="text-center py-5 text-muted">
+                                                            <i class="fas fa-search mb-2"></i>
+                                                            <br>
+                                                            No courses found matching your criteria.
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    </div>
+                                    </section>
                                 </div>
                             </div>
                         </div>
@@ -745,7 +634,55 @@
             </div>
             <!-- scripts -->
             <script>
-// --- 1. Populate View Course Modal ---
+                document.addEventListener("DOMContentLoaded", function() {
+    
+    // Selectors
+    const searchInput = document.getElementById('table-search');
+    const clearBtn = document.getElementById('clear-search');
+    const tableRows = document.querySelectorAll('.course-row');
+    const noResultsRow = document.getElementById('no-search-results');
+
+    // --- Filter Function ---
+    function filterTable() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        tableRows.forEach(function(row) {
+            // Get Data Attribute (Contains Title + Code)
+            const rowSearch = (row.getAttribute('data-search') || '').toLowerCase();
+
+            // Check Search
+            if (rowSearch.includes(searchText)) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Toggle No Results
+        if (visibleCount === 0 && tableRows.length > 0) {
+            if(noResultsRow) noResultsRow.style.display = '';
+        } else {
+            if(noResultsRow) noResultsRow.style.display = 'none';
+        }
+
+        // Toggle Clear Button
+        if(clearBtn) clearBtn.style.display = (searchText.length > 0) ? 'block' : 'none';
+    }
+
+    // Attach Listeners
+    if(searchInput) searchInput.addEventListener('keyup', filterTable);
+
+    if(clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterTable();
+        });
+    }
+});
+
+// --- Populate View Modal ---
 function populateCourseModal(buttonElement) {
     const data = buttonElement.dataset;
     
@@ -756,92 +693,15 @@ function populateCourseModal(buttonElement) {
     document.getElementById('modal_course_description').textContent = data.description || 'No description available.';
 }
 
-// --- 2. Populate Delete Course Modal (Your Requested Logic) ---
+// --- Populate Delete Modal ---
 function populateDeleteModal(buttonElement) {
-    // 1. Get data from the clicked button
-    const courseTitle = buttonElement.getAttribute('data-title');
+    const title = buttonElement.getAttribute('data-title');
     const deleteUrl = buttonElement.getAttribute('data-delete-url');
-
-    // 2. Populate the Modal Name
-    const nameSpan = document.getElementById('delete_modal_course_title');
-    if (nameSpan) {
-        nameSpan.textContent = courseTitle || 'this course';
-    }
-
-    // 3. Update the "Yes, Delete" Link href
-    const confirmBtn = document.getElementById('delete_modal_confirm_btn');
-    if (confirmBtn) {
-        confirmBtn.href = deleteUrl;
-    }
-}
-            </script>
-            <script>
-document.addEventListener("DOMContentLoaded", function() {
     
-    // 1. Column Mapping for Course Table
-    // Index 0: Title, Index 1: Code, Index 2: Fee
-    const columnMap = {
-        "1": 0, // Title
-        "2": 1, // Course Code
-        "3": 2  // Fee
-    };
-
-    const searchInput = document.getElementById('table-search');
-    const filterSelect = document.getElementById('filterBy');
-    const clearBtn = document.getElementById('clear-search');
-    const tableBody = document.querySelector('#courseTable tbody');
-    const tableRows = tableBody.querySelectorAll('tr');
-
-    function executeFilter() {
-        const searchText = searchInput.value.toLowerCase().trim();
-        const filterValue = filterSelect.value; 
-
-        tableRows.forEach(function(row) {
-            let textToCheck = "";
-            const cells = row.getElementsByTagName('td');
-
-            if (filterValue && columnMap.hasOwnProperty(filterValue)) {
-                // Search in specific column
-                const columnIndex = columnMap[filterValue];
-                if (cells[columnIndex]) {
-                    textToCheck = cells[columnIndex].textContent.toLowerCase();
-                }
-            } else {
-                // Search entire row (excluding the Actions column)
-                // We combine Title + Code + Fee + Duration
-                if (cells.length > 3) {
-                    textToCheck = cells[0].textContent + " " + 
-                                  cells[1].textContent + " " + 
-                                  cells[2].textContent + " " + 
-                                  cells[3].textContent;
-                    textToCheck = textToCheck.toLowerCase();
-                }
-            }
-
-            if (textToCheck.includes(searchText)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-
-        // Show/Hide Clear Button
-        if (searchText.length > 0) {
-            clearBtn.style.display = 'block';
-        } else {
-            clearBtn.style.display = 'none';
-        }
-    }
-
-    // Event Listeners
-    searchInput.addEventListener('keyup', executeFilter);
-    filterSelect.addEventListener('change', executeFilter);
-
-    clearBtn.addEventListener('click', function() {
-        searchInput.value = '';
-        this.style.display = 'none';
-        executeFilter();
-    });
-});
+    document.getElementById('delete_modal_course_title').textContent = title;
+    
+    const confirmBtn = document.getElementById('delete_modal_confirm_btn');
+    if(confirmBtn) confirmBtn.href = deleteUrl;
+}
             </script>
         </html>

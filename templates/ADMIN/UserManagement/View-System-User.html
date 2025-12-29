@@ -412,118 +412,139 @@
                             </div>
                             <!-- Page Content Section -->
                             <div class="page-section">
-                                <div class="card card-fluid">
-                                    <div class="card-body">
-                                        <!-- Toolbar: Filter & Search -->
-                                        <div class="form-group">
-                                            <div class="input-group input-group-alt">
-                                                <!-- 1. Filter By Role -->
+                                <section class="card card-fluid">
+                                    <!-- Toolbar: Search & Filter -->
+                                    <header class="card-header border-bottom-0">
+                                        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+                                            <!-- Filter Dropdown -->
+                                            <div class="form-group mb-3 mb-md-0">
+                                                <select id="roleFilter" class="custom-select" style="min-width: 150px;">
+                                                    <option value="all" selected>All Roles</option>
+                                                    <option value="ADMIN">Admin</option>
+                                                    <option value="INSTRUCTOR">Instructor</option>
+                                                    <option value="ACCOUNTANT">Accountant</option>
+                                                    <option value="VIEWER">Viewer</option>
+                                                </select>
+                                            </div>
+                                            <!-- Search Input -->
+                                            <div class="input-group input-group-alt" style="max-width: 300px;">
                                                 <div class="input-group-prepend">
-                                                    <select id="roleFilter" class="custom-select" style="min-width: 150px;">
-                                                        <option value="all" selected>All Roles</option>
-                                                        <option value="ADMIN">Admin</option>
-                                                        <option value="INSTRUCTOR">Instructor</option>
-                                                        <option value="ACCOUNTANT">Accountant</option>
-                                                        <option value="VIEWER">Viewer</option>
-                                                    </select>
+                                                    <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                                 </div>
-                                                <!-- 2. Search Input -->
-                                                <div class="input-group has-clearable">
+                                                <input id="table-search"
+                                                       type="text"
+                                                       class="form-control"
+                                                       placeholder="Search name, username or email...">
+                                                <div class="input-group-append">
                                                     <button id="clear-search"
                                                             type="button"
-                                                            class="close"
-                                                            aria-label="Close"
+                                                            class="btn btn-secondary"
                                                             style="display:none">
-                                                        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                                        <i class="fa fa-times"></i>
                                                     </button>
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                                    </div>
-                                                    <input id="table-search"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Search by name or username...">
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- User Table -->
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-striped" id="userTable">
-                                                <thead class="thead-light">
-                                                    <tr>
-                                                        <th style="min-width:200px">User Profile</th>
-                                                        <th>Role</th>
-                                                        <th>Email</th>
-                                                        <th style="min-width:150px; text-align:right;">Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for user in users %}
-                                                        <!-- Data attributes for Filtering -->
-                                                        <tr data-role="{{ user.role }}">
-                                                            <!-- 1. User Profile -->
-                                                            <td class="align-middle">
-                                                                <a href="#" class="text-dark">
-                                                                    <div class="searchable-name">{{ user.get_full_name|default:user.username }}</div>
-                                                                </a>
-                                                            </td>
-                                                            <!-- 2. Role (Badge) -->
-                                                            <td class="align-middle">
-                                                                {% if user.role == 'ADMIN' %}
-                                                                    <span class="badge badge-subtle badge-purple">Admin</span>
-                                                                {% elif user.role == 'INSTRUCTOR' %}
-                                                                    <span class="badge badge-subtle badge-primary">Instructor</span>
-                                                                {% elif user.role == 'ACCOUNTANT' %}
-                                                                    <span class="badge badge-subtle badge-info">Accountant</span>
-                                                                {% else %}
-                                                                    <span class="badge badge-subtle badge-secondary">Viewer</span>
-                                                                {% endif %}
-                                                            </td>
-                                                            <!-- 3. Email -->
-                                                            <td class="align-middle">{{ user.email }}</td>
-                                                            <!-- 5. Actions -->
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <!-- View Button -->
-                                                                    <button type="button"
-                                                                            class="btn btn-sm btn-icon btn-info text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#userDetailsModal"
-                                                                            data-username="{{ user.username }}"
-                                                                            data-fullname="{{ user.get_full_name }}"
-                                                                            data-email="{{ user.email }}"
-                                                                            data-role="{{ user.role }}"
-                                                                            data-joined="{{ user.date_joined|date:'M d, Y' }}"
-                                                                            onclick="populateUserModal(this)">
-                                                                        View details
-                                                                    </button>
-                                                                    <!-- Edit Button -->
-                                                                    <!-- Replace 'EditUser' with your URL name -->
-                                                                    <a href="{% url 'EditUser' id=user.id %}"
-                                                                       class="btn btn-sm btn-icon btn-warning text-dark mb-2 mb-md-0 ml-md-2">
-                                                                        Edit
-                                                                    </a>
-                                                                    <!-- Delete Button -->
-                                                                    <!-- Disable delete for self or superuser if needed -->
-                                                                    <button type="button"
-                                                                            class="btn btn-sm btn-icon btn-danger ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteUserModal"
-                                                                            data-name="{{ user.first_name }} {{ user.last_name }}"
-                                                                            data-delete-url="{% url 'DeleteUser' id=user.id %}"
-                                                                            onclick="populateDeleteUserModal(this)">
-                                                                        Delete
-                                                                    </button>
+                                    </header>
+                                    <!-- .table-responsive -->
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="userTable">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <!-- 1. Profile: Visible Always -->
+                                                    <th style="min-width:200px">User Profile</th>
+                                                    <!-- 2. Role: Hidden on Mobile (XS) -->
+                                                    <th class="d-none d-sm-table-cell">Role</th>
+                                                    <!-- 3. Email: Hidden on Mobile & Tablet (XS/SM/MD) -->
+                                                    <th class="d-none d-lg-table-cell d-none d-md-table-cell">Email</th>
+                                                    <!-- 4. Actions: Visible Always -->
+                                                    <th style="min-width:100px; text-align:right;">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="userTableBody">
+                                                {% for user in users %}
+                                                    <tr class="user-row"
+                                                        data-search="{{ user.get_full_name }} {{ user.username }} {{ user.email }}"
+                                                        data-role="{{ user.role }}">
+                                                        <!-- 1. User Profile -->
+                                                        <td class="align-middle">
+                                                            <div class="d-flex align-items-center">
+                                                                <div>
+                                                                    <span class="d-block text-dark font-weight-bold">{{ user.get_full_name|default:user.username }}</span>
+                                                                    <!-- Mobile Only Details: Role & Email -->
+                                                                    <div class="d-block d-sm-none mt-1 small d-none d-md-table-cell">
+                                                                        <div class="text-muted mb-1">{{ user.email }}</div>
+                                                                    </div>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                    {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- No Pagination needed as requested -->
+                                                            </div>
+                                                        </td>
+                                                        <!-- 2. Role -->
+                                                        <td class="align-middle d-none d-sm-table-cell">
+                                                            {% if user.role == 'ADMIN' %}
+                                                                <span class="badge badge-subtle badge-purple">Admin</span>
+                                                            {% elif user.role == 'INSTRUCTOR' %}
+                                                                <span class="badge badge-subtle badge-primary">Instructor</span>
+                                                            {% elif user.role == 'ACCOUNTANT' %}
+                                                                <span class="badge badge-subtle badge-info">Accountant</span>
+                                                            {% else %}
+                                                                <span class="badge badge-subtle badge-secondary">Viewer</span>
+                                                            {% endif %}
+                                                        </td>
+                                                        <!-- 3. Email -->
+                                                        <td class="align-middle d-none d-lg-table-cell d-none d-md-table-cell">{{ user.email }}</td>
+                                                        <!-- 4. Actions -->
+                                                        <td class="align-middle text-right">
+                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                <!-- View Button -->
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-subtle-info"
+                                                                        data-toggle="modal"
+                                                                        data-target="#userDetailsModal"
+                                                                        data-username="{{ user.username }}"
+                                                                        data-fullname="{{ user.get_full_name }}"
+                                                                        data-email="{{ user.email }}"
+                                                                        data-role="{{ user.role }}"
+                                                                        data-joined="{{ user.date_joined|date:'M d, Y' }}"
+                                                                        onclick="populateUserModal(this)">View</button>
+                                                                <!-- Edit Button -->
+                                                                <a href="{% url 'EditUser' id=user.id %}"
+                                                                   class="btn btn-sm btn-subtle-warning mx-md-1">
+                                                                    Edit
+                                                                </a>
+                                                                <!-- Delete Button -->
+                                                                <button type="button"
+                                                                        class="btn btn-sm btn-subtle-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deleteUserModal"
+                                                                        data-name="{{ user.get_full_name|default:user.username }}"
+                                                                        data-delete-url="{% url 'DeleteUser' id=user.id %}"
+                                                                        onclick="populateDeleteUserModal(this)">
+                                                                    <i class="oi oi-trash"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                {% empty %}
+                                                    <tr>
+                                                        <td colspan="4" class="text-center py-5 text-muted">
+                                                            <i class="fas fa-users fa-3x mb-3"></i>
+                                                            <br>
+                                                            No users found.
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                <!-- No Results Row -->
+                                                <tr id="no-search-results" style="display: none;">
+                                                    <td colspan="4" class="text-center py-5 text-muted">
+                                                        <i class="fas fa-search mb-2"></i>
+                                                        <br>
+                                                        No users found matching your criteria.
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </div>
+                                </section>
                             </div>
                         </div>
                     </div>
@@ -653,55 +674,63 @@
     <script>
 document.addEventListener("DOMContentLoaded", function() {
     
+    // Selectors
     const searchInput = document.getElementById('table-search');
     const roleFilter = document.getElementById('roleFilter');
     const clearBtn = document.getElementById('clear-search');
-    const tableRows = document.querySelectorAll('#userTable tbody tr');
+    const tableRows = document.querySelectorAll('.user-row');
+    const noResultsRow = document.getElementById('no-search-results');
 
-    // --- 1. Filter Logic ---
+    // --- Filter Function ---
     function filterUsers() {
         const searchText = searchInput.value.toLowerCase().trim();
         const roleVal = roleFilter.value; 
+        let visibleCount = 0;
 
         tableRows.forEach(function(row) {
-            // A. Search: Check Full Name (searchable-name) AND Email (3rd column)
-            // We use optional chaining (?) or checks to prevent crashes if elements are missing
-            const nameEl = row.querySelector('.searchable-name');
-            const nameText = nameEl ? nameEl.textContent.toLowerCase() : "";
-            
-            // Get Email (3rd column, index 2)
-            const emailText = row.cells[2].textContent.toLowerCase();
-
-            const matchesSearch = nameText.includes(searchText) || emailText.includes(searchText);
-
-            // B. Filter: Check Role attribute
+            // 1. Get Data
+            const rowSearch = (row.getAttribute('data-search') || '').toLowerCase();
             const rowRole = row.getAttribute('data-role');
+
+            // 2. Check Search
+            const matchesSearch = rowSearch.includes(searchText);
+
+            // 3. Check Role Filter
             const matchesRole = (roleVal === 'all') || (rowRole === roleVal);
 
-            // Combine Results
+            // 4. Final Toggle
             if (matchesSearch && matchesRole) {
                 row.style.display = '';
+                visibleCount++;
             } else {
                 row.style.display = 'none';
             }
         });
 
+        // Toggle No Results Message
+        if (visibleCount === 0 && tableRows.length > 0) {
+            if(noResultsRow) noResultsRow.style.display = '';
+        } else {
+            if(noResultsRow) noResultsRow.style.display = 'none';
+        }
+
         // Toggle Clear Button
-        clearBtn.style.display = (searchText.length > 0) ? 'block' : 'none';
+        if(clearBtn) clearBtn.style.display = (searchText.length > 0) ? 'block' : 'none';
     }
 
-    // --- 2. Listeners ---
-    searchInput.addEventListener('keyup', filterUsers);
-    roleFilter.addEventListener('change', filterUsers);
+    // Attach Listeners
+    if(searchInput) searchInput.addEventListener('keyup', filterUsers);
+    if(roleFilter) roleFilter.addEventListener('change', filterUsers);
 
-    clearBtn.addEventListener('click', function() {
-        searchInput.value = '';
-        this.style.display = 'none';
-        filterUsers();
-    });
+    if(clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterUsers();
+        });
+    }
 });
 
-// --- 3. Populate View Modal ---
+// --- Populate View Modal ---
 function populateUserModal(buttonElement) {
     const data = buttonElement.dataset;
     
@@ -711,22 +740,17 @@ function populateUserModal(buttonElement) {
     document.getElementById('modal_user_email').textContent = data.email || 'N/A';
     document.getElementById('modal_user_joined').textContent = data.joined || 'N/A';
 
-    // 2. Role Badge Logic (THE FIX)
+    // 2. Role Badge Logic
     const roleEl = document.getElementById('modal_user_role');
-    const role = data.role || 'VIEWER'; // Default if empty
+    const role = data.role || 'VIEWER';
     
-    // Set text (Capitalized or as is)
     roleEl.textContent = role;
-    
-    // Reset classes completely to base 'badge'
     roleEl.className = 'badge'; 
     
-    // Add specific class based on role string
-    // We trim() to avoid whitespace issues
     const roleKey = role.trim().toUpperCase(); 
 
     if (roleKey === 'ADMIN') {
-        roleEl.classList.add('badge-purple'); // Ensure this CSS class exists in your theme
+        roleEl.classList.add('badge-purple'); // Custom purple class in custom.css or substitute with badge-dark
     } else if (roleKey === 'INSTRUCTOR') {
         roleEl.classList.add('badge-primary');
     } else if (roleKey === 'ACCOUNTANT') {
@@ -735,7 +759,8 @@ function populateUserModal(buttonElement) {
         roleEl.classList.add('badge-secondary');
     }
 }
-// --- 4. Populate Delete Modal ---
+
+// --- Populate Delete Modal ---
 function populateDeleteUserModal(buttonElement) {
     const name = buttonElement.getAttribute('data-name');
     const deleteUrl = buttonElement.getAttribute('data-delete-url');

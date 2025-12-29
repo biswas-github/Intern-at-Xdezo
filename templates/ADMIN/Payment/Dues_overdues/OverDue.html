@@ -398,152 +398,139 @@
                                     </div>
                                 </header>
                                 <!-- Page Content Section -->
-                                <div class="page-section">
-                                    <div class="card card-fluid">
-                                        <div class="card-body">
-                                            <!-- Filter & Search Toolbar -->
-                                            <div class="form-group">
-                                                <div class="input-group input-group-alt">
-                                                    <!-- 1. Payment Status Filter -->
-                                                    <div class="input-group-prepend">
-                                                        <select id="statusFilter" class="custom-select" style="min-width: 170px;">
-                                                            <option value="all" selected>All Students</option>
-                                                            <option value="pending">Has Dues</option>
-                                                            <option value="overdue">Has Overdues</option>
-                                                            <option value="cleared">Cleared</option>
-                                                        </select>
-                                                    </div>
-                                                    <!-- 2. Search Input -->
-                                                    <div class="input-group has-clearable">
-                                                        <button id="clear-search"
-                                                                type="button"
-                                                                class="close"
-                                                                aria-label="Close"
-                                                                style="display:none">
-                                                            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
-                                                        </button>
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                                        </div>
-                                                        <input id="table-search"
-                                                               type="text"
-                                                               class="form-control"
-                                                               placeholder="Search by name or batch...">
-                                                    </div>
+                                <section class="card card-fluid">
+                                    <!-- Toolbar: Filter & Search (Header) -->
+                                    <header class="card-header border-bottom-0">
+                                        <div class="d-flex justify-content-between">
+                                            <!-- Filter Dropdown -->
+                                            <div class="form-group mb-0 mr-3">
+                                                <select id="statusFilter" class="custom-select" style="min-width: 150px;">
+                                                    <option value="all" selected>All Status</option>
+                                                    <option value="pending">Has Dues</option>
+                                                    <!-- Includes Pending & Overdue -->
+                                                    <option value="overdue">Overdue Only</option>
+                                                    <option value="cleared">Cleared</option>
+                                                </select>
+                                            </div>
+                                            <!-- Search Input -->
+                                            <div class="input-group input-group-alt" style="max-width: 300px">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                                                </div>
+                                                <input id="table-search"
+                                                       type="text"
+                                                       class="form-control"
+                                                       placeholder="Search student or batch...">
+                                                <div class="input-group-append">
+                                                    <button id="clear-search"
+                                                            type="button"
+                                                            class="btn btn-secondary"
+                                                            style="display:none">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <!-- The Table -->
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-striped" id="duesTable">
-                                                    <thead class="thead-light">
-                                                        <tr>
-                                                            <th style="min-width:250px">Student Name</th>
-                                                            <th>Batch</th>
-                                                            <th>Total Paid</th>
-                                                            <th>Status</th>
-                                                            <th>Due Amount</th>
-                                                            <th style="min-width:100px; text-align:right;">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Row 1: CLEARED -->
-                                                        <tr>
-                                                            <td class="align-middle">
-                                                                <a href="#">Ram Bahadur Thapa</a>
-                                                            </td>
-                                                            <td class="align-middle">Python Jan 2026</td>
-                                                            <td class="align-middle text-success">Rs. 15,000</td>
-                                                            <td class="align-middle">
-                                                                <!-- JS looks at data-filter-status on this span -->
-                                                                <span class="badge badge-subtle badge-success" data-filter-status="cleared">Cleared</span>
-                                                            </td>
-                                                            <td class="align-middle font-weight-bold">-</td>
-                                                            <td class="align-middle text-right">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-info text-white"
-                                                                        data-toggle="modal"
-                                                                        data-target="#dueDetailsModal"
-                                                                        data-student="Ram Bahadur Thapa"
-                                                                        data-course="Python Development"
-                                                                        data-batch="Python Jan 2026"
-                                                                        data-fee="15000"
-                                                                        data-paid="15000"
-                                                                        data-due="0"
-                                                                        data-status="Cleared"
-                                                                        onclick="populateDueModal(this)">
-                                                                    View More
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <!-- Row 2: HAS DUE (Pending) -->
-                                                        <tr>
-                                                            <td class="align-middle">
-                                                                <a href="#">Sita Kumari</a>
-                                                            </td>
-                                                            <td class="align-middle">Django Dec 2025</td>
-                                                            <td class="align-middle text-success">Rs. 10,000</td>
-                                                            <td class="align-middle">
-                                                                <span class="badge badge-subtle badge-warning" data-filter-status="pending">Pending</span>
-                                                            </td>
-                                                            <td class="align-middle text-warning font-weight-bold">Rs. 5,000</td>
-                                                            <td class="align-middle text-right">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-info text-white"
-                                                                        data-toggle="modal"
-                                                                        data-target="#dueDetailsModal"
-                                                                        data-student="Sita Kumari"
-                                                                        data-course="Django Development"
-                                                                        data-batch="Django Dec 2025"
-                                                                        data-fee="15000"
-                                                                        data-paid="10000"
-                                                                        data-due="5000"
-                                                                        data-status="Pending"
-                                                                        onclick="populateDueModal(this)">
-                                                                    View More
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <!-- Row 3: HAS OVERDUE -->
-                                                        <tr>
-                                                            <td class="align-middle">
-                                                                <a href="#" class="tile tile-img mr-1">
-                                                                    <span class="tile-text">BG</span>
-                                                                </a>
-                                                                <a href="#">Bishal Gurung</a>
-                                                            </td>
-                                                            <td class="align-middle">Graphic Design</td>
-                                                            <td class="align-middle text-success">Rs. 0</td>
-                                                            <td class="align-middle">
-                                                                <span class="badge badge-subtle badge-danger" data-filter-status="overdue">Overdue</span>
+                                        </div>
+                                    </header>
+                                    <!-- .table-responsive -->
+                                    <div class="table-responsive">
+                                        <!-- .table -->
+                                        <table class="table table-hover" id="duesTable">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <!-- 1. Name: Visible Always -->
+                                                    <th style="min-width:200px">Student Name</th>
+                                                    <!-- 2. Batch: Hidden on Mobile (XS) & Small (SM) -->
+                                                    <th class="d-none d-md-table-cell">Batch</th>
+                                                    <!-- 3. Total Paid: Hidden on Mobile, SM, MD -->
+                                                    <th class="d-none d-lg-table-cell">Total Paid</th>
+                                                    <!-- 4. Status: Hidden on Mobile (XS) -->
+                                                    <th class="d-none d-sm-table-cell">Status</th>
+                                                    <!-- 5. Due: Hidden on Mobile (XS) & Small (SM) -->
+                                                    <th class="d-none d-md-table-cell">Due Amount</th>
+                                                    <!-- 6. Actions: Visible Always -->
+                                                    <th style="min-width:100px; text-align:right;">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="duesTableBody">
+                                                {% for student in due_list %}
+                                                    <!-- Row with data attributes for JS Filtering -->
+                                                    <tr class="due-row"
+                                                        data-search="{{ student.name }} {{ student.batch }}"
+                                                        data-filter-status="{{ student.status_code }}">
+                                                        <!-- 1. Name -->
+                                                        <td class="align-middle">
+                                                            <a href="#" class="text-dark font-weight-bold">{{ student.name }}</a>
+                                                            <!-- Mobile-only Subtext (Shows Due Amount on phone since column is hidden) -->
+                                                            <div class="d-block d-md-none small">
+                                                                {% if student.due_amount > 0 %}
+                                                                    <span class="text-danger">Due: Rs. {{ student.due_amount }}</span>
+                                                                {% else %}
+                                                                    <span class="text-success">Cleared</span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </td>
+                                                        <!-- 2. Batch -->
+                                                        <td class="align-middle d-none d-md-table-cell">{{ student.batch }}</td>
+                                                        <!-- 3. Paid -->
+                                                        <td class="align-middle d-none d-lg-table-cell text-success">Rs. {{ student.paid_amount }}</td>
+                                                        <!-- 4. Status -->
+                                                        <td class="align-middle d-none d-sm-table-cell">
+                                                            {% if student.status_code == 'cleared' %}
+                                                                <span class="badge badge-subtle badge-success">Cleared</span>
+                                                            {% elif student.status_code == 'pending' %}
+                                                                <span class="badge badge-subtle badge-warning">Pending</span>
+                                                            {% elif student.status_code == 'overdue' %}
+                                                                <span class="badge badge-subtle badge-danger">Overdue</span>
                                                                 <i class="fas fa-exclamation-circle text-danger ml-1"
                                                                    title="Payment Date Exceeded"></i>
-                                                            </td>
-                                                            <td class="align-middle text-danger font-weight-bold">Rs. 12,000</td>
-                                                            <td class="align-middle text-right">
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-info text-white"
-                                                                        data-toggle="modal"
-                                                                        data-target="#dueDetailsModal"
-                                                                        data-student="Bishal Gurung"
-                                                                        data-course="Graphic Design"
-                                                                        data-batch="Graphic Design Morning"
-                                                                        data-fee="12000"
-                                                                        data-paid="0"
-                                                                        data-due="12000"
-                                                                        data-status="Overdue"
-                                                                        onclick="populateDueModal(this)">
-                                                                    View More
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <!-- /.page-inner -->
+                                                            {% endif %}
+                                                        </td>
+                                                        <!-- 5. Due Amount -->
+                                                        <td class="align-middle d-none d-md-table-cell font-weight-bold {% if student.due_amount > 0 %}text-danger{% else %}text-muted{% endif %}">
+                                                            {% if student.due_amount > 0 %}
+                                                                Rs. {{ student.due_amount }}
+                                                            {% else %}
+                                                                -
+                                                            {% endif %}
+                                                        </td>
+                                                        <!-- 6. Actions -->
+                                                        <td class="align-middle text-right">
+                                                            <button type="button"
+                                                                    class="btn btn-sm btn-subtle-info"
+                                                                    data-toggle="modal"
+                                                                    data-target="#dueDetailsModal"
+                                                                    data-student="{{ student.name }}"
+                                                                    data-course="{{ student.course }}"
+                                                                    data-batch="{{ student.batch }}"
+                                                                    data-fee="{{ student.total_fee }}"
+                                                                    data-paid="{{ student.paid_amount }}"
+                                                                    data-due="{{ student.due_amount }}"
+                                                                    data-status="{{ student.status_code|title }}"
+                                                                    onclick="populateDueModal(this)">View</button>
+                                                        </td>
+                                                    </tr>
+                                                {% empty %}
+                                                    <tr>
+                                                        <td colspan="6" class="text-center py-5 text-muted">
+                                                            <i class="fas fa-check-circle fa-3x mb-3"></i>
+                                                            <br>
+                                                            No records found.
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                <!-- Hidden Row for No Search Results -->
+                                                <tr id="no-search-results" style="display: none;">
+                                                    <td colspan="6" class="text-center py-5 text-muted">
+                                                        <i class="fas fa-search mb-2"></i>
+                                                        <br>
+                                                        No students found matching your criteria.
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <!-- /.page -->
-                                </div>
+                                </section>
                                 <!-- /.wrapper -->
                             </main>
                             <!-- /.app-main -->
@@ -639,47 +626,56 @@
                             <script>
 document.addEventListener("DOMContentLoaded", function() {
     
+    // Elements
     const searchInput = document.getElementById('table-search');
     const statusFilter = document.getElementById('statusFilter');
     const clearBtn = document.getElementById('clear-search');
-    const tableRows = document.querySelectorAll('#duesTable tbody tr');
+    const tableRows = document.querySelectorAll('.due-row');
+    const noResultsRow = document.getElementById('no-search-results');
 
-    // --- 1. Filter Logic ---
+    // --- 1. Filter & Search Logic ---
     function filterData() {
         const searchText = searchInput.value.toLowerCase().trim();
         const filterType = statusFilter.value; // all, pending, overdue, cleared
+        let visibleCount = 0;
 
         tableRows.forEach(function(row) {
-            // A. Search Logic
-            const textContent = row.textContent.toLowerCase();
-            const matchesSearch = textContent.includes(searchText);
-
-            // B. Status Logic (Extract from inner SPAN, not TR)
-            // We look for the badge element inside the row
-            const statusBadge = row.querySelector('[data-filter-status]');
-            const statusValue = statusBadge ? statusBadge.getAttribute('data-filter-status') : '';
+            // A. Get Data Attributes
+            const rowSearchText = (row.getAttribute('data-search') || '').toLowerCase();
+            const rowStatus = row.getAttribute('data-filter-status'); // cleared, pending, overdue
             
-            let matchesStatus = false;
+            // B. Search Match
+            const matchesSearch = rowSearchText.includes(searchText);
 
+            // C. Status Match
+            let matchesStatus = false;
             if (filterType === 'all') {
                 matchesStatus = true;
-            } else if (filterType === statusValue) {
-                // Exact match (overdue == overdue, cleared == cleared)
+            } else if (filterType === rowStatus) {
+                // Exact match (e.g. overdue == overdue)
                 matchesStatus = true;
-            } else if (filterType === 'pending' && (statusValue === 'pending' || statusValue === 'overdue')) {
-                // "Has Dues" logic covers both 'pending' and 'overdue' statuses
+            } else if (filterType === 'pending' && (rowStatus === 'pending' || rowStatus === 'overdue')) {
+                // "Has Dues" covers both pending and overdue
                 matchesStatus = true;
             }
 
-            // Combine Results
+            // D. Combine & Toggle
             if (matchesSearch && matchesStatus) {
                 row.style.display = '';
+                visibleCount++;
             } else {
                 row.style.display = 'none';
             }
         });
 
-        // Toggle Clear Button
+        // E. Toggle No Results Message
+        if (visibleCount === 0 && tableRows.length > 0) {
+            if(noResultsRow) noResultsRow.style.display = '';
+        } else {
+            if(noResultsRow) noResultsRow.style.display = 'none';
+        }
+
+        // F. Toggle Clear Button
         if (searchText.length > 0) {
             clearBtn.style.display = 'block';
         } else {
@@ -687,20 +683,20 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // --- 2. Listeners ---
-    searchInput.addEventListener('keyup', filterData);
-    statusFilter.addEventListener('change', filterData);
-
-    clearBtn.addEventListener('click', function() {
-        searchInput.value = '';
-        this.style.display = 'none';
-        filterData();
-    });
+    // --- 2. Event Listeners ---
+    if(searchInput) searchInput.addEventListener('keyup', filterData);
+    if(statusFilter) statusFilter.addEventListener('change', filterData);
+    
+    if(clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterData();
+        });
+    }
 });
 
-// --- 3. Populate Modal ---
+// --- 3. Populate Modal (Global) ---
 function populateDueModal(buttonElement) {
-    // Standard dataset extraction
     const data = buttonElement.dataset;
     
     document.getElementById('modal_due_student').textContent = data.student || 'N/A';
@@ -712,6 +708,7 @@ function populateDueModal(buttonElement) {
     // Balance Styling
     const dueEl = document.getElementById('modal_due_amount');
     const dueVal = parseFloat(data.due);
+    
     if (dueVal > 0) {
         dueEl.textContent = "Rs. " + dueVal;
         dueEl.className = "text-danger font-weight-bold";
@@ -727,9 +724,10 @@ function populateDueModal(buttonElement) {
     statusEl.textContent = statusText;
     statusEl.className = "badge"; 
 
-    if(statusText.toLowerCase() === 'overdue') {
+    const lowerStatus = statusText.toLowerCase();
+    if(lowerStatus === 'overdue') {
         statusEl.classList.add('badge-danger');
-    } else if(statusText.toLowerCase() === 'pending') {
+    } else if(lowerStatus === 'pending') {
         statusEl.classList.add('badge-warning');
     } else {
         statusEl.classList.add('badge-success');

@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from datetime import date
 
 # Create your views here.
 def LoginPage(request):
@@ -113,7 +114,49 @@ def DataManagementStudent(request):
     return render(request,'ADMIN/DataManagement_Student.html')
 # to view all the students
 def ViewStudent(request):
-    return render(request,'ADMIN/View-Student.html')
+    students = [
+        {
+            'id': 1,
+            'name': 'Ram Bahadur Thapa',
+            'phone': '9845123456',
+            'email': 'ram.thapa@example.com',
+            'dob': date(1998, 1, 1),
+            'address': 'Kathmandu, Nepal',
+            'status': 'Active'
+        },
+        {
+            'id': 5,
+            'name': 'Sita Kumari Shrestha',
+            'phone': '9801122334',
+            'email': 'sita.shrestha@example.com',
+            'dob': date(1999, 2, 14),
+            'address': 'Lalitpur, Nepal',
+            'status': 'Inactive'
+        },
+        {
+            'id': 2,
+            'name': 'Bishal Gurung',
+            'phone': '9865012345',
+            'email': 'bishal.gurung@example.com',
+            'dob': date(1999, 5, 15),
+            'address': 'Pokhara, Nepal',
+            'status': 'Dropped'
+        },
+        {
+            'id': 6,
+            'name': 'Anisha KC',
+            'phone': '9812345678',
+            'email': 'anisha.kc@example.com',
+            'dob': date(2000, 3, 10),
+            'address': 'Bhaktapur, Nepal',
+            'status': 'Completed'
+        }
+    ]
+
+    context = {
+        'students': students
+    }
+    return render(request,'ADMIN/View-Student.html',context)
 # updating the student
 def UpdateStudent(request,id):
     return render(request,'ADMIN/Update-Student.html')
@@ -129,7 +172,53 @@ def DeleteStudent(request,id):
 def Course(request):
     return render(request,'ADMIN/Courses.html')
 def ViewCourses(request):
-    return render(request,'ADMIN/View-Courses.html')
+    courses = [
+        {
+            'id': 1,
+            'title': 'Python with Django',
+            'code': 'PY-101',
+            'fee': '15,000',
+            'duration': '3 Months',
+            'description': 'The course focuses on full-stack development using the Django framework.'
+        },
+        {
+            'id': 2,
+            'title': 'Graphic Design',
+            'code': 'GD-205',
+            'fee': '12,000',
+            'duration': '2 Months',
+            'description': 'Learn fundamentals of visual communication, Photoshop and Illustrator.'
+        },
+        {
+            'id': 3,
+            'title': 'Digital Marketing',
+            'code': 'DM-300',
+            'fee': '10,000',
+            'duration': '6 Weeks',
+            'description': 'Master SEO, Social Media Marketing, and Content Strategy.'
+        },
+        {
+            'id': 4,
+            'title': 'Full Stack Web Development',
+            'code': 'WD-401',
+            'fee': '20,000',
+            'duration': '4 Months',
+            'description': 'Comprehensive training in HTML, CSS, JavaScript, React, Node.js, and MongoDB.'
+        },
+        {
+            'id': 5,
+            'title': 'Data Science with Python',
+            'code': 'DS-500',
+            'fee': '25,000',
+            'duration': '5 Months',
+            'description': 'Learn data analysis, visualization, machine learning algorithms, and Pandas/NumPy.'
+        }
+    ]
+
+    context = {
+        'courses': courses
+    }
+    return render(request,'ADMIN/View-Courses.html',context)
 def UpdateCourse(request,id):
     if request.method=="POST":
         # DO SOME LOGICS
@@ -149,7 +238,40 @@ def Batch(request):
 
  #viewbatches
 def ViewBatches(request):
-    return render(request,'ADMIN/Batch/View-Batches.html')
+    batches = [
+        {
+            'id': 1,
+            'name': 'Python Jan 2026 Morning',
+            'course': 'Python Development (PY101)',
+            'instructor': 'Mr. A. Sharma',
+            'status': 'Upcoming',
+            'start_date': date(2026, 1, 1),
+            'end_date': date(2026, 3, 30)
+        },
+        {
+            'id': 2,
+            'name': 'Django Jan 2025 Morning',
+            'course': 'Django Development (PY101)',
+            'instructor': 'Ms. S. Karki',
+            'status': 'Completed',
+            'start_date': date(2024, 11, 22),
+            'end_date': date(2025, 2, 25)
+        },
+        {
+            'id': 3,
+            'name': 'Graphic Design Evening',
+            'course': 'Graphic Design Masterclass',
+            'instructor': 'Mr. B. Rai',
+            'status': 'Ongoing',
+            'start_date': date(2025, 12, 1),
+            'end_date': date(2026, 1, 30)
+        }
+    ]
+
+    context = {
+        'batches': batches
+    }
+    return render(request,'ADMIN/Batch/View-Batches.html',context)
 # DeleteBatch
 def DeleteBatch(request, id):
     return render(request,'ADMIN/BATCH/Delete-Batch.html')
@@ -159,7 +281,50 @@ def UpdateBatch(request,id):
 
 # -----Instructor-------
 def Instructor(request):
-    return render(request,'ADMIN/Instructor/View-Instructor.html')
+    class MockUser:
+            def __init__(self, username, first_name, last_name, email):
+                self.username = username
+                self.first_name = first_name
+                self.last_name = last_name
+                self.email = email
+            
+            def get_full_name(self):
+                return f"{self.first_name} {self.last_name}"
+
+    # 2. Mock the 'Instructor' Model
+    # matching: user (OneToOne), phone, specialization, bio, is_active
+    instructors = [
+        {
+            'id': 1,
+            'user': MockUser('asharma', 'Amit', 'Sharma', 'amit.sharma@example.com'),
+            'phone': '9841234567',
+            'specialization': 'Python, Django, Backend',
+            'bio': 'Senior backend developer with 5+ years of experience in Python ecosystems.',
+            'is_active': True
+        },
+        {
+            'id': 2,
+            'user': MockUser('skarki', 'Sarita', 'Karki', 's.karki@example.com'),
+            'phone': '9801987654',
+            'specialization': 'Graphic Design (Ps, Ai)',
+            'bio': 'Creative director passionate about UI/UX and visual storytelling.',
+            'is_active': True
+        },
+        {
+            'id': 3,
+            'user': MockUser('brana', 'Bibek', 'Rana', 'b.rana@example.com'),
+            'phone': '9860112233',
+            'specialization': 'Digital Marketing, SEO',
+            'bio': 'Certified digital marketer specializing in social media growth.',
+            'is_active': False # Simulating an inactive instructor
+        }
+    ]
+
+    context = {
+        'instructors': instructors
+        }
+
+    return render(request,'ADMIN/Instructor/View-Instructor.html',context)
 # UpdateInstructor
 def UpdateInstructor(request,id):
     return render(request,'ADMIN/Instructor/Update-Instructor.html')
@@ -173,7 +338,41 @@ def AddInstructor(request):
 #------Classroom----#
 # ViewClassroom
 def ViewClassroom(request):
-    return render(request,'ADMIN/Classroom/View-Classroom.html')
+    classrooms=[
+         {
+            'id': 1,
+            'name': 'Room 101',
+            'capacity': 30,
+            'is_active': True
+        },
+        {
+            'id': 2,
+            'name': 'Lab A - Computer Lab',
+            'capacity': 25,
+            'is_active': False
+        },
+        {
+            'id': 3,
+            'name': 'Conference Hall',
+            'capacity': 100,
+            'is_active': True
+        },
+         {
+            'id': 2,
+            'name': 'Lab A - Computer Lab',
+            'capacity': 25,
+            'is_active': False
+        },
+        {
+            'id': 3,
+            'name': 'Conference Hall',
+            'capacity': 100,
+            'is_active': True
+        },
+    ]
+    context={
+        "classrooms":classrooms}
+    return render(request,'ADMIN/Classroom/View-Classroom.html',context)
 # addclassroom 
 def AddClassroom(request):
      return render(request,'ADMIN/Classroom/Add-Classroom.html')
@@ -187,7 +386,34 @@ def DeleteClassroom(request,id):
 #------------ViewEnrollment--------------#
 # ViewEnrollment
 def ViewEnrollment(request):
-    return render(request,'ADMIN/Enrollment/View-Enrollment.html')
+    enrollments = [
+        {
+            'id': 1,
+            'student_name': 'Ram Bahadur Thapa',
+            'batch_name': 'Python Jan 2026',
+            'enrolled_date': 'Jan 15, 2026',
+            'status': 'Active'
+        },
+        {
+            'id': 2,
+            'student_name': 'Sita Kumari',
+            'batch_name': 'Django Dec 2025',
+            'enrolled_date': 'Dec 01, 2025',
+            'status': 'Completed'
+        },
+        {
+            'id': 3,
+            'student_name': 'Hari Krishna',
+            'batch_name': 'Graphic Design',
+            'enrolled_date': 'Nov 10, 2025',
+            'status': 'Dropped'
+        }
+    ]
+
+    context = {
+        'enrollments': enrollments
+    }
+    return render(request,'ADMIN/Enrollment/View-Enrollment.html',context)
 def UpdateEnrollment(request,id):
     if request.method=='POST':
         return redirect('ViewEnrollment')
@@ -200,7 +426,73 @@ def DeleteEnrollment(request,id):
 # ----finance -------#
 # ViewPayment
 def ViewPayment(request):
-    return render(request,'ADMIN/Payment/View-Payments.html')
+    payments_data = [
+        {
+            'id': 1,
+            'student': 'Ram Bahadur Thapa',
+            'batch': 'Python Jan 2026',
+            'amount': '15,000.00',
+            'date': 'Jan 15, 2026',
+            'method': 'ESEWA',
+            'reference_no': 'ESW-987654321',
+            'remarks': 'Full payment for Python course.'
+        },
+        {
+            'id': 2,
+            'student': 'Sita Kumari',
+            'batch': 'Django Dec 2025',
+            'amount': '5,000.00',
+            'date': 'Dec 20, 2025',
+            'method': 'BANK',
+            'reference_no': 'TXN-882910',
+            'remarks': 'First Installment via Nabil Bank.'
+        },
+        {
+            'id': 3,
+            'student': 'Hari Krishna',
+            'batch': 'Graphic Design',
+            'amount': '12,000.00',
+            'date': 'Nov 10, 2025',
+            'method': 'CASH',
+            'reference_no': None, # Testing empty reference
+            'remarks': 'Paid cash at the front desk.'
+        },
+        {
+            'id': 4,
+            'student': 'Kabita Joshi',
+            'batch': 'UI/UX Design',
+            'amount': '15,000.00',
+            'date': 'Mar 05, 2026',
+            'method': 'OTHERS',
+            'reference_no': 'Phonpay-5566',
+            'remarks': 'Paid via PhonePay QR.'
+        },
+        {
+            'id': 5,
+            'student': 'Anjali Sherpa',
+            'batch': 'Web Dev 2026',
+            'amount': '20,000.00',
+            'date': 'Feb 01, 2026',
+            'method': 'ESEWA',
+            'reference_no': 'ESW-112233',
+            'remarks': 'Full Payment including registration.'
+        },
+        {
+            'id': 6,
+            'student': 'Bibek Rana',
+            'batch': 'Python Jan 2026',
+            'amount': '7,500.00',
+            'date': 'Jan 16, 2026',
+            'method': 'BANK',
+            'reference_no': 'CHQ-998877',
+            'remarks': 'Cheque Payment - Part 1.'
+        },
+    ]
+
+    context = {
+        'payments': payments_data
+    }
+    return render(request,'ADMIN/Payment/View-Payments.html',context)
 
         # AddPayment
 def AddPayment(request):
@@ -213,12 +505,102 @@ def DeletePayment(request,id):
     return render(request,'ADMIN/Payment/Delete-Payment.html')
 # dues and overdues 
 def DuesAndOverDues(request):
-    return render(request,'ADMIN/Payment/Dues_overdues/OverDue.html')
+    due_list = [
+        {
+            'name': 'Ram Bahadur Thapa',
+            'batch': 'Python Jan 2026',
+            'course': 'Python Development',
+            'total_fee': 15000,
+            'paid_amount': 15000,
+            'due_amount': 0,
+            'status_code': 'cleared'
+        },
+        {
+            'name': 'Sita Kumari',
+            'batch': 'Django Dec 2025',
+            'course': 'Django Framework',
+            'total_fee': 15000,
+            'paid_amount': 10000,
+            'due_amount': 5000,
+            'status_code': 'pending'
+        },
+        {
+            'name': 'Bishal Gurung',
+            'batch': 'Graphic Design',
+            'course': 'Graphic Design',
+            'total_fee': 12000,
+            'paid_amount': 0,
+            'due_amount': 12000,
+            'status_code': 'overdue'
+        }
+    ]
+    
+    context = {
+        'due_list': due_list
+    }
+    return render(request,'ADMIN/Payment/Dues_overdues/OverDue.html',context)
 
 #-------Schedule 
 # ViewSchedule
 def ViewSchedule(request):
-    return render(request,'ADMIN/Schedule/View-Schedule.html')
+    import datetime
+    today = datetime.date.today()
+    
+    schedules = [
+        {
+            'id': 1,
+            'date': today,
+            'start_time': '07:00',
+            'end_time': '09:00',
+            'batch': 'Python Jan 2026',
+            'course': 'Python with Django',
+            'classroom': 'Room 101',
+            'instructor': 'Mr. A. Sharma',
+            'status': 'SCHEDULED'
+        },
+        {
+            'id': 2,
+            'date': today + datetime.timedelta(days=2),
+            'start_time': '10:00',
+            'end_time': '12:00',
+            'batch': 'Graphic Design A',
+            'course': 'Graphic Design Masterclass',
+            'classroom': 'Lab A',
+            'instructor': 'Ms. S. Karki',
+            'status': 'SCHEDULED'
+        },
+        {
+            'id': 3,
+            'date': today - datetime.timedelta(days=5),
+            'start_time': '14:00',
+            'end_time': '16:00',
+            'batch': 'Web Dev 2025',
+            'course': 'Full Stack Web',
+            'classroom': 'Room 102',
+            'instructor': 'Mr. B. Rai',
+            'status': 'COMPLETED'
+        },
+         {
+            'id': 4,
+            'date': today + datetime.timedelta(days=1),
+            'start_time': '08:00',
+            'end_time': '10:00',
+            'batch': 'Cyber Security',
+            'course': 'Ethical Hacking',
+            'classroom': 'Lab B',
+            'instructor': 'Mr. C. Lama',
+            'status': 'CANCELLED'
+        }
+    ]
+
+    # Unique list of instructors for the filter dropdown
+    instructors = list(set([s['instructor'] for s in schedules]))
+
+    context = {
+        'schedules': schedules,
+        'instructors': instructors
+    }
+    return render(request,'ADMIN/Schedule/View-Schedule.html',context)
 
 # DeleteSchedule
 def DeleteSchedule(request,id):

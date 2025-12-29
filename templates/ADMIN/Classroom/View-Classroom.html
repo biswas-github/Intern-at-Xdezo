@@ -396,110 +396,125 @@
                                 </div>
                                 <!-- Page Content Section -->
                                 <div class="page-section">
-                                    <!-- Classrooms Table -->
-                                    <div class="row">
-                                        <div class="col-12 col-sm-12 col-lg-12 rounded">
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-bordered table-striped"
-                                                       id="classroomtable">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="min-width:200px">Room Name</th>
-                                                            <th>Capacity</th>
-                                                            <th>Status</th>
-                                                            <th style="min-width:150px">&nbsp; &nbsp; Actions&nbsp; &nbsp;</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Row 1: Active Room -->
-                                                        <tr>
-                                                            <td>
-                                                                <span>Room 101</span>
-                                                            </td>
-                                                            <td>30 Students</td>
-                                                            <td>
-                                                                <span class="badge badge-success">Active</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                                     role="group">
-                                                                    <!-- Update Button -->
-                                                                    <a href="{% url 'UpdateClassroom' id=1 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                                    <!-- Delete Button -->
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteClassroomModal"
-                                                                            data-name="Room 101"
-                                                                            data-delete-url="{% url 'DeleteClassroom' id=1 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <!-- Row 2: Inactive Room -->
-                                                        <tr>
-                                                            <td>
-                                                                <span>Lab a computer lab</span>
-                                                            </td>
-                                                            <td>25 Students</td>
-                                                            <td>
-                                                                <span class="badge badge-secondary">Inactive</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                                     role="group">
-                                                                    <!-- Update Button -->
-                                                                    <a href="{% url 'UpdateClassroom' id=2 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                                    <!-- Delete Button -->
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteClassroomModal"
-                                                                            data-name="Lab A"
-                                                                            data-delete-url="{% url 'DeleteClassroom' id=2 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <!-- Row 3: Conference Hall -->
-                                                        <tr>
-                                                            <td>
-                                                                <span>Conference hall</span>
-                                                            </td>
-                                                            <td>100 Students</td>
-                                                            <td>
-                                                                <span class="badge badge-success">Active</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex flex-column flex-md-row gap-3 justify-content-center"
-                                                                     role="group">
-                                                                    <!-- Update Button -->
-                                                                    <a href="{% url 'UpdateClassroom' id=3 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mx-sm-2">Update</a>
-                                                                    <!-- Delete Button -->
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteClassroomModal"
-                                                                            data-name="Conference Hall"
-                                                                            data-delete-url="{% url 'DeleteClassroom' id=3 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                    <section class="card card-fluid">
+                                        <!-- Toolbar: Search & Filter -->
+                                        <header class="card-header border-bottom-0">
+                                            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+                                                <!-- Filter Dropdown -->
+                                                <div class="form-group mb-3 mb-md-0">
+                                                    <select id="filterStatus" class="custom-select" style="min-width: 150px;">
+                                                        <option value="all" selected>Status: All</option>
+                                                        <option value="active">Active</option>
+                                                        <option value="inactive">Inactive</option>
+                                                    </select>
+                                                </div>
+                                                <!-- Search Input -->
+                                                <div class="input-group input-group-alt" style="max-width: 300px;">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                                                    </div>
+                                                    <input id="table-search"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Search room name...">
+                                                    <div class="input-group-append">
+                                                        <button id="clear-search"
+                                                                type="button"
+                                                                class="btn btn-secondary"
+                                                                style="display:none">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        </header>
+                                        <!-- .table-responsive -->
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" id="classroomTable">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <!-- 1. Room Name: Visible Always -->
+                                                        <th style="min-width:200px">Room Name</th>
+                                                        <!-- 2. Capacity: Hidden on Mobile (XS) -->
+                                                        <th class="d-none d-sm-table-cell">Capacity</th>
+                                                        <!-- 3. Status: Hidden on Mobile (XS) -->
+                                                        <th class="d-none d-sm-table-cell">Status</th>
+                                                        <!-- 4. Actions: Visible Always -->
+                                                        <th style="min-width:100px; text-align:right;">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="classroomTableBody">
+                                                    {% for room in classrooms %}
+                                                        <tr class="room-row"
+                                                            data-search="{{ room.name }}"
+                                                            data-status="{{ room.is_active|yesno:'active,inactive' }}">
+                                                            <!-- 1. Room Name -->
+                                                            <td class="align-middle">
+                                                                <span class="d-block text-dark font-weight-bold">{{ room.name }}</span>
+                                                                <!-- Mobile Only Details: Capacity & Status -->
+                                                                <div class="d-block d-sm-none mt-1 small text-muted">
+                                                                    <div>Capacity: {{ room.capacity }}</div>
+                                                                    <div class="mt-1">
+                                                                        {% if room.is_active %}
+                                                                            <span class="text-success font-weight-bold">Active</span>
+                                                                        {% else %}
+                                                                            <span class="text-secondary font-weight-bold">Inactive</span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <!-- 2. Capacity -->
+                                                            <td class="align-middle d-none d-sm-table-cell">{{ room.capacity }} Students</td>
+                                                            <!-- 3. Status -->
+                                                            <td class="align-middle d-none d-sm-table-cell">
+                                                                {% if room.is_active %}
+                                                                    <span class="badge badge-subtle badge-success">Active</span>
+                                                                {% else %}
+                                                                    <span class="badge badge-subtle badge-secondary">Inactive</span>
+                                                                {% endif %}
+                                                            </td>
+                                                            <!-- 4. Actions -->
+                                                            <td class="align-middle text-right">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                                                    <!-- Update Button -->
+                                                                    <a href="{% url 'UpdateClassroom' id=room.id %}"
+                                                                       class="btn btn-sm btn-subtle-warning mx-md-1">
+                                                                        Edit
+                                                                    </a>
+                                                                    <!-- Delete Button -->
+                                                                    <button type="button"
+                                                                            class="btn btn-sm btn-subtle-danger"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deleteClassroomModal"
+                                                                            data-name="{{ room.name }}"
+                                                                            data-delete-url="{% url 'DeleteClassroom' id=room.id %}"
+                                                                            onclick="populateDeleteModal(this)">
+                                                                        <i class="oi oi-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    {% empty %}
+                                                        <tr>
+                                                            <td colspan="4" class="text-center py-5 text-muted">
+                                                                <i class="fas fa-chalkboard fa-3x mb-3"></i>
+                                                                <br>
+                                                                No classrooms found.
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    <!-- No Results Row -->
+                                                    <tr id="no-search-results" style="display: none;">
+                                                        <td colspan="4" class="text-center py-5 text-muted">
+                                                            <i class="fas fa-search mb-2"></i>
+                                                            <br>
+                                                            No classrooms found matching your criteria.
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    </div>
+                                    </section>
                                 </div>
                             </div>
                         </div>
@@ -570,18 +585,74 @@
             </div>
             <!-- ================= JAVASCRIPT ================= -->
             <script>
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // Selectors
+    const searchInput = document.getElementById('table-search');
+    const filterStatus = document.getElementById('filterStatus');
+    const clearBtn = document.getElementById('clear-search');
+    const tableRows = document.querySelectorAll('.room-row');
+    const noResultsRow = document.getElementById('no-search-results');
+
+    // --- Filter Function ---
+    function filterTable() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        const statusVal = filterStatus.value.toLowerCase();
+        let visibleCount = 0;
+
+        tableRows.forEach(function(row) {
+            // 1. Get Data
+            const rowSearch = (row.getAttribute('data-search') || '').toLowerCase();
+            const rowStatus = (row.getAttribute('data-status') || '').toLowerCase();
+
+            // 2. Check Search
+            const matchesSearch = rowSearch.includes(searchText);
+
+            // 3. Check Filter
+            const matchesStatus = (statusVal === 'all') || (rowStatus === statusVal);
+
+            // 4. Final Toggle
+            if (matchesSearch && matchesStatus) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Toggle No Results
+        if (visibleCount === 0 && tableRows.length > 0) {
+            if(noResultsRow) noResultsRow.style.display = '';
+        } else {
+            if(noResultsRow) noResultsRow.style.display = 'none';
+        }
+
+        // Toggle Clear Button
+        if(clearBtn) clearBtn.style.display = (searchText.length > 0) ? 'block' : 'none';
+    }
+
+    // Attach Listeners
+    if(searchInput) searchInput.addEventListener('keyup', filterTable);
+    if(filterStatus) filterStatus.addEventListener('change', filterTable);
+
+    if(clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterTable();
+        });
+    }
+});
+
+// --- Populate Delete Modal ---
 function populateDeleteModal(buttonElement) {
-    // 1. Get Name and URL from the button attributes
     const name = buttonElement.getAttribute('data-name');
     const deleteUrl = buttonElement.getAttribute('data-delete-url');
 
-    // 2. Update Modal Text
     document.getElementById('delete_modal_room_name').textContent = name;
 
-    // 3. Update Modal Button Link
     const confirmBtn = document.getElementById('delete_modal_confirm_btn');
     if (confirmBtn) {
-        confirmBtn.href = deleteUrl;
+         confirmBtn.href = deleteUrl;
     }
 }
             </script>

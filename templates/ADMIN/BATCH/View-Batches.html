@@ -437,138 +437,150 @@
                                 <!-- Table for Viewing and Updating Batches -->
                                 <!-- Page Content Section -->
                                 <div class="page-section">
-                                    <div class="card card-fluid">
-                                        <div class="card-body">
-                                            <!-- Search & Filter Controls -->
-                                            <div class="form-group">
-                                                <div class="input-group input-group-alt">
-                                                    <!-- Filter Dropdown -->
+                                    <section class="card card-fluid">
+                                        <!-- Toolbar: Search & Filter -->
+                                        <header class="card-header border-bottom-0">
+                                            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+                                                <!-- Filter Dropdown -->
+                                                <div class="form-group mb-3 mb-md-0">
+                                                    <select id="filterStatus" class="custom-select" style="min-width: 150px;">
+                                                        <option value="all" selected>Status: All</option>
+                                                        <option value="upcoming">Upcoming</option>
+                                                        <option value="ongoing">Ongoing</option>
+                                                        <option value="completed">Completed</option>
+                                                    </select>
+                                                </div>
+                                                <!-- Search Input -->
+                                                <div class="input-group input-group-alt" style="max-width: 300px;">
                                                     <div class="input-group-prepend">
-                                                        <select id="filterBy" class="custom-select">
-                                                            <option value="" selected>Filter By</option>
-                                                            <option value="1">Batch Name</option>
-                                                            <option value="2">Course</option>
-                                                            <option value="3">Status</option>
-                                                        </select>
+                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                                     </div>
-                                                    <!-- Search Input -->
-                                                    <div class="input-group has-clearable">
+                                                    <input id="table-search"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Search batch or course...">
+                                                    <div class="input-group-append">
                                                         <button id="clear-search"
                                                                 type="button"
-                                                                class="close"
-                                                                aria-label="Close"
+                                                                class="btn btn-secondary"
                                                                 style="display:none">
-                                                            <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                                            <i class="fa fa-times"></i>
                                                         </button>
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                                        </div>
-                                                        <input id="table-search"
-                                                               type="text"
-                                                               class="form-control"
-                                                               placeholder="Search batches...">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- The Batch Table -->
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-striped" id="batchTable">
-                                                    <thead class="thead-light">
-                                                        <tr>
-                                                            <th style="min-width:200px">Batch Name</th>
-                                                            <th>Course</th>
-                                                            <th>Status</th>
-                                                            <th style="min-width:150px; text-align:right;">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Row 1: Python Jan 2026 -->
-                                                        <tr>
+                                        </header>
+                                        <!-- .table-responsive -->
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" id="batchTable">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <!-- 1. Batch Name: Visible Always -->
+                                                        <th style="min-width:200px">Batch Name</th>
+                                                        <!-- 2. Course: Hidden on Mobile (XS/SM) -->
+                                                        <th class="d-none d-md-table-cell">Course</th>
+                                                        <!-- 3. Status: Hidden on Mobile (XS) -->
+                                                        <th class="d-none d-sm-table-cell">Status</th>
+                                                        <!-- 4. Actions: Visible Always -->
+                                                        <th style="min-width:100px; text-align:right;">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="batchTableBody">
+                                                    {% for batch in batches %}
+                                                        <tr class="batch-row"
+                                                            data-search="{{ batch.name }} {{ batch.course }}"
+                                                            data-status="{{ batch.status }}">
+                                                            <!-- 1. Batch Name -->
                                                             <td class="align-middle">
-                                                                <strong>Python Jan 2026 Morning</strong>
+                                                                <span class="d-block text-dark font-weight-bold">{{ batch.name }}</span>
+                                                                <!-- Mobile Only Details: Course, Dates, Status -->
+                                                                <div class="d-block d-md-none mt-1 small text-muted">
+                                                                    <div>{{ batch.course }}</div>
+                                                                    <div class="mt-1">
+                                                                        <i class="far fa-calendar-alt mr-1"></i>
+                                                                        {{ batch.start_date|date:"M d" }} - {{ batch.end_date|date:"M d, Y" }}
+                                                                    </div>
+                                                                    <div class="mt-1">
+                                                                        {% if batch.status|lower == 'upcoming' %}
+                                                                            <span class="text-primary font-weight-bold">Upcoming</span>
+                                                                        {% elif batch.status|lower == 'completed' %}
+                                                                            <span class="text-success font-weight-bold">Completed</span>
+                                                                        {% else %}
+                                                                            <span class="text-warning font-weight-bold">{{ batch.status }}</span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </div>
                                                             </td>
-                                                            <td class="align-middle">Python Development (PY101)</td>
-                                                            <td class="align-middle">
-                                                                <span class="badge badge-primary">UPCOMING</span>
+                                                            <!-- 2. Course -->
+                                                            <td class="align-middle d-none d-md-table-cell">{{ batch.course }}</td>
+                                                            <!-- 3. Status -->
+                                                            <td class="align-middle d-none d-sm-table-cell">
+                                                                {% if batch.status|lower == 'upcoming' %}
+                                                                    <span class="badge badge-subtle badge-primary">Upcoming</span>
+                                                                {% elif batch.status|lower == 'completed' %}
+                                                                    <span class="badge badge-subtle badge-success">Completed</span>
+                                                                {% elif batch.status|lower == 'ongoing' %}
+                                                                    <span class="badge badge-subtle badge-warning">Ongoing</span>
+                                                                {% else %}
+                                                                    <span class="badge badge-subtle badge-secondary">{{ batch.status }}</span>
+                                                                {% endif %}
                                                             </td>
+                                                            <!-- 4. Actions -->
                                                             <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
+                                                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
                                                                     <!-- View Button -->
                                                                     <button type="button"
-                                                                            class="btn btn-info btn-sm text-white mb-2 mb-md-0"
+                                                                            class="btn btn-sm btn-subtle-info"
                                                                             data-toggle="modal"
                                                                             data-target="#batchDetailsModal"
-                                                                            data-batchname="Python Jan 2026 Morning"
-                                                                            data-course="Python Development (PY101)"
-                                                                            data-instructor="Mr. A. Sharma"
-                                                                            data-status="Upcoming"
-                                                                            data-start_date="2026-01-01"
-                                                                            data-end_date="2026-03-30"
+                                                                            data-batchname="{{ batch.name }}"
+                                                                            data-course="{{ batch.course }}"
+                                                                            data-instructor="{{ batch.instructor }}"
+                                                                            data-status="{{ batch.status }}"
+                                                                            data-start_date="{{ batch.start_date|date:'Y-m-d' }}"
+                                                                            data-end_date="{{ batch.end_date|date:'Y-m-d' }}"
                                                                             onclick="populateBatchModal(this)">
-                                                                        View Batch
+                                                                        View
                                                                     </button>
                                                                     <!-- Update Button -->
-                                                                    <a href="{% url 'UpdateBatch' id=1 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
+                                                                    <a href="{% url 'UpdateBatch' id=batch.id %}"
+                                                                       class="btn btn-sm btn-subtle-warning mx-md-1">
+                                                                        Edit
+                                                                    </a>
                                                                     <!-- Delete Button -->
                                                                     <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
+                                                                            class="btn btn-sm btn-subtle-danger"
                                                                             data-toggle="modal"
                                                                             data-target="#deleteBatchModal"
-                                                                            data-batchname="Python Jan 2026 Morning"
-                                                                            data-delete-url="{% url 'DeleteBatch' id=1 %}"
+                                                                            data-batchname="{{ batch.name }}"
+                                                                            data-delete-url="{% url 'DeleteBatch' id=batch.id %}"
                                                                             onclick="populateDeleteModal(this)">
-                                                                        Delete
+                                                                        <i class="oi oi-trash"></i>
                                                                     </button>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <!-- Row 2: Django Jan 2025 -->
+                                                    {% empty %}
                                                         <tr>
-                                                            <td class="align-middle">
-                                                                <strong>Django Jan 2025 Morning</strong>
-                                                            </td>
-                                                            <td class="align-middle">Django Development (PY101)</td>
-                                                            <td class="align-middle">
-                                                                <span class="badge badge-success">Completed</span>
-                                                            </td>
-                                                            <td class="align-middle text-right">
-                                                                <div class="d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                                                    <!-- View Button -->
-                                                                    <button type="button"
-                                                                            class="btn btn-info btn-sm text-white mb-2 mb-md-0"
-                                                                            data-toggle="modal"
-                                                                            data-target="#batchDetailsModal"
-                                                                            data-batchname="Django Jan 2025 Morning"
-                                                                            data-course="Django Development (PY101)"
-                                                                            data-instructor="Ms. S. Karki"
-                                                                            data-status="Completed"
-                                                                            data-start_date="2025-11-22"
-                                                                            data-end_date="2025-11-25"
-                                                                            onclick="populateBatchModal(this)">
-                                                                        View Batch
-                                                                    </button>
-                                                                    <!-- Update Button -->
-                                                                    <a href="{% url 'UpdateBatch' id=2 %}"
-                                                                       class="btn btn-warning btn-sm text-dark mb-2 mb-md-0 ml-md-2">Update</a>
-                                                                    <!-- Delete Button -->
-                                                                    <button type="button"
-                                                                            class="btn btn-danger btn-sm ml-md-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteBatchModal"
-                                                                            data-batchname="Django Jan 2025 Morning"
-                                                                            data-delete-url="{% url 'DeleteBatch' id=2 %}"
-                                                                            onclick="populateDeleteModal(this)">
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
+                                                            <td colspan="4" class="text-center py-5 text-muted">
+                                                                <i class="fas fa-layer-group fa-3x mb-3"></i>
+                                                                <br>
+                                                                No batches found.
                                                             </td>
                                                         </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    {% endfor %}
+                                                    <!-- No Results Row -->
+                                                    <tr id="no-search-results" style="display: none;">
+                                                        <td colspan="4" class="text-center py-5 text-muted">
+                                                            <i class="fas fa-search mb-2"></i>
+                                                            <br>
+                                                            No batches found matching your criteria.
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    </div>
+                                    </section>
                                 </div>
                                 <!-- End of Batches Table -->
                             </div>
@@ -711,6 +723,65 @@
 // --- 1. POPULATE VIEW BATCH MODAL ---
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // Selectors
+    const searchInput = document.getElementById('table-search');
+    const filterStatus = document.getElementById('filterStatus');
+    const clearBtn = document.getElementById('clear-search');
+    const tableRows = document.querySelectorAll('.batch-row');
+    const noResultsRow = document.getElementById('no-search-results');
+
+    // --- Filter Function ---
+    function filterTable() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        const statusVal = filterStatus.value.toLowerCase();
+        let visibleCount = 0;
+
+        tableRows.forEach(function(row) {
+            // 1. Get Data
+            const rowSearch = (row.getAttribute('data-search') || '').toLowerCase();
+            const rowStatus = (row.getAttribute('data-status') || '').toLowerCase();
+
+            // 2. Check Search
+            const matchesSearch = rowSearch.includes(searchText);
+
+            // 3. Check Filter
+            const matchesStatus = (statusVal === 'all') || (rowStatus === statusVal);
+
+            // 4. Final Toggle
+            if (matchesSearch && matchesStatus) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Toggle No Results
+        if (visibleCount === 0 && tableRows.length > 0) {
+            if(noResultsRow) noResultsRow.style.display = '';
+        } else {
+            if(noResultsRow) noResultsRow.style.display = 'none';
+        }
+
+        // Toggle Clear Button
+        if(clearBtn) clearBtn.style.display = (searchText.length > 0) ? 'block' : 'none';
+    }
+
+    // Attach Listeners
+    if(searchInput) searchInput.addEventListener('keyup', filterTable);
+    if(filterStatus) filterStatus.addEventListener('change', filterTable);
+
+    if(clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterTable();
+        });
+    }
+});
+
+// --- 1. POPULATE VIEW BATCH MODAL ---
 function populateBatchModal(buttonElement) {
     const data = buttonElement.dataset;
     
@@ -727,13 +798,10 @@ function populateBatchModal(buttonElement) {
     statusEl.textContent = status;
     statusEl.className = 'badge'; 
     
-    if (status.toLowerCase().includes('active') || status.toLowerCase().includes('upcoming')) {
-        statusEl.classList.add('badge-success');
-    } else if (status.toLowerCase().includes('completed')) {
-        statusEl.classList.add('badge-primary');
-    } else {
-        statusEl.classList.add('badge-secondary');
-    }
+    if (status.toLowerCase() === 'upcoming') statusEl.classList.add('badge-primary');
+    else if (status.toLowerCase() === 'completed') statusEl.classList.add('badge-success');
+    else if (status.toLowerCase() === 'ongoing') statusEl.classList.add('badge-warning');
+    else statusEl.classList.add('badge-secondary');
 
     // 3. FLATPICKR CALENDAR LOGIC
     const calendarEl = document.getElementById("modal_calendar");
@@ -742,104 +810,28 @@ function populateBatchModal(buttonElement) {
     calendarEl.innerHTML = ""; 
 
     if (data.start_date && data.end_date) {
-        
         flatpickr(calendarEl, {
-            inline: true,        // Displays as a static widget
-            mode: "range",       // Highlights the period between start and end
-            dateFormat: "Y-m-d", // Matches your data format
-            
-            // THE FIX: This automatically centers the calendar on the start date
+            inline: true,
+            mode: "range",
+            dateFormat: "Y-m-d",
             defaultDate: [data.start_date, data.end_date],
-            
-            // Optional: Make it read-only so users can't click to change it
             clickOpens: false,
             allowInput: false,
         });
     }
-}+
-
-
+}
 
 // --- 2. POPULATE DELETE BATCH MODAL ---
 function populateDeleteModal(buttonElement) {
-    // Get Data
     const batchName = buttonElement.getAttribute('data-batchname');
     const deleteUrl = buttonElement.getAttribute('data-delete-url');
 
-    // Set Name
     document.getElementById('delete_modal_batch_name').textContent = batchName;
 
-    // Set URL
     const confirmBtn = document.getElementById('delete_modal_confirm_btn');
     if (confirmBtn) {
          confirmBtn.href = deleteUrl;
     }
 }
-        </script>
-        <script>
-document.addEventListener("DOMContentLoaded", function() {
-    
-    // Column Mapping for Batch Table
-    const columnMap = {
-        "1": 0, // Batch Name
-        "2": 1, // Course
-        "3": 2  // Status
-    };
-
-    const searchInput = document.getElementById('table-search');
-    const filterSelect = document.getElementById('filterBy');
-    const clearBtn = document.getElementById('clear-search');
-    const tableBody = document.querySelector('#batchTable tbody');
-    const tableRows = tableBody.querySelectorAll('tr');
-
-    function executeFilter() {
-        const searchText = searchInput.value.toLowerCase().trim();
-        const filterValue = filterSelect.value; 
-
-        tableRows.forEach(function(row) {
-            let textToCheck = "";
-            const cells = row.getElementsByTagName('td');
-
-            if (filterValue && columnMap.hasOwnProperty(filterValue)) {
-                // Search in specific column
-                const columnIndex = columnMap[filterValue];
-                if (cells[columnIndex]) {
-                    textToCheck = cells[columnIndex].textContent.toLowerCase();
-                }
-            } else {
-                // Search entire row (excluding actions)
-                if (cells.length > 2) {
-                    textToCheck = cells[0].textContent + " " + 
-                                  cells[1].textContent + " " + 
-                                  cells[2].textContent;
-                    textToCheck = textToCheck.toLowerCase();
-                }
-            }
-
-            if (textToCheck.includes(searchText)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-
-        // Show/Hide Clear Button
-        if (searchText.length > 0) {
-            clearBtn.style.display = 'block';
-        } else {
-            clearBtn.style.display = 'none';
-        }
-    }
-
-    // Event Listeners
-    searchInput.addEventListener('keyup', executeFilter);
-    filterSelect.addEventListener('change', executeFilter);
-
-    clearBtn.addEventListener('click', function() {
-        searchInput.value = '';
-        this.style.display = 'none';
-        executeFilter();
-    });
-});
         </script>
     </html>

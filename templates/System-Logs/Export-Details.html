@@ -401,59 +401,73 @@
                                 <h3>Export Details</h3>
                             </header>
                             <!-- Page Content Section -->
-                            <div class="page-section">
-                                <div class="card card-fluid">
-                                    <!-- Toolbar: Search (Optional) -->
-                                    <div class="card-header border-0">
-                                        <div class="d-flex align-items-center">
-                                            <span class="mr-auto font-weight-bold">Recent Exports</span>
-                                            <div class="input-group input-group-alt" style="max-width: 250px;">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                                </div>
-                                                <input type="text"
-                                                       id="searchLog"
-                                                       class="form-control"
-                                                       placeholder="Search log...">
+                            <section class="card card-fluid">
+                                <!-- Toolbar: Search -->
+                                <header class="card-header border-bottom-0">
+                                    <div class="d-flex align-items-center">
+                                        <span class="mr-auto font-weight-bold">Recent Exports</span>
+                                        <div class="input-group input-group-alt" style="max-width: 250px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                             </div>
+                                            <input type="text"
+                                                   id="exportSearch"
+                                                   class="form-control"
+                                                   placeholder="Search exports...">
                                         </div>
                                     </div>
-                                    <!-- The Export Table -->
-                                    <div class="table-responsive">
-                                        <table class="table table-hover table-striped" id="exportTable">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th style="min-width:200px">Exported By (Who)</th>
-                                                    <th>Data Content (What)</th>
-                                                    <th>Exported On (Date)</th>
+                                </header>
+                                <!-- .table-responsive -->
+                                <div class="table-responsive">
+                                    <!-- .table -->
+                                    <table class="table table-hover">
+                                        <!-- thead -->
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th style="min-width:200px">Exported By</th>
+                                                <th>Data Content</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- /thead -->
+                                        <!-- tbody -->
+                                        <tbody id="exportTableBody">
+                                            {% for log in exports %}
+                                                <!-- Data-search attribute allows JS to filter easily -->
+                                                <tr class="export-row" data-search="{{ log.user }} {{ log.type }}">
+                                                    <td class="align-middle">
+                                                        <span class="text-dark font-weight-bold">{{ log.user }}</span>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <span class="badge badge-subtle badge-dark">{{ log.type }}</span>
+                                                    </td>
+                                                    <td class="align-middle text-muted">{{ log.date|date:"M d, Y H:i" }}</td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for log in exports %}
-                                                    <tr>
-                                                        <!-- 1. Who -->
-                                                        <td class="align-middle">
-                                                            <div class="d-flex align-items-center">
-                                                                <span class="">{{ log.user }}</span>
-                                                            </div>
-                                                        </td>
-                                                        <!-- 2. What -->
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-subtle badge-dark">{{ log.type }}</span>
-                                                        </td>
-                                                        <!-- 3. Date -->
-                                                        <td class="align-middle">{{ log.date|date:"M d, Y H:i" }}</td>
-                                                    </tr>
-                                                {% empty %}
-                                                    <tr>
-                                                        <td colspan="4" class="text-center py-4 text-muted">No export history found.</td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            {% empty %}
+                                                <!-- Empty State -->
+                                                <tr>
+                                                    <td colspan="3" class="text-center py-4 text-muted">
+                                                        <i class="fas fa-info-circle mb-2"></i>
+                                                        <br>
+                                                        No export history found.
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            <!-- Hidden "No Results" row for Search -->
+                                            <tr id="no-search-results" style="display: none;">
+                                                <td colspan="3" class="text-center py-4 text-muted">
+                                                    <i class="fas fa-search mb-2"></i>
+                                                    <br>
+                                                    No exports found matching your criteria.
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <!-- /tbody -->
+                                    </table>
+                                    <!-- /.table -->
                                 </div>
-                            </div>
+                                <!-- /.table-responsive -->
+                            </section>
                         </div>
                     </div>
                     <!-- /.page-inner -->
@@ -493,31 +507,39 @@
 document.addEventListener("DOMContentLoaded", function() {
     
     // 1. Select Elements
-    const searchInput = document.getElementById('searchLog');
-    // Select all rows inside the Table Body
-    const tableRows = document.querySelectorAll('#exportTable tbody tr');
+    const searchInput = document.getElementById('exportSearch');
+    const tableRows = document.querySelectorAll('.export-row'); // Rows generated by Django
+    const noResultsRow = document.getElementById('no-search-results');
 
-    // 2. Add Event Listener
-    searchInput.addEventListener('keyup', function() {
-        // Get the value typed by user and convert to lowercase
-        const searchText = this.value.toLowerCase().trim();
+    // 2. Filter Function
+    function applySearch() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
 
-        // Loop through every row
         tableRows.forEach(row => {
-            // Helper: Check if this is a "No records found" row (optional safety)
-            if (row.classList.contains('no-records')) return;
+            // Read the data-search attribute (contains User + Type)
+            const rowSearchText = (row.getAttribute('data-search') || '').toLowerCase();
 
-            // Get ALL text inside this row (Who + What + Date)
-            const rowContent = row.textContent.toLowerCase();
-
-            // If the row content contains the search text, Show it. Else, Hide it.
-            if (rowContent.includes(searchText)) {
-                row.style.display = ''; // Shows the row
+            if (rowSearchText.includes(searchText)) {
+                row.style.display = ''; // Show
+                visibleCount++;
             } else {
-                row.style.display = 'none'; // Hides the row
+                row.style.display = 'none'; // Hide
             }
         });
-    });
+
+        // Toggle "No Results" message
+        if (visibleCount === 0 && tableRows.length > 0) {
+            noResultsRow.style.display = '';
+        } else {
+            noResultsRow.style.display = 'none';
+        }
+    }
+
+    // 3. Add Event Listener
+    if(searchInput) {
+        searchInput.addEventListener('keyup', applySearch);
+    }
 });
     </script>
 </html>
