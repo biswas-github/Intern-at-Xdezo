@@ -731,5 +731,35 @@ function populateDeleteModal(buttonElement) {
          confirmBtn.href = deleteUrl;
     }
 }
+
+
+        </script>
+        <!-- j querry search feature -->
+        <script>
+$(document).ready(function() {
+
+    // --- jQuery Ctrl + F Override ---
+    $(document).on('keydown', function(e) {
+        // Check if Ctrl (Windows) or Meta (Mac Cmd) is pressed
+        // AND check if the key pressed is 'f' or 'F' (Key code 70)
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'f' || e.key === 'F')) {
+            
+            // 1. Stop the browser's native Find tool
+            e.preventDefault();
+
+            // 2. Select the search input using the ID selector ($)
+            var searchInput = $('#table-search');
+
+            // 3. Focus on the input
+            searchInput.focus();
+            
+            // Optional: visual effect to show the user where the cursor went
+            // searchInput.css('background-color', '#fff3cd').animate({backgroundColor: '#ffffff'}, 500);
+        }
+    });
+
+    // ... Your other jQuery or JS code ...
+
+});
         </script>
     </html>
