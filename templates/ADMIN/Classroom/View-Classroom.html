@@ -85,10 +85,8 @@
                                         aria-haspopup="true"
                                         aria-expanded="false">
                                     <!-- User Avatar (UPDATED: Generic Icon) -->
-                                    <span class="user-avatar">
-                                        <span class="tile tile-circle bg-primary">
-                                            <span class="oi oi-person text-white"></span>
-                                        </span>
+                                    <span class="tile tile-circle bg-white">
+                                        <span class="oi oi-person text-black"></span>
                                     </span>
                                     <!-- User Name and Role -->
                                     {% if request.user.is_authenticated %}
@@ -149,9 +147,7 @@
                                 data-target="#dropdown-aside">
                             <!-- 1. User Avatar (Generic Icon) -->
                             <span class="user-avatar user-avatar-lg">
-                                <span class="tile tile-circle bg-primary">
-                                    <span class="oi oi-person text-white"></span>
-                                </span>
+                                <span class="oi oi-person text-black"></span>
                             </span>
                             <span class="account-icon">
                                 <span class="fa fa-caret-down fa-lg"></span>
@@ -214,10 +210,10 @@
                                 <!-- here intake mgnt insted of the Pages -->
                                 <li class="menu-header">Intake managements</li>
                                 <!-- /.menu-header -->
-                                <!-- datamanagements -->
+                                <!-- .menu-item -->
                                 <li class="menu-item has-child ">
                                     <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-icon-sm oi oi-people"></span>
                                         <span class="menu-text">User management</span>
                                     </a>
                                     <ul class="menu">
@@ -229,10 +225,12 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <!-- /.menu-item -->
+                                <!-- datamanagements -->
                                 <!-- .menu-item -->
-                                <li class="menu-item has-child has-open ">
+                                <li class="menu-item has-child has-open">
                                     <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-icon-sm oi oi-folder"></span>
                                         <span class="menu-text">Data management</span>
                                     </a>
                                     <ul class="menu">
@@ -248,7 +246,7 @@
                                         <li class="menu-item">
                                             <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
                                         </li>
-                                        <li class="menu-item has-active">
+                                        <li class="menu-item  has-active">
                                             <a href="{% url 'ViewClassroom' %}" class="menu-link">Classrooms</a>
                                         </li>
                                         <li class="menu-item">
@@ -260,7 +258,7 @@
                                 <!-- .menu-item -->
                                 <li class="menu-item has-child">
                                     <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-icon-sm oi oi-calendar"></span>
                                         <span class="menu-text">Schedules & Time-tables</span>
                                     </a>
                                     <ul class="menu">
@@ -280,7 +278,7 @@
                                 <!-- .menu-item -->
                                 <li class="menu-item has-child">
                                     <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-people"></span>
+                                        <span class="menu-icon-sm oi oi-dollar"></span>
                                         <span class="menu-text">Finance</span>
                                     </a>
                                     <ul class="menu">
@@ -296,7 +294,7 @@
                                 <!-- .exports -->
                                 <li class="menu-item has-child" style="">
                                     <a href="#" class="menu-link">
-                                        <span class="menu-icon oi oi-list-rich"></span>
+                                        <span class="menu-icon-sm oi oi-list-rich"></span>
                                         <span class="menu-text">Exports</span>
                                     </a>
                                     <!-- child menu -->
@@ -310,7 +308,7 @@
                                     <!-- .menu-item -->
                                     <li class="menu-item has-child">
                                         <a href="#" class="menu-link">
-                                            <span class="menu-icon oi oi-people"></span>
+                                            <span class="menu-icon-sm oi oi-bar-chart"></span>
                                             <span class="menu-text">Analytics</span>
                                         </a>
                                         <ul class="menu">
@@ -334,7 +332,7 @@
                                     <!-- .menu-item -->
                                     <li class="menu-item has-child">
                                         <a href="#" class="menu-link">
-                                            <span class="menu-icon oi oi-people"></span>
+                                            <span class="menu-icon-sm oi oi-file"></span>
                                             <span class="menu-text">System Logs</span>
                                         </a>
                                         <ul class="menu">
