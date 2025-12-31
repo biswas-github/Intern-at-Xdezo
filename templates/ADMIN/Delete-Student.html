@@ -1,48 +1,48 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <!-- End Required meta tags -->
-        <!-- Begin SEO tag -->
-        <title>Page Title | Looper - Bootstrap 4 Admin Theme</title>
-        <meta property="og:title" content="Starter Template" />
-        <meta name="author" content="Beni Arisandi" />
-        <meta property="og:locale" content="en_US" />
-        <meta name="description"
-              content="Responsive admin theme build on top of Bootstrap 4" />
-        <meta property="og:description"
-              content="Responsive admin theme build on top of Bootstrap 4" />
-        <link rel="canonical" href="//uselooper.com" />
-        <meta property="og:url" content="//uselooper.com" />
-        <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme" />
-        <!-- FAVICONS -->
-        <link rel="apple-touch-icon-precomposed"
-              sizes="144x144"
-              href="{% static 'apple-touch-icon.png' %}" />
-        <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
-        <meta name="theme-color" content="#3063A0" />
-        <!-- End FAVICONS -->
-        <script src="{% static 'vendor/pace/pace.min.js' %}"></script>
-        <!-- BEGIN BASE STYLES -->
-        <link rel="stylesheet" href="{% static 'vendor/pace/pace.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/open-iconic/css/open-iconic-bootstrap.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/font-awesome/css/fontawesome-all.min.css' %}" />
-        <!-- END BASE STYLES -->
-        <!-- BEGIN THEME STYLES -->
-        <link rel="stylesheet" href="{% static 'css/main.min.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
-        <!-- END THEME STYLES -->
-    </head>
-    <body>
-        <style>.success-box {
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title>Page Title | Looper - Bootstrap 4 Admin Theme</title>
+    <meta property="og:title" content="Starter Template" />
+    <meta name="author" content="Beni Arisandi" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="description"
+          content="Responsive admin theme build on top of Bootstrap 4" />
+    <meta property="og:description"
+          content="Responsive admin theme build on top of Bootstrap 4" />
+    <link rel="canonical" href="//uselooper.com" />
+    <meta property="og:url" content="//uselooper.com" />
+    <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme" />
+    <!-- FAVICONS -->
+    <link rel="apple-touch-icon-precomposed"
+          sizes="144x144"
+          href="{% static 'apple-touch-icon.png' %}" />
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
+    <meta name="theme-color" content="#3063A0" />
+    <!-- End FAVICONS -->
+    <script src="{% static 'vendor/pace/pace.min.js' %}"></script>
+    <!-- BEGIN BASE STYLES -->
+    <link rel="stylesheet" href="{% static 'vendor/pace/pace.min.css' %}" />
+    <link rel="stylesheet"
+          href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet"
+          href="{% static 'vendor/open-iconic/css/open-iconic-bootstrap.min.css' %}" />
+    <link rel="stylesheet"
+          href="{% static 'vendor/font-awesome/css/fontawesome-all.min.css' %}" />
+    <!-- END BASE STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+    <!-- END THEME STYLES -->
+  </head>
+  <body>
+    <style>.success-box {
     background: #e8f9e9;        /* light green background */
     border-left: 5px solid #28a745;  /* green left border */
     padding: 12px 18px;
@@ -52,101 +52,101 @@
     font-weight: 500;
     color: #145a19;             /* darker green text */
 }
-        </style>
-        <!-- .app -->
-        <div class="app">
-            <!-- .app-header -->
-            <header class="app-header">
-                <!-- .top-bar -->
-                <div class="top-bar">
-                    <!-- .top-bar-brand -->
-                    <div class="top-bar-brand">
-                        <a href="{% url 'AdminDashboard' %}">
-                            <img src="{% static 'images/brand-inverse.png' %}"
-                                 height="42"
-                                 width="150"
-                                 class="rounded"
-                                 alt="Brand Logo" />
-                        </a>
-                    </div>
-                    <!-- /.top-bar-brand -->
-                    <!-- .top-bar-list -->
-                    <div class="top-bar-list">
-                        <!-- Mobile Menu Toggle -->
-                        <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
-                            <button class="hamburger hamburger-squeeze"
-                                    type="button"
-                                    data-toggle="aside"
-                                    aria-label="Menu"
-                                    aria-controls="navigation">
-                                <span class="hamburger-box">
-                                    <span class="hamburger-inner"></span>
-                                </span>
-                            </button>
-                        </div>
-                        <!-- Spacer -->
-                        <div class="top-bar-item top-bar-item-full"></div>
-                        <!-- .top-bar-item: The Right Side User Menu -->
-                        <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
-                            <!-- Dropdown -->
-                            <div class="dropdown">
-                                <button class="btn-account d-none d-md-flex"
-                                        type="button"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false">
-                                    <!-- User Avatar (UPDATED: Generic Icon) -->
-                                    <span class="tile tile-circle bg-white">
-                                        <span class="oi oi-person text-black"></span>
-                                    </span>
-                                    <!-- User Name and Role -->
-                                    {% if request.user.is_authenticated %}
-                                        <span class="account-summary pr-lg-4 d-none d-lg-block">
-                                            <span class="account-name">{{ request.user.get_full_name|default:request.user.username }}</span>
-                                            <span class="account-description">{{ request.user.get_role_display }}</span>
-                                        </span>
-                                    {% else %}
-                                        <span class="account-summary pr-lg-4 d-none d-lg-block">
-                                            <span class="account-name">Admin_demo</span>
-                                            <span class="account-description">Admin</span>
-                                        </span>
-                                    {% endif %}
-                                </button>
-                                <div class="dropdown-arrow dropdown-arrow-left"></div>
-                                <!-- Dropdown Menu -->
-                                <div class="dropdown-menu">
-                                    {% if request.user.is_authenticated %}
-                                        <h6 class="dropdown-header d-flex flex-column">
-                                            <span class="font-weight-bold">{{ request.user.get_full_name|default:request.user.username }}</span>
-                                            <small class="text-muted">{{ request.user.get_role_display }}</small>
-                                        </h6>
-                                    {% else %}
-                                        <h6>
-                                            <span class="font-weight-bold ps-1">Admin_demo</span>
-                                            <small class="text-muted">admin</small>
-                                        </h6>
-                                    {% endif %}
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'login' %}">
-                                        <span class="dropdown-icon oi oi-account-logout"></span> Logout
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" href="{% url 'login' %}">
-                                        <span class="dropdown-icon oi oi-trash"></span> Delete Account
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- /.dropdown -->
-                        </div>
-                        <!-- /.top-bar-item -->
-                    </div>
-                    <!-- /.top-bar-list -->
+    </style>
+    <!-- .app -->
+    <div class="app">
+      <!-- .app-header -->
+      <header class="app-header">
+        <!-- .top-bar -->
+        <div class="top-bar">
+          <!-- .top-bar-brand -->
+          <div class="top-bar-brand">
+            <a href="{% url 'AdminDashboard' %}">
+              <img src="{% static 'images/brand-inverse.png' %}"
+                   height="42"
+                   width="150"
+                   class="rounded"
+                   alt="Brand Logo" />
+            </a>
+          </div>
+          <!-- /.top-bar-brand -->
+          <!-- .top-bar-list -->
+          <div class="top-bar-list">
+            <!-- Mobile Menu Toggle -->
+            <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+              <button class="hamburger hamburger-squeeze"
+                      type="button"
+                      data-toggle="aside"
+                      aria-label="Menu"
+                      aria-controls="navigation">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
+            </div>
+            <!-- Spacer -->
+            <div class="top-bar-item top-bar-item-full"></div>
+            <!-- .top-bar-item: The Right Side User Menu -->
+            <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
+              <!-- Dropdown -->
+              <div class="dropdown">
+                <button class="btn-account d-none d-md-flex"
+                        type="button"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                  <!-- User Avatar (UPDATED: Generic Icon) -->
+                  <span class="tile tile-circle bg-white">
+                    <span class="oi oi-person text-black"></span>
+                  </span>
+                  <!-- User Name and Role -->
+                  {% if request.user.is_authenticated %}
+                    <span class="account-summary pr-lg-4 d-none d-lg-block">
+                      <span class="account-name">{{ request.user.get_full_name|default:request.user.username }}</span>
+                      <span class="account-description">{{ request.user.get_role_display }}</span>
+                    </span>
+                  {% else %}
+                    <span class="account-summary pr-lg-4 d-none d-lg-block">
+                      <span class="account-name">Admin_demo</span>
+                      <span class="account-description">Admin</span>
+                    </span>
+                  {% endif %}
+                </button>
+                <div class="dropdown-arrow dropdown-arrow-left"></div>
+                <!-- Dropdown Menu -->
+                <div class="dropdown-menu">
+                  {% if request.user.is_authenticated %}
+                    <h6 class="dropdown-header d-flex flex-column">
+                      <span class="font-weight-bold">{{ request.user.get_full_name|default:request.user.username }}</span>
+                      <small class="text-muted">{{ request.user.get_role_display }}</small>
+                    </h6>
+                  {% else %}
+                    <h6>
+                      <span class="font-weight-bold ps-1">Admin_demo</span>
+                      <small class="text-muted">admin</small>
+                    </h6>
+                  {% endif %}
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'login' %}">
+                    <span class="dropdown-icon oi oi-account-logout"></span> Logout
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-danger" href="{% url 'login' %}">
+                    <span class="dropdown-icon oi oi-trash"></span> Delete Account
+                  </a>
                 </div>
-                <!-- /.top-bar -->
-            </header>
-            <!-- /.app-header -->
-            <!-- .app-aside -->
-          <aside class="app-aside">
+              </div>
+              <!-- /.dropdown -->
+            </div>
+            <!-- /.top-bar-item -->
+          </div>
+          <!-- /.top-bar-list -->
+        </div>
+        <!-- /.top-bar -->
+      </header>
+      <!-- /.app-header -->
+      <!-- .app-aside -->
+      <aside class="app-aside">
         <!-- .aside-content -->
         <div class="aside-content">
           <!-- .aside-header -->
@@ -157,11 +157,11 @@
                     data-toggle="collapse"
                     data-target="#dropdown-aside">
               <!-- 1. User Avatar (Generic Icon) -->
-              <span class="user-avatar user-avatar-lg">
+              <span class="user-avatar user-avatar-xs">
                 <span class="oi oi-person text-black"></span>
               </span>
               <span class="account-icon">
-                <span class="fa fa-caret-down fa-lg"></span>
+                <span class="fa fa-caret-down fa-sm"></span>
               </span>
               <!-- 2. User Name and Role -->
               <span class="account-summary">
@@ -366,66 +366,66 @@
           </div>
           <!-- /.aside-content -->
         </aside>
-                <!-- /.app-aside -->
-                <!-- .app-main -->
-                <main class="app-main">
-                    <div class="wrapper">
-                        <div class="page">
-                            <div class="page-inner">
-                                <!-- Page Content Section -->
-                                <div class="page-section">
-                                    <!-- .empty-state -->
-                                    <div class="empty-state container pb-4 d-flex flex-column justify-content-center"
-                                         style="min-height: 70vh">
-                                        <!-- 1. The Icon (Visual Confirmation) -->
-                                        <!-- Using a large Trash icon with a success check overlay look, or just a simple Success Circle -->
-                                        <div class="state-figure mb-4">
-                                            <span class="fa-stack fa-4x">
-                                                <i class="far fa-circle fa-stack-2x text-success"></i>
-                                                <i class="fa fa-check fa-stack-1x text-success"></i>
-                                            </span>
-                                        </div>
-                                        <!-- 2. The Title -->
-                                        <h3 class="state-header">Deleted Successfully!</h3>
-                                        <!-- 3. The Description -->
-                                        <p class="state-description lead text-muted">
-                                            The record has been permanently removed from the system.
-                                            <br>
-                                            This action cannot be undone.
-                                        </p>
-                                        <!-- 4. Action Buttons -->
-                                        <div class="state-action mt-3">
-                                            <!-- Primary Action: Go Back to List -->
-                                            <!-- Replace 'AdminDashboard' with the specific view you want (e.g., 'ViewStudent') -->
-                                            <a href="{% url 'ViewStudent' %}" class="btn btn-primary px-5">
-                                                <i class="fa fa-arrow-left mr-2"></i> Back
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- /.empty-state -->
-                                </div>
-                            </div>
-                        </div>
-                    </main>
-                    <!-- /.app-main -->
+        <!-- /.app-aside -->
+        <!-- .app-main -->
+        <main class="app-main">
+          <div class="wrapper">
+            <div class="page">
+              <div class="page-inner">
+                <!-- Page Content Section -->
+                <div class="page-section">
+                  <!-- .empty-state -->
+                  <div class="empty-state container pb-4 d-flex flex-column justify-content-center"
+                       style="min-height: 70vh">
+                    <!-- 1. The Icon (Visual Confirmation) -->
+                    <!-- Using a large Trash icon with a success check overlay look, or just a simple Success Circle -->
+                    <div class="state-figure mb-4">
+                      <span class="fa-stack fa-4x">
+                        <i class="far fa-circle fa-stack-2x text-success"></i>
+                        <i class="fa fa-check fa-stack-1x text-success"></i>
+                      </span>
+                    </div>
+                    <!-- 2. The Title -->
+                    <h3 class="state-header">Deleted Successfully!</h3>
+                    <!-- 3. The Description -->
+                    <p class="state-description lead text-muted">
+                      The record has been permanently removed from the system.
+                      <br>
+                      This action cannot be undone.
+                    </p>
+                    <!-- 4. Action Buttons -->
+                    <div class="state-action mt-3">
+                      <!-- Primary Action: Go Back to List -->
+                      <!-- Replace 'AdminDashboard' with the specific view you want (e.g., 'ViewStudent') -->
+                      <a href="{% url 'ViewStudent' %}" class="btn btn-primary px-5">
+                        <i class="fa fa-arrow-left mr-2"></i> Back
+                      </a>
+                    </div>
+                  </div>
+                  <!-- /.empty-state -->
                 </div>
-                <!-- /.app -->
-                <!-- BEGIN BASE JS -->
-                <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-                <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-                <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-                <!-- END BASE JS -->
-                <!-- BEGIN PLUGINS JS -->
-                <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-                <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-                <!-- END PLUGINS JS -->
-                <!-- BEGIN THEME JS -->
-                <script src="{% static 'javascript/main.min.js' %}"></script>
-                <!-- END THEME JS -->
-                <!-- Global site tag (gtag.js) - Google Analytics -->
-                <script async
-                        src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-                <script>
+              </div>
+            </div>
+          </main>
+          <!-- /.app-main -->
+        </div>
+        <!-- /.app -->
+        <!-- BEGIN BASE JS -->
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <!-- END BASE JS -->
+        <!-- BEGIN PLUGINS JS -->
+        <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+        <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+        <!-- END PLUGINS JS -->
+        <!-- BEGIN THEME JS -->
+        <script src="{% static 'javascript/main.min.js' %}"></script>
+        <!-- END THEME JS -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async
+                src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+        <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -433,6 +433,6 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
-                </script>
-            </body>
-        </html>
+        </script>
+      </body>
+    </html>

@@ -149,11 +149,11 @@
                     data-toggle="collapse"
                     data-target="#dropdown-aside">
               <!-- 1. User Avatar (Generic Icon) -->
-              <span class="user-avatar user-avatar-lg">
+              <span class="user-avatar user-avatar-xs">
                 <span class="oi oi-person text-black"></span>
               </span>
               <span class="account-icon">
-                <span class="fa fa-caret-down fa-lg"></span>
+                <span class="fa fa-caret-down fa-sm"></span>
               </span>
               <!-- 2. User Name and Role -->
               <span class="account-summary">
@@ -375,199 +375,193 @@
                     </ol>
                   </nav>
                   <div class="d-flex justify-content-between align-items-center">
-                    <h1 class="page-title">View Students</h1>
-                  </div>
-                </header>
-                <!-- Add Student Button -->
-                <div class="mb-1 mx-3 mx-sm-1 mt-0 mt-sm-0">
-                  <div class="d-block">
-                    <a href="{% url 'DataManagementStudent' %}"
-                       class="text-decoration-none ms-2">
-                      <button type="button" class="btn btn-outline-dark shadow-sm ">
-                        <i class="fas fa-plus "></i>
-                      </button>
-                    </a>
-                  </div>
-                  <!--  -->
+                    <h1 class="page-title">
+                      View Students <span> <a href="{% url 'DataManagementStudent' %}"
+    class="text-decoration-none ms-2">
+                      <i style="font-size: 0.5em;"  class="fas fa-plus "></i>
+                    </a></span>
+                  </h1>
                 </div>
-                <!-- Page Content Section -->
-                <div class="page-section">
-                  <section class="card card-fluid">
-                    <!-- Toolbar: Search & Filters -->
-                    <header class="card-header border-bottom-0">
-                      <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
-                        <!-- Group 1: Filter (Optional - e.g., Status) -->
-                        <div class="form-group mb-3 mb-md-0">
-                          <select id="filterStatus" class="custom-select" style="min-width: 150px;">
-                            <option value="all" selected>Status: All</option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                            <option value="dropped">Dropped</option>
-                            <option value="completed">Completed</option>
-                          </select>
+              </header>
+              <!-- Add Student Button -->
+              <!-- Page Content Section -->
+              <div class="page-section">
+                <section class="card card-fluid">
+                  <!-- Toolbar: Search & Filters -->
+                  <header class="card-header border-bottom-0">
+                    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+                      <!-- Group 1: Filter (Optional - e.g., Status) -->
+                      <div class="form-group mb-3 mb-md-0">
+                        <select id="filterStatus" class="custom-select" style="min-width: 150px;">
+                          <option value="all" selected>Status: All</option>
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                          <option value="dropped">Dropped</option>
+                          <option value="completed">Completed</option>
+                        </select>
+                      </div>
+                      <!-- Group 2: Search -->
+                      <div class="input-group input-group-alt" style="max-width: 300px;">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                         </div>
-                        <!-- Group 2: Search -->
-                        <div class="input-group input-group-alt" style="max-width: 300px;">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                          </div>
-                          <input id="table-search"
-                                 type="text"
-                                 class="form-control"
-                                 placeholder="Search name, phone, or email...">
-                          <div class="input-group-append">
-                            <button id="clear-search"
-                                    type="button"
-                                    class="btn btn-secondary"
-                                    style="display:none">
-                              <i class="fa fa-times"></i>
-                            </button>
-                          </div>
+                        <input id="table-search"
+                               type="text"
+                               class="form-control"
+                               placeholder="Search name, phone, or email...">
+                        <div class="input-group-append">
+                          <button id="clear-search"
+                                  type="button"
+                                  class="btn btn-secondary"
+                                  style="display:none">
+                            <i class="fa fa-times"></i>
+                          </button>
                         </div>
                       </div>
-                    </header>
-                    <!-- .table-responsive -->
-                    <div class="table-responsive">
-                      <table class="table table-hover" id="studentTable">
-                        <thead class="thead-light">
-                          <tr>
-                            <!-- 1. Name: Visible Always -->
-                            <th style="min-width:200px">Name</th>
-                            <!-- 2. Phone: Hidden on Mobile (XS) -->
-                            <th class="d-none d-sm-table-cell">Phone No</th>
-                            <!-- 3. Email: Hidden on Mobile & Tablet (XS/SM/MD) -->
-                            <th class="d-none d-lg-table-cell">Email</th>
-                            <!-- 4. Status: Hidden on Mobile (XS) -->
-                            <th class="d-none d-sm-table-cell">Status</th>
-                            <!-- 5. Actions: Visible Always -->
-                            <th style="min-width:100px; text-align:right;">Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody id="studentTableBody">
-                          {% for student in students %}
-                            <tr class="student-row"
-                                data-search="{{ student.name }} {{ student.phone }} {{ student.email }}"
-                                data-status="{{ student.status }}">
-                              <!-- 1. Name -->
-                              <td class="align-middle">
-                                <a href="#" class="text-dark font-weight-bold">{{ student.name }}</a>
-                                <!-- Mobile Only Details -->
-                                <div class="d-block d-sm-none mt-1 small">
-                                  <div class="text-muted">
-                                    <i class="fas fa-phone mr-1"></i>{{ student.phone }}
-                                  </div>
-                                  <div class="mt-1">
-                                    {% if student.status|lower == 'active' %}
-                                      <span class="text-success font-weight-bold">Active</span>
-                                    {% elif student.status|lower == 'inactive' %}
-                                      <span class="text-warning font-weight-bold">Inactive</span>
-                                    {% elif student.status|lower == 'dropped' %}
-                                      <span class="text-danger font-weight-bold">Dropped</span>
-                                    {% else %}
-                                      <span class="text-secondary font-weight-bold">{{ student.status }}</span>
-                                    {% endif %}
-                                  </div>
+                    </div>
+                  </header>
+                  <!-- .table-responsive -->
+                  <div class="table-responsive">
+                    <table class="table table-hover" id="studentTable">
+                      <thead class="thead-dark">
+                        <tr>
+                          <!-- 1. Name: Visible Always -->
+                          <th style="min-width:200px">Name</th>
+                          <!-- 2. Phone: Hidden on Mobile (XS) -->
+                          <th class="d-none d-sm-table-cell">Phone No</th>
+                          <!-- 3. Email: Hidden on Mobile & Tablet (XS/SM/MD) -->
+                          <th class="d-none d-lg-table-cell">Email</th>
+                          <!-- 4. Status: Hidden on Mobile (XS) -->
+                          <th class="d-none d-sm-table-cell">Status</th>
+                          <!-- 5. Actions: Visible Always -->
+                          <th style="min-width:100px; text-align:right;">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="studentTableBody">
+                        {% for student in students %}
+                          <tr class="student-row"
+                              data-search="{{ student.name }} {{ student.phone }} {{ student.email }}"
+                              data-status="{{ student.status }}">
+                            <!-- 1. Name -->
+                            <td class="align-middle">
+                              <a href="#" class="text-dark font-weight-bold">{{ student.name }}</a>
+                              <!-- Mobile Only Details -->
+                              <div class="d-block d-sm-none mt-1 small">
+                                <div class="text-muted">
+                                  <i class="fas fa-phone mr-1"></i>{{ student.phone }}
                                 </div>
-                              </td>
-                              <!-- 2. Phone -->
-                              <td class="align-middle d-none d-sm-table-cell">{{ student.phone }}</td>
-                              <!-- 3. Email -->
-                              <td class="align-middle d-none d-lg-table-cell">{{ student.email }}</td>
-                              <!-- 4. Status -->
-                              <td class="align-middle d-none d-sm-table-cell">
-                                {% if student.status|lower == 'active' %}
-                                  <span class="badge badge-subtle badge-success">Active</span>
-                                {% elif student.status|lower == 'inactive' %}
-                                  <span class="badge badge-subtle badge-warning">Inactive</span>
-                                {% elif student.status|lower == 'dropped' %}
-                                  <span class="badge badge-subtle badge-danger">Dropped</span>
-                                {% elif student.status|lower == 'completed' %}
-                                  <span class="badge badge-subtle badge-primary">Completed</span>
-                                {% else %}
-                                  <span class="badge badge-subtle badge-secondary">{{ student.status }}</span>
-                                {% endif %}
-                              </td>
-                              <!-- 5. Actions -->
-                              <td class="align-middle text-right">
-                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                  <!-- View Button -->
-                                  <button type="button"
-                                          class="btn btn-sm btn-subtle-info"
-                                          data-toggle="modal"
-                                          data-target="#studentDetailsModal"
-                                          data-name="{{ student.name }}"
-                                          data-phone="{{ student.phone }}"
-                                          data-email="{{ student.email }}"
-                                          data-dob="{{ student.dob|date:'M d, Y' }}"
-                                          data-address="{{ student.address }}"
-                                          data-status="{{ student.status }}"
-                                          onclick="populateModal(this)">View</button>
-                                  <!-- Update Button -->
-                                  <a href="{% url 'UpdateStudent' id=student.id %}"
-                                     class="btn btn-sm btn-subtle-warning mx-md-1">Edit</a>
-                                  <!-- Delete Button -->
-                                  <button type="button"
-                                          class="btn btn-sm btn-subtle-danger"
-                                          data-toggle="modal"
-                                          data-target="#deleteStudentModal"
-                                          data-name="{{ student.name }}"
-                                          data-delete-url="{% url 'DeleteStudent' id=student.id %}"
-                                          onclick="populateDeleteModal(this)">
-                                    <i class="oi oi-trash"></i>
-                                  </button>
+                                <div class="mt-1">
+                                  {% if student.status|lower == 'active' %}
+                                    <span class="text-success font-weight-bold">Active</span>
+                                  {% elif student.status|lower == 'inactive' %}
+                                    <span class="text-warning font-weight-bold">Inactive</span>
+                                  {% elif student.status|lower == 'dropped' %}
+                                    <span class="text-danger font-weight-bold">Dropped</span>
+                                  {% else %}
+                                    <span class="text-secondary font-weight-bold">{{ student.status }}</span>
+                                  {% endif %}
                                 </div>
-                              </td>
-                            </tr>
-                          {% empty %}
-                            <tr>
-                              <td colspan="5" class="text-center py-5 text-muted">
-                                <i class="fas fa-user-slash fa-3x mb-3"></i>
-                                <br>
-                                No students found.
-                              </td>
-                            </tr>
-                          {% endfor %}
-                          <!-- No Results Row -->
-                          <tr id="no-search-results" style="display: none;">
-                            <td colspan="5" class="text-center py-5 text-muted">
-                              <i class="fas fa-search mb-2"></i>
-                              <br>
-                              No students found matching your criteria.
+                              </div>
+                            </td>
+                            <!-- 2. Phone -->
+                            <td class="align-middle d-none d-sm-table-cell">{{ student.phone }}</td>
+                            <!-- 3. Email -->
+                            <td class="align-middle d-none d-lg-table-cell">{{ student.email }}</td>
+                            <!-- 4. Status -->
+                            <td class="align-middle d-none d-sm-table-cell">
+                              {% if student.status|lower == 'active' %}
+                                <span class="badge badge-subtle badge-success">Active</span>
+                              {% elif student.status|lower == 'inactive' %}
+                                <span class="badge badge-subtle badge-warning">Inactive</span>
+                              {% elif student.status|lower == 'dropped' %}
+                                <span class="badge badge-subtle badge-danger">Dropped</span>
+                              {% elif student.status|lower == 'completed' %}
+                                <span class="badge badge-subtle badge-primary">Completed</span>
+                              {% else %}
+                                <span class="badge badge-subtle badge-secondary">{{ student.status }}</span>
+                              {% endif %}
+                            </td>
+                            <!-- 5. Actions -->
+                            <td class="align-middle text-right">
+                              <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                <!-- View Button -->
+                                <button type="button"
+                                        class="btn btn-sm btn-subtle-info"
+                                        data-toggle="modal"
+                                        data-target="#studentDetailsModal"
+                                        data-name="{{ student.name }}"
+                                        data-phone="{{ student.phone }}"
+                                        data-email="{{ student.email }}"
+                                        data-dob="{{ student.dob|date:'M d, Y' }}"
+                                        data-address="{{ student.address }}"
+                                        data-status="{{ student.status }}"
+                                        onclick="populateModal(this)">View</button>
+                                <!-- Update Button -->
+                                <a href="{% url 'UpdateStudent' id=student.id %}"
+                                   class="btn btn-sm btn-subtle-warning mx-md-1">Edit</a>
+                                <!-- Delete Button -->
+                                <button type="button"
+                                        class="btn btn-sm btn-subtle-danger"
+                                        data-toggle="modal"
+                                        data-target="#deleteStudentModal"
+                                        data-name="{{ student.name }}"
+                                        data-delete-url="{% url 'DeleteStudent' id=student.id %}"
+                                        onclick="populateDeleteModal(this)">
+                                  <i class="oi oi-trash"></i>
+                                </button>
+                              </div>
                             </td>
                           </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </section>
-                </div>
-                <!-- ================= MODALS & JS ================= -->
-                <!-- Make sure you have the Single Modals and Scripts below this! -->
-                <!-- 1. #studentDetailsModal (View) -->
-                <!-- 2. #deleteStudentModal (Delete) -->
-                <!-- 3. <script> with populateModal() and populateDeleteModal() and search logic -->
+                        {% empty %}
+                          <tr>
+                            <td colspan="5" class="text-center py-5 text-muted">
+                              <i class="fas fa-user-slash fa-3x mb-3"></i>
+                              <br>
+                              No students found.
+                            </td>
+                          </tr>
+                        {% endfor %}
+                        <!-- No Results Row -->
+                        <tr id="no-search-results" style="display: none;">
+                          <td colspan="5" class="text-center py-5 text-muted">
+                            <i class="fas fa-search mb-2"></i>
+                            <br>
+                            No students found matching your criteria.
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
               </div>
+              <!-- ================= MODALS & JS ================= -->
+              <!-- Make sure you have the Single Modals and Scripts below this! -->
+              <!-- 1. #studentDetailsModal (View) -->
+              <!-- 2. #deleteStudentModal (Delete) -->
+              <!-- 3. <script> with populateModal() and populateDeleteModal() and search logic -->
             </div>
           </div>
-        </main>
-        <!-- /.app-main -->
-      </div>
-      <!-- /.app -->
-      <!-- BEGIN BASE JS -->
-      <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-      <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-      <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-      <!-- END BASE JS -->
-      <!-- BEGIN PLUGINS JS -->
-      <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-      <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-      <!-- END PLUGINS JS -->
-      <!-- BEGIN THEME JS -->
-      <script src="{% static 'javascript/main.min.js' %}"></script>
-      <!-- END THEME JS -->
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async
-              src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-      <script>
+        </div>
+      </main>
+      <!-- /.app-main -->
+    </div>
+    <!-- /.app -->
+    <!-- BEGIN BASE JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+    <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <!-- END PLUGINS JS -->
+    <!-- BEGIN THEME JS -->
+    <script src="{% static 'javascript/main.min.js' %}"></script>
+    <!-- END THEME JS -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+    <script>
       window.dataLayer = window.dataLayer || [];
 
       function gtag() {
@@ -575,99 +569,99 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
-      </script>
-      <!-- single normal modal -->
-      <div class="modal fade"
-           id="studentDetailsModal"
-           tabindex="-1"
-           role="dialog"
-           aria-labelledby="studentDetailsModalLabel"
-           aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Students Details</h5>
+    </script>
+    <!-- single normal modal -->
+    <div class="modal fade"
+         id="studentDetailsModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="studentDetailsModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Students Details</h5>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table table-bordered mb-0">
+                <tbody>
+                  <!-- 1. Name (Blue Header) -->
+                  <tr>
+                    <th scope="row"
+                        class="bg-primary text-white"
+                        style="width: 30%;
+                               min-width: 120px">Name</th>
+                    <td id="modal_data_name"></td>
+                  </tr>
+                  <!-- 2. Address (Light Header) -->
+                  <tr>
+                    <th scope="row" class="bg-light text-primary">Address</th>
+                    <td class="text-break" id="modal_data_address"></td>
+                  </tr>
+                  <!-- 3. DOB (Blue Header) -->
+                  <tr>
+                    <th scope="row" class="bg-primary text-white">Date of Birth</th>
+                    <td id="modal_data_dob"></td>
+                  </tr>
+                  <!-- 4. Email (Light Header) -->
+                  <tr>
+                    <th scope="row" class="bg-light text-primary">Email</th>
+                    <td class="text-break" id="modal_data_email"></td>
+                  </tr>
+                  <!-- 5. Phone (Blue Header) -->
+                  <tr>
+                    <th scope="row" class="bg-primary text-white">Phone Number</th>
+                    <td id="modal_data_phone"></td>
+                  </tr>
+                  <!-- 6. Status (Light Header) -->
+                  <tr>
+                    <th scope="row" class="bg-light text-primary">Status</th>
+                    <td>
+                      <span id="modal_data_status" class="badge"></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="modal-body">
-              <div class="table-responsive">
-                <table class="table table-bordered mb-0">
-                  <tbody>
-                    <!-- 1. Name (Blue Header) -->
-                    <tr>
-                      <th scope="row"
-                          class="bg-primary text-white"
-                          style="width: 30%;
-                                 min-width: 120px">Name</th>
-                      <td id="modal_data_name"></td>
-                    </tr>
-                    <!-- 2. Address (Light Header) -->
-                    <tr>
-                      <th scope="row" class="bg-light text-primary">Address</th>
-                      <td class="text-break" id="modal_data_address"></td>
-                    </tr>
-                    <!-- 3. DOB (Blue Header) -->
-                    <tr>
-                      <th scope="row" class="bg-primary text-white">Date of Birth</th>
-                      <td id="modal_data_dob"></td>
-                    </tr>
-                    <!-- 4. Email (Light Header) -->
-                    <tr>
-                      <th scope="row" class="bg-light text-primary">Email</th>
-                      <td class="text-break" id="modal_data_email"></td>
-                    </tr>
-                    <!-- 5. Phone (Blue Header) -->
-                    <tr>
-                      <th scope="row" class="bg-primary text-white">Phone Number</th>
-                      <td id="modal_data_phone"></td>
-                    </tr>
-                    <!-- 6. Status (Light Header) -->
-                    <tr>
-                      <th scope="row" class="bg-light text-primary">Status</th>
-                      <td>
-                        <span id="modal_data_status" class="badge"></span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
-      <!-- single delete modal -->
-      <!-- Single Generic Delete Confirmation Modal -->
-      <div class="modal fade"
-           id="deleteStudentModal"
-           tabindex="-1"
-           role="dialog"
-           aria-labelledby="deleteModalLabel"
-           aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body text-center">
-              <p>
-                Are you sure you want to delete <strong id="delete_modal_student_name">this item</strong>?
-              </p>
-              <p class="small text-danger mb-0">This action cannot be undone.</p>
-            </div>
-            <div class="modal-footer justify-content-center">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <a href="#" id="delete_modal_confirm_btn" class="btn btn-danger">Yes, Delete</a>
-            </div>
+    </div>
+    <!-- single delete modal -->
+    <!-- Single Generic Delete Confirmation Modal -->
+    <div class="modal fade"
+         id="deleteStudentModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="deleteModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <p>
+              Are you sure you want to delete <strong id="delete_modal_student_name">this item</strong>?
+            </p>
+            <p class="small text-danger mb-0">This action cannot be undone.</p>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <a href="#" id="delete_modal_confirm_btn" class="btn btn-danger">Yes, Delete</a>
           </div>
         </div>
       </div>
-    </body>
-    <script>
+    </div>
+  </body>
+  <script>
 document.addEventListener("DOMContentLoaded", function() {
     
     // Selectors
@@ -760,8 +754,8 @@ function populateDeleteModal(buttonElement) {
     const confirmBtn = document.getElementById('delete_modal_confirm_btn');
     if(confirmBtn) confirmBtn.href = deleteUrl;
 }
-    </script>
-    <script>
+  </script>
+  <script>
 $(document).ready(function() {
 
     // --- jQuery Ctrl + F Override ---
@@ -787,5 +781,5 @@ $(document).ready(function() {
     // ... Your other jQuery or JS code ...
 
 });
-    </script>
-  </html>
+  </script>
+</html>
