@@ -391,6 +391,30 @@
                   <div></div>
                 </div>
               </header>
+              <!-- quick action for mobile view  -->
+              <div class="d-block d-sm-none col-lg-4">
+                <div class="card card-fluid mb-3">
+                  <div class="card-header">
+                    <span class="card-title">Quick actions</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="d-grid gap-2">
+                      <a href="{% url 'DataManagementStudent' %}">
+                        <button class="btn btn-outline-primary m-1 " type="button">New student</button>
+                      </a>
+                      <a href="{% url 'Batch' %}">
+                        <button class="btn btn-outline-primary m-1 " type="button">New batch</button>
+                      </a>
+                      <a href="{% url 'AddSchedule' %}">
+                        <button class="btn btn-outline-primary m-1 " type="button">Schedule class</button>
+                      </a>
+                      <a href="{% url 'AddPayment' %}">
+                        <button class="btn btn-outline-primary m-1 " type="button">Record payment</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <!-- First row: KPI cards -->
               <div class="page-section">
                 <div class="row">
@@ -546,7 +570,7 @@
                     </div>
                   </div>
                   <!-- Quick actions (right) -->
-                  <div class="col-lg-4">
+                  <div class="d-none d-sm-block col-lg-4">
                     <div class="card card-fluid mb-3">
                       <div class="card-header">
                         <span class="card-title">Quick actions</span>
@@ -568,6 +592,46 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-sm-8">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">Rooms</th>
+                          <th scope="col">Capacity</th>
+                          <th scope="col">Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Class 1</td>
+                          <td>30</td>
+                          <td>05:00 - 08:00</td>
+                        </tr>
+                        <!-- New Data 1 -->
+                        <tr>
+                          <td>Class 2</td>
+                          <td>45</td>
+                          <td>10:00 - 12:00</td>
+                        </tr>
+                        <!-- New Data 2 -->
+                        <tr>
+                          <td>Computer Lab</td>
+                          <td>20</td>
+                          <td>13:00 - 15:00</td>
+                        </tr>
+                        <!-- New Data 3 -->
+                        <tr>
+                          <td>Conference Hall</td>
+                          <td>100</td>
+                          <td>09:00 - 17:00</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
