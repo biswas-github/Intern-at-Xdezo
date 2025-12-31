@@ -393,6 +393,11 @@
                                         <h1 class="page-title">Check Room Availability</h1>
                                     </div>
                                 </header>
+                                <!-- today fillup button  -->
+                                <!-- You can place this button anywhere in your HTML body -->
+                                <button type="button"
+                                        onclick="fillToday()"
+                                        class="btn btn-primary mb-1 mb-sm-2">Auto-Fill Today</button>
                                 <!-- Page Content Section -->
                                 <div class="page-section">
                                     <!-- 1. SEARCH FILTER CARD -->
@@ -542,4 +547,25 @@
       gtag("config", "UA-116692175-1");
             </script>
         </body>
+        <script>
+    function fillToday() {
+        const now = new Date();
+        
+        // 1. Fix timezone so you get local time, not UTC
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        
+        // 2. Convert to ISO string (YYYY-MM-DDTHH:MM:SS)
+        const localIso = now.toISOString();
+
+        // 3. Set Date (First 10 characters: YYYY-MM-DD)
+        document.getElementById('check_date').value = localIso.slice(0, 10);
+
+        // 4. Set Start Time (Characters 11 to 16: HH:MM)
+        document.getElementById('check_start').value = localIso.slice(11, 16);
+
+        // 5. Set End Time (+1 Hour)
+        now.setHours(now.getHours() + 1);
+        document.getElementById('check_end').value = now.toISOString().slice(11, 16);
+    }
+        </script>
     </html>

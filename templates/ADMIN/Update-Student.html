@@ -380,8 +380,9 @@
                                 </header>
                                 <!-- Page Content Section -->
                                 <!-- .form -->
-                                <form>
+                                <form method="post">
                                     <!-- .fieldset -->
+                                    {% csrf_token %}
                                     <fieldset>
                                         <legend>Student Registration form</legend>
                                         <!-- .form-group -->
@@ -453,7 +454,7 @@
                                         </div>
                                         <button type="submit"
                                                 class="btn btn-outline-primary d-flex justify-content-center w-100">
-                                            Register Student
+                                            Update Student
                                         </button>
                                     </fieldset>
                                     <!-- /.fieldset -->
