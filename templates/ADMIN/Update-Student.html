@@ -384,7 +384,7 @@
                                     <!-- .fieldset -->
                                     {% csrf_token %}
                                     <fieldset>
-                                        <legend>Student Registration form</legend>
+                                        <legend>Student Update form</legend>
                                         <!-- .form-group -->
                                         <div class="form-group">
                                             <label for="lbl1">
@@ -395,8 +395,9 @@
                                                    class="form-control placeholder-shown"
                                                    id="lbl1"
                                                    placeholder="Enter your name"
-                                                   value="Ram Bahadur Thapa	"
-                                                   required>
+                                                   value="{{ name }}"
+                                                   required
+                                                   name="name">
                                         </div>
                                         <!-- /.form-group -->
                                         <!-- .form-group -->
@@ -409,8 +410,9 @@
                                                    class="form-control placeholder-shown"
                                                    id="lbl1"
                                                    placeholder="example@gmail.com"
-                                                   value="ram.thapa@example.com"
-                                                   required>
+                                                   value="{{ email }}"
+                                                   required
+                                                   name="email">
                                         </div>
                                         <!-- /.form-group -->
                                         <!-- .form-group -->
@@ -423,8 +425,9 @@
                                                    class="form-control placeholder-shown"
                                                    id="lbl1"
                                                    placeholder="eg :9849554478"
-                                                   value="9845123456"
-                                                   required>
+                                                   value="{{ phone }}"
+                                                   required
+                                                   name="phone">
                                         </div>
                                         <!-- /.form-group -->
                                         <!-- .form-group -->
@@ -437,19 +440,31 @@
                                                    class="form-control placeholder-shown"
                                                    id="lbl1"
                                                    placeholder="Enter the place you reside"
-                                                   value='pokhara'
-                                                   required>
+                                                   value="{{ address }}"
+                                                   required
+                                                   name="Address">
                                         </div>
                                         <!-- /.form-group -->
                                         <!-- select-element -->
                                         <div class="form-group">
                                             <label for="sel3">Status</label>
-                                            <select class="custom-select" id="sel3" required>
-                                                <option value="">Choose...</option>
-                                                <option value="ACTIVE">Active</option>
-                                                <option value="Inactive">Inactive</option>
-                                                <option value="Completed">Completed</option>
-                                                <option value="Completed">Dropped</option>
+                                            <select class="custom-select" id="sel3" name="status" required>
+                                                <option value="ACTIVE"
+                                                        {% if status == "ACTIVE" or status == "Active" %}selected{% endif %}>
+                                                    Active
+                                                </option>
+                                                <option value="INACTIVE"
+                                                        {% if status == "Inactive" or status == "INACTIVE" %}selected{% endif %}>
+                                                    Inactive
+                                                </option>
+                                                <option value="COMPLETED"
+                                                        {% if status == "COMPLETED" or status == "Completed" %}selected{% endif %}>
+                                                    Completed
+                                                </option>
+                                                <option value="DROPPED"
+                                                        {% if status == "DROPPED" or status == "Dropped" %}selected{% endif %}>
+                                                    Dropped
+                                                </option>
                                             </select>
                                         </div>
                                         <button type="submit"

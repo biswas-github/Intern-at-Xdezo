@@ -15,14 +15,13 @@ class Student(models.Model):
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     address = models.TextField(blank=True, null=True)
-    date_of_birth = models.DateField(blank=True, null=True)
     status = models.CharField(
         max_length=20,
         choices=Status.choices,
         default=Status.ACTIVE,
     )
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True)
 
     def __str__(self):
         return self.full_name
@@ -37,7 +36,7 @@ class Student(models.Model):
         
         # Check  Special Characters
         # We check if the name contains anything that ISN'T a letter or a space.
-        allowed_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+        allowed_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" + " "
         for char in name:
             if char not in allowed_chars:
                 raise ValueError("Name validation failed: Cannot contain special characters (only letters and spaces allowed).")

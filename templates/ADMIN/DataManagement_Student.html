@@ -383,7 +383,8 @@
                   <div class="col-12 col-sm-12 col-lg-12 border rounded mb-5 mb-sm-5 ">
                     <div class="card-body ">
                       <!-- .form -->
-                      <form>
+                      <form method="post">
+                        {% csrf_token %}
                         <!-- .fieldset -->
                         <fieldset>
                           <legend>Student Registration form</legend>
@@ -397,6 +398,7 @@
                                    class="form-control placeholder-shown"
                                    id="lbl1"
                                    placeholder="Enter your name"
+                                   name='name'
                                    required>
                           </div>
                           <!-- /.form-group -->
@@ -410,6 +412,7 @@
                                    class="form-control placeholder-shown"
                                    id="lbl1"
                                    placeholder="example@gmail.com"
+                                   name="email"
                                    required>
                           </div>
                           <!-- /.form-group -->
@@ -423,6 +426,7 @@
                                    class="form-control placeholder-shown"
                                    id="lbl1"
                                    placeholder="eg :9849554478"
+                                   name="phone"
                                    required>
                           </div>
                           <!-- /.form-group -->
@@ -436,13 +440,14 @@
                                    class="form-control placeholder-shown"
                                    id="lbl1"
                                    placeholder="Enter the place you reside"
+                                   name="Address"
                                    required>
                           </div>
                           <!-- /.form-group -->
                           <!-- select-element -->
                           <div class="form-group">
                             <label for="sel3">Status</label>
-                            <select class="custom-select" id="sel3" required>
+                            <select class="custom-select" id="sel3" name="status" required>
                               <option value="">Choose...</option>
                               <option value="ACTIVE" selected>Active</option>
                               <option value="Inactive">Inactive</option>

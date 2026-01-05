@@ -1,5 +1,5 @@
-from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.shortcuts import render,redirect, get_object_or_404
+from django.http import HttpResponse,Http404
 from datetime import date
 
 # Create your views here.
@@ -97,7 +97,15 @@ def ViewSystemUser(request):
     return render(request,'ADMIN/UserManagement/View-System-User.html',context)
 # AddSystemUser
 def AddSystemUser(request):
-    return render(request,'ADMIN/UserManagement/Add-System-User.html')
+    if request.method=="GET":
+        return render(request,'ADMIN/UserManagement/Add-System-User.html')
+    # if request.method=="POST":
+    #     # register system user 
+    #     role=request.POST['role']
+    #     print(role)
+    #     return render(request,'ADMIN/UserManagement/Add-System-User.html')
+    
+
 # EditUser
 def EditUser(request,id):
     return render(request,'ADMIN/UserManagement/Edit-System-User.html')
@@ -110,61 +118,132 @@ def AdminDashboard(request):
     return render(request,'ADMIN/Admin-Dashboard.html')
 # ----Students------#
 # DataManagement-Student for managing the students 
+# add the student
 def DataManagementStudent(request):
-    return render(request,'ADMIN/DataManagement_Student.html')
+    if request.method=='GET':
+        return render(request,'ADMIN/DataManagement_Student.html')
+    if request.method=='POST':
+        print("post method has hit")
+        from .models import Student
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        phone=request.POST.get('phone')
+        Address=request.POST.get('Address')
+        status=request.POST.get('status')
+        print(name,email,phone,Address,status)
+        try:
+            if not phone:
+                raise ValueError("Phone is required")
+
+            if not phone.isdigit():
+                raise ValueError("Phone must contain only digits")
+
+            if len(phone) != 10:
+                raise ValueError("Phone must be exactly 10 digits")
+
+            # register to the model
+            Student.objects.create(full_name=name,email=email,phone=phone,address=Address,status=status)
+        except Exception as e :
+            # Other exceptions
+            print(f"cant be done{e}")
+        finally:
+            return redirect(ViewStudent)
+
+
+      
+
+        
+
+        
+
+
+
+
+    
 # to view all the students
 def ViewStudent(request):
-    students = [
-        {
-            'id': 1,
-            'name': 'Ram Bahadur Thapa',
-            'phone': '9845123456',
-            'email': 'ram.thapa@example.com',
-            'dob': date(1998, 1, 1),
-            'address': 'Kathmandu, Nepal',
-            'status': 'Active'
-        },
-        {
-            'id': 5,
-            'name': 'Sita Kumari Shrestha',
-            'phone': '9801122334',
-            'email': 'sita.shrestha@example.com',
-            'dob': date(1999, 2, 14),
-            'address': 'Lalitpur, Nepal',
-            'status': 'Inactive'
-        },
-        {
-            'id': 2,
-            'name': 'Bishal Gurung',
-            'phone': '9865012345',
-            'email': 'bishal.gurung@example.com',
-            'dob': date(1999, 5, 15),
-            'address': 'Pokhara, Nepal',
-            'status': 'Dropped'
-        },
-        {
-            'id': 6,
-            'name': 'Anisha KC',
-            'phone': '9812345678',
-            'email': 'anisha.kc@example.com',
-            'dob': date(2000, 3, 10),
-            'address': 'Bhaktapur, Nepal',
-            'status': 'Completed'
-        }
-    ]
+    student = Student.objects.order_by('-id')
+    if not student:
+        # handle "not found" case
+        raise Http404("No students found")  # optional
+
+
+    students=[]
+    for data in list(student):
+        students.append(
+            {
+                 'id': data.id,
+                 'name': data.full_name,
+                 'phone': data.phone,
+                 'email': data.email,
+                 'address': data.address,
+                 'status': data.status,
+            }
+        )
 
     context = {
         'students': students
     }
     return render(request,'ADMIN/View-Student.html',context)
+
+
 # updating the student
 def UpdateStudent(request,id):
-    return render(request,'ADMIN/Update-Student.html')
+    if request.method=="GET":
+        data =get_object_or_404(Student, id=id)
+
+        context= {
+                        'id': data.id,
+                        'name': data.full_name,
+                        'phone': data.phone,
+                        'email': data.email,
+                        'address': data.address,
+                        'status': data.status,
+                    }
+        return render(request,'ADMIN/Update-Student.html',context)
+    if request.method=="POST":
+        # extract data form the form
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        phone=request.POST.get('phone')
+        Address=request.POST.get('Address')
+        status=request.POST.get('status')
+        print(status)
+        # student modal 
+        try:
+            student =get_object_or_404(Student, id=id)
+            student.full_name=name
+            student.email=email
+            student.address=Address
+            student.status=status
+            student.phone=phone
+            # save to the db
+            student.save()
+            # updated to the students 
+            print("saved")
+            return redirect(ViewStudent)
+            
+        except Exception as e:
+            print(f"the error is {e}")
+            return redirect(ViewStudent)
+
+
+        
+
+    
+
 # showing the student details
 def ShowStudent(request,id):
     return render(request,'ADMIN/Show-Student.html')
 # delete the students
 def DeleteStudent(request,id):
+   
+    student =get_object_or_404(Student, id=id)
+    try:
+        student.delete()
+        # deleted
+    except exception as e:
+        print("not deleted error {e}")
     return render(request,'ADMIN/Delete-Student.html')
 
 # ----Courses------#
