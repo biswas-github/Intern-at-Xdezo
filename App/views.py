@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect, get_object_or_404
+from django.shortcuts import render,redirect, get_object_or_404,get_list_or_404
 from django.http import HttpResponse,Http404
 from datetime import date
 
@@ -229,12 +229,6 @@ def UpdateStudent(request,id):
 
 
         
-
-    
-
-# showing the student details
-def ShowStudent(request,id):
-    return render(request,'ADMIN/Show-Student.html')
 # delete the students
 def DeleteStudent(request,id):
    
@@ -242,62 +236,55 @@ def DeleteStudent(request,id):
     try:
         student.delete()
         # deleted
-    except exception as e:
+    except Exception as e:
         print("not deleted error {e}")
     return render(request,'ADMIN/Delete-Student.html')
 
 # ----Courses------#
 # DataManagement->courses for managing the Courses
 def Course(request):
-    return render(request,'ADMIN/Courses.html')
+    if request.method=="GET":
+        return render(request,'ADMIN/Courses.html')
+    if request.method=="POST":
+        # extract data
+        title=request.POST.get('title')
+        code=request.POST.get('code')
+        fee=int(request.POST.get('fee'))
+        Description=request.POST.get('Description')
+        Duration=request.POST.get('Duration')
+        print(f'all data that are recived are {title,code,fee,Description,Duration}')
+        # immport course
+        from .models import Course
+        Course.objects.create(title=title,code=code,Course_fee=fee,description=Description,default_duration_weeks=int(Duration))
+        return redirect(ViewCourses)
+       
+    
 def ViewCourses(request):
-    courses = [
-        {
-            'id': 1,
-            'title': 'Python with Django',
-            'code': 'PY-101',
-            'fee': '15,000',
-            'duration': '3 Months',
-            'description': 'The course focuses on full-stack development using the Django framework.'
-        },
-        {
-            'id': 2,
-            'title': 'Graphic Design',
-            'code': 'GD-205',
-            'fee': '12,000',
-            'duration': '2 Months',
-            'description': 'Learn fundamentals of visual communication, Photoshop and Illustrator.'
-        },
-        {
-            'id': 3,
-            'title': 'Digital Marketing',
-            'code': 'DM-300',
-            'fee': '10,000',
-            'duration': '6 Weeks',
-            'description': 'Master SEO, Social Media Marketing, and Content Strategy.'
-        },
-        {
-            'id': 4,
-            'title': 'Full Stack Web Development',
-            'code': 'WD-401',
-            'fee': '20,000',
-            'duration': '4 Months',
-            'description': 'Comprehensive training in HTML, CSS, JavaScript, React, Node.js, and MongoDB.'
-        },
-        {
-            'id': 5,
-            'title': 'Data Science with Python',
-            'code': 'DS-500',
-            'fee': '25,000',
-            'duration': '5 Months',
-            'description': 'Learn data analysis, visualization, machine learning algorithms, and Pandas/NumPy.'
-        }
-    ]
-
-    context = {
-        'courses': courses
+    if request.method=="GET":
+        from .models import Course
+        courses=[]
+        all_course= get_list_or_404(Course)
+        all_course.reverse()
+        for data in all_course:
+            courses.append(
+                {
+                    "id":data.id,
+                    "title":data.title,
+                    "code":data.code,
+                    "description":data.description,
+                    "fee":data.Course_fee,
+                    "duration":data.default_duration_weeks
+                }
+            )
+        
+        context = {
+        "courses": courses
     }
-    return render(request,'ADMIN/View-Courses.html',context)
+        return render(request,'ADMIN/View-Courses.html',context)
+
+  
+
+
 def UpdateCourse(request,id):
     if request.method=="POST":
         # DO SOME LOGICS
