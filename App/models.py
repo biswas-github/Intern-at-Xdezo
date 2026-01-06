@@ -68,7 +68,7 @@ class Course(models.Model):
     code = models.CharField(max_length=50, unique=True)
     description = models.TextField(blank=True, null=True)
 
-    # default_duration_weeks : how ling the course usally runs 
+    # default_duration_weeks : how l0ng the course usally runs 
     default_duration_weeks = models.PositiveIntegerField(blank=True, null=True)
     Course_fee = models.DecimalField(
         decimal_places=2,

@@ -379,6 +379,13 @@
                                     </div>
                                 </header>
                                 <!-- Page Content Section -->
+                                <!-- message -->
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+                                             role="alert">{{ message }}</div>
+                                    {% endfor %}
+                                {% endif %}
                                 <!-- .form -->
                                 <form method="post">
                                     {% csrf_token %}
@@ -395,8 +402,8 @@
                                                    class="form-control placeholder-shown"
                                                    id="inputTitle"
                                                    placeholder="e.g. Introduction to Python"
-                                                   name="tittle"
-                                                   value="Python with Django"
+                                                   name="title"
+                                                   value="{{ course.title }}"
                                                    required>
                                         </div>
                                         <!-- /.form-group -->
@@ -411,7 +418,7 @@
                                                    id="inputCode"
                                                    placeholder="e.g. PY-101"
                                                    name="course_code"
-                                                   value="PY-101"
+                                                   value="{{ course.code }}"
                                                    required>
                                         </div>
                                         <!-- /.form-group -->
@@ -423,19 +430,19 @@
                                                       id="inputDescription"
                                                       rows="3"
                                                       placeholder="Enter course details..."
-                                                      name="description">This course provides a comprehensive introduction to Python programming, covering data structures, loops, and object-oriented concepts.</textarea>
+                                                      name="description">{{course.description}}</textarea>
                                         </div>
                                         <!-- /.form-group -->
                                         <!-- Field: Default Duration Weeks -->
                                         <div class="form-group">
                                             <label for="inputDuration">Default Duration (Weeks)</label>
-                                            <input type="text"
+                                            <input type="number"
                                                    class="form-control placeholder-shown"
                                                    id="inputDuration"
                                                    placeholder="e.g. 12"
                                                    name="duration"
                                                    min="0"
-                                                   value="3 Months">
+                                                   value="{{ course.duration }}">
                                         </div>
                                         <!-- /.form-group -->
                                         <!-- Field: Course Fee -->
@@ -446,10 +453,9 @@
                                                    class="form-control placeholder-shown"
                                                    id="inputFee"
                                                    placeholder="0.00"
-                                                   step="0.01"
                                                    min="0"
                                                    name="Fee"
-                                                   value="30000">
+                                                   value="{{ course.fee }}">
                                         </div>
                                         <!-- /.form-group -->
                                         <!-- Submit Button -->

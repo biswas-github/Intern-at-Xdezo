@@ -382,7 +382,13 @@
                                         </div>
                                     </div>
                                 </header>
-                                <!-- add course btn-->
+                                <!-- messages -->
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+                                             role="alert">{{ message | safe }}</div>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                             <!-- Page Content Section -->
                             <div class="page-section">
@@ -444,7 +450,7 @@
                                                         </td>
                                                         <!-- 2. Code -->
                                                         <td class="align-middle d-none d-sm-table-cell">
-                                                            <span class="badge badge-subtle badge-dark">{{ course.code }}</span>
+                                                            <span class="">{{ course.code }}</span>
                                                         </td>
                                                         <!-- 3. Fee -->
                                                         <td class="align-middle d-none d-md-table-cell font-weight-bold text-dark">Rs. {{ course.fee }}</td>
@@ -620,7 +626,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                          
                         </div>
                     </div>
                     <div class="modal-footer">

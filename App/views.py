@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect, get_object_or_404,get_list_or_404
 from django.http import HttpResponse,Http404
 from datetime import date
+from django.contrib import messages
+from .models import Course
+
 
 # Create your views here.
 def LoginPage(request):
@@ -143,10 +146,12 @@ def DataManagementStudent(request):
 
             # register to the model
             Student.objects.create(full_name=name,email=email,phone=phone,address=Address,status=status)
+            messages.success(request, "Student Added Sucessfully !")
         except Exception as e :
             # Other exceptions
             print(f"cant be done{e}")
-        finally:
+            messages.error(request, "Student cant be added !")
+        finally:    
             return redirect(ViewStudent)
 
 
@@ -209,6 +214,9 @@ def UpdateStudent(request,id):
         Address=request.POST.get('Address')
         status=request.POST.get('status')
         print(status)
+        if len(phone)<10:
+            messages.warning(request,"phone number has to be at least 10 digits")
+            return redirect(UpdateStudent,id)
         # student modal 
         try:
             student =get_object_or_404(Student, id=id)
@@ -221,10 +229,12 @@ def UpdateStudent(request,id):
             student.save()
             # updated to the students 
             print("saved")
+            messages.success(request, "Student  Updated")
             return redirect(ViewStudent)
             
         except Exception as e:
             print(f"the error is {e}")
+            messages.error(request, "Student cant be Updated")
             return redirect(ViewStudent)
 
 
@@ -233,16 +243,18 @@ def UpdateStudent(request,id):
 def DeleteStudent(request,id):
    
     student =get_object_or_404(Student, id=id)
+
     try:
         student.delete()
         # deleted
     except Exception as e:
         print("not deleted error {e}")
+       
     return render(request,'ADMIN/Delete-Student.html')
 
 # ----Courses------#
 # DataManagement->courses for managing the Courses
-def Course(request):
+def CourseRegister(request):
     if request.method=="GET":
         return render(request,'ADMIN/Courses.html')
     if request.method=="POST":
@@ -253,9 +265,13 @@ def Course(request):
         Description=request.POST.get('Description')
         Duration=request.POST.get('Duration')
         print(f'all data that are recived are {title,code,fee,Description,Duration}')
-        # immport course
-        from .models import Course
-        Course.objects.create(title=title,code=code,Course_fee=fee,description=Description,default_duration_weeks=int(Duration))
+        try:
+            Course.objects.create(title=title,code=code,Course_fee=fee,description=Description,default_duration_weeks=int(Duration))
+            print("course saves")
+            messages.success(request,"cource added sucessfully")
+        except:
+            print("course not saved")
+            messages.error(request,"cource added sucessfully")
         return redirect(ViewCourses)
        
     
@@ -286,13 +302,92 @@ def ViewCourses(request):
 
 
 def UpdateCourse(request,id):
+    if request.method=="GET":
+        try:
+        # extract course 
+            data=get_object_or_404(Course,id=id)
+            course_data={
+                "id":data.id,
+                "title":data.title,
+                "code":data.code,
+                "description":data.description,
+                "duration":data.default_duration_weeks,
+                "fee":data.Course_fee
+            }
+            print(course_data)
+            context={
+                "course":course_data
+            }
+            return render(request,'ADMIN/Update-Course.html',context)
+        except Exception as e:
+            print(e)
+            messages.warning(request,"Course not found")
+            return redirect('ViewCourses')
+            
+
+
     if request.method=="POST":
         # DO SOME LOGICS
-        return redirect('ViewCourses')
-    return render(request,'ADMIN/Update-Course.html')
+        title=request.POST.get('title')
+        print(title)
+        code=request.POST.get('course_code')
+        print(code)
+        # from decimal import Decimal
+        from decimal import Decimal
+        fee = Decimal(request.POST.get('Fee'))
+        print(fee)
+        Description=request.POST.get('description')
+        print(Description)
+        Duration=request.POST.get('duration')
+        print(Duration)
+        try:
+        # extract course 
+            course=get_object_or_404(Course,id=id)
+            # edit course
+            if  course.title:
+                course.title=title
+            if  course.code:
+                course.code=code
+            if  course.Course_fee >0:
+                course.Course_fee=fee
+            else:
+                messages.error(request,"Course fee should be a digit and greater than 0")
+                return redirect(UpdateCourse)
+            
+            course.description=Description
+            if not Duration.isdigit():
+                messages.error(
+                    request,
+                    "Please enter duration in weeks using digits only (e.g. 2, 5, 12)"
+                )
+                return redirect(request.path)
+
+            course.default_duration_weeks = int(Duration)
+            # Save course 
+            course.save()
+            # send the message in the browser
+            messages.success(request,"Course is Updated ")
+            return redirect('ViewCourses')
+
+        except Exception as e:
+            print(e)
+            messages.error(request,"Course is NOT Updated ")
+            return redirect('ViewCourses')
+
+    
 
 
 def DeleteCourse(request,id):
+    # find the course with the id
+    course=get_object_or_404(Course,id=id)
+    course_name=course.title
+    try:
+        course.delete()
+        messages.success(request,f"the course  <strong>{course_name} </strong> is deleted successfully  ")
+    except Exception as e:
+        print(e)
+        messages.error(request,"Course not deleted ")
+        return redirect('ViewCourses')
     return render(request,'ADMIN/Delete-Course.html')
 def ShowCourse(request,id):
     return render(request,'ADMIN/Show-Course.html')

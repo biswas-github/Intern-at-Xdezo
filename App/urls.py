@@ -1,5 +1,5 @@
 from django.urls import path,include
-from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,DeleteStudent,Course,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom,ViewEnrollment,UpdateEnrollment,AddEnrollment,DeleteEnrollment,ViewPayment,AddPayment,UpdatePayment,DeletePayment,DuesAndOverDues,ViewSchedule,DeleteSchedule,AddSchedule,EditSchedule,FreeRoom,Downloads,studentpercourse,MonthlyRevenue,ActiveStudent,analytics_enrollment_trends,Signup
+from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,DeleteStudent,CourseRegister,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,Batch,ViewBatches,Instructor,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom,ViewEnrollment,UpdateEnrollment,AddEnrollment,DeleteEnrollment,ViewPayment,AddPayment,UpdatePayment,DeletePayment,DuesAndOverDues,ViewSchedule,DeleteSchedule,AddSchedule,EditSchedule,FreeRoom,Downloads,studentpercourse,MonthlyRevenue,ActiveStudent,analytics_enrollment_trends,Signup
 from .views import ViewSystemUser,AddSystemUser,EditUser,DeleteUser
 from .views import AllActivities,ExportDetails
 from . views import download_report
@@ -39,8 +39,9 @@ urlpatterns = [
   
                 #delete Students
     path('AdminDashboard/DataManagementStudent/DeleteStudent/<int:id>',DeleteStudent,name='DeleteStudent'),
+
     # -----Courses------
-    path('AdminDashboard/DataManagementCourse/AddCourse',Course,name="Course"),
+    path('AdminDashboard/DataManagementCourse/AddCourse',CourseRegister,name="Course"),
             # ViewCourses
     path('AdminDashboard/DataManagementStudent/ViewCourses',ViewCourses,name="ViewCourses"),
             #update course

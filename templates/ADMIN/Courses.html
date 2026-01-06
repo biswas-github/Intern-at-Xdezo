@@ -422,11 +422,12 @@
                                                             FEE
                                                             <abbr title="Required">*</abbr>
                                                         </label>
-                                                        <input type="text"
+                                                        <input type="number"
                                                                class="form-control placeholder-shown"
                                                                id="lbl1"
                                                                placeholder="16 k,16000"
                                                                name="fee"
+                                                               min="500"
                                                                required>
                                                     </div>
                                                     <!-- /.form-group -->
@@ -454,6 +455,8 @@
                                                                id="lbl2"
                                                                placeholder="Default duration weeks: eg : 2, 4 ,8 "
                                                                name="Duration"
+                                                               type="number"
+                                                               min="0"
                                                                required>
                                                     </div>
                                                     <!-- /.form-group -->
