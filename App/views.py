@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404,get_list_or_404
 from django.http import HttpResponse,Http404
 from datetime import date
 from django.contrib import messages
-from .models import Course,Instructor
+from .models import Course,Instructor,Batch
 
 
 # Create your views here.
@@ -135,24 +135,22 @@ def DataManagementStudent(request):
         status=request.POST.get('status')
         print(name,email,phone,Address,status)
         try:
-            if not phone:
-                raise ValueError("Phone is required")
-
             if not phone.isdigit():
-                raise ValueError("Phone must contain only digits")
+                messages.error(request,"phone number must include numbers only")
+                return redirect('DataManagementStudent')
 
             if len(phone) != 10:
-                raise ValueError("Phone must be exactly 10 digits")
+                messages.error(request,"phone number should be exact 10 digits")
+                return redirect('DataManagementStudent')
 
             # register to the model
             Student.objects.create(full_name=name,email=email,phone=phone,address=Address,status=status)
             messages.success(request, "Student Added Sucessfully !")
+            return redirect('ViewStudent')
         except Exception as e :
             # Other exceptions
             print(f"cant be done{e}")
             messages.error(request, "Student cant be added !")
-        finally:    
-            return redirect(ViewStudent)
 
 
       
@@ -214,7 +212,7 @@ def UpdateStudent(request,id):
         Address=request.POST.get('Address')
         status=request.POST.get('status')
         print(status)
-        if len(phone)<10:
+        if len(phone)!=10:
             messages.warning(request,"phone number has to be at least 10 digits")
             return redirect(UpdateStudent,id)
         # student modal 
@@ -394,7 +392,7 @@ def ShowCourse(request,id):
 
 
 # ----Batch------#
-def Batch(request):
+def AddBatch(request):
     # in the batch we need to send the all courses to the batch register
     if request.method=='GET':
         # courses
@@ -423,48 +421,95 @@ def Batch(request):
             "instructors":all_ins
 
         }
+        return render(request,'ADMIN/Batch/Batch.html',context)
+    if request.method == "POST":
+        name = request.POST.get('name')
+        course_id = request.POST.get('course')
+        instructor_id = request.POST.get('instructor')
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        status = request.POST.get('status')
 
-    return render(request,'ADMIN/Batch/Batch.html',context)
+        # ---------- VALIDATIONS ----------
+        if not name:
+            messages.error(request, "Batch name is required")
+            return redirect('Batch')
+
+        if not course_id:
+            messages.error(request, "Please select a course")
+            return redirect('Batch')
+
+        if not start_date or not end_date:
+            messages.error(request, "Start date and end date are required")
+            return redirect('Batch')
+
+        # Convert dates
+        try:
+            start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
+            end_date = datetime.strptime(end_date, "%Y-%m-%d").date()
+        except ValueError:
+            messages.error(request, "Invalid date format")
+            return redirect('Batch')
+
+        if start_date > end_date:
+            messages.error(request, "Start date cannot be after end date")
+            return redirect('Batch')
+        try:
+            
+            course=get_object_or_404(Course,id=course_id)
+        except Course.DoesNotExist:
+            messages.error(request, "Selected course does not exist")
+            return redirect('Batch')
+
+        instructor = None
+        if instructor_id:
+            try:
+                instructor=get_object_or_404(Instructor,id=instructor_id)
+            except Instructor.DoesNotExist:
+                messages.error(request, "Selected instructor does not exist")
+                return redirect('Batch')
+
+        # ---------- SAVE ----------
+        Batch.objects.create(
+            name=name,
+            course=course,
+            instructor=instructor,
+            start_date=start_date,
+            end_date=end_date,
+            status=status or Batch.Status.UPCOMING,
+        )
+
+        messages.success(request, "Batch created successfully ")
+        return redirect('ViewBatches')
+
+
 
  #viewbatches
 def ViewBatches(request):
-    batches = [
-        {
-            'id': 1,
-            'name': 'Python Jan 2026 Morning',
-            'course': 'Python Development (PY101)',
-            'instructor': 'Mr. A. Sharma',
-            'status': 'Upcoming',
-            'start_date': date(2026, 1, 1),
-            'end_date': date(2026, 3, 30)
-        },
-        {
-            'id': 2,
-            'name': 'Django Jan 2025 Morning',
-            'course': 'Django Development (PY101)',
-            'instructor': 'Ms. S. Karki',
-            'status': 'Completed',
-            'start_date': date(2024, 11, 22),
-            'end_date': date(2025, 2, 25)
-        },
-        {
-            'id': 3,
-            'name': 'Graphic Design Evening',
-            'course': 'Graphic Design Masterclass',
-            'instructor': 'Mr. B. Rai',
-            'status': 'Ongoing',
-            'start_date': date(2025, 12, 1),
-            'end_date': date(2026, 1, 30)
-        }
-    ]
+    batches = Batch.objects.select_related(
+        'course',
+        'instructor',
+        'instructor__user'
+    ).order_by('-id')
+    
+    return render(request, 'ADMIN/BATCH/View-Batches.html', {'batches': batches})
 
-    context = {
-        'batches': batches
-    }
-    return render(request,'ADMIN/Batch/View-Batches.html',context)
 # DeleteBatch
 def DeleteBatch(request, id):
-    return render(request,'ADMIN/BATCH/Delete-Batch.html')
+    try:
+        batch = get_object_or_404(Batch, id=id)
+        batch_name = batch.name
+        batch.delete()
+        messages.success(request,f"Batch <strong>{batch_name}</strong> deleted successfully.")
+    except Exception as e:
+        print(e)
+        messages.success(request,f"NOt deleted ")
+    return redirect('ViewBatches')
+    
+
+
+
+    
 # UpdateBatch
 def UpdateBatch(request,id):
     return render(request,'ADMIN/BATCH/Update-Batch.html')
