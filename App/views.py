@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404,get_list_or_404
 from django.http import HttpResponse,Http404
 from datetime import date
 from django.contrib import messages
-from .models import Course
+from .models import Course,Instructor
 
 
 # Create your views here.
@@ -395,7 +395,36 @@ def ShowCourse(request,id):
 
 # ----Batch------#
 def Batch(request):
-    return render(request,'ADMIN/Batch/Batch.html')
+    # in the batch we need to send the all courses to the batch register
+    if request.method=='GET':
+        # courses
+        courses=get_list_or_404(Course)
+        data=[]
+        for course11 in courses:
+            data.append(
+                {
+                    "id":course11.id,
+                    "name":course11.title
+                }
+            )
+        # instructors
+        ins=get_list_or_404(Instructor)
+        if ins:
+            all_ins=[]
+            for instructor in ins:
+                all_ins.append(
+                    {
+                        "id":instructor.id,
+                        "name":instructor.user.username
+                    }
+                )
+        context={
+            "courses":data,
+            "instructors":all_ins
+
+        }
+
+    return render(request,'ADMIN/Batch/Batch.html',context)
 
  #viewbatches
 def ViewBatches(request):
@@ -441,7 +470,7 @@ def UpdateBatch(request,id):
     return render(request,'ADMIN/BATCH/Update-Batch.html')
 
 # -----Instructor-------
-def Instructor(request):
+def Instructor1(request):
     class MockUser:
             def __init__(self, username, first_name, last_name, email):
                 self.username = username
