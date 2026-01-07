@@ -277,23 +277,31 @@ def ViewCourses(request):
     if request.method=="GET":
         from .models import Course
         courses=[]
-        all_course= get_list_or_404(Course)
-        all_course.reverse()
-        for data in all_course:
-            courses.append(
-                {
-                    "id":data.id,
-                    "title":data.title,
-                    "code":data.code,
-                    "description":data.description,
-                    "fee":data.Course_fee,
-                    "duration":data.default_duration_weeks
-                }
-            )
+        try:
+            all_course= get_list_or_404(Course)
+            all_course.reverse()
+            for data in all_course:
+                courses.append(
+                    {
+                        "id":data.id,
+                        "title":data.title,
+                        "code":data.code,
+                        "description":data.description,
+                        "fee":data.Course_fee,
+                        "duration":data.default_duration_weeks
+                    }
+                )
         
-        context = {
-        "courses": courses
-    }
+            context = {
+            "courses": courses
+        }
+        except:
+            courses=[]
+            context = {
+            "courses": courses
+            }
+            messages.error(request,"no courses found !")
+
         return render(request,'ADMIN/View-Courses.html',context)
 
   
@@ -396,7 +404,11 @@ def AddBatch(request):
     # in the batch we need to send the all courses to the batch register
     if request.method=='GET':
         # courses
-        courses=get_list_or_404(Course)
+        try:
+            courses=get_list_or_404(Course)
+        except:
+            messages.error(request,"First register to the course !")
+            return redirect('ViewBatches')
         data=[]
         for course11 in courses:
             data.append(
@@ -406,7 +418,11 @@ def AddBatch(request):
                 }
             )
         # instructors
-        ins=get_list_or_404(Instructor)
+        try:
+            ins=get_list_or_404(Instructor)
+        except:
+            ins=None
+        all_ins=[]
         if ins:
             all_ins=[]
             for instructor in ins:
@@ -486,11 +502,15 @@ def AddBatch(request):
 
  #viewbatches
 def ViewBatches(request):
-    batches = Batch.objects.select_related(
+    try:
+        batches = Batch.objects.select_related(
         'course',
         'instructor',
         'instructor__user'
-    ).order_by('-id')
+        ).order_by('-id') or None
+    except:
+        messages.error(request,"something Error occured")
+        return redirect("ViewBatches")
     
     return render(request, 'ADMIN/BATCH/View-Batches.html', {'batches': batches})
 
@@ -611,7 +631,7 @@ def DeleteInstructor(request,id):
         messages.error(request,f"The instructor <strong>{instructor.user.username}</strong> is deleted from the DB")
     except:
         messages.error(request,f"instructor not found")
-        
+
     return render(request,'ADMIN/Instructor/Delete-Instructor.html')
 # AddInstructor
 def AddInstructor(request):
