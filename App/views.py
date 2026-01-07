@@ -561,8 +561,8 @@ def UpdateBatch(request,id):
         end = batch.end_date.strftime('%Y-%m-%d') if batch.end_date else ''
         # --- RENDER FORM (GET REQUEST) ---
         
-        courses = Course.objects.all()
-        instructors = Instructor.objects.all()
+        courses = get_list_or_404(Course)
+        instructors = get_list_or_404(Instructor)
 
         # We must format dates as YYYY-MM-DD for HTML input type="date"
         # If dates are None, we pass empty strings
@@ -588,45 +588,13 @@ def UpdateBatch(request,id):
 
 # -----Instructor-------
 def Instructor1(request):
-    class MockUser:
-            def __init__(self, username, first_name, last_name, email):
-                self.username = username
-                self.first_name = first_name
-                self.last_name = last_name
-                self.email = email
-            
-            def get_full_name(self):
-                return f"{self.first_name} {self.last_name}"
-
-    # 2. Mock the 'Instructor' Model
-    # matching: user (OneToOne), phone, specialization, bio, is_active
-    instructors = [
-        {
-            'id': 1,
-            'user': MockUser('asharma', 'Amit', 'Sharma', 'amit.sharma@example.com'),
-            'phone': '9841234567',
-            'specialization': 'Python, Django, Backend',
-            'bio': 'Senior backend developer with 5+ years of experience in Python ecosystems.',
-            'is_active': True
-        },
-        {
-            'id': 2,
-            'user': MockUser('skarki', 'Sarita', 'Karki', 's.karki@example.com'),
-            'phone': '9801987654',
-            'specialization': 'Graphic Design (Ps, Ai)',
-            'bio': 'Creative director passionate about UI/UX and visual storytelling.',
-            'is_active': True
-        },
-        {
-            'id': 3,
-            'user': MockUser('brana', 'Bibek', 'Rana', 'b.rana@example.com'),
-            'phone': '9860112233',
-            'specialization': 'Digital Marketing, SEO',
-            'bio': 'Certified digital marketer specializing in social media growth.',
-            'is_active': False # Simulating an inactive instructor
-        }
-    ]
-
+    instructors=None
+    # extract instructors from the DB
+    try:
+        data=get_list_or_404(Instructor)
+        instructors=data
+    except:
+        messages.error(request,"No data have been found")  
     context = {
         'instructors': instructors
         }
@@ -637,6 +605,13 @@ def UpdateInstructor(request,id):
     return render(request,'ADMIN/Instructor/Update-Instructor.html')
 # DeleteInstructor
 def DeleteInstructor(request,id):
+    try:
+        instructor=get_object_or_404(Instructor,id=id)
+        instructor.delete()
+        messages.error(request,f"The instructor <strong>{instructor.user.username}</strong> is deleted from the DB")
+    except:
+        messages.error(request,f"instructor not found")
+        
     return render(request,'ADMIN/Instructor/Delete-Instructor.html')
 # AddInstructor
 def AddInstructor(request):

@@ -410,6 +410,13 @@
                                             </div>
                                         </div>
                                     </header>
+                                    {% comment %} messages {% endcomment %}
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+                                                 role="alert">{{ message | safe }}</div>
+                                        {% endfor %}
+                                    {% endif %}
                                     <!-- .table-responsive -->
                                     <div class="table-responsive">
                                         <table class="table table-hover" id="instructorTable">
@@ -428,13 +435,13 @@
                                             <tbody id="instructorTableBody">
                                                 {% for instructor in instructors %}
                                                     <tr class="instructor-row"
-                                                        data-search="{{ instructor.user.get_full_name }} {{ instructor.specialization }}">
+                                                        data-search="{{ instructor.user.username }} {{ instructor.specialization }}">
                                                         <!-- 1. Name & Mobile Details -->
                                                         <td class="align-middle">
                                                             <div class="d-flex align-items-center">
                                                                 <!-- Initials Avatar -->
                                                                 <div>
-                                                                    <a href="#" class="text-dark font-weight-bold">{{ instructor.user.get_full_name }}</a>
+                                                                    <a href="#" class="text-dark font-weight-bold">{{ instructor.user.username }}</a>
                                                                     <!-- Mobile Only Details -->
                                                                     <div class="d-block d-sm-none mt-1 small text-muted">
                                                                         <div class="text-truncate" style="max-width: 150px;">{{ instructor.specialization }}</div>
@@ -463,7 +470,7 @@
                                                                         class="btn btn-sm btn-subtle-info"
                                                                         data-toggle="modal"
                                                                         data-target="#instructorDetailsModal"
-                                                                        data-name="{{ instructor.user.get_full_name }}"
+                                                                        data-name="{{ instructor.user.username }}"
                                                                         data-email="{{ instructor.user.email }}"
                                                                         data-phone="{{ instructor.phone }}"
                                                                         data-specialization="{{ instructor.specialization }}"
