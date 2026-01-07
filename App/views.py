@@ -512,7 +512,79 @@ def DeleteBatch(request, id):
     
 # UpdateBatch
 def UpdateBatch(request,id):
-    return render(request,'ADMIN/BATCH/Update-Batch.html')
+    batch = get_object_or_404(Batch, id=id)
+
+    if request.method == "POST":
+        # --- PROCESS FORM SUBMISSION ---
+        
+        # 1. Get data from request.POST
+        name = request.POST.get("name")
+        course_id = request.POST.get("course")
+        instructor_id = request.POST.get("instructor")
+        start_date = request.POST.get("start_date")
+        end_date = request.POST.get("end_date")
+        print(f"update batch start date{start_date}")
+        status = request.POST.get("status")
+
+        # 2. Update Basic Fields
+        batch.name = name
+        batch.start_date = start_date
+        batch.end_date = end_date
+        batch.status = status
+
+        # 3. Handle Foreign Keys
+        # Course (Required)
+        if course_id:
+            batch.course = get_object_or_404(Course, id=course_id)
+        
+        # Instructor (Optional / Nullable)
+        if instructor_id:
+            batch.instructor = get_object_or_404(Instructor, id=instructor_id)
+        else:
+            # If empty string was sent (User selected "No Instructor")
+            batch.instructor = None
+        #validation for date 
+        if not (start_date and end_date):
+            messages.error(request,"You must provide start date and end date ")
+            return redirect('UpdateBatch',id)
+        if start_date>end_date:
+            messages.error(request,"Start date should be before end date:")
+            return redirect('UpdateBatch',id)
+
+        # 4. Save to Database
+        batch.save()
+        messages.success(request, "Batch updated successfully!")
+        return redirect('ViewBatches') 
+
+    else:
+        start = batch.start_date.strftime('%Y-%m-%d') if batch.start_date else ''
+        end = batch.end_date.strftime('%Y-%m-%d') if batch.end_date else ''
+        # --- RENDER FORM (GET REQUEST) ---
+        
+        courses = Course.objects.all()
+        instructors = Instructor.objects.all()
+
+        # We must format dates as YYYY-MM-DD for HTML input type="date"
+        # If dates are None, we pass empty strings
+        
+
+        context = {
+            "batch": batch,
+            "courses": courses,
+            "instructors": instructors,
+            
+            # Context variables specifically for your Template Logic:
+            "selected_course": batch.course.id,
+            
+            # check if instructor exists before accessing .id to avoid errors
+            "selected_instructor": batch.instructor.id if batch.instructor else None,
+            
+            "start_date": start,
+            "end_date": end,
+            "current_status": batch.status, 
+        }
+
+        return render(request, "ADMIN/BATCH/Update-Batch.html", context)
 
 # -----Instructor-------
 def Instructor1(request):

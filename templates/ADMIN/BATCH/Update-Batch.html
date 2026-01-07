@@ -385,10 +385,10 @@
                                             <div class="card-body">
                                                 <!-- Form -->
                                                 <form method="post">
-                                                    <!-- {% csrf_token %} -->
+                                                    {% csrf_token %}
                                                     <fieldset>
                                                         <legend>Edit Information</legend>
-                                                        <!-- Batch Name (Pre-filled) -->
+                                                        <!-- Batch Name -->
                                                         <div class="form-group">
                                                             <label for="id_name">
                                                                 Batch Name <abbr title="Required">*</abbr>
@@ -397,32 +397,43 @@
                                                                    class="form-control"
                                                                    id="id_name"
                                                                    name="name"
-                                                                   value="Python Jan 2026 Morning"
+                                                                   value="{{ batch.name }}"
                                                                    required>
+                                                            <!-- Fixed: batch.name -->
                                                         </div>
-                                                        <!-- Course (Pre-selected) -->
+                                                        <!-- Course -->
                                                         <div class="form-group">
                                                             <label for="id_course">
                                                                 Course <abbr title="Required">*</abbr>
                                                             </label>
                                                             <select class="form-control" id="id_course" name="course" required>
                                                                 <option value="" disabled>Select a Course</option>
-                                                                <!-- Pre-selected value -->
-                                                                <option value="1" selected>Course A (CODE101)</option>
-                                                                <option value="2">Course B (CODE202)</option>
+                                                                {% if courses %}
+                                                                    {% for course in courses %}
+                                                                        <option value="{{ course.id }}"
+                                                                                {% if course.id == selected_course %}selected{% endif %}>
+                                                                            {{ course.title }}
+                                                                        </option>
+                                                                    {% endfor %}
+                                                                {% endif %}
                                                             </select>
                                                         </div>
-                                                        <!-- Instructor (Pre-selected) -->
+                                                        <!-- Instructor -->
                                                         <div class="form-group">
                                                             <label for="id_instructor">Instructor</label>
                                                             <select class="form-control" id="id_instructor" name="instructor">
                                                                 <option value="">No Instructor Assigned (Optional)</option>
-                                                                <!-- Pre-selected value -->
-                                                                <option value="10" selected>Instructor John Doe</option>
-                                                                <option value="11">Instructor Jane Smith</option>
+                                                                {% if instructors %}
+                                                                    {% for instructor in instructors %}
+                                                                        <option value="{{ instructor.id }}"
+                                                                                {% if selected_instructor == instructor.id %}selected{% endif %}>
+                                                                            {{ instructor }} <!-- Fixed: Uses __str__ method -->
+                                                                        </option>
+                                                                    {% endfor %}
+                                                                {% endif %}
                                                             </select>
                                                         </div>
-                                                        <!-- Dates (Pre-filled) -->
+                                                        <!-- Dates -->
                                                         <div class="row">
                                                             <div class="form-group col-md-6">
                                                                 <label for="id_start_date">
@@ -432,7 +443,7 @@
                                                                        class="form-control"
                                                                        id="id_start_date"
                                                                        name="start_date"
-                                                                       value="2026-01-15"
+                                                                       value="{{ start_date }}"
                                                                        required>
                                                             </div>
                                                             <div class="form-group col-md-6">
@@ -443,21 +454,32 @@
                                                                        class="form-control"
                                                                        id="id_end_date"
                                                                        name="end_date"
-                                                                       value="2026-04-15"
+                                                                       value="{{ end_date }}"
                                                                        required>
                                                             </div>
                                                         </div>
-                                                        <!-- Status (Pre-selected) -->
+                                                        <!-- Status (Now Dynamic!) -->
                                                         <div class="form-group">
                                                             <label for="id_status">
                                                                 Status <abbr title="Required">*</abbr>
                                                             </label>
                                                             <select class="form-control" id="id_status" name="status" required>
-                                                                <option value="UPCOMING">Upcoming</option>
-                                                                <!-- Pre-selected value -->
-                                                                <option value="ONGOING" selected>Ongoing</option>
-                                                                <option value="COMPLETED">Completed</option>
-                                                                <option value="CANCELLED">Cancelled</option>
+                                                                <option value="UPCOMING"
+                                                                        {% if current_status == "UPCOMING" %}selected{% endif %}>
+                                                                    Upcoming
+                                                                </option>
+                                                                <option value="ONGOING"
+                                                                        {% if current_status == "ONGOING" %}selected{% endif %}>
+                                                                    Ongoing
+                                                                </option>
+                                                                <option value="COMPLETED"
+                                                                        {% if current_status == "COMPLETED" %}selected{% endif %}>
+                                                                    Completed
+                                                                </option>
+                                                                <option value="CANCELLED"
+                                                                        {% if current_status == "CANCELLED" %}selected{% endif %}>
+                                                                    Cancelled
+                                                                </option>
                                                             </select>
                                                         </div>
                                                         <!-- Update Button -->
@@ -465,10 +487,6 @@
                                                                 class="btn btn-primary d-flex justify-content-center w-100 mt-4">
                                                             Update Batch
                                                         </button>
-                                                        <!-- Optional Cancel Link -->
-                                                        <div class="text-center mt-2">
-                                                            <a href="{% url 'ViewBatches' %}" class="text-muted small">Cancel</a>
-                                                        </div>
                                                     </fieldset>
                                                 </form>
                                                 <!-- /.form -->

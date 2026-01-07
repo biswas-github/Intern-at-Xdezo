@@ -495,7 +495,7 @@
                                                             <span class="d-block text-dark font-weight-bold">{{ batch.name }}</span>
                                                             <!-- Mobile Only Details: Course, Dates, Status -->
                                                             <div class="d-block d-md-none mt-1 small text-muted">
-                                                                <div>{{ batch.course }}</div>
+                                                                <div>{{ batch.course.title }}</div>
                                                                 <div class="mt-1">
                                                                     <i class="far fa-calendar-alt mr-1"></i>
                                                                     {{ batch.start_date|date:"M d" }} - {{ batch.end_date|date:"M d, Y" }}
@@ -512,7 +512,7 @@
                                                             </div>
                                                         </td>
                                                         <!-- 2. Course -->
-                                                        <td class="align-middle d-none d-md-table-cell">{{ batch.course }}</td>
+                                                        <td class="align-middle d-none d-md-table-cell">{{ batch.course.title }}</td>
                                                         <!-- 3. Status -->
                                                         <td class="align-middle d-none d-sm-table-cell">
                                                             {% if batch.status|lower == 'upcoming' %}
@@ -534,7 +534,7 @@
                                                                         data-toggle="modal"
                                                                         data-target="#batchDetailsModal"
                                                                         data-batchname="{{ batch.name }}"
-                                                                        data-course="{{ batch.course }}"
+                                                                        data-course="{{ batch.course.title }}"
                                                                         data-instructor="{{ batch.instructor }}"
                                                                         data-status="{{ batch.status }}"
                                                                         data-start_date="{{ batch.start_date|date:'Y-m-d' }}"
