@@ -395,6 +395,12 @@
                                         <h1 class="page-title">Update Classroom Details</h1>
                                     </div>
                                 </header>
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+                                             role="alert">{{ message }}</div>
+                                    {% endfor %}
+                                {% endif %}
                                 <!-- Page Content Section -->
                                 <div class="page-section">
                                     <div class="row">
@@ -415,7 +421,7 @@
                                                                    class="form-control"
                                                                    id="id_name"
                                                                    name="name"
-                                                                   value="Room 101"
+                                                                   value="{{ name }}"
                                                                    required>
                                                         </div>
                                                         <!-- Capacity (Pre-filled) -->
@@ -428,7 +434,7 @@
                                                                    id="id_capacity"
                                                                    name="capacity"
                                                                    min="1"
-                                                                   value="30"
+                                                                   value="{{ capacity }}"
                                                                    required>
                                                             <small class="form-text text-muted">Maximum number of students this room can accommodate.</small>
                                                         </div>
@@ -436,8 +442,8 @@
                                                         <div class="form-group">
                                                             <label for="id_is_active">Room Status</label>
                                                             <select class="form-control" id="id_is_active" name="is_active">
-                                                                <option value="True" selected>Active (Available for booking)</option>
-                                                                <option value="False">Inactive (Under maintenance/Closed)</option>
+                                                                <option value="True" {% if is_active %}selected{% endif %}>Active (Available for booking)</option>
+                                                                <option value="False" {% if not is_active %}selected{% endif %}>Inactive (Under maintenance/Closed)</option>
                                                             </select>
                                                         </div>
                                                         <!-- Action Buttons -->
