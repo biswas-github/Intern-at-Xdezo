@@ -435,13 +435,13 @@
                                             <tbody id="instructorTableBody">
                                                 {% for instructor in instructors %}
                                                     <tr class="instructor-row"
-                                                        data-search="{{ instructor.user.username }} {{ instructor.specialization }}">
+                                                        data-search="{{ instructor.full_name }} {{ instructor.specialization }}">
                                                         <!-- 1. Name & Mobile Details -->
                                                         <td class="align-middle">
                                                             <div class="d-flex align-items-center">
                                                                 <!-- Initials Avatar -->
                                                                 <div>
-                                                                    <a href="#" class="text-dark font-weight-bold">{{ instructor.user.username }}</a>
+                                                                    <a href="#" class="text-dark font-weight-bold">{{ instructor.full_name }}</a>
                                                                     <!-- Mobile Only Details -->
                                                                     <div class="d-block d-sm-none mt-1 small text-muted">
                                                                         <div class="text-truncate" style="max-width: 150px;">{{ instructor.specialization }}</div>
@@ -458,7 +458,7 @@
                                                         </td>
                                                         <!-- 2. Specialization -->
                                                         <td class="align-middle d-none d-sm-table-cell">
-                                                            <span class="badge badge-subtle badge-dark">{{ instructor.specialization }}</span>
+                                                            <span class=" ">{{ instructor.specialization }}</span>
                                                         </td>
                                                         <!-- 3. Phone -->
                                                         <td class="align-middle d-none d-md-table-cell">{{ instructor.phone }}</td>
@@ -470,8 +470,8 @@
                                                                         class="btn btn-sm btn-subtle-info"
                                                                         data-toggle="modal"
                                                                         data-target="#instructorDetailsModal"
-                                                                        data-name="{{ instructor.user.username }}"
-                                                                        data-email="{{ instructor.user.email }}"
+                                                                        data-name="{{ instructor.full_name }}"
+                                                                        data-email="{{ instructor.email }}"
                                                                         data-phone="{{ instructor.phone }}"
                                                                         data-specialization="{{ instructor.specialization }}"
                                                                         data-bio="{{ instructor.bio }}"
@@ -489,7 +489,7 @@
                                                                         class="btn btn-sm btn-subtle-danger"
                                                                         data-toggle="modal"
                                                                         data-target="#deleteInstructorModal"
-                                                                        data-name="{{ instructor.user.get_full_name }}"
+                                                                        data-name="{{ instructor.full_name }}"
                                                                         data-delete-url="{% url 'DeleteInstructor' id=instructor.id %}"
                                                                         onclick="populateDeleteModal(this)">
                                                                     Delete

@@ -486,6 +486,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="batchTableBody">
+                                                
                                                 {% for batch in batches %}
                                                     <tr class="batch-row"
                                                         data-search="{{ batch.name }} {{ batch.course }}"
@@ -535,7 +536,7 @@
                                                                         data-target="#batchDetailsModal"
                                                                         data-batchname="{{ batch.name }}"
                                                                         data-course="{{ batch.course.title }}"
-                                                                        data-instructor="{{ batch.instructor }}"
+                                                                        data-instructor="{{ batch.instructor.full_name }}"
                                                                         data-status="{{ batch.status }}"
                                                                         data-start_date="{{ batch.start_date|date:'Y-m-d' }}"
                                                                         data-end_date="{{ batch.end_date|date:'Y-m-d' }}"

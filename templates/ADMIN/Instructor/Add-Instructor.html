@@ -380,6 +380,13 @@
                                         <h1 class="page-title">Register New Instructor</h1>
                                     </div>
                                 </header>
+                                <!-- messages  -->
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+                                             role="alert">{{ message | safe }}</div>
+                                    {% endfor %}
+                                {% endif %}
                                 <!-- Page Content Section -->
                                 <div class="page-section">
                                     <div class="row">
@@ -388,21 +395,35 @@
                                             <div class="card-body">
                                                 <!-- Form -->
                                                 <form method="post">
-                                                    <!-- {% csrf_token %} -->
+                                                    {% csrf_token %}
                                                     <!-- SECTION 1: Personal Information -->
                                                     <fieldset>
                                                         <legend>Personal Information</legend>
                                                         <!-- Full Name (Updated) -->
-                                                        <div class="form-group">
-                                                            <label for="id_full_name">
-                                                                Full Name <abbr title="Required">*</abbr>
-                                                            </label>
-                                                            <input type="text"
-                                                                   class="form-control"
-                                                                   id="id_full_name"
-                                                                   name="full_name"
-                                                                   placeholder="e.g. John Doe"
-                                                                   required>
+                                                        <!-- Name Row -->
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="id_first_name">
+                                                                    First Name <abbr title="Required">*</abbr>
+                                                                </label>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       id="id_first_name"
+                                                                       name="first_name"
+                                                                      placeholder="First Name"
+                                                                       required>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="id_last_name">
+                                                                    Last Name <abbr title="Required">*</abbr>
+                                                                </label>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       id="id_last_name"
+                                                                       name="last_name"
+                                                                     placeholder="Last Name"
+                                                                       required>
+                                                            </div>
                                                         </div>
                                                         <!-- Contact Row -->
                                                         <div class="row">
@@ -449,15 +470,6 @@
                                                                    name="specialization"
                                                                    placeholder="e.g. Python, Django, Graphic Design">
                                                         </div>
-                                                        <!-- Status (Is Active) -->
-                                                        <div class="form-group">
-                                                            <label for="id_is_active">Account Status</label>
-                                                            <select class="form-control" id="id_is_active" name="is_active">
-                                                                <option value="True" selected>Active</option>
-                                                                <option value="False">Inactive</option>
-                                                            </select>
-                                                            <small class="form-text text-muted">Set to 'Inactive' if the instructor is not currently teaching.</small>
-                                                        </div>
                                                         <!-- Bio -->
                                                         <div class="form-group">
                                                             <label for="id_bio">Biography / Notes</label>
@@ -466,6 +478,14 @@
                                                                       name="bio"
                                                                       rows="4"
                                                                       placeholder="Write a brief description about the instructor..."></textarea>
+                                                        </div>
+                                                        <!-- Status (Is Active) -->
+                                                        <div class="form-group">
+                                                            <label for="id_is_active">Account Status</label>
+                                                            <select class="form-control" id="id_is_active" name="is_active">
+                                                                <option value="is_active" selected>Active</option>
+                                                                <option value="">Inactive</option>
+                                                            </select>
                                                         </div>
                                                         <!-- Action Buttons -->
                                                         <div class="d-flex justify-content-between align-items-center mt-4">

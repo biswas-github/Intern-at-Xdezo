@@ -83,19 +83,22 @@ class Course(models.Model):
 # Instructor 
 class Instructor(models.Model):
     # 1 to 1 with the user model for the instructor
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name="instructor_profile",
-    )
-    phone = models.CharField(max_length=20, blank=True, null=True)
-    specialization = models.CharField(max_length=150, blank=True, null=True)  # e.g. "Python, Django"
+    full_name = models.CharField(max_length=150)
+    email = models.EmailField(unique=True) # distinct email for every instructor
+    phone = models.CharField(max_length=20) 
+    address = models.TextField(blank=True, null=True)
+    
+    specialization = models.CharField(max_length=150, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
+    
+    # It is always good practice to keep an active flag for soft deletes
     is_active = models.BooleanField(default=True)
+    
+    # Optional: Track when they were added
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        # Show full name if available, otherwise username
-        return self.user.get_full_name() or self.user.username
+        return self.full_name
     
 
 # There could be many(running classes ) batch for a single courses so we need to do the Batch 

@@ -165,28 +165,28 @@ def DataManagementStudent(request):
     
 # to view all the students
 def ViewStudent(request):
-    student = Student.objects.order_by('-id')
-    if not student:
-        # handle "not found" case
-        raise Http404("No students found")  # optional
-
-
-    students=[]
-    for data in list(student):
-        students.append(
-            {
-                 'id': data.id,
-                 'name': data.full_name,
-                 'phone': data.phone,
-                 'email': data.email,
-                 'address': data.address,
-                 'status': data.status,
-            }
-        )
+    try:
+        student = Student.objects.order_by('-id')
+        student=get_list_or_404(Student.objects.order_by('-id'))
+        students=[]
+        for data in list(student):
+            students.append(
+                {
+                    'id': data.id,
+                    'name': data.full_name,
+                    'phone': data.phone,
+                    'email': data.email,
+                    'address': data.address,
+                    'status': data.status,
+                }
+            )
+    except:
+        students=[]
+        messages.error(request,"No student found !") 
 
     context = {
-        'students': students
-    }
+            'students': students
+        }
     return render(request,'ADMIN/View-Student.html',context)
 
 
@@ -429,7 +429,7 @@ def AddBatch(request):
                 all_ins.append(
                     {
                         "id":instructor.id,
-                        "name":instructor.user.username
+                        "name":instructor.full_name
                     }
                 )
         context={
@@ -503,14 +503,14 @@ def AddBatch(request):
  #viewbatches
 def ViewBatches(request):
     try:
-        batches = Batch.objects.select_related(
+        batches = get_list_or_404(Batch.objects.select_related(
         'course',
         'instructor',
-        'instructor__user'
-        ).order_by('-id') or None
+        ).order_by('-id'))
     except:
-        messages.error(request,"something Error occured")
-        return redirect("ViewBatches")
+        batches=[]
+        messages.error(request,"No data Found ")
+        
     
     return render(request, 'ADMIN/BATCH/View-Batches.html', {'batches': batches})
 
@@ -611,7 +611,7 @@ def Instructor1(request):
     instructors=None
     # extract instructors from the DB
     try:
-        data=get_list_or_404(Instructor)
+        data=get_list_or_404(Instructor.objects.order_by("-id"))
         instructors=data
     except:
         messages.error(request,"No data have been found")  
@@ -622,19 +622,63 @@ def Instructor1(request):
     return render(request,'ADMIN/Instructor/View-Instructor.html',context)
 # UpdateInstructor
 def UpdateInstructor(request,id):
+    if request.method=="GET":
+        try:
+            instrutor_details=get_object_or_404(Instructor,id=id)
+            name=instrutor_details.split(" ")
+            first_name=
+            last_name=
+
+        except:
+            pass
+
+
+
     return render(request,'ADMIN/Instructor/Update-Instructor.html')
 # DeleteInstructor
 def DeleteInstructor(request,id):
     try:
         instructor=get_object_or_404(Instructor,id=id)
+        full_name=instructor.full_name
         instructor.delete()
-        messages.error(request,f"The instructor <strong>{instructor.user.username}</strong> is deleted from the DB")
+        messages.success(request,f"The instructor <strong>{full_name}</strong> is deleted from the DB")
     except:
         messages.error(request,f"instructor not found")
 
     return render(request,'ADMIN/Instructor/Delete-Instructor.html')
 # AddInstructor
 def AddInstructor(request):
+    if request.method=="POST":
+        first_name=request.POST.get('first_name')
+        last_name=request.POST.get('last_name')
+        full_name=first_name+ " " +last_name
+
+        email=request.POST.get('email')
+        phone=request.POST.get('phone')
+        address=request.POST.get('address')
+        specialization=request.POST.get('specialization')
+        is_active=request.POST.get('is_active')
+        bio=request.POST.get('bio')
+        if is_active=="is_active":
+            is_active=True
+        else:
+            is_active=False
+
+        try:
+            Instructor.objects.create(
+                full_name=full_name,
+                email=email,
+                phone=phone,
+                address=address,
+                specialization=specialization,
+                is_active=is_active,
+                bio=bio
+                )
+            messages.success(request,f"Instructor <strong>{full_name}</strong> has been Added Successfully ")
+            return redirect('Instructor') 
+        except Exception as e:
+            messages.error(request,"Sorry, Instructor can't be added !")
+
     return render(request,'ADMIN/Instructor/Add-Instructor.html')
 
 #------Classroom----#
