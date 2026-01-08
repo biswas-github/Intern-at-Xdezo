@@ -96,6 +96,8 @@ class Instructor(models.Model):
     
     # Optional: Track when they were added
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True,blank=True)
+
 
     def __str__(self):
         return self.full_name

@@ -380,6 +380,13 @@
                                         <h1 class="page-title">Update Instructor Profile</h1>
                                     </div>
                                 </header>
+                                messages
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+                                             role="alert">{{ message | safe }}</div>
+                                    {% endfor %}
+                                {% endif %}
                                 <!-- Page Content Section -->
                                 <div class="page-section">
                                     <div class="row">
@@ -402,7 +409,7 @@
                                                                        class="form-control"
                                                                        id="id_first_name"
                                                                        name="first_name"
-                                                                       value="Amit"
+                                                                       value="{{ first_name }}"
                                                                        required>
                                                             </div>
                                                             <div class="col-md-6 mb-3">
@@ -413,7 +420,7 @@
                                                                        class="form-control"
                                                                        id="id_last_name"
                                                                        name="last_name"
-                                                                       value="Sharma"
+                                                                       value="{{ last_name }}"
                                                                        required>
                                                             </div>
                                                         </div>
@@ -427,7 +434,7 @@
                                                                        class="form-control"
                                                                        id="id_email"
                                                                        name="email"
-                                                                       value="a.sharma@example.com"
+                                                                       value="{{ email }}"
                                                                        required>
                                                             </div>
                                                             <div class="col-md-6 mb-3">
@@ -436,7 +443,7 @@
                                                                        class="form-control"
                                                                        id="id_phone"
                                                                        name="phone"
-                                                                       value="9841234567">
+                                                                       value="{{ phone }}">
                                                             </div>
                                                         </div>
                                                         <!-- Address Row -->
@@ -446,7 +453,7 @@
                                                                    class="form-control"
                                                                    id="id_address"
                                                                    name="address"
-                                                                   value="Kathmandu, Nepal">
+                                                                   value="{{ address }}">
                                                         </div>
                                                     </fieldset>
                                                     <hr class="my-4">
@@ -460,21 +467,21 @@
                                                                    class="form-control"
                                                                    id="id_specialization"
                                                                    name="specialization"
-                                                                   value="Python, Django, Machine Learning"
+                                                                   value="{{ specialization }}"
                                                                    placeholder="e.g. Python, Django">
                                                         </div>
                                                         <!-- Status (Is Active) -->
                                                         <div class="form-group">
                                                             <label for="id_is_active">Account Status</label>
                                                             <select class="form-control" id="id_is_active" name="is_active">
-                                                                <option value="True" selected>Active</option>
-                                                                <option value="False">Inactive</option>
+                                                                <option value="is_active" {% if status == True %}selected{% endif %}>Active</option>
+                                                                <option value=""{% if status == False %}selected {% endif %}>Inactive</option>
                                                             </select>
                                                         </div>
                                                         <!-- Bio -->
                                                         <div class="form-group">
                                                             <label for="id_bio">Biography / Notes</label>
-                                                            <textarea class="form-control" id="id_bio" name="bio" rows="4">Senior Python Developer with 5 years of teaching experience.</textarea>
+                                                            <textarea class="form-control" id="id_bio" name="bio" rows="4">{{ bio }}</textarea>
                                                         </div>
                                                         <!-- Action Buttons -->
                                                         <div class="d-flex justify-content-between align-items-center mt-4">
