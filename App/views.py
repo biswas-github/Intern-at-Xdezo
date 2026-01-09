@@ -3,6 +3,7 @@ from django.http import HttpResponse,Http404
 from datetime import date
 from django.contrib import messages
 from .models import Course,Instructor,Batch,Classroom
+from django.db import IntegrityError
 
 
 # Create your views here.
@@ -123,8 +124,6 @@ def AdminDashboard(request):
 # DataManagement-Student for managing the students 
 # add the student
 def DataManagementStudent(request):
-    if request.method=='GET':
-        return render(request,'ADMIN/DataManagement_Student.html')
     if request.method=='POST':
         print("post method has hit")
         from .models import Student
@@ -147,10 +146,14 @@ def DataManagementStudent(request):
             Student.objects.create(full_name=name,email=email,phone=phone,address=Address,status=status)
             messages.success(request, "Student Added Sucessfully !")
             return redirect('ViewStudent')
+        except ValueError as v:
+            messages.error(request, "Student name should not contain special chracters  !")
+
         except Exception as e :
             # Other exceptions
             print(f"cant be done{e}")
             messages.error(request, "Student cant be added !")
+    return render(request,'ADMIN/DataManagement_Student.html')
 
 
       
@@ -841,47 +844,139 @@ def UpdateClassroom(request,id):
     return render(request,'ADMIN/Classroom/Update-Classroom.html',context)
 # DeleteClassroom
 def DeleteClassroom(request,id):
-   
-     return render(request,'ADMIN/Classroom/Delete-Classroom.html')
+    try:
+        classroom=get_object_or_404(Classroom,id=id)
+        classroom.delete()
+        messages.success(request,"The classroom is Deleted ")
+    except Exception as e:
+        print(f"error while deleting :{e}")
+        messages.success(request,"The classroom couldn't be Deleted ")
+        return redirect('ViewClassroom')
+        
+    
+    return render(request,'ADMIN/Classroom/Delete-Classroom.html')
 
 #------------ViewEnrollment--------------#
 # ViewEnrollment
 def ViewEnrollment(request):
-    enrollments = [
-        {
-            'id': 1,
-            'student_name': 'Ram Bahadur Thapa',
-            'batch_name': 'Python Jan 2026',
-            'enrolled_date': 'Jan 15, 2026',
-            'status': 'Active'
-        },
-        {
-            'id': 2,
-            'student_name': 'Sita Kumari',
-            'batch_name': 'Django Dec 2025',
-            'enrolled_date': 'Dec 01, 2025',
-            'status': 'Completed'
-        },
-        {
-            'id': 3,
-            'student_name': 'Hari Krishna',
-            'batch_name': 'Graphic Design',
-            'enrolled_date': 'Nov 10, 2025',
-            'status': 'Dropped'
-        }
-    ]
-
+    enrollments=[]
+    try:
+        enroll1 = get_list_or_404(Enrollment.objects.order_by('-id'))
+        print(enroll1)
+        data=[]
+        for enroll in enroll1:
+            data.append(
+                {
+                    "id":enroll.id,
+                    "student_name":enroll.student.full_name,
+                    "batch_name":enroll.batch.name,
+                    "enrolled_date":enroll.enrolled_on,
+                    "status":enroll.status,
+                }
+            )
+            enrollments=data
+        
+    except Exception as e:
+        messages.error(request, "Data Not found !")
     context = {
         'enrollments': enrollments
     }
-    return render(request,'ADMIN/Enrollment/View-Enrollment.html',context)
-def UpdateEnrollment(request,id):
-    if request.method=='POST':
-        return redirect('ViewEnrollment')
-    return render(request,'ADMIN/Enrollment/Update-Enrollment.html')
+    return render(request, 'ADMIN/Enrollment/View-Enrollment.html', context)
+
+
+def UpdateEnrollment(request, id):
+    # Fetch the object once (used for both GET to display and POST to update)
+    enrollment = get_object_or_404(Enrollment, id=id)
+
+    if request.method == 'POST':
+        try:
+            # 1. Get data from the form
+            student_id = request.POST.get('student')
+            batch_id = request.POST.get('batch')
+            status_val = request.POST.get('status')
+            enrolled_on_val = request.POST.get('enrolled_on') # Get the date string
+
+            # 2. Update the fields
+            enrollment.student_id = student_id 
+            enrollment.batch_id = batch_id
+            enrollment.status = status_val
+            
+            # Update the date (Ensure your HTML input name is 'enrolled_on')
+            if enrolled_on_val: 
+                enrollment.enrolled_on = enrolled_on_val
+
+            # 3. Save
+            enrollment.save()
+            
+            messages.success(request, "Enrollment updated successfully!")
+            return redirect('ViewEnrollment')
+
+        except IntegrityError:
+            messages.error(request, "This student is already enrolled in this batch!")
+        except Exception as e:
+            messages.error(request, f"Error updating enrollment: {e}")
+
+    # --- GET REQUEST ---
+    # We only need to fetch the lists here. 'enrollment' is already fetched at the top.
+    students = get_list_or_404(Student)
+    batches = get_list_or_404(Batch)
+
+    context = {
+        "enrollment": enrollment,
+        "students": students,
+        "batches": batches
+    }
+    return render(request, 'ADMIN/Enrollment/Update-Enrollment.html', context)
+
 def AddEnrollment(request):
-    return render(request,'ADMIN/Enrollment/Add-Enrollment.html')
+    if request.method == "POST":
+        try:
+            # 1. Extract data
+            student_id = request.POST.get('student')
+            batch_id = request.POST.get('batch')
+            status_val = request.POST.get('status')
+
+            # 2. Create the Enrollment
+            # We use student_id and batch_id to avoid fetching the full objects first
+            enrollment = Enrollment(
+                student_id=student_id,
+                batch_id=batch_id,
+                status=status_val
+            )
+            
+            # 3. Save to DB
+            enrollment.save()
+
+            messages.success(request, "Student enrolled successfully!")
+            return redirect('ViewEnrollment')
+
+        except IntegrityError:
+            # This handles the unique_together constraint (Double entry)
+            messages.error(request, "This student is already enrolled in this batch!")
+        except Exception as e:
+            messages.error(request, f"Error: {e}")
+
+    # --- GET REQUEST ---
+    # Fetch all students and batches to populate the dropdowns
+    students = Student.objects.all()
+    batches = Batch.objects.all()
+
+    context = {
+        'students': students,
+        'batches': batches
+    }
+    return render(request, 'ADMIN/Enrollment/Add-Enrollment.html', context)
+
 def DeleteEnrollment(request,id):
+    try:
+        en=get_object_or_404(Enrollment,id=id)
+        name=en.student.full_name
+        course=en.batch.course.title
+        en.delete()
+        messages.success(request,f"Enrollment deleted for student {name} on course{course}")
+    except Exception as e:
+        messages.success(request,f"Enrollment NOT deleted")
+
     return render(request,'ADMIN/Enrollment/Delete-Enrollment.html')
 
 # ----finance -------#

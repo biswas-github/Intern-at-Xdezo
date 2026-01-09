@@ -390,58 +390,73 @@
                                                     {% csrf_token %}
                                                     <fieldset>
                                                         <legend>Edit Enrollment</legend>
-                                                        <!-- Student (Pre-selected) -->
+                                                        <!-- Student Dropdown -->
                                                         <div class="form-group">
                                                             <label for="id_student">
                                                                 Student <abbr title="Required">*</abbr>
                                                             </label>
                                                             <select class="form-control" id="id_student" name="student" required>
                                                                 <option value="" disabled>Select Student</option>
-                                                                <!-- Pre-selected value simulating the current student -->
-                                                                <option value="1" selected>Ram Bahadur Thapa (ID: 101)</option>
-                                                                <option value="2">Sita Kumari (ID: 102)</option>
-                                                                <option value="3">Hari Krishna (ID: 103)</option>
+                                                                {% for student in students %}
+                                                                    <option value="{{ student.id }}"
+                                                                            {% if student.id == enrollment.student.id %}selected{% endif %}>
+                                                                        <!-- Adjust 'full_name' to whatever field your Student model uses -->
+                                                                        {{ student.full_name }} 
+                                                                    </option>
+                                                                {% endfor %}
                                                             </select>
                                                         </div>
-                                                        <!-- Batch (Pre-selected) -->
+                                                        <!-- Batch Dropdown -->
                                                         <div class="form-group">
                                                             <label for="id_batch">
                                                                 Batch <abbr title="Required">*</abbr>
                                                             </label>
                                                             <select class="form-control" id="id_batch" name="batch" required>
                                                                 <option value="" disabled>Select Batch</option>
-                                                                <!-- Pre-selected value simulating the current batch -->
-                                                                <option value="10" selected>Python Jan 2026</option>
-                                                                <option value="11">Django Dec 2025</option>
-                                                                <option value="12">Graphic Design Morning</option>
+                                                                {% for batch in batches %}
+                                                                    <option value="{{ batch.id }}"
+                                                                            {% if batch.id == enrollment.batch.id %}selected{% endif %}>
+                                                                        {{ batch.name }}
+                                                                    </option>
+                                                                {% endfor %}
                                                             </select>
                                                         </div>
-                                                        <!-- Status (Pre-selected) -->
+                                                        <!-- Status Dropdown -->
                                                         <div class="form-group">
                                                             <label for="id_status">
                                                                 Enrollment Status <abbr title="Required">*</abbr>
                                                             </label>
                                                             <select class="form-control" id="id_status" name="status" required>
-                                                                <option value="ACTIVE" selected>Active</option>
-                                                                <option value="COMPLETED">Completed</option>
-                                                                <option value="DROPPED">Dropped</option>
+                                                                <!-- We compare the database value with the option value to select it -->
+                                                                <option value="ACTIVE"
+                                                                        {% if enrollment.status == "ACTIVE" %}selected{% endif %}>
+                                                                    Active
+                                                                </option>
+                                                                <option value="COMPLETED"
+                                                                        {% if enrollment.status == "COMPLETED" %}selected{% endif %}>
+                                                                    Completed
+                                                                </option>
+                                                                <option value="DROPPED"
+                                                                        {% if enrollment.status == "DROPPED" %}selected{% endif %}>
+                                                                    Dropped
+                                                                </option>
                                                             </select>
                                                         </div>
-                                                        <!-- Enrolled On (Read Only - usually not editable) -->
+                                                        <!-- Enrolled On (Read Only) -->
                                                         <div class="form-group">
                                                             <label for="id_enrolled_on">Enrolled Date</label>
-                                                            <input type="text"
+                                                            <input type="date"
                                                                    class="form-control"
                                                                    id="id_enrolled_on"
-                                                                   value="Jan 15, 2026"
-                                                                   disabled>
+                                                                   name="enrolled_on"
+                                                                   value="{{ enrollment.enrolled_on|date:'Y-m-d' }}" 
+                                                                   >
                                                             <small class="form-text text-muted">Enrollment date cannot be changed manually.</small>
                                                         </div>
                                                         <!-- Action Buttons -->
                                                         <div class="d-flex flex-column mt-4">
-                                                            <!-- Update Button (Outline Primary as requested) -->
                                                             <button type="submit" class="btn btn-outline-primary w-100">Update Enrollment</button>
-                                                            <!-- Cancel Link -->
+                                                            <a href="{% url 'ViewEnrollment' %}" class="btn btn-link mt-2">Cancel</a>
                                                         </div>
                                                     </fieldset>
                                                 </form>

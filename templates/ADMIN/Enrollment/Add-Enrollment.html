@@ -396,10 +396,12 @@
                                                             </label>
                                                             <select class="form-control" id="id_student" name="student" required>
                                                                 <option value="" disabled selected>Select a Student</option>
-                                                                <!-- These options will be populated dynamically from your database -->
-                                                                <option value="1">Ram Bahadur Thapa</option>
-                                                                <option value="2">Sita Kumari</option>
-                                                                <option value="3">Hari Krishna</option>
+                                                                {% for student in students %}
+                                                                    <!-- Adjust 'full_name' to match your Student model field -->
+                                                                    <option value="{{ student.id }}">{{ student.full_name }} </option>
+                                                                {% empty %}
+                                                                    <option value="" disabled>No students found in database</option>
+                                                                {% endfor %}
                                                             </select>
                                                         </div>
                                                         <!-- Batch Selection -->
@@ -409,17 +411,17 @@
                                                             </label>
                                                             <select class="form-control" id="id_batch" name="batch" required>
                                                                 <option value="" disabled selected>Select a Batch</option>
-                                                                <!-- These options will be populated dynamically from your database -->
-                                                                <option value="10">Python Jan 2026</option>
-                                                                <option value="11">Django Dec 2025</option>
-                                                                <option value="12">Graphic Design Morning</option>
+                                                                {% for batch in batches %}
+                                                                    <option value="{{ batch.id }}">{{ batch.name }}</option>
+                                                                {% empty %}
+                                                                    <option value="" disabled>No batches found in database</option>
+                                                                {% endfor %}
                                                             </select>
                                                         </div>
                                                         <!-- Status Selection -->
                                                         <div class="form-group">
                                                             <label for="id_status">Enrollment Status</label>
                                                             <select class="form-control" id="id_status" name="status">
-                                                                <!-- Default to ACTIVE based on your model -->
                                                                 <option value="ACTIVE" selected>Active</option>
                                                                 <option value="COMPLETED">Completed</option>
                                                                 <option value="DROPPED">Dropped</option>
@@ -429,7 +431,8 @@
                                                         <!-- Submit Button -->
                                                         <div class="d-flex flex-column mt-4">
                                                             <button type="submit" class="btn btn-outline-primary w-100">Enroll Student</button>
-                                                            <!-- Cancel Link -->
+                                                            <a href="{% url 'ViewEnrollment' %}"
+                                                               class="btn btn-link mt-2 text-center">Cancel</a>
                                                         </div>
                                                     </fieldset>
                                                 </form>
