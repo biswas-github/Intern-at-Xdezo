@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -204,9 +205,74 @@ class Schedule(models.Model):
         choices=Status.choices,
         default=Status.SCHEDULED,
     )
+    class Meta:
+        unique_together = ['classroom','instructor', 'date', 'start_time','end_time']
+       
 
     def __str__(self):
         return f"{self.batch} @ {self.date} {self.start_time}-{self.end_time}"
+    
+
+    # validation and conflits  are checked here 
+    def clean(self):
+        # This is the "Checking" phase
+       
+    #classroom conflits
+    # at the time , on that day the classroom is occupied or not . 
+    # if occupied then raise validation error 
+        if self.classroom:  # Skip if no room selected
+            existing = Schedule.objects.filter(
+                classroom=self.classroom,
+                date=self.date,
+                status='SCHEDULED'
+            ).exclude(pk=self.pk).filter(
+                # Time overlap check (simple version)
+                start_time__lt=self.end_time,
+                end_time__gt=self.start_time
+            )
+        if existing.exists():
+            conflict=existing.first()
+            raise ValidationError(f"The {self.classroom.name} is busy on the {self.start_time}---{self.end_time} ")
+    # Instructor validation 
+
+    #   check if the instructor is busy or not at the given date , given time 
+    # it checks for if the instructor conflits on the given time 
+    # because the instructor may be teaching other batches  
+        if self.instructor:
+            existing = Schedule.objects.filter(
+                instructor=self.instructor,
+                date=self.date,
+                status='SCHEDULED'
+            ).exclude(pk=self.pk).filter(
+                start_time__lt=self.end_time,
+                end_time__gt=self.start_time
+            )
+            if existing.exists():
+                conflict = existing.first()
+                raise ValidationError(
+                    f"Instructor {self.instructor.full_name} busy at this time"
+                )
+            
+
+    # Check for the Batch --> check wether the batch is already scheduled already at that given time 
+        existing = Schedule.objects.filter(
+            batch=self.batch,
+            date=self.date,
+            start_time=self.start_time,
+            end_time=self.end_time,
+            status='SCHEDULED'
+        ).exclude(pk=self.pk)
+        
+        if existing.exists():
+            raise ValidationError("This batch already has class at this time!")
+   
+
+
+    def save(self, *args, **kwargs):
+        # 1. Start the inspection
+        self.full_clean()
+        # 2. If the inspection passed, do the action
+        super().save(*args, **kwargs)
 
 
 # Choosing the method for the Payments in the database 
