@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404,get_list_or_404
 from django.http import HttpResponse,Http404
 from datetime import date
 from django.contrib import messages
-from .models import Course,Instructor,Batch,Classroom
+from .models import Course,Instructor,Batch,Classroom,Schedule
 from django.db import IntegrityError
 
 
@@ -1101,65 +1101,41 @@ def DuesAndOverDues(request):
 def ViewSchedule(request):
     import datetime
     today = datetime.date.today()
-    
-    schedules = [
-        {
-            'id': 1,
-            'date': today,
-            'start_time': '07:00',
-            'end_time': '09:00',
-            'batch': 'Python Jan 2026',
-            'course': 'Python with Django',
-            'classroom': 'Room 101',
-            'instructor': 'Mr. A. Sharma',
-            'status': 'SCHEDULED'
-        },
-        {
-            'id': 2,
-            'date': today + datetime.timedelta(days=2),
-            'start_time': '10:00',
-            'end_time': '12:00',
-            'batch': 'Graphic Design A',
-            'course': 'Graphic Design Masterclass',
-            'classroom': 'Lab A',
-            'instructor': 'Ms. S. Karki',
-            'status': 'SCHEDULED'
-        },
-        {
-            'id': 3,
-            'date': today - datetime.timedelta(days=5),
-            'start_time': '14:00',
-            'end_time': '16:00',
-            'batch': 'Web Dev 2025',
-            'course': 'Full Stack Web',
-            'classroom': 'Room 102',
-            'instructor': 'Mr. B. Rai',
-            'status': 'COMPLETED'
-        },
-         {
-            'id': 4,
-            'date': today + datetime.timedelta(days=1),
-            'start_time': '08:00',
-            'end_time': '10:00',
-            'batch': 'Cyber Security',
-            'course': 'Ethical Hacking',
-            'classroom': 'Lab B',
-            'instructor': 'Mr. C. Lama',
-            'status': 'CANCELLED'
-        }
-    ]
+    schedules=[]
+    instructors=[]
+    try:
+        schedules = get_list_or_404(
+        Schedule.objects.select_related('batch', 'classroom', 'instructor').order_by('-date'))
+        
+    except:
+        messages.error(request,"No data found !")
 
-    # Unique list of instructors for the filter dropdown
-    instructors = list(set([s['instructor'] for s in schedules]))
+    # 2. Fetch instructors for the filter dropdown (optional, but needed for your UI)
+    try:
+        instructors = get_list_or_404(Instructor.objects.all())
+    except:
+        messages.error(request,"No instructor found !")
 
     context = {
         'schedules': schedules,
         'instructors': instructors
     }
-    return render(request,'ADMIN/Schedule/View-Schedule.html',context)
+    return render(request, 'ADMIN/Schedule/View-Schedule.html', context)
+
 
 # DeleteSchedule
 def DeleteSchedule(request,id):
+    try:
+        sched=get_object_or_404(Schedule,id=id)
+        if sched:
+            s_date=sched.date
+            s_time=sched.start_time
+            s_batch=sched.batch.name
+            sched.delete()
+            messages.success(request,f"Schedule Deleted fron the DB date :{s_date}  time: {s_time} batch: {s_batch}")
+    except Exception as e:
+        messages.error(request,"Data cant be deleted ")
+        print(e)
     return render(request,'ADMIN/Schedule/Delete-Schedule.html')
 # AddSchedule
 def AddSchedule(request):

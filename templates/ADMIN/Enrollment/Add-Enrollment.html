@@ -378,6 +378,12 @@
                                         <h1 class="page-title">Register New Enrollment</h1>
                                     </div>
                                 </header>
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+                                             role="alert">{{ message }}</div>
+                                    {% endfor %}
+                                {% endif %}
                                 <!-- Page Content Section -->
                                 <div class="page-section">
                                     <div class="row">
@@ -398,7 +404,7 @@
                                                                 <option value="" disabled selected>Select a Student</option>
                                                                 {% for student in students %}
                                                                     <!-- Adjust 'full_name' to match your Student model field -->
-                                                                    <option value="{{ student.id }}">{{ student.full_name }} </option>
+                                                                    <option value="{{ student.id }}">{{ student.full_name }}</option>
                                                                 {% empty %}
                                                                     <option value="" disabled>No students found in database</option>
                                                                 {% endfor %}
