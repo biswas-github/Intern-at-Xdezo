@@ -205,8 +205,7 @@ class Schedule(models.Model):
         choices=Status.choices,
         default=Status.SCHEDULED,
     )
-    class Meta:
-        unique_together = ['classroom','instructor', 'date', 'start_time','end_time']
+   
        
 
     def __str__(self):
@@ -230,9 +229,9 @@ class Schedule(models.Model):
                 start_time__lt=self.end_time,
                 end_time__gt=self.start_time
             )
-        if existing.exists():
-            conflict=existing.first()
-            raise ValidationError(f"The {self.classroom.name} is busy on the {self.start_time}---{self.end_time} ")
+            if existing.exists():
+                conflict=existing.first()
+                raise ValidationError(f"The class  {self.classroom.name} is busy on the {self.start_time}-- with {conflict.start_time}:{conflict.end_time}")
     # Instructor validation 
 
     #   check if the instructor is busy or not at the given date , given time 
@@ -250,7 +249,7 @@ class Schedule(models.Model):
             if existing.exists():
                 conflict = existing.first()
                 raise ValidationError(
-                    f"Instructor {self.instructor.full_name} busy at this time"
+                    f"Instructor {self.instructor.full_name} busy at this time on the batch {conflict.batch.name}"
                 )
             
 
@@ -264,7 +263,7 @@ class Schedule(models.Model):
         ).exclude(pk=self.pk)
         
         if existing.exists():
-            raise ValidationError("This batch already has class at this time!")
+            raise ValidationError("This batch already has class at this time !")
    
 
 
