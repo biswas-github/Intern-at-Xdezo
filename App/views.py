@@ -1257,7 +1257,54 @@ def AddSchedule(request):
 
 # EditSchedule
 def EditSchedule(request,id):
-    return render(request,'ADMIN/Schedule/Edit-Schedule.html')
+    schedule = get_object_or_404(Schedule, id=id)
+
+    if request.method == "POST":
+        try:
+            # 2. Extract Data
+            batch_id = request.POST.get('batch')
+            date_val = request.POST.get('date')
+            start_time = request.POST.get('start_time')
+            end_time = request.POST.get('end_time')
+            status_val = request.POST.get('status')
+            
+            # Special handling for Optional Fields (Instructor/Classroom)
+            # If value is an empty string "", we must set it to None (Null)
+            instructor_id = request.POST.get('instructor') or None
+            classroom_id = request.POST.get('classroom') or None
+
+            # 3. Update Object Fields
+            schedule.batch_id = batch_id
+            schedule.date = date_val
+            schedule.start_time = start_time
+            schedule.end_time = end_time
+            schedule.status = status_val
+            schedule.instructor_id = instructor_id
+            schedule.classroom_id = classroom_id
+
+            # 4. Save Changes
+            schedule.save()
+
+            messages.success(request, "Schedule updated successfully!")
+            return redirect('ViewSchedule')
+
+        except Exception as e:
+            messages.error(request, f"Error updating schedule: {e}")
+            return redirect('ViewSchedule')
+
+    # --- GET REQUEST ---
+    # Fetch lists for the dropdowns
+    batches = Batch.objects.all()
+    instructors = Instructor.objects.all()
+    classrooms = Classroom.objects.all()
+
+    context = {
+        'schedule': schedule,
+        'batches': batches,
+        'instructors': instructors,
+        'classrooms': classrooms
+    }
+    return render(request, 'ADMIN/Schedule/Edit-Schedule.html', context)
 
 # FreeRoom
 def FreeRoom(request):

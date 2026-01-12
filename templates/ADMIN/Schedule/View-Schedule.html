@@ -425,14 +425,13 @@
                                                     <option value="CANCELLED">Cancelled</option>
                                                 </select>
                                                 <!-- Date Filter -->
-                                                <select id="filterDate"
-                                                        class="custom-select mr-2 mb-2 mb-sm-0"
-                                                        style="width: auto;
-                                                               min-width: 130px">
-                                                    <option value="all" selected>Date: All</option>
-                                                    <option value="today">Today</option>
-                                                    <option value="upcoming">Upcoming</option>
-                                                </select>
+                                                <!-- REPLACED SELECT WITH DATE INPUT -->
+                                                <input type="date"
+                                                       id="filterDate"
+                                                       class="form-control mr-2 mb-2 mb-sm-0"
+                                                       style="width: auto;
+                                                              min-width: 160px"
+                                                       placeholder="Select Date">
                                                 <!-- Instructor Filter (Optional) -->
                                                 <select id="filterInstructor"
                                                         class="custom-select mr-2 mb-2 mb-sm-0"
@@ -748,32 +747,35 @@
         </div>
         <!-- scripts -->
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
+           document.addEventListener("DOMContentLoaded", function() {
     
-    // Selectors
+    // Selectors (No changes needed here)
     const searchInput = document.getElementById('table-search');
     const filterDate = document.getElementById('filterDate');
     const filterStatus = document.getElementById('filterStatus');
-    const filterInstructor = document.getElementById('filterInstructor'); // Optional
+    const filterInstructor = document.getElementById('filterInstructor'); 
     const clearBtn = document.getElementById('clear-search');
     const tableRows = document.querySelectorAll('.schedule-row');
     const noResultsRow = document.getElementById('no-search-results');
 
-    // Helper: Get Today's Date in YYYY-MM-DD
+    // Helper: Get Today's Date (Still useful if you need it, but not for the filter anymore)
     const today = new Date().toISOString().split('T')[0];
 
     // --- Filter Function ---
     function filterTable() {
-        const searchText = searchInput.value.toLowerCase().trim();
-        const dateVal = filterDate.value;
-        const statusVal = filterStatus.value;
+        const searchText = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        
+        // CHANGED: Now this gets a specific date string (e.g., "2026-01-15") or empty string ""
+        const dateVal = filterDate.value; 
+        
+        const statusVal = filterStatus ? filterStatus.value : 'all';
         const instVal = filterInstructor ? filterInstructor.value : 'all';
         let visibleCount = 0;
 
         tableRows.forEach(function(row) {
             // 1. Get Data
             const rowSearch = (row.getAttribute('data-search') || '').toLowerCase();
-            const rowDate = row.getAttribute('data-date'); // YYYY-MM-DD
+            const rowDate = row.getAttribute('data-date'); // Should be YYYY-MM-DD
             const rowStatus = row.getAttribute('data-status');
             const rowInst = row.getAttribute('data-instructor');
 
@@ -781,10 +783,15 @@
             const matchesSearch = rowSearch.includes(searchText);
 
             // 3. Filter Logic
-            // Date
+            
+            // --- DATE LOGIC UPDATED HERE ---
             let matchesDate = true;
-            if (dateVal === 'today') matchesDate = (rowDate === today);
-            else if (dateVal === 'upcoming') matchesDate = (rowDate >= today);
+            if (dateVal) {
+                // If user selected a date, show only rows that match exactly
+                matchesDate = (rowDate === dateVal);
+            }
+            // If dateVal is empty (no date picked), matchesDate remains true (All)
+            // -------------------------------
 
             // Status
             const matchesStatus = (statusVal === 'all') || (rowStatus === statusVal);
@@ -808,11 +815,11 @@
             if(noResultsRow) noResultsRow.style.display = 'none';
         }
 
-        // Toggle Clear Button
+        // Toggle Clear Button (Existing logic for search text)
         if(clearBtn) clearBtn.style.display = (searchText.length > 0) ? 'block' : 'none';
     }
 
-    // Attach Listeners
+    // Attach Listeners (No changes needed, 'change' event works for date input too)
     if(searchInput) searchInput.addEventListener('keyup', filterTable);
     if(filterDate) filterDate.addEventListener('change', filterTable);
     if(filterStatus) filterStatus.addEventListener('change', filterTable);

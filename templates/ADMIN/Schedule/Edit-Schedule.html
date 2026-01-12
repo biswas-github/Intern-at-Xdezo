@@ -410,8 +410,13 @@
                                                             <div class="form-group">
                                                                 <label for="id_batch">Batch</label>
                                                                 <select class="form-control" id="id_batch" name="batch" required>
-                                                                    <option value="1" selected>Python Jan 2026</option>
-                                                                    <option value="2">Django Dec 2025</option>
+                                                                    <option value="" disabled>Select Batch</option>
+                                                                    {% for batch in batches %}
+                                                                        <option value="{{ batch.id }}"
+                                                                                {% if batch.id == schedule.batch.id %}selected{% endif %}>
+                                                                            {{ batch.name }}
+                                                                        </option>
+                                                                    {% endfor %}
                                                                 </select>
                                                             </div>
                                                             <!-- Date -->
@@ -419,11 +424,12 @@
                                                                 <label for="id_date">
                                                                     Date <abbr title="Required">*</abbr>
                                                                 </label>
+                                                                <!-- formatting date to Y-m-d is required for type="date" inputs -->
                                                                 <input type="date"
                                                                        class="form-control"
                                                                        id="id_date"
                                                                        name="date"
-                                                                       value="2026-01-15"
+                                                                       value="{{ schedule.date|date:'Y-m-d' }}"
                                                                        required>
                                                             </div>
                                                             <!-- Time Slot -->
@@ -432,11 +438,12 @@
                                                                     <label for="id_start_time">
                                                                         Start Time <abbr title="Required">*</abbr>
                                                                     </label>
+                                                                    <!-- formatting time to H:i (24hr format) is required for type="time" inputs -->
                                                                     <input type="time"
                                                                            class="form-control"
                                                                            id="id_start_time"
                                                                            name="start_time"
-                                                                           value="07:00"
+                                                                           value="{{ schedule.start_time|time:'H:i' }}"
                                                                            required>
                                                                 </div>
                                                                 <div class="col-md-6 mb-3">
@@ -447,7 +454,7 @@
                                                                            class="form-control"
                                                                            id="id_end_time"
                                                                            name="end_time"
-                                                                           value="09:00"
+                                                                           value="{{ schedule.end_time|time:'H:i' }}"
                                                                            required>
                                                                 </div>
                                                             </div>
@@ -457,16 +464,24 @@
                                                                     <label for="id_instructor">Instructor</label>
                                                                     <select class="form-control" id="id_instructor" name="instructor">
                                                                         <option value="">Select Instructor</option>
-                                                                        <option value="1" selected>Mr. A. Sharma</option>
-                                                                        <option value="2">Ms. S. Karki</option>
+                                                                        {% for instructor in instructors %}
+                                                                            <option value="{{ instructor.id }}"
+                                                                                    {% if instructor.id == schedule.instructor.id %}selected{% endif %}>
+                                                                                {{ instructor.full_name }}
+                                                                            </option>
+                                                                        {% endfor %}
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-md-6 mb-3">
                                                                     <label for="id_classroom">Classroom</label>
                                                                     <select class="form-control" id="id_classroom" name="classroom">
                                                                         <option value="">Select Room</option>
-                                                                        <option value="1" selected>Room 101</option>
-                                                                        <option value="2">Lab A</option>
+                                                                        {% for classroom in classrooms %}
+                                                                            <option value="{{ classroom.id }}"
+                                                                                    {% if classroom.id == schedule.classroom.id %}selected{% endif %}>
+                                                                                {{ classroom.name }}
+                                                                            </option>
+                                                                        {% endfor %}
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -474,9 +489,18 @@
                                                             <div class="form-group">
                                                                 <label for="id_status">Session Status</label>
                                                                 <select class="form-control" id="id_status" name="status">
-                                                                    <option value="SCHEDULED" selected>Scheduled</option>
-                                                                    <option value="COMPLETED">Completed</option>
-                                                                    <option value="CANCELLED">Cancelled</option>
+                                                                    <option value="SCHEDULED"
+                                                                            {% if schedule.status == "SCHEDULED" %}selected{% endif %}>
+                                                                        Scheduled
+                                                                    </option>
+                                                                    <option value="COMPLETED"
+                                                                            {% if schedule.status == "COMPLETED" %}selected{% endif %}>
+                                                                        Completed
+                                                                    </option>
+                                                                    <option value="CANCELLED"
+                                                                            {% if schedule.status == "CANCELLED" %}selected{% endif %}>
+                                                                        Cancelled
+                                                                    </option>
                                                                 </select>
                                                             </div>
                                                             <!-- Action Buttons -->
