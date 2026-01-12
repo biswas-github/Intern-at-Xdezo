@@ -231,7 +231,7 @@ class Schedule(models.Model):
             )
             if existing.exists():
                 conflict=existing.first()
-                raise ValidationError(f"The class  {self.classroom.name} is busy on the {self.start_time}-- with {conflict.start_time}:{conflict.end_time}")
+                raise ValidationError(f"The class  {self.classroom.name} is busy on the {self.start_time} with {conflict.start_time}--{conflict.end_time}")
     # Instructor validation 
 
     #   check if the instructor is busy or not at the given date , given time 
@@ -264,7 +264,10 @@ class Schedule(models.Model):
         
         if existing.exists():
             raise ValidationError("This batch already has class at this time !")
-   
+
+        # check for batch start date and end date 
+        if not self.batch.start_date or not self.batch.end_date:
+                     raise ValueError("Selected Batch does not have valid Start/End dates.")
 
 
     def save(self, *args, **kwargs):
