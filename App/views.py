@@ -6,9 +6,9 @@ from datetime import date
 # current_date += timedelta(days=1)
 from datetime import timedelta
 from django.contrib import messages
-from .models import Course,Instructor,Batch,Classroom,Schedule
+from .models import Course,Instructor,Batch,Classroom,Schedule,Payments
 from django.db import IntegrityError
-
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 def LoginPage(request):
@@ -986,83 +986,111 @@ def DeleteEnrollment(request,id):
 # ----finance -------#
 # ViewPayment
 def ViewPayment(request):
-    payments_data = [
-        {
-            'id': 1,
-            'student': 'Ram Bahadur Thapa',
-            'batch': 'Python Jan 2026',
-            'amount': '15,000.00',
-            'date': 'Jan 15, 2026',
-            'method': 'ESEWA',
-            'reference_no': 'ESW-987654321',
-            'remarks': 'Full payment for Python course.'
-        },
-        {
-            'id': 2,
-            'student': 'Sita Kumari',
-            'batch': 'Django Dec 2025',
-            'amount': '5,000.00',
-            'date': 'Dec 20, 2025',
-            'method': 'BANK',
-            'reference_no': 'TXN-882910',
-            'remarks': 'First Installment via Nabil Bank.'
-        },
-        {
-            'id': 3,
-            'student': 'Hari Krishna',
-            'batch': 'Graphic Design',
-            'amount': '12,000.00',
-            'date': 'Nov 10, 2025',
-            'method': 'CASH',
-            'reference_no': None, # Testing empty reference
-            'remarks': 'Paid cash at the front desk.'
-        },
-        {
-            'id': 4,
-            'student': 'Kabita Joshi',
-            'batch': 'UI/UX Design',
-            'amount': '15,000.00',
-            'date': 'Mar 05, 2026',
-            'method': 'OTHERS',
-            'reference_no': 'Phonpay-5566',
-            'remarks': 'Paid via PhonePay QR.'
-        },
-        {
-            'id': 5,
-            'student': 'Anjali Sherpa',
-            'batch': 'Web Dev 2026',
-            'amount': '20,000.00',
-            'date': 'Feb 01, 2026',
-            'method': 'ESEWA',
-            'reference_no': 'ESW-112233',
-            'remarks': 'Full Payment including registration.'
-        },
-        {
-            'id': 6,
-            'student': 'Bibek Rana',
-            'batch': 'Python Jan 2026',
-            'amount': '7,500.00',
-            'date': 'Jan 16, 2026',
-            'method': 'BANK',
-            'reference_no': 'CHQ-998877',
-            'remarks': 'Cheque Payment - Part 1.'
-        },
-    ]
+    # Fetch all payments using standard queryset without select_related
+    payments_data = []
+    try:
+        payments_qs = get_list_or_404(Payments.objects.all().order_by('-date'))
+        # Create the list with mapped fields for the template
 
+        for payment in payments_qs:
+            payments_data.append({
+                'id': payment.id,
+                'student': payment.student.full_name,      
+                'batch': payment.enrollment.batch,     
+                'amount': payment.amount,
+                'date': payment.date,
+                'method': payment.method,
+                'reference_no': payment.ref_no,  
+                'remarks': payment.remarks,
+            })
+    except:
+        print("no payments")
+        messages.error(request,"No Data found for Payments")
+    
     context = {
         'payments': payments_data
     }
-    return render(request,'ADMIN/Payment/View-Payments.html',context)
+    return render(request, 'ADMIN/Payment/View-Payments.html', context)
 
         # AddPayment
 def AddPayment(request):
-    return render(request,'ADMIN/Payment/Add-Payment.html')
+    if request.method == 'POST':
+        # 1. Retrieve data from the HTML form
+        student_id = request.POST.get('student')
+        enrollment_id = request.POST.get('enrollment')  # Optional
+        amount = request.POST.get('amount')
+        method = request.POST.get('method')
+        ref_no = request.POST.get('ref_no')
+        remarks = request.POST.get('remarks')
+        
+        if enrollment_id:
+            enrollment_obj = get_object_or_404(Enrollment, id=enrollment_id)
+            student_obj = enrollment_obj.student  # Auto-fill student from enrollment
+        else:
+            # If no enrollment, then Student ID is REQUIRED manually
+            if not student_id:
+                messages.error(request, "Please select a student.")
+                return redirect('add_payment')
+            student_obj = get_object_or_404(Student, id=student_id)
+            enrollment_obj = None
+        
+        try:
+            # 3. Save to Database
+            # We use atomic transaction to ensure data integrity
+            from django.db import transaction
+            with transaction.atomic():
+                Payments.objects.create(
+                    student=student_obj,
+                    enrollment=enrollment_obj,
+                    amount=amount,
+                    method=method,
+                    ref_no=ref_no,
+                    remarks=remarks
+                )
+            print(f"student {student_id},enroll {enrollment_id} amt {amount} method {method}")
+            messages.success(request, f"Payment of Rs. {amount} added successfully for {student_obj.full_name}.")
+            return redirect('ViewPayment')
+
+        except ValidationError as e:
+            # Capture model validation errors
+            messages.error(request, f"Error: {e}")
+        except Exception as e:
+            # Capture other database errors
+            messages.error(request, f"An unexpected error occurred: {e}")
+            
+    # --- GET Request (Display the Form) ---
+    
+    students = Student.objects.all().order_by('-id')
+    
+    # Fetch active enrollments (optimized with select_related)
+    # We display the Batch name in the dropdown so the user knows what they are paying for
+    enrollments = Enrollment.objects.filter(status=Enrollment.Status.ACTIVE).select_related('batch', 'student').order_by('-enrolled_on')
+
+    context = {
+        'students': students,
+        'enrollments': enrollments,
+    }
+    return render(request, 'ADMIN/Payment/Add-Payment.html', context)
 #   UpdatePayment
 def UpdatePayment(request,id):
     return render(request,'ADMIN/Payment/Update-Payment.html')
 # DeletePayment
 def DeletePayment(request,id):
-    return render(request,'ADMIN/Payment/Delete-Payment.html')
+    if id:
+        try:
+            # Fetch and delete the payment
+            pay = get_object_or_404(Payments, id=id)
+            pay.delete()
+            
+            print(f"Delete success")
+            messages.success(request,f"Deleted the payment successfully for <strong>{pay.student.full_name}</strong>")
+            return render(request, 'ADMIN/Payment/Delete-Payment.html') 
+
+        except Exception as e:
+            print(f"Delete failed: {e}")
+            messages.error(request, "Failed to delete payment.")
+
+    return render(request, 'ADMIN/Payment/Delete-Payment.html')
 # dues and overdues 
 def DuesAndOverDues(request):
     due_list = [

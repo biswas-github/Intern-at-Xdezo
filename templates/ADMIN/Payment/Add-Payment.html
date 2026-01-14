@@ -401,7 +401,7 @@
                                             <div class="card-body">
                                                 <!-- Form -->
                                                 <form method="post">
-                                                    <!-- {% csrf_token %} -->
+                                                    {% csrf_token %}
                                                     <!-- SECTION 1: Payer Details -->
                                                     <fieldset>
                                                         <legend>Payer Information</legend>
@@ -412,18 +412,17 @@
                                                             </label>
                                                             <select class="form-control" id="id_student" name="student" required>
                                                                 <option value="" disabled selected>Select Student</option>
-                                                                <!-- These will be populated from DB -->
-                                                                <option value="1">Ram Bahadur Thapa (ID: 101)</option>
-                                                                <option value="2">Sita Kumari (ID: 102)</option>
+                                                                {% for std in students %}<option value="{{ std.id }}">{{ std.full_name }}</option>{% endfor %}
                                                             </select>
                                                         </div>
                                                         <!-- Enrollment Selection (Optional but recommended) -->
                                                         <div class="form-group">
                                                             <label for="id_enrollment">Linked Enrollment</label>
                                                             <select class="form-control" id="id_enrollment" name="enrollment">
-                                                                <option value="" selected>-- General Payment (No specific batch) --</option>
-                                                                <option value="10">Python Jan 2026</option>
-                                                                <option value="11">Django Dec 2025</option>
+                                                                <option value="" disabled selected>Select Enrollment</option>
+                                                                {% for enroll in enrollments %}
+                                                                    <option value="{{ enroll.id }}">Student : {{ enroll.student.full_name }} Batch :{{ enroll.batch.name }}</option>
+                                                                {% endfor %}
                                                             </select>
                                                             <small class="form-text text-muted">Select which course/batch this payment is for.</small>
                                                         </div>
@@ -521,6 +520,42 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
+            </script>
+            <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const studentSelect = document.getElementById('id_student');
+        const enrollmentSelect = document.getElementById('id_enrollment');
+        
+        // Find the container div to hide/show
+        const studentFormGroup = studentSelect.closest('.form-group');
+
+        function toggleStudentField() {
+            // Check if an enrollment is selected (value is not empty)
+            if (enrollmentSelect.value) {
+                // 1. Hide the student selection field
+                studentFormGroup.style.display = 'none';
+                
+                // 2. Clear the Student ID value
+                // This sets the value sent to the server to "" (empty string)
+                studentSelect.value = ""; 
+                
+                // 3. Remove 'required' so form can submit with empty student
+                studentSelect.removeAttribute('required');
+            } else {
+                // If no enrollment selected, show student field
+                studentFormGroup.style.display = 'block';
+                
+                // Make it required again
+                studentSelect.setAttribute('required', 'required');
+            }
+        }
+
+        // Run on initial load
+        toggleStudentField();
+
+        // Run on change
+        enrollmentSelect.addEventListener('change', toggleStudentField);
+    });
             </script>
         </body>
     </html>

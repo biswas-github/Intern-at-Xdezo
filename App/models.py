@@ -143,9 +143,9 @@ class Enrollment(models.Model):
         DROPPED = "DROPPED", "Dropped"
 
     # student 
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="student_enrollments")
+    student = models.ForeignKey(Student, on_delete=models.SET_NULL,null=True, related_name="student_enrollments")
     # related batch
-    batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name="batch_enrollments")
+    batch = models.ForeignKey(Batch, on_delete=models.SET_NULL,null=True, related_name="batch_enrollments")
     enrolled_on = models.DateField(auto_now_add=True)
 
 
