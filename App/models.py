@@ -287,7 +287,8 @@ class Payments(models.Model):
 
     student = models.ForeignKey(
         Student,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null=True,
         related_name='student_payments',
     )
     enrollment = models.ForeignKey(

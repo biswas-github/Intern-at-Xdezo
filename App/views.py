@@ -993,19 +993,30 @@ def ViewPayment(request):
         # Create the list with mapped fields for the template
 
         for payment in payments_qs:
+            if payment.enrollment:
+                batch_info= payment.enrollment.batch.name
+                student_info=payment.enrollment.student.full_name
+            else:
+                student_info=payment.student.full_name
+                batch_info="General payment"
+            
             payments_data.append({
                 'id': payment.id,
-                'student': payment.student.full_name,      
-                'batch': payment.enrollment.batch,     
+                'student':  student_info,      
+                'batch':batch_info,     
                 'amount': payment.amount,
                 'date': payment.date,
                 'method': payment.method,
                 'reference_no': payment.ref_no,  
                 'remarks': payment.remarks,
             })
+            
     except:
-        print("no payments")
-        messages.error(request,"No Data found for Payments")
+        if len(payments_data)<=0:
+            print("no payments")
+            messages.error(request,"No Data found for Payments")
+            pass
+        
     
     context = {
         'payments': payments_data
@@ -1070,10 +1081,72 @@ def AddPayment(request):
         'students': students,
         'enrollments': enrollments,
     }
-    return render(request, 'ADMIN/Payment/Add-Payment.html', context)
+    return render(request, 'ADMIN/Payment/Add-Payment.html', context)     
+
 #   UpdatePayment
-def UpdatePayment(request,id):
-    return render(request,'ADMIN/Payment/Update-Payment.html')
+def UpdatePayment(request, id):
+    payment = get_object_or_404(Payments, id=id)
+
+    if request.method == 'POST':
+        student_id = request.POST.get('student')
+        enrollment_id = request.POST.get('enrollment')
+        amount = request.POST.get('amount')
+        method = request.POST.get('method')
+        ref_no = request.POST.get('ref_no')
+        remarks = request.POST.get('remarks')
+
+        try:
+            # --- FIX STARTS HERE ---
+            
+            # Logic: If Enrollment is chosen, get Student FROM Enrollment.
+            # Otherwise, use the manually selected Student ID.
+            
+            if enrollment_id:
+                # 1. Fetch Enrollment First
+                enrol_obj = get_object_or_404(Enrollment, id=enrollment_id)
+                payment.enrollment = enrol_obj
+                
+                # 2. Auto-set Student from that Enrollment
+                # This fixes the issue where student_id is empty because JS hid the field
+                student_obj = enrol_obj.student  
+                payment.student = student_obj
+                
+            else:
+                # Fallback: No enrollment, so we MUST have a student_id
+                if not student_id:
+                    messages.error(request, "Student is required for general payments.")
+                    return redirect('UpdatePayment', id=id)
+                    
+                student_obj = get_object_or_404(Student, id=student_id)
+                payment.student = student_obj
+                payment.enrollment = None
+            
+            # --- FIX ENDS HERE ---
+
+            payment.amount = amount
+            payment.method = method
+            payment.ref_no = ref_no
+            payment.remarks = remarks
+            
+            payment.save()
+                
+            messages.success(request, f"Payment updated successfully for {student_obj.full_name}")
+            return redirect('ViewPayment')
+
+        except Exception as e:
+            messages.error(request, f"Error updating payment: {e}")
+
+    # GET Request logic remains the same
+    students = Student.objects.filter(status=Student.Status.ACTIVE).order_by('full_name')
+    enrollments = Enrollment.objects.filter(status=Enrollment.Status.ACTIVE).select_related('batch', 'student')
+
+    context = {
+        'payment': payment,
+        'students': students,
+        'enrollments': enrollments,
+    }
+    return render(request, 'ADMIN/Payment/Update-Payment.html', context)
+
 # DeletePayment
 def DeletePayment(request,id):
     if id:

@@ -401,31 +401,38 @@
                                             <div class="card-body">
                                                 <!-- Form -->
                                                 <form method="post">
-                                                    <!-- {% csrf_token %} -->
+                                                    {% csrf_token %}
                                                     <!-- SECTION 1: Payer Details -->
                                                     <fieldset>
                                                         <legend>Payer Information</legend>
-                                                        <!-- Student Selection (Pre-selected) -->
+                                                        <!-- Student Selection -->
                                                         <div class="form-group">
                                                             <label for="id_student">
                                                                 Student <abbr title="Required">*</abbr>
                                                             </label>
                                                             <select class="form-control" id="id_student" name="student" required>
                                                                 <option value="" disabled>Select Student</option>
-                                                                <!-- Pre-selected student -->
-                                                                <option value="1" selected>Ram Bahadur Thapa (ID: 101)</option>
-                                                                <option value="2">Sita Kumari (ID: 102)</option>
+                                                                {% for std in students %}
+                                                                    <option value="{{ std.id }}"
+                                                                            {% if std.id == payment.student.id %}selected{% endif %}>
+                                                                        {{ std.full_name }}
+                                                                    </option>
+                                                                {% endfor %}
                                                             </select>
                                                         </div>
-                                                        <!-- Enrollment Selection (Pre-selected) -->
+                                                        <!-- Enrollment Selection -->
                                                         <div class="form-group">
                                                             <label for="id_enrollment">Linked Enrollment (Batch)</label>
                                                             <select class="form-control" id="id_enrollment" name="enrollment">
                                                                 <option value="">-- General Payment --</option>
-                                                                <!-- Pre-selected batch -->
-                                                                <option value="10" selected>Python Jan 2026</option>
-                                                                <option value="11">Django Dec 2025</option>
+                                                                {% for enroll in enrollments %}
+                                                                    <option value="{{ enroll.id }}"
+                                                                            {% if payment.enrollment and enroll.id == payment.enrollment.id %}selected{% endif %}>
+                                                                        {{ enroll.student.full_name }} - {{ enroll.batch.name }}
+                                                                    </option>
+                                                                {% endfor %}
                                                             </select>
+                                                            <small class="form-text text-muted">Select which course/batch this payment is for.</small>
                                                         </div>
                                                     </fieldset>
                                                     <hr class="my-4">
@@ -433,7 +440,7 @@
                                                     <fieldset>
                                                         <legend>Transaction Details</legend>
                                                         <div class="row">
-                                                            <!-- Amount (Pre-filled) -->
+                                                            <!-- Amount -->
                                                             <div class="col-md-6 mb-3">
                                                                 <label for="id_amount">
                                                                     Amount (Rs.) <abbr title="Required">*</abbr>
@@ -444,43 +451,43 @@
                                                                        name="amount"
                                                                        step="0.01"
                                                                        min="0"
-                                                                       value="15000.00"
+                                                                       value="{{ payment.amount|stringformat:'.2f' }}"
                                                                        required>
                                                             </div>
-                                                            <!-- Payment Method (Pre-selected) -->
+                                                            <!-- Payment Method -->
                                                             <div class="col-md-6 mb-3">
                                                                 <label for="id_method">Payment Method</label>
                                                                 <select class="form-control" id="id_method" name="method">
-                                                                    <option value="CASH">Cash</option>
-                                                                    <option value="ESEWA" selected>eSewa</option>
-                                                                    <option value="BANK">Bank Transfer</option>
-                                                                    <option value="OTHERS">Others</option>
+                                                                    <option value="CASH" {% if payment.method == 'CASH' %}selected{% endif %}>Cash</option>
+                                                                    <option value="ESEWA" {% if payment.method == 'ESEWA' %}selected{% endif %}>eSewa</option>
+                                                                    <option value="BANK" {% if payment.method == 'BANK' %}selected{% endif %}>Bank Transfer</option>
+                                                                    <option value="OTHERS" {% if payment.method == 'OTHERS' %}selected{% endif %}>Others</option>
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <!-- Transaction Date (Read Only - auto_now_add usually isn't editable) -->
+                                                        <!-- Transaction Date (Read Only) -->
                                                         <div class="form-group">
                                                             <label for="id_date">Transaction Date</label>
                                                             <input type="text"
                                                                    class="form-control"
                                                                    id="id_date"
-                                                                   value="Jan 15, 2026 14:30"
+                                                                   value="{{ payment.date }}"
                                                                    disabled>
                                                             <small class="form-text text-muted">Original payment date cannot be modified.</small>
                                                         </div>
-                                                        <!-- Reference Number (Pre-filled) -->
+                                                        <!-- Reference Number -->
                                                         <div class="form-group">
                                                             <label for="id_ref_no">Reference / Transaction No.</label>
                                                             <input type="text"
                                                                    class="form-control"
                                                                    id="id_ref_no"
                                                                    name="ref_no"
-                                                                   value="ESW-987654321">
+                                                                   value="{{ payment.ref_no|default:'' }}">
                                                         </div>
-                                                        <!-- Remarks (Pre-filled) -->
+                                                        <!-- Remarks -->
                                                         <div class="form-group">
                                                             <label for="id_remarks">Remarks</label>
-                                                            <textarea class="form-control" id="id_remarks" name="remarks" rows="3">Full payment for Python course.</textarea>
+                                                            <textarea class="form-control" id="id_remarks" name="remarks" rows="3">{{ payment.remarks|default:'' }}</textarea>
                                                         </div>
                                                         <!-- Action Buttons -->
                                                         <div class="d-flex flex-column mt-4">
@@ -526,6 +533,47 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-116692175-1");
+            </script>
+            <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const studentSelect = document.getElementById('id_student');
+        const enrollmentSelect = document.getElementById('id_enrollment');
+        
+        // Find the container div to hide/show (closest parent with class 'form-group')
+        const studentFormGroup = studentSelect.closest('.form-group');
+
+        function toggleStudentField() {
+            // Check if an enrollment is selected (value is not empty)
+            if (enrollmentSelect.value) {
+                // 1. Hide the student selection field
+                studentFormGroup.style.display = 'none';
+                
+                // 2. Remove 'required' attribute so form can submit
+                // Note: In update view, we often DON'T clear the value immediately 
+                // because if the user made a mistake and unselects enrollment, 
+                // we might want the original student ID to remain (or they re-select).
+                // But following Add Payment logic, we assume Enrollment overrides Student.
+                studentSelect.removeAttribute('required');
+                
+                // Optional: You could clear the value, but for "Update", 
+                // sometimes it's safer just to hide it and let the backend logic
+                // (which prioritizes enrollment) handle the data.
+                // studentSelect.value = ""; 
+            } else {
+                // If no enrollment selected (General Payment), show student field
+                studentFormGroup.style.display = 'block';
+                
+                // Make it required again
+                studentSelect.setAttribute('required', 'required');
+            }
+        }
+
+        // Run on initial load to handle pre-selected values from the database
+        toggleStudentField();
+
+        // Run whenever the enrollment dropdown changes
+        enrollmentSelect.addEventListener('change', toggleStudentField);
+    });
             </script>
         </body>
     </html>

@@ -411,7 +411,7 @@
                                                                 Student <abbr title="Required">*</abbr>
                                                             </label>
                                                             <select class="form-control" id="id_student" name="student" required>
-                                                                <option value="" disabled selected>Select Student</option>
+                                                                <option value=""  selected>Select Student</option>
                                                                 {% for std in students %}<option value="{{ std.id }}">{{ std.full_name }}</option>{% endfor %}
                                                             </select>
                                                         </div>
@@ -419,7 +419,7 @@
                                                         <div class="form-group">
                                                             <label for="id_enrollment">Linked Enrollment</label>
                                                             <select class="form-control" id="id_enrollment" name="enrollment">
-                                                                <option value="" disabled selected>Select Enrollment</option>
+                                                                <option value=""  selected>Select Enrollment</option>
                                                                 {% for enroll in enrollments %}
                                                                     <option value="{{ enroll.id }}">Student : {{ enroll.student.full_name }} Batch :{{ enroll.batch.name }}</option>
                                                                 {% endfor %}
@@ -526,35 +526,45 @@
         const studentSelect = document.getElementById('id_student');
         const enrollmentSelect = document.getElementById('id_enrollment');
         
-        // Find the container div to hide/show
-        const studentFormGroup = studentSelect.closest('.form-group');
+        const studentGroup = studentSelect.closest('.form-group');
+        const enrollmentGroup = enrollmentSelect.closest('.form-group');
 
-        function toggleStudentField() {
-            // Check if an enrollment is selected (value is not empty)
-            if (enrollmentSelect.value) {
-                // 1. Hide the student selection field
-                studentFormGroup.style.display = 'none';
-                
-                // 2. Clear the Student ID value
-                // This sets the value sent to the server to "" (empty string)
+        function toggleFields(triggeredBy) {
+            const studentVal = studentSelect.value;
+            const enrollmentVal = enrollmentSelect.value;
+
+            // CASE 1: Enrollment was just changed and has a value
+            if (triggeredBy === 'enrollment' && enrollmentVal !== "") {
+                // Hide Student, Clear Student Value, Remove Required
+                studentGroup.style.display = 'none';
                 studentSelect.value = ""; 
-                
-                // 3. Remove 'required' so form can submit with empty student
                 studentSelect.removeAttribute('required');
-            } else {
-                // If no enrollment selected, show student field
-                studentFormGroup.style.display = 'block';
+            }
+            // CASE 2: Student was just changed and has a value
+            else if (triggeredBy === 'student' && studentVal !== "") {
+                // Hide Enrollment, Clear Enrollment Value
+                enrollmentGroup.style.display = 'none';
+                enrollmentSelect.value = ""; 
+            }
+            // CASE 3: Reset / Both Empty (User selected default option)
+            else {
+                // Show both fields
+                studentGroup.style.display = 'block';
+                enrollmentGroup.style.display = 'block';
                 
-                // Make it required again
+                // Student is mandatory if no enrollment is selected
                 studentSelect.setAttribute('required', 'required');
             }
         }
 
-        // Run on initial load
-        toggleStudentField();
+        // Listen for specific change events to know which one triggered the update
+        studentSelect.addEventListener('change', function() {
+            toggleFields('student');
+        });
 
-        // Run on change
-        enrollmentSelect.addEventListener('change', toggleStudentField);
+        enrollmentSelect.addEventListener('change', function() {
+            toggleFields('enrollment');
+        });
     });
             </script>
         </body>
