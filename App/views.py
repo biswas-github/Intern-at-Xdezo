@@ -989,7 +989,7 @@ def ViewPayment(request):
     # Fetch all payments using standard queryset without select_related
     payments_data = []
     try:
-        payments_qs = get_list_or_404(Payments.objects.all().order_by('-date'))
+        payments_qs = Payments.objects.all().order_by('-date')
         # Create the list with mapped fields for the template
 
         for payment in payments_qs:
@@ -999,7 +999,6 @@ def ViewPayment(request):
             else:
                 student_info=payment.student.full_name
                 batch_info="General payment"
-            
             payments_data.append({
                 'id': payment.id,
                 'student':  student_info,      
