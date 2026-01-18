@@ -1039,7 +1039,7 @@ def AddPayment(request):
         else:
             # If no enrollment, then Student ID is REQUIRED manually
             if not student_id:
-                messages.error(request, "Please select a student.")
+                messages.error(request, "Please select a student OR the enrollment to the student")
                 return redirect('add_payment')
             student_obj = get_object_or_404(Student, id=student_id)
             enrollment_obj = None
@@ -1167,24 +1167,6 @@ def DeletePayment(request,id):
 def DuesAndOverDues(request):
     due_list = [
         {
-            'name': 'Ram Bahadur Thapa',
-            'batch': 'Python Jan 2026',
-            'course': 'Python Development',
-            'total_fee': 15000,
-            'paid_amount': 15000,
-            'due_amount': 0,
-            'status_code': 'cleared'
-        },
-        {
-            'name': 'Sita Kumari',
-            'batch': 'Django Dec 2025',
-            'course': 'Django Framework',
-            'total_fee': 15000,
-            'paid_amount': 10000,
-            'due_amount': 5000,
-            'status_code': 'pending'
-        },
-        {
             'name': 'Bishal Gurung',
             'batch': 'Graphic Design',
             'course': 'Graphic Design',
@@ -1192,8 +1174,50 @@ def DuesAndOverDues(request):
             'paid_amount': 0,
             'due_amount': 12000,
             'status_code': 'overdue'
-        }
-    ]
+        }]
+    # today = timezone.localdate()
+    today=date.today()
+    
+    enrollments = Enrollment.objects.select_related("student", "batch", "batch__course")
+
+    report = []
+    for e in enrollments:
+        course_fee = e.batch.course.Course_fee or 0
+        batch_start_date = e.batch.start_date
+
+        # Sum payments only for this enrollment (ignore "general payments")
+        paid_all = (
+            Payments.objects
+            .filter(enrollment=e))  
+        sum=0              # only enrollment payment
+        for data in paid_all:
+            sum+=data.amount
+        paid=sum
+        due = course_fee - paid
+        if due==0 or due<0:
+            continue
+        else:
+            if batch_start_date>today:
+                status="pending"
+            if batch_start_date<today:
+                status="overdue"
+            
+
+        started = batch_start_date <= today
+
+        due_list.append({
+            "name": e.student.full_name if e.student else None,
+            "course": e.batch.course.title if e.batch and e.batch.course else None,
+            "batch": e.batch.name if e.batch else None,
+            "batch_start_date": batch_start_date,
+            "total_fee": course_fee,
+            "paid_amount": paid,
+            "due_amount": due,
+            "status_code": status,
+            "batch_started": started,
+        })
+    
+    
     
     context = {
         'due_list': due_list

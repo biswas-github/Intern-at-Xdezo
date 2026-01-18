@@ -485,7 +485,7 @@
                                                             {% if student.due_amount > 0 %}
                                                                 Rs. {{ student.due_amount }}
                                                             {% else %}
-                                                                -
+                                                                <span class=" badge badge-success">Over paid</span>
                                                             {% endif %}
                                                         </td>
                                                         <!-- 6. Actions -->
@@ -523,7 +523,6 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        
                                         <tfoot>
                                             <ul class="pagination justify-content-center mt-4">
                                                 <li class="page-item disabled">
