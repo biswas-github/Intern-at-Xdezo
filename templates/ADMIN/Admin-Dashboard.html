@@ -66,7 +66,11 @@
           <!-- .top-bar-brand -->
           <div class="top-bar-brand">
             <a href="{% url 'AdminDashboard' %}">
-              <img src="{% static 'images/brand-inverse.png' %}" height="32" alt="">
+              <img src="{% static 'images/brand-inverse.png' %}"
+                   height="42"
+                   width="150"
+                   class="rounded"
+                   alt="Brand Logo" />
             </a>
           </div>
           <!-- /.top-bar-brand -->
@@ -122,7 +126,7 @@
                     </h6>
                   {% else %}
                     <h6>
-                      <span class="font-weight-bold ps-1">Admin_demo</span>
+                <span style="margin-left: 1rem !important;" class="font-weight-bold ">Admin_demo</span>
                       <small class="text-muted">admin</small>
                     </h6>
                   {% endif %}

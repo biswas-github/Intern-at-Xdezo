@@ -111,7 +111,7 @@
                                         </h6>
                                     {% else %}
                                         <h6>
-                                            <span class="font-weight-bold ps-1">Admin_demo</span>
+                                            <span style="margin-left: 1rem !important;" class="font-weight-bold ">Admin_demo</span>
                                             <small class="text-muted">admin</small>
                                         </h6>
                                     {% endif %}
@@ -379,7 +379,7 @@
                                         <h1 class="page-title">Update Enrollment Details</h1>
                                     </div>
                                 </header>
-                                  {% if messages %}
+                                {% if messages %}
                                     {% for message in messages %}
                                         <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
                                              role="alert">{{ message }}</div>
@@ -407,7 +407,7 @@
                                                                     <option value="{{ student.id }}"
                                                                             {% if student.id == enrollment.student.id %}selected{% endif %}>
                                                                         <!-- Adjust 'full_name' to whatever field your Student model uses -->
-                                                                        {{ student.full_name }} 
+                                                                        {{ student.full_name }}
                                                                     </option>
                                                                 {% endfor %}
                                                             </select>
@@ -455,8 +455,7 @@
                                                                    class="form-control"
                                                                    id="id_enrolled_on"
                                                                    name="enrolled_on"
-                                                                   value="{{ enrollment.enrolled_on|date:'Y-m-d' }}" 
-                                                                   >
+                                                                   value="{{ enrollment.enrolled_on|date:'Y-m-d' }}">
                                                             <small class="form-text text-muted">Enrollment date cannot be changed manually.</small>
                                                         </div>
                                                         <!-- Action Buttons -->
