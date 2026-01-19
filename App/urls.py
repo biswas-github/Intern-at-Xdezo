@@ -1,6 +1,6 @@
 from django.urls import path,include
-from . views import LoginPage,AdminDashboard,ViewerDashboard,DataManagementStudent,ViewStudent,UpdateStudent,DeleteStudent,CourseRegister,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,AddBatch,ViewBatches,Instructor1,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom,ViewEnrollment,UpdateEnrollment,AddEnrollment,DeleteEnrollment,ViewPayment,AddPayment,UpdatePayment,DeletePayment,DuesAndOverDues,ViewSchedule,DeleteSchedule,AddSchedule,EditSchedule,FreeRoom,Downloads,studentpercourse,MonthlyRevenue,ActiveStudent,analytics_enrollment_trends,Signup
-from .views import ViewSystemUser,AddSystemUser,EditUser,DeleteUser
+from . views import LoginPage,AdminDashboard,ViewerDashboard,CourseRegister,ViewCourses,UpdateCourse,DeleteCourse,ShowCourse,AddBatch,ViewBatches,Instructor1,DeleteBatch,UpdateBatch,UpdateInstructor,DeleteInstructor,AddInstructor,ViewClassroom,AddClassroom,UpdateClassroom,DeleteClassroom,ViewEnrollment,UpdateEnrollment,AddEnrollment,DeleteEnrollment,ViewPayment,AddPayment,UpdatePayment,DeletePayment,DuesAndOverDues,ViewSchedule,DeleteSchedule,AddSchedule,EditSchedule,FreeRoom,Downloads,studentpercourse,MonthlyRevenue,ActiveStudent,analytics_enrollment_trends,Signup
+
 from .views import AllActivities,ExportDetails
 from . views import download_report
 
@@ -15,30 +15,6 @@ urlpatterns = [
     # for admindashboard
     path('AdminDashboard/',AdminDashboard,name='AdminDashboard'),
 
-    # -------System User management-------#
-    # ViewSystemUser
-    path('AdminDashboard/UserManagement/ViewSystemUser',ViewSystemUser,name='ViewSystemUser'),
-    path('AdminDashboard/UserManagement/AddSystemUser',AddSystemUser,name='AddSystemUser'),
-    # EditUser
-    path('AdminDashboard/UserManagement/EditUser/<int:id>',EditUser,name='EditUser'),
-    # DeleteUser
-    path('AdminDashboard/UserManagement/DeleteUser/<int:id>',DeleteUser,name='DeleteUser'),
-
-
-
-
-
-
-        # datamanagement 
-          #student
-    path('AdminDashboard/DataManagementStudent/AddStudent',DataManagementStudent,name='DataManagementStudent'),
-                #view students
-    path('AdminDashboard/DataManagementStudent/ViewStudent',ViewStudent,name="ViewStudent"),
-                #update students 
-    path('AdminDashboard/DataManagementStudent/UpdateStudent/<int:id>',UpdateStudent,name="UpdateStudent"),
-  
-                #delete Students
-    path('AdminDashboard/DataManagementStudent/DeleteStudent/<int:id>',DeleteStudent,name='DeleteStudent'),
 
     # -----Courses------
     path('AdminDashboard/DataManagementCourse/AddCourse',CourseRegister,name="Course"),
