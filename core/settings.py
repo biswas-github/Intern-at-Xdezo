@@ -42,7 +42,13 @@ INSTALLED_APPS = [
     # user management
     "UserManagement",
     # student
-    "student"
+    "student",
+    # course
+    "course",
+    "batch",
+    "Instructor",
+    # classroom
+    "classroom",
 ]
 
 MIDDLEWARE = [
