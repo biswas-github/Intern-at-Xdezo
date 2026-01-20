@@ -393,6 +393,13 @@
                                         <h1 class="page-title">Record New Payment</h1>
                                     </div>
                                 </header>
+                                {% comment %} message {% endcomment %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+                                             role="alert">{{ message }}</div>
+                                    {% endfor %}
+                                {% endif %}
                                 <!-- Page Content Section -->
                                 <div class="page-section">
                                     <div class="row">
@@ -410,7 +417,7 @@
                                                             <label for="id_student">
                                                                 Student <abbr title="Required">*</abbr>
                                                             </label>
-                                                            <select class="form-control" id="id_student" name="student" required>
+                                                            <select class="form-control" id="id_student" name="student">
                                                                 <option value=""  selected>Select Student</option>
                                                                 {% for std in students %}<option value="{{ std.id }}">{{ std.full_name }}</option>{% endfor %}
                                                             </select>
@@ -419,9 +426,23 @@
                                                         <div class="form-group">
                                                             <label for="id_enrollment">Linked Enrollment</label>
                                                             <select class="form-control" id="id_enrollment" name="enrollment">
-                                                                <option value=""  selected>Select Enrollment</option>
+                                                                <option value="">Select Enrollment</option>
                                                                 {% for enroll in enrollments %}
-                                                                    <option value="{{ enroll.id }}">Student : {{ enroll.student.full_name }} Batch :{{ enroll.batch.name }}</option>
+                                                                    <option value="{{ enroll.id }}">
+                                                                        Student:
+                                                                        {% if enroll.student %}
+                                                                            {{ enroll.student.full_name }}
+                                                                        {% else %}
+                                                                            Student Deleted
+                                                                        {% endif %}
+                                                                        |
+                                                                        Batch:
+                                                                        {% if enroll.batch %}
+                                                                            {{ enroll.batch.name }}
+                                                                        {% else %}
+                                                                            No Batch
+                                                                        {% endif %}
+                                                                    </option>
                                                                 {% endfor %}
                                                             </select>
                                                             <small class="form-text text-muted">Select which course/batch this payment is for.</small>

@@ -7,6 +7,7 @@ import datetime
 
 
 # ----Batch------#
+from datetime import datetime
 def AddBatch(request):
     # in the batch we need to send the all courses to the batch register
     if request.method=='GET':

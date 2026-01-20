@@ -49,6 +49,12 @@ INSTALLED_APPS = [
     "Instructor",
     # classroom
     "classroom",
+    # enrollments
+    "enrollment",
+    # schedule 
+    "schedule",
+    # payments
+    "payments"
 ]
 
 MIDDLEWARE = [

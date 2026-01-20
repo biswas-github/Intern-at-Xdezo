@@ -13,6 +13,9 @@ urlpatterns = [
     path('AdminDashboard/DataManagementBatch/',include('batch.urls')),
     path('AdminDashboard/DataManagementInstructor/',include('Instructor.urls')),
     path('AdminDashboard/DataManagementClassroom/',include('classroom.urls')),
+    path('AdminDashboard/DataManagementEnrollment/',include('enrollment.urls')),
+    path('AdminDashboard/Schedule/',include('schedule.urls')),
+    path('AdminDashboard/payments/',include('payments.urls')),
 
 
 
