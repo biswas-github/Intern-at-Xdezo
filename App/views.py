@@ -37,7 +37,30 @@ from datetime import datetime, timedelta
 
 # admin dashboard after login 
 def AdminDashboard(request):
-    return render(request,'ADMIN/Admin-Dashboard.html')
+    revenue_labels = ["July", "August", "September", "October", "November", "December"]
+    revenue_data = [45000, 52000, 48000, 61000, 75000, 92000]
+    
+    # Calculate total for the badge: "Total: Rs. 373,000"
+    total_revenue_sum = sum(revenue_data)
+
+    # --- 2. Dummy Enrollment Data (Bar Chart) ---
+    # In a real app, you would query your Student model here.
+    enrollment_labels = ["July", "Aug", "Sept", "Oct", "Nov", "Dec"]
+    enrollment_data = [15, 22, 18, 30, 25, 42]
+
+    context = {
+        # ... your existing KPIs (active_students, etc.) ...
+        
+        # Keys must match what is used in the {{ variable|json_script }} tags
+        'chart_labels': revenue_labels,
+        'chart_data': revenue_data,
+        'total_revenue': "{:,}".format(total_revenue_sum), # Adds comma (e.g., 92,000)
+        
+        'enrollment_labels': enrollment_labels,
+        'enrollment_data': enrollment_data,
+    }
+
+    return render(request,'ADMIN/Admin-Dashboard.html',context)
 
 
 

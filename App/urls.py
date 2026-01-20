@@ -13,17 +13,8 @@ urlpatterns = [
     # for admindashboard
     path('AdminDashboard/',AdminDashboard,name='AdminDashboard'),
 
-
-
-
-
-
 #---------download files , download reports -------------#
     path('AdminDashboard/download',download_report,name="download_report"),
-
-
- 
-
 
     # ---------for viewer dashboard--------
     path('ViewerDashboard/',ViewerDashboard,name='ViewerDashboard'),
