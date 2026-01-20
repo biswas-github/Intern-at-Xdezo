@@ -456,7 +456,7 @@
                         <div class="d-flex align-items-center justify-content-center mb-2">
                           <span class="badge badge-subtle badge-primary rounded-pill px-3 py-1 text-uppercase small">Active</span>
                         </div>
-                        <h2 class="mb-0 display-4 font-weight-bold">128</h2>
+                        <h2 class="mb-0 display-4 font-weight-bold">{{ active_students }}</h2>
                         <small class="text-muted">Currently enrolled</small>
                       </div>
                     </div>
@@ -468,8 +468,8 @@
                         <div class="d-flex align-items-center justify-content-center mb-2">
                           <span class="badge badge-subtle badge-info rounded-pill px-3 py-1 text-uppercase small">Batches</span>
                         </div>
-                        <h2 class="mb-0 display-4 font-weight-bold">12</h2>
-                        <small class="text-muted">Running batches</small>
+                        <h2 class="mb-0 display-4 font-weight-bold">{{ today_sessions }}</h2>
+                        <small class="text-muted">ongoing batches</small>
                       </div>
                     </div>
                   </div>
@@ -480,7 +480,7 @@
                         <div class="d-flex align-items-center justify-content-center mb-2">
                           <span class="badge badge-subtle badge-warning rounded-pill px-3 py-1 text-uppercase small">Today</span>
                         </div>
-                        <h2 class="mb-0 display-4 font-weight-bold">7</h2>
+                        <h2 class="mb-0 display-4 font-weight-bold">{{ today_sessions }}</h2>
                         <small class="text-muted">Classes scheduled</small>
                       </div>
                     </div>
@@ -492,7 +492,7 @@
                         <div class="d-flex align-items-center justify-content-center mb-2">
                           <span class="badge badge-subtle badge-danger rounded-pill px-3 py-1 text-uppercase small">Dues</span>
                         </div>
-                        <h2 class="mb-0 display-4 font-weight-bold text-danger">92k</h2>
+                        <h2 class="mb-0 display-5 font-weight-bold text-danger">{{pending_dues}}</h2>
                         <small class="text-muted">Total Pending (Rs)</small>
                       </div>
                     </div>
@@ -525,31 +525,27 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>
-                                <div class="font-weight-bold">07 Dec</div>
-                                <small class="text-muted">10:00 – 11:30</small>
-                              </td>
-                              <td>Python A1</td>
-                              <td class="d-none d-sm-table-cell">Lab 201</td>
-                              <td class="d-none d-sm-table-cell">R. Sharma</td>
-                              <td class="text-end">
-                                <span class="badge badge-subtle badge-success">Scheduled</span>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <div class="font-weight-bold">07 Dec</div>
-                                <small class="text-muted">12:00 – 13:30</small>
-                              </td>
-                              <td>Web Dev B2</td>
-                              <td class="d-none d-sm-table-cell">Room 104</td>
-                              <td class="d-none d-sm-table-cell">M. Karki</td>
-                              <td class="text-end">
-                                <span class="badge badge-subtle badge-success">Scheduled</span>
-                              </td>
-                            </tr>
-                            <!-- More rows... -->
+                            {% for schedule in upcoming_schedules %}
+                              <tr>
+                                <td>
+                                  <!-- Display Date -->
+                                  <div class="font-weight-bold">{{ schedule.date|date:"d M" }}</div>
+                                  <!-- Display Start - End Time -->
+                                  <small class="text-muted">{{ schedule.start_time|time:"H:i" }} – {{ schedule.end_time|time:"H:i" }}</small>
+                                </td>
+                                <td>{{ schedule.batch.name }}</td>
+                                <!-- Hide Room/Instructor on small mobile screens -->
+                                <td class="d-none d-sm-table-cell">{{ schedule.classroom.name|default:"No Room" }}</td>
+                                <td class="d-none d-sm-table-cell">{{ schedule.instructor.full_name|default:"TBA" }}</td>
+                                <td class="text-end">
+                                  <span class="badge badge-subtle badge-success">{{ schedule.get_status_display }}</span>
+                                </td>
+                              </tr>
+                            {% empty %}
+                              <tr>
+                                <td colspan="5" class="text-center py-3">No upcoming classes scheduled.</td>
+                              </tr>
+                            {% endfor %}
                           </tbody>
                         </table>
                       </div>
@@ -571,25 +567,28 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>07 Dec</td>
-                              <td>
-                                <div class="font-weight-bold">Ramesh K.</div>
-                                <small class="text-muted d-sm-none">Python A1</small>
-                              </td>
-                              <td class="d-none d-sm-table-cell">
-                                <span class="badge badge-subtle badge-secondary">Cash</span>
-                              </td>
-                              <td class="text-end font-weight-bold text-success">Rs 10,000</td>
-                            </tr>
-                            <tr>
-                              <td>07 Dec</td>
-                              <td>Sita P.</td>
-                              <td class="d-none d-sm-table-cell">
-                                <span class="badge badge-subtle badge-secondary">Bank</span>
-                              </td>
-                              <td class="text-end font-weight-bold text-success">Rs 8,000</td>
-                            </tr>
+                            {% for pay in recent_payments %}
+                              <tr>
+                                <td>{{ pay.date|date:"d M" }}</td>
+                                <td>
+                                  <div class="font-weight-bold">
+                                    {% if pay.student %}
+                                      {{ pay.student.full_name }}
+                                    {% else %}
+                                      deleted
+                                    {% endif %}
+                                  </div>
+                                </td>
+                                <td class="d-none d-sm-table-cell">
+                                  <span class="badge badge-subtle badge-secondary">{{ pay.method }}</span>
+                                </td>
+                                <td class="text-end font-weight-bold text-success">Rs. {{ pay.amount }}</td>
+                              </tr>
+                            {% empty %}
+                              <tr>
+                                <td colspan="4" class="text-center py-3">No recent payments found.</td>
+                              </tr>
+                            {% endfor %}
                           </tbody>
                         </table>
                       </div>
@@ -605,29 +604,32 @@
                           <thead class="thead-light">
                             <tr>
                               <th>Room</th>
-                              <th>Time</th>
+                              <th></th>
                               <th class="text-end">Status</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>
-                                Class 1 <small class="text-muted">(Cap: 30)</small>
-                              </td>
-                              <td>05:00 - 08:00</td>
-                              <td class="text-end">
-                                <span class="badge badge-subtle badge-success">Available</span>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                Class 2 <small class="text-muted">(Cap: 45)</small>
-                              </td>
-                              <td>10:00 - 12:00</td>
-                              <td class="text-end">
-                                <span class="badge badge-subtle badge-danger">Occupied</span>
-                              </td>
-                            </tr>
+                            {% for room in rooms %}
+                              <tr>
+                                <td>
+                                  {{ room.name }}
+                                  <small class="text-muted">(Cap: {{ room.capacity }})</small>
+                                </td>
+                                <!-- Static time placeholder because dynamic availability is complex -->
+                                <td></td>
+                                <td class="text-end">
+                                  {% if room.is_active %}
+                                    <span class="badge badge-subtle badge-success">Active</span>
+                                  {% else %}
+                                    <span class="badge badge-subtle badge-danger">Maintenance</span>
+                                  {% endif %}
+                                </td>
+                              </tr>
+                            {% empty %}
+                              <tr>
+                                <td colspan="3">No rooms found.</td>
+                              </tr>
+                            {% endfor %}
                           </tbody>
                         </table>
                       </div>
