@@ -45,8 +45,8 @@ def AdminDashboard(request):
 
     # --- 2. Dummy Enrollment Data (Bar Chart) ---
     # In a real app, you would query your Student model here.
-    enrollment_labels = ["July", "Aug", "Sept", "Oct", "Nov", "Dec"]
-    enrollment_data = [15, 22, 18, 30, 25, 42]
+    enrollment_labels = ["may","July", "Aug", "Sept", "Oct", "Nov", "Dec"]
+    enrollment_data = [15, 22, 18, 30, 25, 42,1]
 
     context = {
         # ... your existing KPIs (active_students, etc.) ...

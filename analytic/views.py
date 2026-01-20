@@ -107,8 +107,8 @@ def MonthlyRevenue(request):
 
     return render(request, 'ADMIN/Analytic/monthly-Revenue.html', context)
 # ActiveStudent
-def ActiveStudent(request):
-    from django.shortcuts import render
+
+from django.shortcuts import render
 from App.models import Student, Enrollment
 
 def ActiveStudent(request):
