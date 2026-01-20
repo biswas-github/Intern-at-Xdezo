@@ -54,7 +54,11 @@ INSTALLED_APPS = [
     # schedule 
     "schedule",
     # payments
-    "payments"
+    "payments",
+    # analytics
+    "analytic",
+    # systemlogs
+    "systemlogs"
 ]
 
 MIDDLEWARE = [

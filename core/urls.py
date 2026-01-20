@@ -16,6 +16,10 @@ urlpatterns = [
     path('AdminDashboard/DataManagementEnrollment/',include('enrollment.urls')),
     path('AdminDashboard/Schedule/',include('schedule.urls')),
     path('AdminDashboard/payments/',include('payments.urls')),
+    path('AdminDashboard/analytics/',include('analytic.urls')),
+    path('AdminDashboard/analytics/',include('systemlogs.urls')),
+
+
 
 
 
