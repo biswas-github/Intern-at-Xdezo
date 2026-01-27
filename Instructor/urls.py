@@ -4,7 +4,7 @@ from Instructor.views import Instructor1,AddInstructor,DeleteInstructor,UpdateIn
 
 urlpatterns = [
     
-    path('Instructor',Instructor1,name="Instructor"),
+    path('ViewInstructor',Instructor1,name="Instructor"),
 #               UpdateInstructor
 
     path('UpdateInstructor/<int:id>',UpdateInstructor,name="UpdateInstructor"),

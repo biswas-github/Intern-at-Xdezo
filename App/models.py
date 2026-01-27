@@ -103,7 +103,7 @@ class Instructor(models.Model):
     def __str__(self):
         return self.full_name
     
-
+from colorfield.fields import ColorField
 # There could be many(running classes ) batch for a single courses so we need to do the Batch 
 class Batch(models.Model):
     class Status(models.TextChoices):
@@ -130,6 +130,7 @@ class Batch(models.Model):
         choices=Status.choices,
         default=Status.UPCOMING,
     )
+    color = ColorField(default="#124470")  # NEW FIELD
 
     def __str__(self):
         return f"{self.course.code} - {self.name}"

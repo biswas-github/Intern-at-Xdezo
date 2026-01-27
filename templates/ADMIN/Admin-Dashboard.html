@@ -1,645 +1,270 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- End Required meta tags -->
-    <!-- Begin SEO tag -->
-    <title>Starter Template | Looper - Bootstrap 4 Admin Theme</title>
-    <meta property="og:title" content="Starter Template" />
-    <meta name="author" content="Beni Arisandi" />
-    <meta property="og:locale" content="en_US" />
-    <meta name="description"
-          content="Responsive admin theme build on top of Bootstrap 4" />
-    <meta property="og:description"
-          content="Responsive admin theme build on top of Bootstrap 4" />
-    <link rel="canonical" href="//uselooper.com" />
-    <meta property="og:url" content="//uselooper.com" />
-    <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme" />
-    <script type="application/ld+json">
-      {
-        "name": "Looper - Bootstrap 4 Admin Theme",
-        "description": "Responsive admin theme build on top of Bootstrap 4",
-        "author": {
-          "@type": "Person",
-          "name": "Beni Arisandi"
-        },
-        "@type": "WebSite",
-        "url": "",
-        "headline": "Starter Template",
-        "@context": "http://schema.org"
-      }
-    </script>
-    <!-- End SEO tag -->
-    <!-- FAVICONS -->
-    <link rel="apple-touch-icon-precomposed"
-          sizes="144x144"
-          href="{% static 'apple-touch-icon.png' %}" />
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
-    <meta name="theme-color" content="#3063A0" />
-    <!-- End FAVICONS -->
-    <script src="{% static 'vendor/pace/pace.min.js' %}"></script>
-    <!-- BEGIN BASE STYLES -->
-    <link rel="stylesheet" href="{% static 'vendor/pace/pace.min.css' %}" />
-    <link rel="stylesheet"
-          href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" />
-    <link rel="stylesheet"
-          href="{% static 'vendor/open-iconic/css/open-iconic-bootstrap.min.css' %}" />
-    <link rel="stylesheet"
-          href="{% static 'vendor/font-awesome/css/fontawesome-all.min.css' %}" />
-    <!-- END BASE STYLES -->
-    <!-- BEGIN THEME STYLES -->
-    <link rel="stylesheet" href="{% static 'css/main.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
-    <!-- END THEME STYLES -->
-  </head>
-  <body>
-    <!-- .app -->
-    <div class="app">
-      <!-- .app-header -->
-      <header class="app-header">
-        <!-- .top-bar -->
-        <div class="top-bar">
-          <!-- .top-bar-brand -->
-          <div class="top-bar-brand">
-            <a href="{% url 'AdminDashboard' %}">
-              <img src="{% static 'images/brand-inverse.png' %}"
-                   height="42"
-                   width="150"
-                   class="rounded"
-                   alt="Brand Logo" />
-            </a>
-          </div>
-          <!-- /.top-bar-brand -->
-          <!-- .top-bar-list -->
-          <div class="top-bar-list">
-            <!-- Mobile Menu Toggle -->
-            <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
-              <button class="hamburger hamburger-squeeze"
-                      type="button"
-                      data-toggle="aside"
-                      aria-label="Menu"
-                      aria-controls="navigation">
-                <span class="hamburger-box">
-                  <span class="hamburger-inner"></span>
-                </span>
-              </button>
+{% extends "base.html" %}
+<!-- .extra js in head -->
+{% block extrajs %}
+{% endblock extrajs %}
+{% block content %}
+    <!-- ================================================== -->
+    <!-- 1. DATA BRIDGE (Pass Django Data to JS)            -->
+    <!-- ================================================== -->
+    {{ chart_labels|json_script:"revenue-labels" }}
+    {{ chart_data|json_script:"revenue-data" }}
+    <!-- Assuming you will pass these for Enrollment later -->
+    {{ enrollment_labels|json_script:"enrollment-labels" }}
+    {{ enrollment_data|json_script:"enrollment-data" }}
+    <!-- ================================================== -->
+    <!-- 2. PAGE HEADER                                     -->
+    <!-- ================================================== -->
+    <header class="py-3 mb-3 border-bottom d-sm-flex flex-row justify-content-between">
+        <div class="d-flex justify-content-between align-items-center  ">
+            <div class="mx-2 ">
+                <h1 class="page-title h3 font-weight-bold">Dashboard</h1>
+                <p class="text-muted mb-0">Intake overview & Analytics</p>
             </div>
-            <!-- Spacer -->
-            <div class="top-bar-item top-bar-item-full"></div>
-            <!-- .top-bar-item: The Right Side User Menu -->
-            <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
-              <!-- Dropdown -->
-              <div class="dropdown">
-                <button class="btn-account d-none d-md-flex"
-                        type="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                  <!-- User Avatar (UPDATED: Generic Icon) -->
-                  <span class="tile tile-circle bg-white">
-                    <span class="oi oi-person text-black"></span>
-                  </span>
-                  <!-- User Name and Role -->
-                  {% if request.user.is_authenticated %}
-                    <span class="account-summary pr-lg-4 d-none d-lg-block">
-                      <span class="account-name">{{ request.user.get_full_name|default:request.user.username }}</span>
-                      <span class="account-description">{{ request.user.get_role_display }}</span>
-                    </span>
-                  {% else %}
-                    <span class="account-summary pr-lg-4 d-none d-lg-block">
-                      <span class="account-name">Admin_demo</span>
-                      <span class="account-description">Admin</span>
-                    </span>
-                  {% endif %}
-                </button>
-                <div class="dropdown-arrow dropdown-arrow-left"></div>
-                <!-- Dropdown Menu -->
-                <div class="dropdown-menu">
-                  {% if request.user.is_authenticated %}
-                    <h6 class="dropdown-header d-flex flex-column">
-                      <span class="font-weight-bold">{{ request.user.get_full_name|default:request.user.username }}</span>
-                      <small class="text-muted">{{ request.user.get_role_display }}</small>
-                    </h6>
-                  {% else %}
-                    <h6>
-                      <span style="margin-left: 1rem !important;" class="font-weight-bold ">Admin_demo</span>
-                      <small class="text-muted">admin</small>
-                    </h6>
-                  {% endif %}
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{% url 'login' %}">
-                    <span class="dropdown-icon oi oi-account-logout"></span> Logout
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item text-danger" href="{% url 'login' %}">
-                    <span class="dropdown-icon oi oi-trash"></span> Delete Account
-                  </a>
-                </div>
-              </div>
-              <!-- /.dropdown -->
-            </div>
-            <!-- /.top-bar-item -->
-          </div>
-          <!-- /.top-bar-list -->
+            <!-- Optional: Date Range Picker could go here -->
         </div>
-        <!-- /.top-bar -->
-      </header>
-      <!-- /.app-header -->
-      <!-- .app-aside -->
-      <aside class="app-aside">
-        <!-- .aside-content -->
-        <div class="aside-content">
-          <!-- .aside-header -->
-          <header class="aside-header d-block d-md-none">
-            <!-- .btn-account -->
-            <button class="btn-account"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#dropdown-aside">
-              <!-- 1. User Avatar (Generic Icon) -->
-              <span class="user-avatar user-avatar-xs">
-                <span class="oi oi-person text-black"></span>
-              </span>
-              <span class="account-icon">
-                <span class="fa fa-caret-down fa-sm"></span>
-              </span>
-              <!-- 2. User Name and Role -->
-              <span class="account-summary">
-                <span class="account-name">
-                  {% if request.user.is_authenticated %}
-                    {{ request.user.get_full_name|default:request.user.username }}
-                  {% else %}
-                    Admin_DEMO
-                  {% endif %}
-                </span>
-                <span class="account-description">
-                  {% if request.user.is_authenticated %}
-                    {{ request.user.get_role_display }}
-                  {% else %}
-                    Admin
-                  {% endif %}
-                </span>
-              </span>
-            </button>
-            <!-- /.btn-account -->
-            <!-- .dropdown-aside -->
-            <div id="dropdown-aside" class="dropdown-aside collapse">
-              <!-- dropdown-items -->
-              <div class="pb-3">
-                <!-- Logout Link -->
-                <a class="dropdown-item" href="{% url 'login' %}">
-                  <span class="dropdown-icon oi oi-account-logout"></span> Logout
-                </a>
-                <div class="dropdown-divider"></div>
-                <!-- Delete Account Link -->
-                <a class="dropdown-item text-danger" href="{% url 'login' %}">
-                  <span class="dropdown-icon oi oi-trash"></span> Delete Account
-                </a>
-              </div>
-              <!-- /dropdown-items -->
+        <div>
+            <a class="btn btn-outline-primary"
+               href="{% url 'Classroom_schedule_today' %}">View Today Schedule</a>
+        </header>
+        <!-- ================================================== -->
+        <!-- 4. ANALYTICS (Charts)                              -->
+        <!-- ================================================== -->
+        <div class="page-section mb-4">
+            <div class="row g-3">
+                <!-- Chart 1: Revenue -->
+                <div class="col-12 col-lg-6">
+                    <div class="card card-fluid shadow-sm border-0 h-100">
+                        <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center mt-2">
+                            <h5 class="card-title mb-0">Monthly Revenue</h5>
+                            <span class="badge badge-success">Rs. {{ total_revenue|default:"0" }}</span>
+                        </div>
+                        <div class="card-body pt-0">
+                            <!-- Fixed Height Container for Responsiveness -->
+                            <div class="chart-container"
+                                 style="position: relative;
+                                        height: 300px;
+                                        width: 100%">
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Chart 2: Enrollment -->
+                <div class="col-12 col-lg-6">
+                    <div class="card card-fluid shadow-sm border-0 h-100">
+                        <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center mt-2">
+                            <h5 class="card-title mb-0">Enrollment Trends</h5>
+                            <span class="badge badge-primary">This Year</span>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="chart-container"
+                                 style="position: relative;
+                                        height: 300px;
+                                        width: 100%">
+                                <canvas id="enrollmentChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.dropdown-aside -->
-          </header>
-          <!-- /.aside-header -->
-          <!-- .aside-menu -->
-          <section class="aside-menu has-scrollable">
-            <!-- .stacked-menu -->
-            <nav id="stacked-menu" class="stacked-menu">
-              <!-- .menu -->
-              <ul class="menu">
-                <!-- .menu-item -->
-                <li class="menu-item has-active">
-                  <a href="{% url 'AdminDashboard' %}" class="menu-link">
-                    <span class="menu-icon oi oi-dashboard"></span>
-                    <span class="menu-text">Dashboard</span>
-                  </a>
-                </li>
-                <!-- /.menu-item -->
-                <!-- .menu-item -->
-                <!-- .menu-header -->
-                <!-- .menu-header -->
-                <!-- here intake mgnt insted of the Pages -->
-                <li class="menu-header">Intake managements</li>
-                <!-- /.menu-header -->
-                <!-- .menu-item -->
-                <!-- /.menu-item -->
-                <!-- user managements -->
-                <li class="menu-item has-child ">
-                  <a href="#" class="menu-link">
-                    <span class="menu-icon-sm oi oi-people"></span>
-                    <span class="menu-text">User management</span>
-                  </a>
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a class="menu-link" href="{% url 'ViewSystemUser' %}">View system Users</a>
-                    </li>
-                    <li class="menu-item">
-                      <a class="menu-link" href="{% url 'AddSystemUser' %}">Add system Users</a>
-                    </li>
-                  </ul>
-                </li>
-                <!-- ./user managements -->
-                <!-- datamanagements -->
-                <!-- .menu-item -->
-                <li class="menu-item has-child ">
-                  <a href="#" class="menu-link">
-                    <span class="menu-icon-sm oi oi-folder"></span>
-                    <span class="menu-text">Data management</span>
-                  </a>
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{% url 'ViewCourses' %}" class="menu-link">Course</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{% url 'ViewBatches' %}" class="menu-link">Batches</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{% url 'ViewClassroom' %}" class="menu-link">Classrooms</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{% url 'ViewEnrollment' %}" class="menu-link">Enrollments</a>
-                    </li>
-                  </ul>
-                </li>
-                <!-- finance  -->
-                <!-- .menu-item -->
-                <li class="menu-item has-child">
-                  <a href="#" class="menu-link">
-                    <span class="menu-icon-sm oi oi-calendar"></span>
-                    <span class="menu-text">Schedules & Time-tables</span>
-                  </a>
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
-                    </li>
-                  </ul>
-                </li>
-                <!-- ./menuitems -->
-                <!--  ./finance-->
-                <!-- .menu-item -->
-                <li class="menu-item has-child">
-                  <a href="#" class="menu-link">
-                    <span class="menu-icon-sm oi oi-dollar"></span>
-                    <span class="menu-text">Finance</span>
-                  </a>
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
-                    </li>
-                  </ul>
-                </li>
-                <!-- ./menuitems -->
-                <!-- .exports -->
-                <li class="menu-item has-child" style="">
-                  <a href="#" class="menu-link">
-                    <span class="menu-icon-sm oi oi-list-rich"></span>
-                    <span class="menu-text">Exports</span>
-                  </a>
-                  <!-- child menu -->
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
-                    </li>
-                  </ul>
-                  <!-- /child menu -->
-                </li>
-                <!-- .analytics -->
-                <!-- .menu-item -->
-                <li class="menu-item has-child">
-                  <a href="#" class="menu-link">
-                    <span class="menu-icon-sm oi oi-bar-chart"></span>
-                    <span class="menu-text">Analytics</span>
-                  </a>
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{% url 'ActiveStudent' %}" class="menu-link">Active Students</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{% url 'analytics_enrollment_trends' %}" class="menu-link">Enrollments Trends</a>
-                    </li>
-                  </ul>
-                </li>
-                <!-- ./menuitems -->
-                <!-- ./analytics -->
-                <!-- System logs -->
-                <!-- .menu-item -->
-                <li class="menu-item has-child">
-                  <a href="#" class="menu-link">
-                    <span class="menu-icon-sm oi oi-file"></span>
-                    <span class="menu-text">System Logs</span>
-                  </a>
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a href="{% url 'AllActivities' %}" class="menu-link">All activities</a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="{% url 'Export-Details' %}" class="menu-link">Export Details</a>
-                    </li>
-                  </ul>
-                </li>
-                <!-- ./menuitems -->
-                <!-- ./System logs  -->
-                <!-- .menu-item -->
-                <!-- /.menu-item -->
-              </ul>
-              <!-- /.menu -->
-            </nav>
-            <!-- /.stacked-menu -->
-          </section>
-          <!-- /.aside-menu -->
         </div>
-        <!-- /.aside-content -->
-      </aside>
-      <!-- /.app-aside -->
-      <!-- .app-main -->
-      <main class="app-main">
-        <div class="wrapper">
-          <div class="page">
-            <div class="page-inner ms-2 me-2">
-              <!-- ================================================== -->
-              <!-- 1. DATA BRIDGE (Pass Django Data to JS)            -->
-              <!-- ================================================== -->
-              {{ chart_labels|json_script:"revenue-labels" }}
-              {{ chart_data|json_script:"revenue-data" }}
-              <!-- Assuming you will pass these for Enrollment later -->
-              {{ enrollment_labels|json_script:"enrollment-labels" }}
-              {{ enrollment_data|json_script:"enrollment-data" }}
-              <!-- ================================================== -->
-              <!-- 2. PAGE HEADER                                     -->
-              <!-- ================================================== -->
-              <header class="py-3 mb-3 border-bottom">
-                <div class="d-flex justify-content-between align-items-center  ">
-                  <div class="mx-2 ">
-                    <h1 class="page-title h3 font-weight-bold">Dashboard</h1>
-                    <p class="text-muted mb-0">Intake overview & Analytics</p>
-                  </div>
-                  <!-- Optional: Date Range Picker could go here -->
+        <!-- ================================================== -->
+        <!-- 3. KPI CARDS (Responsive Grid)                     -->
+        <!-- ================================================== -->
+        <div class="page-section mb-4">
+            <div class="row g-3">
+                <!-- g-3 adds spacing between cols -->
+                <!-- Active students -->
+                <div class="col-12 col-sm-6 col-xl-3 mb-1">
+                    <div class="card card-fluid shadow-sm border-0 h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <span class="badge badge-subtle badge-primary rounded-pill px-3 py-1 text-uppercase small">Active</span>
+                            </div>
+                            <h2 class="mb-0 display-4 font-weight-bold">{{ active_students }}</h2>
+                            <small class="text-muted">Currently enrolled</small>
+                        </div>
+                    </div>
                 </div>
-              </header>
-              <!-- ================================================== -->
-              <!-- 4. ANALYTICS (Charts)                              -->
-              <!-- ================================================== -->
-              <div class="page-section mb-4">
-                <div class="row g-3">
-                  <!-- Chart 1: Revenue -->
-                  <div class="col-12 col-lg-6">
+                <!-- Ongoing batches -->
+                <div class="col-12 col-sm-6 col-xl-3 mb-1">
                     <div class="card card-fluid shadow-sm border-0 h-100">
-                      <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center mt-2">
-                        <h5 class="card-title mb-0">Monthly Revenue</h5>
-                        <span class="badge badge-success">Rs. {{ total_revenue|default:"0" }}</span>
-                      </div>
-                      <div class="card-body pt-0">
-                        <!-- Fixed Height Container for Responsiveness -->
-                        <div class="chart-container"
-                             style="position: relative;
-                                    height: 300px;
-                                    width: 100%">
-                          <canvas id="revenueChart"></canvas>
+                        <div class="card-body text-center p-4">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <span class="badge badge-subtle badge-info rounded-pill px-3 py-1 text-uppercase small">Batches</span>
+                            </div>
+                            <h2 class="mb-0 display-4 font-weight-bold">{{ today_sessions }}</h2>
+                            <small class="text-muted">ongoing batches</small>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                  <!-- Chart 2: Enrollment -->
-                  <div class="col-12 col-lg-6">
-                    <div class="card card-fluid shadow-sm border-0 h-100">
-                      <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center mt-2">
-                        <h5 class="card-title mb-0">Enrollment Trends</h5>
-                        <span class="badge badge-primary">This Year</span>
-                      </div>
-                      <div class="card-body pt-0">
-                        <div class="chart-container"
-                             style="position: relative;
-                                    height: 300px;
-                                    width: 100%">
-                          <canvas id="enrollmentChart"></canvas>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </div>
-              <!-- ================================================== -->
-              <!-- 3. KPI CARDS (Responsive Grid)                     -->
-              <!-- ================================================== -->
-              <div class="page-section mb-4">
-                <div class="row g-3">
-                  <!-- g-3 adds spacing between cols -->
-                  <!-- Active students -->
-                  <div class="col-12 col-sm-6 col-xl-3 mb-1">
+                <!-- Today sessions -->
+                <div class="col-12 col-sm-6 col-xl-3 mb-1">
                     <div class="card card-fluid shadow-sm border-0 h-100">
-                      <div class="card-body text-center p-4">
-                        <div class="d-flex align-items-center justify-content-center mb-2">
-                          <span class="badge badge-subtle badge-primary rounded-pill px-3 py-1 text-uppercase small">Active</span>
+                        <div class="card-body text-center p-4">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <span class="badge badge-subtle badge-warning rounded-pill px-3 py-1 text-uppercase small">Today</span>
+                            </div>
+                            <h2 class="mb-0 display-4 font-weight-bold">{{ today_sessions }}</h2>
+                            <small class="text-muted">Classes scheduled</small>
                         </div>
-                        <h2 class="mb-0 display-4 font-weight-bold">{{ active_students }}</h2>
-                        <small class="text-muted">Currently enrolled</small>
-                      </div>
                     </div>
-                  </div>
-                  <!-- Ongoing batches -->
-                  <div class="col-12 col-sm-6 col-xl-3 mb-1">
-                    <div class="card card-fluid shadow-sm border-0 h-100">
-                      <div class="card-body text-center p-4">
-                        <div class="d-flex align-items-center justify-content-center mb-2">
-                          <span class="badge badge-subtle badge-info rounded-pill px-3 py-1 text-uppercase small">Batches</span>
-                        </div>
-                        <h2 class="mb-0 display-4 font-weight-bold">{{ today_sessions }}</h2>
-                        <small class="text-muted">ongoing batches</small>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Today sessions -->
-                  <div class="col-12 col-sm-6 col-xl-3 mb-1">
-                    <div class="card card-fluid shadow-sm border-0 h-100">
-                      <div class="card-body text-center p-4">
-                        <div class="d-flex align-items-center justify-content-center mb-2">
-                          <span class="badge badge-subtle badge-warning rounded-pill px-3 py-1 text-uppercase small">Today</span>
-                        </div>
-                        <h2 class="mb-0 display-4 font-weight-bold">{{ today_sessions }}</h2>
-                        <small class="text-muted">Classes scheduled</small>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Pending dues -->
-                  <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="card card-fluid shadow-sm border-0 h-100">
-                      <div class="card-body text-center p-4">
-                        <div class="d-flex align-items-center justify-content-center mb-2">
-                          <span class="badge badge-subtle badge-danger rounded-pill px-3 py-1 text-uppercase small">Dues</span>
-                        </div>
-                        <h2 class="mb-0 display-5 font-weight-bold text-danger">{{pending_dues}}</h2>
-                        <small class="text-muted">Total Pending (Rs)</small>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </div>
-              <!-- ================================================== -->
-              <!-- 5. MAIN OPERATIONS (Split Layout)                  -->
-              <!-- ================================================== -->
-              <div class="page-section">
-                <div class="row g-3">
-                  <!-- LEFT COLUMN: Data Tables (Full width on Mobile) -->
-                  <div class="col-12 col-lg-8">
+                <!-- Pending dues -->
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="card card-fluid shadow-sm border-0 h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <span class="badge badge-subtle badge-danger rounded-pill px-3 py-1 text-uppercase small">Dues</span>
+                            </div>
+                            <h2 class="mb-0 display-5 font-weight-bold text-danger">{{ pending_dues }}</h2>
+                            <small class="text-muted">Total Pending (Rs)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ================================================== -->
+        <!-- 5. MAIN OPERATIONS (Split Layout)                  -->
+        <!-- ================================================== -->
+        <div class="page-section">
+            <div class="row g-3">
+                <!-- LEFT COLUMN: Data Tables (Full width on Mobile) -->
+                <div class="col-12 col-lg-8">
                     <!-- Upcoming schedules -->
                     <div class="card card-fluid shadow-sm border-0 mb-4">
-                      <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0 font-weight-bold">Upcoming schedules</h6>
-                        <a href="{% url 'ViewSchedule' %}" class="btn btn-sm btn-subtle-primary">View all</a>
-                      </div>
-                      <div class="table-responsive">
-                        <table class="table table-hover mb-0 align-middle">
-                          <thead class="thead-light">
-                            <tr>
-                              <th>Time</th>
-                              <!-- Date combined with Time for mobile space? Or kept separate -->
-                              <th>Batch</th>
-                              <th class="d-none d-sm-table-cell">Classroom</th>
-                              <th class="d-none d-sm-table-cell">Instructor</th>
-                              <th class="text-end">Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {% for schedule in upcoming_schedules %}
-                              <tr>
-                                <td>
-                                  <!-- Display Date -->
-                                  <div class="font-weight-bold">{{ schedule.date|date:"d M" }}</div>
-                                  <!-- Display Start - End Time -->
-                                  <small class="text-muted">{{ schedule.start_time|time:"H:i" }} – {{ schedule.end_time|time:"H:i" }}</small>
-                                </td>
-                                <td>{{ schedule.batch.name }}</td>
-                                <!-- Hide Room/Instructor on small mobile screens -->
-                                <td class="d-none d-sm-table-cell">{{ schedule.classroom.name|default:"No Room" }}</td>
-                                <td class="d-none d-sm-table-cell">{{ schedule.instructor.full_name|default:"TBA" }}</td>
-                                <td class="text-end">
-                                  <span class="badge badge-subtle badge-success">{{ schedule.get_status_display }}</span>
-                                </td>
-                              </tr>
-                            {% empty %}
-                              <tr>
-                                <td colspan="5" class="text-center py-3">No upcoming classes scheduled.</td>
-                              </tr>
-                            {% endfor %}
-                          </tbody>
-                        </table>
-                      </div>
+                        <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0 font-weight-bold">Upcoming schedules</h6>
+                            <a href="{% url 'ViewSchedule' %}" class="btn btn-sm btn-subtle-primary">View all</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 align-middle">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Time</th>
+                                        <!-- Date combined with Time for mobile space? Or kept separate -->
+                                        <th>Batch</th>
+                                        <th class="d-none d-sm-table-cell">Classroom</th>
+                                        <th class="d-none d-sm-table-cell">Instructor</th>
+                                        <th class="text-end">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for schedule in upcoming_schedules %}
+                                        <tr>
+                                            <td>
+                                                <!-- Display Date -->
+                                                <div class="font-weight-bold">{{ schedule.date|date:"d M" }}</div>
+                                                <!-- Display Start - End Time -->
+                                                <small class="text-muted">{{ schedule.start_time|time:"H:i" }} – {{ schedule.end_time|time:"H:i" }}</small>
+                                            </td>
+                                            <td>{{ schedule.batch.name }}</td>
+                                            <!-- Hide Room/Instructor on small mobile screens -->
+                                            <td class="d-none d-sm-table-cell">{{ schedule.classroom.name|default:"No Room" }}</td>
+                                            <td class="d-none d-sm-table-cell">{{ schedule.instructor.full_name|default:"TBA" }}</td>
+                                            <td class="text-end">
+                                                <span class="badge badge-subtle badge-success">{{ schedule.get_status_display }}</span>
+                                            </td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="5" class="text-center py-3">No upcoming classes scheduled.</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <!-- Recent Payments -->
                     <div class="card card-fluid shadow-sm border-0 mb-4">
-                      <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0 font-weight-bold">Recent payments</h6>
-                        <a href="{% url 'ViewPayment' %}" class="btn btn-sm btn-subtle-primary">Finance</a>
-                      </div>
-                      <div class="table-responsive">
-                        <table class="table table-hover mb-0 align-middle">
-                          <thead class="thead-light">
-                            <tr>
-                              <th>Date</th>
-                              <th>Student</th>
-                              <th class="d-none d-sm-table-cell">Method</th>
-                              <th class="text-end">Amount</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {% for pay in recent_payments %}
-                              <tr>
-                                <td>{{ pay.date|date:"d M" }}</td>
-                                <td>
-                                  <div class="font-weight-bold">
-                                    {% if pay.student %}
-                                      {{ pay.student.full_name }}
-                                    {% else %}
-                                      deleted
-                                    {% endif %}
-                                  </div>
-                                </td>
-                                <td class="d-none d-sm-table-cell">
-                                  <span class="badge badge-subtle badge-secondary">{{ pay.method }}</span>
-                                </td>
-                                <td class="text-end font-weight-bold text-success">Rs. {{ pay.amount }}</td>
-                              </tr>
-                            {% empty %}
-                              <tr>
-                                <td colspan="4" class="text-center py-3">No recent payments found.</td>
-                              </tr>
-                            {% endfor %}
-                          </tbody>
-                        </table>
-                      </div>
+                        <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0 font-weight-bold">Recent payments</h6>
+                            <a href="{% url 'ViewPayment' %}" class="btn btn-sm btn-subtle-primary">Finance</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 align-middle">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Student</th>
+                                        <th class="d-none d-sm-table-cell">Method</th>
+                                        <th class="text-end">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for pay in recent_payments %}
+                                        <tr>
+                                            <td>{{ pay.date|date:"d M" }}</td>
+                                            <td>
+                                                <div class="font-weight-bold">
+                                                    {% if pay.student %}
+                                                        {{ pay.student.full_name }}
+                                                    {% else %}
+                                                        deleted
+                                                    {% endif %}
+                                                </div>
+                                            </td>
+                                            <td class="d-none d-sm-table-cell">
+                                                <span class="badge badge-subtle badge-secondary">{{ pay.method }}</span>
+                                            </td>
+                                            <td class="text-end font-weight-bold text-success">Rs. {{ pay.amount }}</td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="4" class="text-center py-3">No recent payments found.</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <!-- Available Rooms -->
                     <div class="card card-fluid shadow-sm border-0 mb-4">
-                      <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0 font-weight-bold">Available rooms</h6>
-                        <a href="{% url 'FreeRoom' %}" class="btn btn-sm btn-subtle-primary">Check all</a>
-                      </div>
-                      <div class="table-responsive">
-                        <table class="table table-hover mb-0 align-middle">
-                          <thead class="thead-light">
-                            <tr>
-                              <th>Room</th>
-                              <th></th>
-                              <th class="text-end">Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {% for room in rooms %}
-                              <tr>
-                                <td>
-                                  {{ room.name }}
-                                  <small class="text-muted">(Cap: {{ room.capacity }})</small>
-                                </td>
-                                <!-- Static time placeholder because dynamic availability is complex -->
-                                <td></td>
-                                <td class="text-end">
-                                  {% if room.is_active %}
-                                    <span class="badge badge-subtle badge-success">Active</span>
-                                  {% else %}
-                                    <span class="badge badge-subtle badge-danger">Maintenance</span>
-                                  {% endif %}
-                                </td>
-                              </tr>
-                            {% empty %}
-                              <tr>
-                                <td colspan="3">No rooms found.</td>
-                              </tr>
-                            {% endfor %}
-                          </tbody>
-                        </table>
-                      </div>
+                        <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0 font-weight-bold">Available rooms</h6>
+                            <a href="{% url 'FreeRoom' %}" class="btn btn-sm btn-subtle-primary">Check all</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 align-middle">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Room</th>
+                                        <th></th>
+                                        <th class="text-end">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for room in rooms %}
+                                        <tr>
+                                            <td>
+                                                {{ room.name }}
+                                                <small class="text-muted">(Cap: {{ room.capacity }})</small>
+                                            </td>
+                                            <!-- Static time placeholder because dynamic availability is complex -->
+                                            <td></td>
+                                            <td class="text-end">
+                                                {% if room.is_active %}
+                                                    <span class="badge badge-subtle badge-success">Active</span>
+                                                {% else %}
+                                                    <span class="badge badge-subtle badge-danger">Maintenance</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="3">No rooms found.</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                  </div>
-                  <!-- End Left Col -->
-                  <!-- RIGHT COLUMN: Sticky Quick Actions (HIDDEN ON PHONE/TABLET) -->
-                  <!-- 'd-none d-lg-block' ensures this disappears on small screens -->
-                  <!-- 1. CSS FIX: This is crucial. Put this style block right before the column or in your <head> -->
-                  <style>
+                </div>
+                <!-- End Left Col -->
+                <!-- RIGHT COLUMN: Sticky Quick Actions (HIDDEN ON PHONE/TABLET) -->
+                <!-- 'd-none d-lg-block' ensures this disappears on small screens -->
+                <!-- 1. CSS FIX: This is crucial. Put this style block right before the column or in your <head> -->
+                <style>
   /* Force parents to allow sticky positioning */
   body, html, .app-main, .page-inner, .wrapper, .page-section, .content {
       overflow: visible !important; 
@@ -647,46 +272,45 @@
 
   /* The Sticky Container Class */
   .sticky-sidebar {
-      position: -webkit-sticky; /* Safari */
-      position: sticky;
-      top: 7.5rem; /* Adjust based on your Navbar height (approx 100px) */
-      z-index: 100;
-      align-self: flex-start; /* Ensures it doesn't stretch weirdly */
+      position: -webkit-sticky !important; /* Safari */ 
+      position: sticky !important ;
+      top: 13rem !important ;/* Adjust based on your Navbar height (approx 100px) */
+      z-index: 100 !important;
+      align-self: flex-start !important; /* Ensures it doesn't stretch weirdly */
   }
-                  </style>
-                  <!-- 2. THE HTML STRUCTURE -->
-                  <div class="d-none d-lg-block col-lg-4">
+                </style>
+                <!-- 2. THE HTML STRUCTURE -->
+                <div class="d-none d-lg-block col-lg-4">
                     <!-- The wrapper with the sticky class -->
                     <div class="sticky-sidebar">
-                      <div class="card card-fluid shadow-sm border-0 mb-3">
-                        <div class="card-header border-0 bg-light py-3">
-                          <span class="card-title font-weight-bold text-uppercase small ls-1 text-primary">
-                            <i class="fa fa-bolt me-2"></i>Quick Actions
-                          </span>
+                        <div class="card card-fluid shadow-sm border-0 mb-3">
+                            <div class="card-header border-0 bg-light py-3">
+                                <span class="card-title font-weight-bold text-uppercase small ls-1 text-primary">
+                                    <i class="fa fa-bolt me-2"></i>Quick Actions
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-grid gap-3">
+                                    <a href="{% url 'DataManagementStudent' %}"
+                                       class="btn btn-outline-primary text-start shadow-sm mb-2">New student</a>
+                                    <a href="{% url 'Batch' %}"
+                                       class="btn btn-outline-primary text-start shadow-sm mb-2">New batch</a>
+                                    <a href="{% url 'AddSchedule' %}"
+                                       class="btn btn-outline-primary text-start shadow-sm">Schedule class</a>
+                                    <a href="{% url 'AddPayment' %}"
+                                       class="btn btn-outline-primary text-start shadow-sm">Record payment</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                          <div class="d-grid gap-3">
-                            <a href="{% url 'DataManagementStudent' %}"
-                               class="btn btn-outline-primary text-start shadow-sm mb-2">New student</a>
-                            <a href="{% url 'Batch' %}"
-                               class="btn btn-outline-primary text-start shadow-sm mb-2">New batch</a>
-                            <a href="{% url 'AddSchedule' %}"
-                               class="btn btn-outline-primary text-start shadow-sm">Schedule class</a>
-                            <a href="{% url 'AddPayment' %}"
-                               class="btn btn-outline-primary text-start shadow-sm">Record payment</a>
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-            <!-- ================================================== -->
-            <!-- 6. JAVASCRIPT LOGIC                                -->
-            <!-- ================================================== -->
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script>
+        </div>
+        <!-- ================================================== -->
+        <!-- 6. JAVASCRIPT LOGIC                                -->
+        <!-- ================================================== -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
 document.addEventListener("DOMContentLoaded", function() {
 // ------------------------------------------------
 // 1. REVENUE CHART (Green Theme)
@@ -782,38 +406,9 @@ plugins: { legend: { display: false } }
 });
 }
 });
-            </script>
-          </div>
-          <!-- /.page -->
-        </div>
-        <!-- /.wrapper -->
-      </main>
-      <!-- /.app-main -->
-      <!-- /.app -->
-      <!-- BEGIN BASE JS -->
-      <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-      <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-      <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-      <!-- END BASE JS -->
-      <!-- BEGIN PLUGINS JS -->
-      <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-      <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-      <!-- END PLUGINS JS -->
-      <!-- BEGIN THEME JS -->
-      <script src="{% static 'javascript/main.min.js' %}"></script>
-      <!-- END THEME JS -->
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async
-              src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-      <script>
-      window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "UA-116692175-1");
-      </script>
-    </body>
-    <script src="{% static 'vendor/sticky-kit/jquery.sticky-kit.min.js' %}"></script>
-  </html>
+        </script>
+    </div>
+    <!-- /.page -->
+{% endblock content %}
+{% block bottomjs %}
+{% endblock bottomjs %}

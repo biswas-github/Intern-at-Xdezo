@@ -42,8 +42,8 @@ from django.db.models import Sum, Count, F
 from django.db.models.functions import TruncMonth
 
 # Import your specific models
-from .models import Student, Batch, Schedule, Payments, Classroom, Enrollment, Course
-
+from App.models import Student, Batch, Schedule, Payments, Classroom, Enrollment, Course
+from App.classrooms_dummy import classroom_block
 def AdminDashboard(request):
     # Get current date (needed to filter upcoming classes)
     today = timezone.now().date()
@@ -149,6 +149,10 @@ def AdminDashboard(request):
     # Just listing all active rooms and their capacity
     rooms = Classroom.objects.filter(is_active=True)
 
+    # modals details from classrooms_block
+
+    
+
     # =======================================================
     # PART 4: SEND TO TEMPLATE
     # =======================================================
@@ -172,6 +176,7 @@ def AdminDashboard(request):
         'recent_payments': recent_payments,
         'rooms': rooms,
     }
+    
 
     return render(request, 'ADMIN/Admin-Dashboard.html', context)
 
@@ -210,3 +215,57 @@ def download_report(request):
         as_attachment=True,
         filename="data.csv"
     )
+
+import random
+def Classroom_schedule_today(request):
+    """
+    Generates compact data for the timetable. 
+    Rows = Time Slots, Columns = Rooms.
+    """
+    # 7 AM to 5 PM
+    start_hours = range(7, 18) 
+    
+    room_names = [
+        "Room 1 Lab", "Room 2 "
+       
+    ]
+    
+    batch_options = [
+        {"name": "Python A1", "color": "#4e73df", "instructor": "R. Sharma"}, 
+        {"name": "React B2", "color": "#080806", "instructor": "M. Karki"},    
+        {"name": "Data Sci", "color": "#36b9cc", "instructor": "S. Lama"},    
+        {"name": "Cyber Sec", "color": "#e74a3b", "instructor": "A. Sherpa"},   
+        {"name": "Java",      "color": "#f6c23e", "instructor": "P. Thapa"},    
+    ]
+
+    table_rows = []
+
+    for hour in start_hours:
+        time_label = f"{hour:02d}:00"
+        row_cells = []
+        
+        for room in room_names:
+            # 30% chance occupied
+            is_busy = random.choice([True, False, False]) 
+            
+            if is_busy:
+                batch_info = random.choice(batch_options)
+                row_cells.append({
+                    "is_occupied": True,
+                    "batch": batch_info["name"],
+                    "color": batch_info["color"],
+                    "instructor": batch_info["instructor"]
+                })
+            else:
+                row_cells.append({"is_occupied": False})
+
+        table_rows.append({
+            "time": time_label,
+            "cells": row_cells
+        })
+
+    context = {
+        "room_headers": room_names,
+        "timetable_rows": table_rows
+    }
+    return render(request, 'ADMIN/Classroom/Classroom_schedule_today.html', context)
