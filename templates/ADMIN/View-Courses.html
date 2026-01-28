@@ -4,188 +4,187 @@
 {% block extrajs %}
 {% endblock extrajs %}
 {% block content %}
-    <div class="page-inner ms-2">
-        <!-- Page header -->
-        <!-- back -->
-        <!-- ./back -->
-        <div class="mx-2 mx-sm-1 mb-1">
-            <header class="mb-1">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <p class="text-muted mb-0">
-                            <a class="text-muted"
-                               style="text-decoration: none"
-                               href="{% url 'AdminDashboard' %}">DataManagement</a>/ Courses / <a class="text-primary">View Courses</a>
-                        </p>
-                        <h1 class="page-title">
-                            View Courses <span><a href="{% url 'Course' %}" class="text-decoration-none">
-                            <i style="font-size: 0.5em;"  class="fas fa-plus "></i>
-                        </a></span>
-                    </h1>
+    <!-- Page header -->
+    <!-- back -->
+    <!-- ./back -->
+    <div class="mx-2 mx-sm-1 mb-1">
+        <header class="mb-1">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="text-muted mb-0">
+                        <a class="text-muted"
+                           style="text-decoration: none"
+                           href="{% url 'AdminDashboard' %}">DataManagement</a>/ Courses / <a class="text-primary">View Courses</a>
+                    </p>
+                    <h1 class="page-title">
+                        View Courses <span><a href="{% url 'Course' %}" class="text-decoration-none">
+                        <i style="font-size: 0.5em;"  class="fas fa-plus "></i>
+                    </a></span>
+                </h1>
+            </div>
+        </div>
+    </header>
+    <!-- messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+                 role="alert">{{ message | safe }}</div>
+        {% endfor %}
+    {% endif %}
+</div>
+<!-- Page Content Section -->
+<div class="page-section">
+    <section class="card card-fluid">
+        <!-- Toolbar: Search -->
+        <header class="card-header border-bottom-0">
+            <div class="d-flex align-items-center justify-content-between">
+                <span class="d-none d-md-block text-muted">All Courses</span>
+                <!-- Search Input -->
+                <div class="input-group input-group-alt"
+                     style="max-width: 300px;
+                            margin-left: auto">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                    </div>
+                    <input id="table-search"
+                           type="text"
+                           class="form-control"
+                           placeholder="Search title or code...">
+                    <div class="input-group-append">
+                        <button id="clear-search"
+                                type="button"
+                                class="btn btn-secondary"
+                                style="display:none">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
-        <!-- messages -->
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
-                     role="alert">{{ message | safe }}</div>
-            {% endfor %}
-        {% endif %}
-    </div>
-    <!-- Page Content Section -->
-    <div class="page-section">
-        <section class="card card-fluid">
-            <!-- Toolbar: Search -->
-            <header class="card-header border-bottom-0">
-                <div class="d-flex align-items-center justify-content-between">
-                    <span class="d-none d-md-block text-muted">All Courses</span>
-                    <!-- Search Input -->
-                    <div class="input-group input-group-alt"
-                         style="max-width: 300px;
-                                margin-left: auto">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                        </div>
-                        <input id="table-search"
-                               type="text"
-                               class="form-control"
-                               placeholder="Search title or code...">
-                        <div class="input-group-append">
-                            <button id="clear-search"
-                                    type="button"
-                                    class="btn btn-secondary"
-                                    style="display:none">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            <!-- .table-responsive -->
-            <div class="table-responsive">
-                <table class="table table-hover" id="courseTable">
-                    <thead class="thead-dark">
-                        <tr>
-                            <!-- 1. Title: Visible Always -->
-                            <th style="min-width:200px">Title</th>
-                            <!-- 2. Code: Hidden on Mobile (XS) -->
-                            <th class="d-none d-sm-table-cell">Course Code</th>
-                            <!-- 3. Fee: Hidden on Mobile & Tablet (XS/SM) -->
-                            <th class="d-none d-md-table-cell">Fee</th>
-                            <!-- 4. Duration: Hidden on Mobile/Tablet (XS/SM/MD) -->
-                            <th class="d-none d-lg-table-cell">Duration</th>
-                            <!-- 5. Actions: Visible Always -->
-                            <th style="min-width:100px; text-align:right;">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="courseTableBody">
-                        {% for course in courses %}
-                            <tr class="course-row" data-search="{{ course.title }} {{ course.code }}">
-                                <!-- 1. Title -->
-                                <td class="align-middle">
-                                    <span class="d-block text-dark font-weight-bold">{{ course.title }}</span>
-                                    <!-- Mobile Only Details: Code, Fee, Duration -->
-                                    <div class="d-block d-sm-none mt-1 small text-muted">
-                                        <span>{{ course.code }}</span>
-                                        <span class="mx-1">|</span>
-                                    </div>
-                                </td>
-                                <!-- 2. Code -->
-                                <td class="align-middle d-none d-sm-table-cell">
-                                    <span class="">{{ course.code }}</span>
-                                </td>
-                                <!-- 3. Fee -->
-                                <td class="align-middle d-none d-md-table-cell font-weight-bold text-dark">Rs. {{ course.fee }}</td>
-                                <!-- 4. Duration -->
-                                <td class="align-middle d-none d-lg-table-cell">{{ course.duration }}</td>
-                                <!-- 5. Actions -->
-                                <td class="align-middle text-right">
-                                    <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                        <!-- View Button -->
-                                        <button type="button"
-                                                class="btn btn-sm btn-subtle-info"
-                                                data-toggle="modal"
-                                                data-target="#courseDetailsModal"
-                                                data-title="{{ course.title }}"
-                                                data-code="{{ course.code }}"
-                                                data-fee="Rs. {{ course.fee }}"
-                                                data-duration="{{ course.duration }}"
-                                                data-description="{{ course.description }}"
-                                                onclick="populateCourseModal(this)">View</button>
-                                        <!-- Update Button -->
-                                        <a href="{% url 'UpdateCourse' id=course.id %}"
-                                           class="btn btn-sm bg-light text-dark mx-md-1">Edit</a>
-                                        <!-- Delete Button -->
-                                        <button type="button"
-                                                class="btn btn-sm btn-subtle-danger"
-                                                data-toggle="modal"
-                                                data-target="#deleteCourseModal"
-                                                data-title="{{ course.title }}"
-                                                data-delete-url="{% url 'DeleteCourse' id=course.id %}"
-                                                onclick="populateDeleteModal(this)">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td colspan="5" class="text-center py-5 text-muted">
-                                    <i class="fas fa-book-open fa-3x mb-3"></i>
-                                    <br>
-                                    No courses found.
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        <!-- No Results Row -->
-                        <tr id="no-search-results" style="display: none;">
-                            <td colspan="5" class="text-center py-5 text-muted">
-                                <i class="fas fa-search mb-2"></i>
-                                <br>
-                                No courses found matching your criteria.
+        <!-- .table-responsive -->
+        <div class="table-responsive">
+            <table class="table table-hover" id="courseTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <!-- 1. Title: Visible Always -->
+                        <th style="min-width:200px">Title</th>
+                        <!-- 2. Code: Hidden on Mobile (XS) -->
+                        <th class="d-none d-sm-table-cell">Course Code</th>
+                        <!-- 3. Fee: Hidden on Mobile & Tablet (XS/SM) -->
+                        <th class="d-none d-md-table-cell">Fee</th>
+                        <!-- 4. Duration: Hidden on Mobile/Tablet (XS/SM/MD) -->
+                        <th class="d-none d-lg-table-cell">Duration</th>
+                        <!-- 5. Actions: Visible Always -->
+                        <th style="min-width:100px; text-align:right;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="courseTableBody">
+                    {% for course in courses %}
+                        <tr class="course-row" data-search="{{ course.title }} {{ course.code }}">
+                            <!-- 1. Title -->
+                            <td class="align-middle">
+                                <span class="d-block text-dark font-weight-bold">{{ course.title }}</span>
+                                <!-- Mobile Only Details: Code, Fee, Duration -->
+                                <div class="d-block d-sm-none mt-1 small text-muted">
+                                    <span>{{ course.code }}</span>
+                                    <span class="mx-1">|</span>
+                                </div>
+                            </td>
+                            <!-- 2. Code -->
+                            <td class="align-middle d-none d-sm-table-cell">
+                                <span class="">{{ course.code }}</span>
+                            </td>
+                            <!-- 3. Fee -->
+                            <td class="align-middle d-none d-md-table-cell font-weight-bold text-dark">Rs. {{ course.fee }}</td>
+                            <!-- 4. Duration -->
+                            <td class="align-middle d-none d-lg-table-cell">{{ course.duration }}</td>
+                            <!-- 5. Actions -->
+                            <td class="align-middle text-right">
+                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                    <!-- View Button -->
+                                    <button type="button"
+                                            class="btn btn-sm btn-subtle-info"
+                                            data-toggle="modal"
+                                            data-target="#courseDetailsModal"
+                                            data-title="{{ course.title }}"
+                                            data-code="{{ course.code }}"
+                                            data-fee="Rs. {{ course.fee }}"
+                                            data-duration="{{ course.duration }}"
+                                            data-description="{{ course.description }}"
+                                            onclick="populateCourseModal(this)">View</button>
+                                    <!-- Update Button -->
+                                    <a href="{% url 'UpdateCourse' id=course.id %}"
+                                       class="btn btn-sm bg-light text-dark mx-md-1">Edit</a>
+                                    <!-- Delete Button -->
+                                    <button type="button"
+                                            class="btn btn-sm btn-subtle-danger"
+                                            data-toggle="modal"
+                                            data-target="#deleteCourseModal"
+                                            data-title="{{ course.title }}"
+                                            data-delete-url="{% url 'DeleteCourse' id=course.id %}"
+                                            onclick="populateDeleteModal(this)">Delete</button>
+                                </div>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5 text-muted">
+                                <i class="fas fa-book-open fa-3x mb-3"></i>
+                                <br>
+                                No courses found.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <!-- No Results Row -->
+                    <tr id="no-search-results" style="display: none;">
+                        <td colspan="5" class="text-center py-5 text-muted">
+                            <i class="fas fa-search mb-2"></i>
+                            <br>
+                            No courses found matching your criteria.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <tfoot>
                 <tfoot>
-                    <tfoot>
-                        <ul class="pagination justify-content-center mt-4">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">
-                                    <i class="fa fa-lg fa-angle-left"></i>
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">...</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">13</a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">14</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">15</a>
-                            </li>
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">...</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">24</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">
-                                    <i class="fa fa-lg fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </tfoot>
+                    <ul class="pagination justify-content-center mt-4">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">
+                                <i class="fa fa-lg fa-angle-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">...</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">13</a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">14</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">15</a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">...</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">24</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">
+                                <i class="fa fa-lg fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </tfoot>
-            </div>
-        </section>
-    </div>
+            </tfoot>
+        </div>
+    </section>
+</div>
 </div>
 <!-- modals -->
 <!-- ================= 1. SINGLE VIEW COURSE MODAL ================= -->
@@ -271,7 +270,6 @@
             </div>
         </div>
     </div>
-</div>
 {% endblock content %}
 {% block bottomjs %}
     <!-- all scripts for the javascripts  -->
