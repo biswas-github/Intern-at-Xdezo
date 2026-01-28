@@ -9,7 +9,7 @@ urlpatterns = [
                 #view students
     path('ViewStudent',ViewStudent,name="ViewStudent"),
                 #update students 
-    path('UpdateStudent/<int:id>',UpdateStudent,name="UpdateStudent"),
+    path('UpdateStudents/<int:id>',UpdateStudent,name="UpdateStudent"),
   
                 #delete Students
     path('DeleteStudent/<int:id>',DeleteStudent,name='DeleteStudent'),

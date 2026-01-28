@@ -455,38 +455,46 @@
   </body>
   <script src="{% static 'vendor/sticky-kit/jquery.sticky-kit.min.js' %}"></script>
   <script>
-document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function() {
+    // 1. Get current path and split into segments
+    // Example: /AdminDashboard/Data/Update/1  -> ["AdminDashboard", "Data", "Update", "1"]
     const currentPath = window.location.pathname;
-    
-    // Find ALL menu links in your stacked-menu
+    const currentSegments = currentPath.split('/').filter(Boolean); // Remove empty strings
+
     const allMenuLinks = document.querySelectorAll('#stacked-menu .menu-link');
-    
+
     allMenuLinks.forEach(link => {
-        const linkPath = link.getAttribute('href');
-        
-        // Exact path match
-        if (linkPath === currentPath) {
-            // 1. Add 'active' to this link
-            link.classList.add('active');
-            
-            // 2. Find parent menu-item and add 'has-active'
-            const parentItem = link.closest('.menu-item');
-            if (parentItem) {
-                parentItem.classList.add('has-active');
-            }
-            
-            // 3. If inside submenu, open parent menu-item
-            const submenu = link.closest('ul.menu');
-            if (submenu && submenu.parentElement.classList.contains('has-child')) {
-                const parentHasChild = submenu.parentElement;
-                parentHasChild.classList.add('has-active');
-                
-                // Optional: Add active to parent link too
-                const parentLink = parentHasChild.querySelector('a');
-                if (parentLink) parentLink.classList.add('active');
-            }
+        const linkHref = link.getAttribute('href');
+        if (!linkHref || linkHref === '#') return;
+
+        // 2. Exact Match (Best case)
+        if (currentPath === linkHref) {
+            activateMenu(link);
+            return;
+        }
+
+        // 3. Loose Match (The "Fix")
+        // logic: If the link href is contained at the very start of the current URL
+        // Example: Link: "/students/"  Current: "/students/update/12" -> MATCH
+        if (currentPath.startsWith(linkHref) && linkHref !== '/') {
+            activateMenu(link);
         }
     });
+
+    function activateMenu(link) {
+        // Add active class to link
+        link.classList.add('active');
+        
+        // Open Parent Menu
+        const parentItem = link.closest('.menu-item');
+        if (parentItem) parentItem.classList.add('has-active');
+        
+        // Open Grandparent (Submenu wrapper)
+        const submenu = link.closest('ul.menu');
+        if (submenu && submenu.parentElement.classList.contains('has-child')) {
+            submenu.parentElement.classList.add('has-active', 'has-open');
+        }
+    }
 });
   </script>
   {% block bottomjs %}

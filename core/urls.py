@@ -11,7 +11,7 @@ urlpatterns = [
     # Usermanagement
     path('AdminDashboard/UserManagement/',include('UserManagement.urls')),
     # student
-    path('AdminDashboard/DataManagementStudent/',include('student.urls')),
+    path('AdminDashboard/DataManagementStudent/Students/',include('student.urls')),
     path('AdminDashboard/DataManagementCourse/',include('course.urls')),
     path('AdminDashboard/DataManagementBatch/',include('batch.urls')),
     path('AdminDashboard/DataManagement/Instructor/',include('Instructor.urls')),

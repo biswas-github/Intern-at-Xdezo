@@ -1,517 +1,160 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <!-- End Required meta tags -->
-        <!-- Begin SEO tag -->
-        <title>Page Title | Looper - Bootstrap 4 Admin Theme</title>
-        <meta property="og:title" content="Starter Template" />
-        <meta name="author" content="Beni Arisandi" />
-        <meta property="og:locale" content="en_US" />
-        <meta name="description"
-              content="Responsive admin theme build on top of Bootstrap 4" />
-        <meta property="og:description"
-              content="Responsive admin theme build on top of Bootstrap 4" />
-        <link rel="canonical" href="//uselooper.com" />
-        <meta property="og:url" content="//uselooper.com" />
-        <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme" />
-        <!-- FAVICONS -->
-        <link rel="apple-touch-icon-precomposed"
-              sizes="144x144"
-              href="{% static 'apple-touch-icon.png' %}" />
-        <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
-        <meta name="theme-color" content="#3063A0" />
-        <!-- End FAVICONS -->
-        <script src="{% static 'vendor/pace/pace.min.js' %}"></script>
-        <!-- BEGIN BASE STYLES -->
-        <link rel="stylesheet" href="{% static 'vendor/pace/pace.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/open-iconic/css/open-iconic-bootstrap.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/font-awesome/css/fontawesome-all.min.css' %}" />
-        <!-- END BASE STYLES -->
-        <!-- BEGIN THEME STYLES -->
-        <link rel="stylesheet" href="{% static 'css/main.min.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
-        <!-- END THEME STYLES -->
-    </head>
-    <body>
-        <!-- .app -->
-        <div class="app">
-            <!-- .app-header -->
-            <header class="app-header">
-                <!-- .top-bar -->
-                <div class="top-bar">
-                    <!-- .top-bar-brand -->
-                    <div class="top-bar-brand">
-                        <a href="{% url 'AdminDashboard' %}">
-                            <img src="{% static 'images/brand-inverse.png' %}"
-                                 height="42"
-                                 width="150"
-                                 class="rounded"
-                                 alt="Brand Logo" />
-                        </a>
-                    </div>
-                    <!-- /.top-bar-brand -->
-                    <!-- .top-bar-list -->
-                    <div class="top-bar-list">
-                        <!-- Mobile Menu Toggle -->
-                        <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
-                            <button class="hamburger hamburger-squeeze"
-                                    type="button"
-                                    data-toggle="aside"
-                                    aria-label="Menu"
-                                    aria-controls="navigation">
-                                <span class="hamburger-box">
-                                    <span class="hamburger-inner"></span>
-                                </span>
-                            </button>
-                        </div>
-                        <!-- Spacer -->
-                        <div class="top-bar-item top-bar-item-full"></div>
-                        <!-- .top-bar-item: The Right Side User Menu -->
-                        <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
-                            <!-- Dropdown -->
-                            <div class="dropdown">
-                                <button class="btn-account d-none d-md-flex"
-                                        type="button"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false">
-                                    <!-- User Avatar (UPDATED: Generic Icon) -->
-                                    <span class="tile tile-circle bg-white">
-                                        <span class="oi oi-person text-black"></span>
-                                    </span>
-                                    <!-- User Name and Role -->
-                                    {% if request.user.is_authenticated %}
-                                        <span class="account-summary pr-lg-4 d-none d-lg-block">
-                                            <span class="account-name">{{ request.user.get_full_name|default:request.user.username }}</span>
-                                            <span class="account-description">{{ request.user.get_role_display }}</span>
-                                        </span>
-                                    {% else %}
-                                        <span class="account-summary pr-lg-4 d-none d-lg-block">
-                                            <span class="account-name">Admin_demo</span>
-                                            <span class="account-description">Admin</span>
-                                        </span>
-                                    {% endif %}
-                                </button>
-                                <div class="dropdown-arrow dropdown-arrow-left"></div>
-                                <!-- Dropdown Menu -->
-                                <div class="dropdown-menu">
-                                    {% if request.user.is_authenticated %}
-                                        <h6 class="dropdown-header d-flex flex-column">
-                                            <span class="font-weight-bold">{{ request.user.get_full_name|default:request.user.username }}</span>
-                                            <small class="text-muted">{{ request.user.get_role_display }}</small>
-                                        </h6>
-                                    {% else %}
-                                        <h6>
-                                            <span style="margin-left: 1rem !important;" class="font-weight-bold ">Admin_demo</span>
-                                            <small class="text-muted">admin</small>
-                                        </h6>
-                                    {% endif %}
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'login' %}">
-                                        <span class="dropdown-icon oi oi-account-logout"></span> Logout
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" href="{% url 'login' %}">
-                                        <span class="dropdown-icon oi oi-trash"></span> Delete Account
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- /.dropdown -->
-                        </div>
-                        <!-- /.top-bar-item -->
-                    </div>
-                    <!-- /.top-bar-list -->
-                </div>
-                <!-- /.top-bar -->
-            </header>
-            <!-- /.app-header -->
-            <!-- .app-aside -->
-            <aside class="app-aside">
-                <!-- .aside-content -->
-                <div class="aside-content">
-                    <!-- .aside-header -->
-                    <header class="aside-header d-block d-md-none">
-                        <!-- .btn-account -->
-                        <button class="btn-account"
-                                type="button"
-                                data-toggle="collapse"
-                                data-target="#dropdown-aside">
-                            <!-- 1. User Avatar (Generic Icon) -->
-                            <span class="user-avatar user-avatar-xs">
-                                <span class="oi oi-person text-black"></span>
-                            </span>
-                            <span class="account-icon">
-                                <span class="fa fa-caret-down fa-sm"></span>
-                            </span>
-                            <!-- 2. User Name and Role -->
-                            <span class="account-summary">
-                                <span class="account-name">
-                                    {% if request.user.is_authenticated %}
-                                        {{ request.user.get_full_name|default:request.user.username }}
-                                    {% else %}
-                                        Admin_DEMO
-                                    {% endif %}
-                                </span>
-                                <span class="account-description">
-                                    {% if request.user.is_authenticated %}
-                                        {{ request.user.get_role_display }}
-                                    {% else %}
-                                        Admin
-                                    {% endif %}
-                                </span>
-                            </span>
-                        </button>
-                        <!-- /.btn-account -->
-                        <!-- .dropdown-aside -->
-                        <div id="dropdown-aside" class="dropdown-aside collapse">
-                            <!-- dropdown-items -->
-                            <div class="pb-3">
-                                <!-- Logout Link -->
-                                <a class="dropdown-item" href="{% url 'login' %}">
-                                    <span class="dropdown-icon oi oi-account-logout"></span> Logout
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <!-- Delete Account Link -->
-                                <a class="dropdown-item text-danger" href="{% url 'login' %}">
-                                    <span class="dropdown-icon oi oi-trash"></span> Delete Account
-                                </a>
-                            </div>
-                            <!-- /dropdown-items -->
-                        </div>
-                        <!-- /.dropdown-aside -->
-                    </header>
-                    <!-- /.aside-header -->
-                    <!-- .aside-menu -->
-                    <section class="aside-menu has-scrollable">
-                        <!-- .stacked-menu -->
-                        <nav id="stacked-menu" class="stacked-menu">
-                            <!-- .menu -->
-                            <ul class="menu">
-                                <!-- .menu-item -->
-                                <li class="menu-item ">
-                                    <a href="{% url 'AdminDashboard' %}" class="menu-link">
-                                        <span class="menu-icon oi oi-dashboard"></span>
-                                        <span class="menu-text">Dashboard</span>
-                                    </a>
-                                </li>
-                                <!-- /.menu-item -->
-                                <!-- .menu-item -->
-                                <!-- .menu-header -->
-                                <!-- .menu-header -->
-                                <!-- here intake mgnt insted of the Pages -->
-                                <li class="menu-header">Intake managements</li>
-                                <!-- /.menu-header -->
-                                <li class="menu-item has-child ">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-people"></span>
-                                        <span class="menu-text">User management</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a class="menu-link" href="{% url 'ViewSystemUser' %}">View system Users</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a class="menu-link" href="{% url 'AddSystemUser' %}">Add system Users</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- datamanagements -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child has-open">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-folder"></span>
-                                        <span class="menu-text">Data management</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item has-active">
-                                            <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewCourses' %}" class="menu-link">Course</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewBatches' %}" class="menu-link">Batches</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewClassroom' %}" class="menu-link">Classrooms</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewEnrollment' %}" class="menu-link">Enrollments</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- finance  -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-calendar"></span>
-                                        <span class="menu-text">Schedules & Time-tables</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!--  ./finance-->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-dollar"></span>
-                                        <span class="menu-text">Finance</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- .exports -->
-                                <li class="menu-item has-child" style="">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-list-rich"></span>
-                                        <span class="menu-text">Exports</span>
-                                    </a>
-                                    <!-- child menu -->
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /child menu -->
-                                    <!-- .analytics -->
-                                    <!-- .menu-item -->
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon-sm oi oi-bar-chart"></span>
-                                            <span class="menu-text">Analytics</span>
-                                        </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'ActiveStudent' %}" class="menu-link">Active Students</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'analytics_enrollment_trends' %}" class="menu-link">Enrollments Trends</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- ./menuitems -->
-                                    <!-- ./analytics -->
-                                    <!-- System logs -->
-                                    <!-- .menu-item -->
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon-sm oi oi-file"></span>
-                                            <span class="menu-text">System Logs</span>
-                                        </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="{% url 'AllActivities' %}" class="menu-link">All activities</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'Export-Details' %}" class="menu-link">Export Details</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- ./menuitems -->
-                                    <!-- ./System logs  -->
-                                    <!-- .menu-item -->
-                                    <!-- /.menu-item -->
-                                </ul>
-                                <!-- /.menu -->
-                            </nav>
-                            <!-- /.stacked-menu -->
-                        </section>
-                        <!-- /.aside-menu -->
-                    </div>
-                    <!-- /.aside-content -->
-                </aside>
-                <!-- /.app-aside -->
-                <!-- .app-main -->
-                <main class="app-main">
-                    <div class="wrapper">
-                        <div class="page">
-                            <div class="page-inner ms-2">
-                                <!-- Page header -->
-                                <!-- back -->
-                                <!-- ./back -->
-                                <header class="">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <p class="text-muted mb-0">
-                                                <a style="text-decoration: none"
-                                                   class="text-muted"
-                                                   href="{% url 'AdminDashboard' %}">Datamanagement</a>/ <a style="text-decoration: none"
+{% extends "base.html" %}
+{% block extrastyles %}
+{% endblock extrastyles %}
+{% block extrajs %}
+{% endblock extrajs %}
+{% block content %}
+    <div class="page">
+        <!-- Page header -->
+        <!-- back -->
+        <!-- ./back -->
+        <header class="">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="text-muted mb-0">
+                        <a style="text-decoration: none"
+                           class="text-muted"
+                           href="{% url 'AdminDashboard' %}">Datamanagement</a>/ <a style="text-decoration: none"
     class="text-muted"
     href="{% url 'ViewStudent' %}">Students</a> / <span class='text-primary'>Update Students</span>
-                                            </p>
-                                            <h1 class="page-title">Update Students</h1>
-                                        </div>
-                                    </div>
-                                </header>
-                                <!-- Page Content Section -->
-                                <!-- message -->
-                                {% if messages %}
-                                    {% for message in messages %}
-                                        <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
-                                             role="alert">{{ message }}</div>
-                                    {% endfor %}
-                                {% endif %}
-                                <!-- .form -->
-                                <form method="post">
-                                    <!-- .fieldset -->
-                                    {% csrf_token %}
-                                    <fieldset>
-                                        <legend>Student Update form</legend>
-                                        <!-- .form-group -->
-                                        <div class="form-group">
-                                            <label for="lbl1">
-                                                Student name
-                                                <abbr title="Required">*</abbr>
-                                            </label>
-                                            <input type="text"
-                                                   class="form-control placeholder-shown"
-                                                   id="lbl1"
-                                                   placeholder="Enter your name"
-                                                   value="{{ name }}"
-                                                   required
-                                                   name="name">
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- .form-group -->
-                                        <div class="form-group">
-                                            <label for="lbl1">
-                                                Email
-                                                <abbr title="Required">*</abbr>
-                                            </label>
-                                            <input type="email"
-                                                   class="form-control placeholder-shown"
-                                                   id="lbl1"
-                                                   placeholder="example@gmail.com"
-                                                   value="{{ email }}"
-                                                   required
-                                                   name="email">
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- .form-group -->
-                                        <div class="form-group">
-                                            <label for="lbl1">
-                                                Phone Number
-                                                <abbr title="Required">*</abbr>
-                                            </label>
-                                            <input type="text"
-                                                   class="form-control placeholder-shown"
-                                                   id="lbl1"
-                                                   placeholder="eg :9849554478"
-                                                   value="{{ phone }}"
-                                                   required
-                                                   name="phone">
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- .form-group -->
-                                        <div class="form-group">
-                                            <label for="lbl1">
-                                                Address
-                                                <abbr title="Required">*</abbr>
-                                            </label>
-                                            <input type="text"
-                                                   class="form-control placeholder-shown"
-                                                   id="lbl1"
-                                                   placeholder="Enter the place you reside"
-                                                   value="{{ address }}"
-                                                   required
-                                                   name="Address">
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- select-element -->
-                                        <div class="form-group">
-                                            <label for="sel3">Status</label>
-                                            <select class="custom-select" id="sel3" name="status" required>
-                                                <option value="ACTIVE"
-                                                        {% if status == "ACTIVE" or status == "Active" %}selected{% endif %}>
-                                                    Active
-                                                </option>
-                                                <option value="INACTIVE"
-                                                        {% if status == "Inactive" or status == "INACTIVE" %}selected{% endif %}>
-                                                    Inactive
-                                                </option>
-                                                <option value="COMPLETED"
-                                                        {% if status == "COMPLETED" or status == "Completed" %}selected{% endif %}>
-                                                    Completed
-                                                </option>
-                                                <option value="DROPPED"
-                                                        {% if status == "DROPPED" or status == "Dropped" %}selected{% endif %}>
-                                                    Dropped
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <button type="submit"
-                                                class="btn btn-outline-primary d-flex justify-content-center w-100">
-                                            Update Student
-                                        </button>
-                                    </fieldset>
-                                    <!-- /.fieldset -->
-                                </form>
-                                <!-- /.form -->
-                            </div>
-                        </div>
-                    </div>
-                </main>
-                <!-- /.app-main -->
+                    </p>
+                    <h1 class="page-title">Update Students</h1>
+                </div>
             </div>
-            <!-- /.app -->
-            <!-- BEGIN BASE JS -->
-            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-            <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-            <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-            <!-- END BASE JS -->
-            <!-- BEGIN PLUGINS JS -->
-            <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-            <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-            <!-- END PLUGINS JS -->
-            <!-- BEGIN THEME JS -->
-            <script src="{% static 'javascript/main.min.js' %}"></script>
-            <!-- END THEME JS -->
-            <!-- Global site tag (gtag.js) - Google Analytics -->
-            <script async
-                    src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-            <script>
-      window.dataLayer = window.dataLayer || [];
+        </header>
+        <!-- Page Content Section -->
+        <!-- message -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+                     role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <!-- .form -->
+        <form method="post">
+            <!-- .fieldset -->
+            {% csrf_token %}
+            <fieldset>
+                <legend>Student Update form</legend>
+                <!-- .form-group -->
+                <div class="form-group">
+                    <label for="lbl1">
+                        Student name
+                        <abbr title="Required">*</abbr>
+                    </label>
+                    <input type="text"
+                           class="form-control placeholder-shown"
+                           id="lbl1"
+                           placeholder="Enter your name"
+                           value="{{ name }}"
+                           required
+                           name="name">
+                </div>
+                <!-- /.form-group -->
+                <!-- .form-group -->
+                <div class="form-group">
+                    <label for="lbl1">
+                        Email
+                        <abbr title="Required">*</abbr>
+                    </label>
+                    <input type="email"
+                           class="form-control placeholder-shown"
+                           id="lbl1"
+                           placeholder="example@gmail.com"
+                           value="{{ email }}"
+                           required
+                           name="email">
+                </div>
+                <!-- /.form-group -->
+                <!-- .form-group -->
+                <div class="form-group">
+                    <label for="lbl1">
+                        Phone Number
+                        <abbr title="Required">*</abbr>
+                    </label>
+                    <input type="text"
+                           class="form-control placeholder-shown"
+                           id="lbl1"
+                           placeholder="eg :9849554478"
+                           value="{{ phone }}"
+                           required
+                           name="phone">
+                </div>
+                <!-- /.form-group -->
+                <!-- .form-group -->
+                <div class="form-group">
+                    <label for="lbl1">
+                        Address
+                        <abbr title="Required">*</abbr>
+                    </label>
+                    <input type="text"
+                           class="form-control placeholder-shown"
+                           id="lbl1"
+                           placeholder="Enter the place you reside"
+                           value="{{ address }}"
+                           required
+                           name="Address">
+                </div>
+                <!-- /.form-group -->
+                <!-- select-element -->
+                <div class="form-group">
+                    <label for="sel3">Status</label>
+                    <select class="custom-select" id="sel3" name="status" required>
+                        <option value="ACTIVE"
+                                {% if status == "ACTIVE" or status == "Active" %}selected{% endif %}>Active</option>
+                        <option value="INACTIVE"
+                                {% if status == "Inactive" or status == "INACTIVE" %}selected{% endif %}>
+                            Inactive
+                        </option>
+                        <option value="COMPLETED"
+                                {% if status == "COMPLETED" or status == "Completed" %}selected{% endif %}>
+                            Completed
+                        </option>
+                        <option value="DROPPED"
+                                {% if status == "DROPPED" or status == "Dropped" %}selected{% endif %}>Dropped</option>
+                    </select>
+                </div>
+                <button type="submit"
+                        class="btn btn-outline-primary d-flex justify-content-center w-100">Update Student</button>
+            </fieldset>
+            <!-- /.fieldset -->
+        </form>
+        <!-- /.form -->
+    </div>
+{% endblock content %}
+{% block bottomjs %}
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Define the specific Sidebar Link we want to highlight
+    // We let Django generate the string for us
+    const targetUrl = "{% url 'ViewStudent' %}";
 
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "UA-116692175-1");
-            </script>
-        </body>
-    </html>
+    // 2. Find the <a> tag in the sidebar that matches this URL
+    // We search specifically inside #stacked-menu
+    const activeLink = document.querySelector(`#stacked-menu .menu-link[href="${targetUrl}"]`);
+
+    if (activeLink) {
+        // 3. Highlight the Link (Students)
+        activeLink.classList.add('active');
+
+        // 4. Highlight the <li> wrapper
+        const parentItem = activeLink.closest('.menu-item');
+        if (parentItem) {
+            parentItem.classList.add('has-active');
+        }
+
+        // 5. Open the Parent Dropdown (Data Management)
+        // Find the <ul> (menu) holding this link
+        const parentMenu = activeLink.closest('ul.menu');
+        if (parentMenu) {
+            // Find the <li> (Data Management) holding that <ul>
+            const grandParent = parentMenu.closest('.menu-item.has-child');
+            if (grandParent) {
+                // 'has-open' expands the menu, 'has-active' highlights the folder icon
+                grandParent.classList.add('has-active', 'has-open');
+            }
+        }
+    }
+});
+    </script>
+{% endblock bottomjs %}
