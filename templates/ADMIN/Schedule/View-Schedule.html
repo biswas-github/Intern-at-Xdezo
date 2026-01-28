@@ -1,752 +1,342 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <!-- End Required meta tags -->
-        <!-- Begin SEO tag -->
-        <title>Starter Template | Looper - Bootstrap 4 Admin Theme</title>
-        <meta property="og:title" content="Starter Template" />
-        <meta name="author" content="Beni Arisandi" />
-        <meta property="og:locale" content="en_US" />
-        <meta name="description"
-              content="Responsive admin theme build on top of Bootstrap 4" />
-        <meta property="og:description"
-              content="Responsive admin theme build on top of Bootstrap 4" />
-        <link rel="canonical" href="//uselooper.com" />
-        <meta property="og:url" content="//uselooper.com" />
-        <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme" />
-        <script type="application/ld+json">
-      {
-        "name": "Looper - Bootstrap 4 Admin Theme",
-        "description": "Responsive admin theme build on top of Bootstrap 4",
-        "author": {
-          "@type": "Person",
-          "name": "Beni Arisandi"
-        },
-        "@type": "WebSite",
-        "url": "",
-        "headline": "Starter Template",
-        "@context": "http://schema.org"
-      }
-        </script>
-        <!-- End SEO tag -->
-        <!-- FAVICONS -->
-        <link rel="apple-touch-icon-precomposed"
-              sizes="144x144"
-              href="{% static 'apple-touch-icon.png' %}" />
-        <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
-        <meta name="theme-color" content="#3063A0" />
-        <!-- End FAVICONS -->
-        <script src="{% static 'vendor/pace/pace.min.js' %}"></script>
-        <!-- BEGIN BASE STYLES -->
-        <link rel="stylesheet" href="{% static 'vendor/pace/pace.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/open-iconic/css/open-iconic-bootstrap.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/font-awesome/css/fontawesome-all.min.css' %}" />
-        <!-- END BASE STYLES -->
-        <!-- BEGIN THEME STYLES -->
-        <link rel="stylesheet" href="{% static 'css/main.min.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
-        <!-- END THEME STYLES -->
-    </head>
-    <body>
-        <!-- .app -->
-        <div class="app">
-            <!-- .app-header -->
-            <header class="app-header">
-                <!-- .top-bar -->
-                <div class="top-bar">
-                    <!-- .top-bar-brand -->
-                    <div class="top-bar-brand">
-                        <a href="{% url 'AdminDashboard' %}">
-                            <img src="{% static 'images/brand-inverse.png' %}"
-                                 height="42"
-                                 width="150"
-                                 class="rounded"
-                                 alt="Brand Logo" />
-                        </a>
-                    </div>
-                    <!-- /.top-bar-brand -->
-                    <!-- .top-bar-list -->
-                    <div class="top-bar-list">
-                        <!-- Mobile Menu Toggle -->
-                        <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
-                            <button class="hamburger hamburger-squeeze"
-                                    type="button"
-                                    data-toggle="aside"
-                                    aria-label="Menu"
-                                    aria-controls="navigation">
-                                <span class="hamburger-box">
-                                    <span class="hamburger-inner"></span>
-                                </span>
-                            </button>
-                        </div>
-                        <!-- Spacer -->
-                        <div class="top-bar-item top-bar-item-full"></div>
-                        <!-- .top-bar-item: The Right Side User Menu -->
-                        <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
-                            <!-- Dropdown -->
-                            <div class="dropdown">
-                                <button class="btn-account d-none d-md-flex"
-                                        type="button"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false">
-                                    <!-- User Avatar (UPDATED: Generic Icon) -->
-                                    <span class="tile tile-circle bg-white">
-                                        <span class="oi oi-person text-black"></span>
-                                    </span>
-                                    <!-- User Name and Role -->
-                                    {% if request.user.is_authenticated %}
-                                        <span class="account-summary pr-lg-4 d-none d-lg-block">
-                                            <span class="account-name">{{ request.user.get_full_name|default:request.user.username }}</span>
-                                            <span class="account-description">{{ request.user.get_role_display }}</span>
-                                        </span>
-                                    {% else %}
-                                        <span class="account-summary pr-lg-4 d-none d-lg-block">
-                                            <span class="account-name">Admin_demo</span>
-                                            <span class="account-description">Admin</span>
-                                        </span>
-                                    {% endif %}
-                                </button>
-                                <div class="dropdown-arrow dropdown-arrow-left"></div>
-                                <!-- Dropdown Menu -->
-                                <div class="dropdown-menu">
-                                    {% if request.user.is_authenticated %}
-                                        <h6 class="dropdown-header d-flex flex-column">
-                                            <span class="font-weight-bold">{{ request.user.get_full_name|default:request.user.username }}</span>
-                                            <small class="text-muted">{{ request.user.get_role_display }}</small>
-                                        </h6>
-                                    {% else %}
-                                        <h6>
-                                          <span style="margin-left: 1rem !important;" class="font-weight-bold ">Admin_demo</span>
-                                            <small class="text-muted">admin</small>
-                                        </h6>
-                                    {% endif %}
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'login' %}">
-                                        <span class="dropdown-icon oi oi-account-logout"></span> Logout
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" href="{% url 'login' %}">
-                                        <span class="dropdown-icon oi oi-trash"></span> Delete Account
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- /.dropdown -->
-                        </div>
-                        <!-- /.top-bar-item -->
-                    </div>
-                    <!-- /.top-bar-list -->
+{% extends "base.html" %}
+{% block extrastyles %}
+{% endblock extrastyles %}
+{% block extrajs %}
+{% endblock extrajs %}
+{% block content %}
+    <!-- Page Header & Breadcrumbs -->
+    <header class="page-title-bar mb-0 mb-sm-0">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'AdminDashboard' %}">DataManagement</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'ViewSchedule' %}">Schedules</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">View Schedules</li>
+            </ol>
+        </nav>
+        <div style="" class="d-flex justify-content-between align-items-center">
+            <h1 class="page-title">
+                Class Schedules <span> <a href="{% url 'AddSchedule' %}" class="text-decoration-none">
+                <i style="font-size: 0.5em;"  class="fas fa-plus"></i>
+            </a></span>
+        </h1>
+    </div>
+</header>
+<!-- Add Session Button -->
+<!-- Page Content Section -->
+<!-- messages-->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+             role="alert">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+<!-- ./messages-->
+<div class="page-section">
+    <section class="card card-fluid">
+        <!-- Toolbar: Filters & Search -->
+        <header class="card-header border-bottom-0">
+            <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between">
+                <!-- Group 1: Filters (Wrapped) -->
+                <div class="form-group mb-3 mb-xl-0 d-flex flex-wrap gap-2 align-items-center">
+                    <!-- Status Filter -->
+                    <select id="filterStatus"
+                            class="custom-select mr-2 mb-2 mb-sm-0"
+                            style="width: auto;
+                                   min-width: 140px">
+                        <option value="all" selected>Status: All</option>
+                        <option value="SCHEDULED">Scheduled</option>
+                        <option value="COMPLETED">Completed</option>
+                        <option value="CANCELLED">Cancelled</option>
+                    </select>
+                    <!-- Date Filter -->
+                    <!-- REPLACED SELECT WITH DATE INPUT -->
+                    <input type="date"
+                           id="filterDate"
+                           class="form-control mr-2 mb-2 mb-sm-0"
+                           style="width: auto;
+                                  min-width: 160px"
+                           placeholder="Select Date">
+                    <!-- Instructor Filter (Optional) -->
+                    <select id="filterInstructor"
+                            class="custom-select mr-2 mb-2 mb-sm-0"
+                            style="width: auto;
+                                   min-width: 150px">
+                        <option value="all" selected>Instructor: All</option>
+                        <!-- Ideally populate from DB -->
+                        {% for inst in instructors %}<option value="{{ inst }}">{{ inst }}</option>{% endfor %}
+                    </select>
                 </div>
-                <!-- /.top-bar -->
-            </header>
-            <!-- /.app-header -->
-            <!-- .app-aside -->
-            <aside class="app-aside">
-                <!-- .aside-content -->
-                <div class="aside-content">
-                    <!-- .aside-header -->
-                    <header class="aside-header d-block d-md-none">
-                        <!-- .btn-account -->
-                        <button class="btn-account"
+                <!-- Group 2: Search -->
+                <div class="input-group input-group-alt" style="max-width: 300px;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                    </div>
+                    <input id="table-search"
+                           type="text"
+                           class="form-control"
+                           placeholder="Search batch or course...">
+                    <div class="input-group-append">
+                        <button id="clear-search"
                                 type="button"
-                                data-toggle="collapse"
-                                data-target="#dropdown-aside">
-                            <!-- 1. User Avatar (Generic Icon) -->
-                            <span class="user-avatar user-avatar-xs">
-                                <span class="oi oi-person text-black"></span>
-                            </span>
-                            <span class="account-icon">
-                                <span class="fa fa-caret-down fa-sm"></span>
-                            </span>
-                            <!-- 2. User Name and Role -->
-                            <span class="account-summary">
-                                <span class="account-name">
-                                    {% if request.user.is_authenticated %}
-                                        {{ request.user.get_full_name|default:request.user.username }}
-                                    {% else %}
-                                        Admin_DEMO
-                                    {% endif %}
-                                </span>
-                                <span class="account-description">
-                                    {% if request.user.is_authenticated %}
-                                        {{ request.user.get_role_display }}
-                                    {% else %}
-                                        Admin
-                                    {% endif %}
-                                </span>
-                            </span>
+                                class="btn btn-secondary"
+                                style="display:none">
+                            <i class="fa fa-times"></i>
                         </button>
-                        <!-- /.btn-account -->
-                        <!-- .dropdown-aside -->
-                        <div id="dropdown-aside" class="dropdown-aside collapse">
-                            <!-- dropdown-items -->
-                            <div class="pb-3">
-                                <!-- Logout Link -->
-                                <a class="dropdown-item" href="{% url 'login' %}">
-                                    <span class="dropdown-icon oi oi-account-logout"></span> Logout
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <!-- Delete Account Link -->
-                                <a class="dropdown-item text-danger" href="{% url 'login' %}">
-                                    <span class="dropdown-icon oi oi-trash"></span> Delete Account
-                                </a>
-                            </div>
-                            <!-- /dropdown-items -->
-                        </div>
-                        <!-- /.dropdown-aside -->
-                    </header>
-                    <!-- /.aside-header -->
-                    <!-- .aside-menu -->
-                    <section class="aside-menu has-scrollable">
-                        <!-- .stacked-menu -->
-                        <nav id="stacked-menu" class="stacked-menu">
-                            <!-- .menu -->
-                            <ul class="menu">
-                                <!-- .menu-item -->
-                                <li class="menu-item has-active">
-                                    <a href="{% url 'AdminDashboard' %}" class="menu-link">
-                                        <span class="menu-icon oi oi-dashboard"></span>
-                                        <span class="menu-text">Dashboard</span>
-                                    </a>
-                                </li>
-                                <!-- /.menu-item -->
-                                <!-- .menu-item -->
-                                <!-- .menu-header -->
-                                <!-- .menu-header -->
-                                <!-- here intake mgnt insted of the Pages -->
-                                <li class="menu-header">Intake managements</li>
-                                <!-- /.menu-header -->
-                                <li class="menu-item has-child ">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-people"></span>
-                                        <span class="menu-text">User management</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a class="menu-link" href="{% url 'ViewSystemUser' %}">View system Users</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a class="menu-link" href="{% url 'AddSystemUser' %}">Add system Users</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- datamanagements -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child ">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-folder"></span>
-                                        <span class="menu-text">Data management</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewCourses' %}" class="menu-link">Course</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewBatches' %}" class="menu-link">Batches</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewClassroom' %}" class="menu-link">Classrooms</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewEnrollment' %}" class="menu-link">Enrollments</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- finance  -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child has-open">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-calendar"></span>
-                                        <span class="menu-text">Schedules & Time-tables</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item  has-active">
-                                            <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!--  ./finance-->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-dollar"></span>
-                                        <span class="menu-text">Finance</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- .exports -->
-                                <li class="menu-item has-child" style="">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-list-rich"></span>
-                                        <span class="menu-text">Exports</span>
-                                    </a>
-                                    <!-- child menu -->
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /child menu -->
-                                    <!-- .analytics -->
-                                    <!-- .menu-item -->
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon-sm oi oi-bar-chart"></span>
-                                            <span class="menu-text">Analytics</span>
-                                        </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'ActiveStudent' %}" class="menu-link">Active Students</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'analytics_enrollment_trends' %}" class="menu-link">Enrollments Trends</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- ./menuitems -->
-                                    <!-- ./analytics -->
-                                    <!-- System logs -->
-                                    <!-- .menu-item -->
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon-sm oi oi-file"></span>
-                                            <span class="menu-text">System Logs</span>
-                                        </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="{% url 'AllActivities' %}" class="menu-link">All activities</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'Export-Details' %}" class="menu-link">Export Details</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- ./menuitems -->
-                                    <!-- ./System logs  -->
-                                    <!-- .menu-item -->
-                                    <!-- /.menu-item -->
-                                </ul>
-                                <!-- /.menu -->
-                            </nav>
-                            <!-- /.stacked-menu -->
-                        </section>
-                        <!-- /.aside-menu -->
                     </div>
-                    <!-- /.aside-content -->
-                </aside>
-                <!-- /.app-aside -->
-                <!-- .app-main -->
-                <main class="app-main">
-                    <div class="wrapper">
-                        <div class="page">
-                            <div class="page-inner ms-2 me-2">
-                                <!-- Page Header & Breadcrumbs -->
-                                <header class="page-title-bar mb-0 mb-sm-0">
-                                    <nav aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item">
-                                                <a href="{% url 'AdminDashboard' %}">DataManagement</a>
-                                            </li>
-                                            <li class="breadcrumb-item">
-                                                <a href="{% url 'ViewSchedule' %}">Schedules</a>
-                                            </li>
-                                            <li class="breadcrumb-item active" aria-current="page">View Schedules</li>
-                                        </ol>
-                                    </nav>
-                                    <div style="" class="d-flex justify-content-between align-items-center">
-                                        <h1 class="page-title">
-                                            Class Schedules <span> <a href="{% url 'AddSchedule' %}" class="text-decoration-none">
-                                            <i style="font-size: 0.5em;"  class="fas fa-plus"></i>
-                                        </a></span>
-                                    </h1>
-                                </div>
-                            </header>
-                            <!-- Add Session Button -->
-                            <!-- Page Content Section -->
-                            <!-- messages-->
-                            {% if messages %}
-                                {% for message in messages %}
-                                    <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
-                                         role="alert">{{ message }}</div>
-                                {% endfor %}
-                            {% endif %}
-                            <!-- ./messages-->
-                            <div class="page-section">
-                                <section class="card card-fluid">
-                                    <!-- Toolbar: Filters & Search -->
-                                    <header class="card-header border-bottom-0">
-                                        <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between">
-                                            <!-- Group 1: Filters (Wrapped) -->
-                                            <div class="form-group mb-3 mb-xl-0 d-flex flex-wrap gap-2 align-items-center">
-                                                <!-- Status Filter -->
-                                                <select id="filterStatus"
-                                                        class="custom-select mr-2 mb-2 mb-sm-0"
-                                                        style="width: auto;
-                                                               min-width: 140px">
-                                                    <option value="all" selected>Status: All</option>
-                                                    <option value="SCHEDULED">Scheduled</option>
-                                                    <option value="COMPLETED">Completed</option>
-                                                    <option value="CANCELLED">Cancelled</option>
-                                                </select>
-                                                <!-- Date Filter -->
-                                                <!-- REPLACED SELECT WITH DATE INPUT -->
-                                                <input type="date"
-                                                       id="filterDate"
-                                                       class="form-control mr-2 mb-2 mb-sm-0"
-                                                       style="width: auto;
-                                                              min-width: 160px"
-                                                       placeholder="Select Date">
-                                                <!-- Instructor Filter (Optional) -->
-                                                <select id="filterInstructor"
-                                                        class="custom-select mr-2 mb-2 mb-sm-0"
-                                                        style="width: auto;
-                                                               min-width: 150px">
-                                                    <option value="all" selected>Instructor: All</option>
-                                                    <!-- Ideally populate from DB -->
-                                                    {% for inst in instructors %}<option value="{{ inst }}">{{ inst }}</option>{% endfor %}
-                                                </select>
-                                            </div>
-                                            <!-- Group 2: Search -->
-                                            <div class="input-group input-group-alt" style="max-width: 300px;">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                                </div>
-                                                <input id="table-search"
-                                                       type="text"
-                                                       class="form-control"
-                                                       placeholder="Search batch or course...">
-                                                <div class="input-group-append">
-                                                    <button id="clear-search"
-                                                            type="button"
-                                                            class="btn btn-secondary"
-                                                            style="display:none">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </header>
-                                    <!-- .table-responsive -->
-                                    <div class="table-responsive">
-                                        <table class="table table-hover" id="scheduleTable">
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <!-- 1. Date: Visible Always -->
-                                                    <th style="min-width:110px">Date</th>
-                                                    <!-- 2. Time: Hidden on Mobile (XS/SM) -->
-                                                    <th class="d-none d-md-table-cell">Time</th>
-                                                    <!-- 3. Batch: Visible Always -->
-                                                    <th style="min-width:180px">Batch / Course</th>
-                                                    <!-- 4. Room: Hidden on Mobile & Tablet (XS/SM/MD) -->
-                                                    <th class="d-none d-lg-table-cell">Room</th>
-                                                    <!-- 5. Status: Hidden on Mobile (XS) -->
-                                                    <th class="d-none d-sm-table-cell">Status</th>
-                                                    <!-- 6. Actions: Visible Always -->
-                                                    <th style="min-width:100px; text-align:right;">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="scheduleTableBody">
-                                                {% for schedule in schedules %}
-                                                    <tr class="schedule-row"
-                                                        data-date="{{ schedule.date|date:'Y-m-d' }}"
-                                                        data-status="{{ schedule.status }}"
-                                                        data-instructor="{{ schedule.instructor }}"
-                                                        data-classroom="{{ schedule.classroom }}"
-                                                        data-search="{{ schedule.batch }} {{ schedule.course }}">
-                                                        <!-- 1. Date -->
-                                                        <td class="align-middle text-muted">{{ schedule.date|date:"M d, Y" }}</td>
-                                                        <!-- 2. Time -->
-                                                        <td class="align-middle d-none d-md-table-cell">{{ schedule.start_time }} - {{ schedule.end_time }}</td>
-                                                        <!-- 3. Batch -->
-                                                        <td class="align-middle">
-                                                            <span class="d-block font-weight-bold text-dark">{{ schedule.batch }}</span>
-                                                            <small class="text-muted">{{ schedule.course }}</small>
-                                                            <!-- Mobile Only Details: Time, Room, Status -->
-                                                            <div class="d-block d-md-none mt-1 small">
-                                                                <span class="text-dark"><i class="far fa-clock mr-1"></i>{{ schedule.start_time }}</span>
-                                                                <span class="mx-1 text-muted">|</span>
-                                                                <span class="text-muted">{{ schedule.classroom }}</span>
-                                                                <div class="mt-1">
-                                                                    {% if schedule.status == 'SCHEDULED' %}
-                                                                        <span class="text-primary font-weight-bold">Scheduled</span>
-                                                                    {% elif schedule.status == 'COMPLETED' %}
-                                                                        <span class="text-success font-weight-bold">Completed</span>
-                                                                    {% elif schedule.status == 'CANCELLED' %}
-                                                                        <span class="text-warning font-weight-bold">Cancelled</span>
-                                                                    {% endif %}
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <!-- 4. Room -->
-                                                        <td class="align-middle d-none d-lg-table-cell">{{ schedule.classroom }}</td>
-                                                        <!-- 5. Status -->
-                                                        <td class="align-middle d-none d-sm-table-cell">
-                                                            {% if schedule.status == 'SCHEDULED' %}
-                                                                <span class="badge badge-subtle badge-primary">Scheduled</span>
-                                                            {% elif schedule.status == 'COMPLETED' %}
-                                                                <span class="badge badge-subtle badge-success">Completed</span>
-                                                            {% elif schedule.status == 'CANCELLED' %}
-                                                                <span class="badge badge-subtle badge-warning">Cancelled</span>
-                                                            {% else %}
-                                                                <span class="badge badge-subtle badge-secondary">{{ schedule.status }}</span>
-                                                            {% endif %}
-                                                        </td>
-                                                        <!-- 6. Actions -->
-                                                        <!-- 6. Actions -->
-                                                        <td class="align-middle text-right">
-                                                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
-                                                                <!-- View Button -->
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-subtle-info"
-                                                                        data-toggle="modal"
-                                                                        data-target="#scheduleDetailsModal"
-                                                                        data-batch="{{ schedule.batch }}"
-                                                                        data-course="{{ schedule.course }}"
-                                                                        data-instructor="{{ schedule.instructor }}"
-                                                                        data-classroom="{{ schedule.classroom }}"
-                                                                        data-date="{{ schedule.date|date:'M d, Y' }}"
-                                                                        data-time="{{ schedule.start_time }} - {{ schedule.end_time }}"
-                                                                        data-status="{{ schedule.status }}"
-                                                                        onclick="populateScheduleModal(this)">
-                                                                    View
-                                                                </button>
-                                                                <!-- Update Button -->
-                                                                <a href="{% url 'EditSchedule' id=schedule.id %}"
-                                                                   class="btn btn-sm bg-light text-dark mx-md-1 ">
-                                                                    Edit
-                                                                </a>
-                                                                <!-- Delete Button -->
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-subtle-danger"
-                                                                        data-toggle="modal"
-                                                                        data-target="#deleteScheduleModal"
-                                                                        data-name="{{ schedule.batch }} on {{ schedule.date|date:'M d' }}"
-                                                                        data-delete-url="{% url 'DeleteSchedule' id=schedule.id %}"
-                                                                        onclick="populateDeleteModal(this)">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                {% empty %}
-                                                    <tr>
-                                                        <td colspan="6" class="text-center py-5 text-muted">
-                                                            <i class="fas fa-calendar-times fa-3x mb-3"></i>
-                                                            <br>
-                                                            No schedules found.
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                                <!-- No Results Row -->
-                                                <tr id="no-search-results" style="display: none;">
-                                                    <td colspan="6" class="text-center py-5 text-muted">
-                                                        <i class="fas fa-search mb-2"></i>
-                                                        <br>
-                                                        No schedules found matching your criteria.
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <tfoot>
-                                            <ul class="pagination justify-content-center mt-4">
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">
-                                                        <i class="fa fa-lg fa-angle-left"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">1</a>
-                                                </li>
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">...</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">13</a>
-                                                </li>
-                                                <li class="page-item active">
-                                                    <a class="page-link" href="#">14</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">15</a>
-                                                </li>
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">...</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">24</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">
-                                                        <i class="fa fa-lg fa-angle-right"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </tfoot>
+                </div>
+            </div>
+        </header>
+        <!-- .table-responsive -->
+        <div class="table-responsive">
+            <table class="table table-hover" id="scheduleTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <!-- 1. Date: Visible Always -->
+                        <th style="min-width:110px">Date</th>
+                        <!-- 2. Time: Hidden on Mobile (XS/SM) -->
+                        <th class="d-none d-md-table-cell">Time</th>
+                        <!-- 3. Batch: Visible Always -->
+                        <th style="min-width:180px">Batch / Course</th>
+                        <!-- 4. Room: Hidden on Mobile & Tablet (XS/SM/MD) -->
+                        <th class="d-none d-lg-table-cell">Room</th>
+                        <!-- 5. Status: Hidden on Mobile (XS) -->
+                        <th class="d-none d-sm-table-cell">Status</th>
+                        <!-- 6. Actions: Visible Always -->
+                        <th style="min-width:100px; text-align:right;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleTableBody">
+                    {% for schedule in schedules %}
+                        <tr class="schedule-row"
+                            data-date="{{ schedule.date|date:'Y-m-d' }}"
+                            data-status="{{ schedule.status }}"
+                            data-instructor="{{ schedule.instructor }}"
+                            data-classroom="{{ schedule.classroom }}"
+                            data-search="{{ schedule.batch }} {{ schedule.course }}">
+                            <!-- 1. Date -->
+                            <td class="align-middle text-muted">{{ schedule.date|date:"M d, Y" }}</td>
+                            <!-- 2. Time -->
+                            <td class="align-middle d-none d-md-table-cell">{{ schedule.start_time }} - {{ schedule.end_time }}</td>
+                            <!-- 3. Batch -->
+                            <td class="align-middle">
+                                <span class="d-block font-weight-bold text-dark">{{ schedule.batch }}</span>
+                                <small class="text-muted">{{ schedule.course }}</small>
+                                <!-- Mobile Only Details: Time, Room, Status -->
+                                <div class="d-block d-md-none mt-1 small">
+                                    <span class="text-dark"><i class="far fa-clock mr-1"></i>{{ schedule.start_time }}</span>
+                                    <span class="mx-1 text-muted">|</span>
+                                    <span class="text-muted">{{ schedule.classroom }}</span>
+                                    <div class="mt-1">
+                                        {% if schedule.status == 'SCHEDULED' %}
+                                            <span class="text-primary font-weight-bold">Scheduled</span>
+                                        {% elif schedule.status == 'COMPLETED' %}
+                                            <span class="text-success font-weight-bold">Completed</span>
+                                        {% elif schedule.status == 'CANCELLED' %}
+                                            <span class="text-warning font-weight-bold">Cancelled</span>
+                                        {% endif %}
                                     </div>
-                                </section>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.page-inner -->
-                </div>
-                <!-- /.page -->
+                                </div>
+                            </td>
+                            <!-- 4. Room -->
+                            <td class="align-middle d-none d-lg-table-cell">{{ schedule.classroom }}</td>
+                            <!-- 5. Status -->
+                            <td class="align-middle d-none d-sm-table-cell">
+                                {% if schedule.status == 'SCHEDULED' %}
+                                    <span class="badge badge-subtle badge-primary">Scheduled</span>
+                                {% elif schedule.status == 'COMPLETED' %}
+                                    <span class="badge badge-subtle badge-success">Completed</span>
+                                {% elif schedule.status == 'CANCELLED' %}
+                                    <span class="badge badge-subtle badge-warning">Cancelled</span>
+                                {% else %}
+                                    <span class="badge badge-subtle badge-secondary">{{ schedule.status }}</span>
+                                {% endif %}
+                            </td>
+                            <!-- 6. Actions -->
+                            <!-- 6. Actions -->
+                            <td class="align-middle text-right">
+                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-end">
+                                    <!-- View Button -->
+                                    <button type="button"
+                                            class="btn btn-sm btn-subtle-info"
+                                            data-toggle="modal"
+                                            data-target="#scheduleDetailsModal"
+                                            data-batch="{{ schedule.batch }}"
+                                            data-course="{{ schedule.course }}"
+                                            data-instructor="{{ schedule.instructor }}"
+                                            data-classroom="{{ schedule.classroom }}"
+                                            data-date="{{ schedule.date|date:'M d, Y' }}"
+                                            data-time="{{ schedule.start_time }} - {{ schedule.end_time }}"
+                                            data-status="{{ schedule.status }}"
+                                            onclick="populateScheduleModal(this)">View</button>
+                                    <!-- Update Button -->
+                                    <a href="{% url 'EditSchedule' id=schedule.id %}"
+                                       class="btn btn-sm bg-light text-dark mx-md-1 ">Edit</a>
+                                    <!-- Delete Button -->
+                                    <button type="button"
+                                            class="btn btn-sm btn-subtle-danger"
+                                            data-toggle="modal"
+                                            data-target="#deleteScheduleModal"
+                                            data-name="{{ schedule.batch }} on {{ schedule.date|date:'M d' }}"
+                                            data-delete-url="{% url 'DeleteSchedule' id=schedule.id %}"
+                                            onclick="populateDeleteModal(this)">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center py-5 text-muted">
+                                <i class="fas fa-calendar-times fa-3x mb-3"></i>
+                                <br>
+                                No schedules found.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <!-- No Results Row -->
+                    <tr id="no-search-results" style="display: none;">
+                        <td colspan="6" class="text-center py-5 text-muted">
+                            <i class="fas fa-search mb-2"></i>
+                            <br>
+                            No schedules found matching your criteria.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <tfoot>
+                <ul class="pagination justify-content-center mt-4">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">
+                            <i class="fa fa-lg fa-angle-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">...</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">13</a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">14</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">15</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">...</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">24</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">
+                            <i class="fa fa-lg fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </tfoot>
+        </div>
+    </section>
+</div>
+<!-- modals -->
+<!-- ================= VIEW DETAILS MODAL ================= -->
+<div class="modal fade"
+     id="scheduleDetailsModal"
+     tabindex="-1"
+     role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Session Details</h5>
+                <button type="button"
+                        class="btn-close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <!-- /.wrapper -->
-        </main>
-        <!-- /.app-main -->
-        <!-- /.app -->
-        <!-- BEGIN BASE JS -->
-        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-        <!-- END BASE JS -->
-        <!-- BEGIN PLUGINS JS -->
-        <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-        <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-        <!-- END PLUGINS JS -->
-        <!-- BEGIN THEME JS -->
-        <script src="{% static 'javascript/main.min.js' %}"></script>
-        <!-- END THEME JS -->
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async
-                src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-        <script>
-      window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "UA-116692175-1");
-        </script>
-        <!-- ================= VIEW DETAILS MODAL ================= -->
-        <div class="modal fade"
-             id="scheduleDetailsModal"
-             tabindex="-1"
-             role="dialog"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Session Details</h5>
-                        <button type="button"
-                                class="btn-close"
-                                data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered mb-0">
-                                <tbody>
-                                    <tr>
-                                        <th class="bg-primary text-white" style="width: 35%;">Batch</th>
-                                        <td id="modal_sch_batch"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="bg-light text-primary">Course</th>
-                                        <td id="modal_sch_course"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="bg-primary text-white">Date</th>
-                                        <td id="modal_sch_date"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="bg-light text-primary">Time</th>
-                                        <td id="modal_sch_time" class="font-weight-bold"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="bg-primary text-white">Instructor</th>
-                                        <td id="modal_sch_instructor"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="bg-light text-primary">Classroom</th>
-                                        <td id="modal_sch_classroom"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="bg-primary text-white">Status</th>
-                                        <td>
-                                            <span id="modal_sch_status" class="badge"></span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0">
+                        <tbody>
+                            <tr>
+                                <th class="bg-primary text-white" style="width: 35%;">Batch</th>
+                                <td id="modal_sch_batch"></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light text-primary">Course</th>
+                                <td id="modal_sch_course"></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-primary text-white">Date</th>
+                                <td id="modal_sch_date"></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light text-primary">Time</th>
+                                <td id="modal_sch_time" class="font-weight-bold"></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-primary text-white">Instructor</th>
+                                <td id="modal_sch_instructor"></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light text-primary">Classroom</th>
+                                <td id="modal_sch_classroom"></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-primary text-white">Status</th>
+                                <td>
+                                    <span id="modal_sch_status" class="badge"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
-        <!-- ================= DELETE CONFIRMATION MODAL ================= -->
-        <div class="modal fade"
-             id="deleteScheduleModal"
-             tabindex="-1"
-             role="dialog"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm Deletion</h5>
-                        <button type="button"
-                                class="btn-close"
-                                data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-                        Are you sure you want to delete session for <strong id="delete_modal_sch_name"></strong>?
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
-                        <a href="#"
-                           id="delete_modal_confirm_btn"
-                           class="btn btn-secondary text-danger">Yes, Delete</a>
-                    </div>
-                </div>
+    </div>
+</div>
+<!-- ================= DELETE CONFIRMATION MODAL ================= -->
+<div class="modal fade"
+     id="deleteScheduleModal"
+     tabindex="-1"
+     role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button"
+                        class="btn-close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                Are you sure you want to delete session for <strong id="delete_modal_sch_name"></strong>?
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
+                <a href="#"
+                   id="delete_modal_confirm_btn"
+                   class="btn btn-secondary text-danger">Yes, Delete</a>
             </div>
         </div>
-        <!-- scripts -->
-        <script>
+    </div>
+</div>
+{% endblock content %}
+{% block bottomjs %}
+    <script>
            document.addEventListener("DOMContentLoaded", function() {
     
     // Selectors (No changes needed here)
@@ -866,8 +456,9 @@ function populateDeleteModal(buttonElement) {
     const confirmBtn = document.getElementById('delete_modal_confirm_btn');
     if(confirmBtn) confirmBtn.href = deleteUrl;
 }
-        </script>
-        <script>
+    </script>
+    <script>
+      // for the ctrl + f 
 $(document).ready(function() {
 
     // --- jQuery Ctrl + F Override ---
@@ -893,6 +484,5 @@ $(document).ready(function() {
     // ... Your other jQuery or JS code ...
 
 });
-        </script>
-    </body>
-</html>
+    </script>
+{% endblock bottomjs %}
