@@ -1,657 +1,259 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <!-- End Required meta tags -->
-        <!-- Begin SEO tag -->
-        <title>Starter Template | Looper - Bootstrap 4 Admin Theme</title>
-        <meta property="og:title" content="Starter Template" />
-        <meta name="author" content="Beni Arisandi" />
-        <meta property="og:locale" content="en_US" />
-        <meta name="description"
-              content="Responsive admin theme build on top of Bootstrap 4" />
-        <meta property="og:description"
-              content="Responsive admin theme build on top of Bootstrap 4" />
-        <link rel="canonical" href="//uselooper.com" />
-        <meta property="og:url" content="//uselooper.com" />
-        <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme" />
-        <script type="application/ld+json">
-      {
-        "name": "Looper - Bootstrap 4 Admin Theme",
-        "description": "Responsive admin theme build on top of Bootstrap 4",
-        "author": {
-          "@type": "Person",
-          "name": "Beni Arisandi"
-        },
-        "@type": "WebSite",
-        "url": "",
-        "headline": "Starter Template",
-        "@context": "http://schema.org"
-      }
-        </script>
-        <!-- End SEO tag -->
-        <!-- FAVICONS -->
-        <link rel="apple-touch-icon-precomposed"
-              sizes="144x144"
-              href="{% static 'apple-touch-icon.png' %}" />
-        <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
-        <meta name="theme-color" content="#3063A0" />
-        <!-- End FAVICONS -->
-        <script src="{% static 'vendor/pace/pace.min.js' %}"></script>
-        <!-- BEGIN BASE STYLES -->
-        <link rel="stylesheet" href="{% static 'vendor/pace/pace.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/open-iconic/css/open-iconic-bootstrap.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/font-awesome/css/fontawesome-all.min.css' %}" />
-        <!-- END BASE STYLES -->
-        <!-- BEGIN THEME STYLES -->
-        <link rel="stylesheet" href="{% static 'css/main.min.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
-        <!-- END THEME STYLES -->
-    </head>
-    <body>
-        <!-- .app -->
-        <div class="app">
-            <!-- .app-header -->
-            <header class="app-header">
-                <!-- .top-bar -->
-                <div class="top-bar">
-                    <!-- .top-bar-brand -->
-                    <div class="top-bar-brand">
-                        <a href="{% url 'AdminDashboard' %}">
-                            <img src="{% static 'images/brand-inverse.png' %}"
-                                 height="42"
-                                 width="150"
-                                 class="rounded"
-                                 alt="Brand Logo" />
-                        </a>
-                    </div>
-                    <!-- /.top-bar-brand -->
-                    <!-- .top-bar-list -->
-                    <div class="top-bar-list">
-                        <!-- Mobile Menu Toggle -->
-                        <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
-                            <button class="hamburger hamburger-squeeze"
-                                    type="button"
-                                    data-toggle="aside"
-                                    aria-label="Menu"
-                                    aria-controls="navigation">
-                                <span class="hamburger-box">
-                                    <span class="hamburger-inner"></span>
-                                </span>
-                            </button>
-                        </div>
-                        <!-- Spacer -->
-                        <div class="top-bar-item top-bar-item-full"></div>
-                        <!-- .top-bar-item: The Right Side User Menu -->
-                        <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
-                            <!-- Dropdown -->
-                            <div class="dropdown">
-                                <button class="btn-account d-none d-md-flex"
-                                        type="button"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false">
-                                    <!-- User Avatar (UPDATED: Generic Icon) -->
-                                    <span class="tile tile-circle bg-white">
-                                        <span class="oi oi-person text-black"></span>
-                                    </span>
-                                    <!-- User Name and Role -->
-                                    {% if request.user.is_authenticated %}
-                                        <span class="account-summary pr-lg-4 d-none d-lg-block">
-                                            <span class="account-name">{{ request.user.get_full_name|default:request.user.username }}</span>
-                                            <span class="account-description">{{ request.user.get_role_display }}</span>
-                                        </span>
-                                    {% else %}
-                                        <span class="account-summary pr-lg-4 d-none d-lg-block">
-                                            <span class="account-name">Admin_demo</span>
-                                            <span class="account-description">Admin</span>
-                                        </span>
-                                    {% endif %}
-                                </button>
-                                <div class="dropdown-arrow dropdown-arrow-left"></div>
-                                <!-- Dropdown Menu -->
-                                <div class="dropdown-menu">
-                                    {% if request.user.is_authenticated %}
-                                        <h6 class="dropdown-header d-flex flex-column">
-                                            <span class="font-weight-bold">{{ request.user.get_full_name|default:request.user.username }}</span>
-                                            <small class="text-muted">{{ request.user.get_role_display }}</small>
-                                        </h6>
-                                    {% else %}
-                                        <h6>
-                                            <span style="margin-left: 1rem !important;" class="font-weight-bold ">Admin_demo</span>
-                                            <small class="text-muted">admin</small>
-                                        </h6>
-                                    {% endif %}
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'login' %}">
-                                        <span class="dropdown-icon oi oi-account-logout"></span> Logout
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" href="{% url 'login' %}">
-                                        <span class="dropdown-icon oi oi-trash"></span> Delete Account
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- /.dropdown -->
-                        </div>
-                        <!-- /.top-bar-item -->
-                    </div>
-                    <!-- /.top-bar-list -->
+{% extends "base.html" %}
+{% block extrastyles %}
+{% endblock extrastyles %}
+{% block extrajs %}
+{% endblock extrajs %}
+{% block content %}
+    <!-- Page Header & Breadcrumbs -->
+    <header class="">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'AdminDashboard' %}">DataManagement</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#">Finance</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Dues & Overdues</li>
+            </ol>
+        </nav>
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="page-title">Financial Status</h1>
+        </div>
+    </header>
+    <!-- Page Content Section -->
+    <section class="card card-fluid">
+        <!-- Toolbar: Filter & Search (Header) -->
+        <header class="card-header border-bottom-0">
+            <div class="d-flex justify-content-between">
+                <!-- Filter Dropdown -->
+                <div class="form-group mb-0 mr-3">
+                    <select id="statusFilter" class="custom-select" style="min-width: 150px;">
+                        <option value="all" selected>All Status</option>
+                        <option value="pending">Has Dues</option>
+                        <!-- Includes Pending & Overdue -->
+                        <option value="overdue">Overdue Only</option>
+                    </select>
                 </div>
-                <!-- /.top-bar -->
-            </header>
-            <!-- /.app-header -->
-            <!-- .app-aside -->
-            <aside class="app-aside">
-                <!-- .aside-content -->
-                <div class="aside-content">
-                    <!-- .aside-header -->
-                    <header class="aside-header d-block d-md-none">
-                        <!-- .btn-account -->
-                        <button class="btn-account"
-                                type="button"
-                                data-toggle="collapse"
-                                data-target="#dropdown-aside">
-                            <!-- 1. User Avatar (Generic Icon) -->
-                            <span class="user-avatar user-avatar-xs">
-                                <span class="oi oi-person text-black"></span>
-                            </span>
-                            <span class="account-icon">
-                                <span class="fa fa-caret-down fa-sm"></span>
-                            </span>
-                            <!-- 2. User Name and Role -->
-                            <span class="account-summary">
-                                <span class="account-name">
-                                    {% if request.user.is_authenticated %}
-                                        {{ request.user.get_full_name|default:request.user.username }}
-                                    {% else %}
-                                        Admin_DEMO
-                                    {% endif %}
-                                </span>
-                                <span class="account-description">
-                                    {% if request.user.is_authenticated %}
-                                        {{ request.user.get_role_display }}
-                                    {% else %}
-                                        Admin
-                                    {% endif %}
-                                </span>
-                            </span>
-                        </button>
-                        <!-- /.btn-account -->
-                        <!-- .dropdown-aside -->
-                        <div id="dropdown-aside" class="dropdown-aside collapse">
-                            <!-- dropdown-items -->
-                            <div class="pb-3">
-                                <!-- Logout Link -->
-                                <a class="dropdown-item" href="{% url 'login' %}">
-                                    <span class="dropdown-icon oi oi-account-logout"></span> Logout
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <!-- Delete Account Link -->
-                                <a class="dropdown-item text-danger" href="{% url 'login' %}">
-                                    <span class="dropdown-icon oi oi-trash"></span> Delete Account
-                                </a>
-                            </div>
-                            <!-- /dropdown-items -->
-                        </div>
-                        <!-- /.dropdown-aside -->
-                    </header>
-                    <!-- /.aside-header -->
-                    <!-- .aside-menu -->
-                    <section class="aside-menu has-scrollable">
-                        <!-- .stacked-menu -->
-                        <nav id="stacked-menu" class="stacked-menu">
-                            <!-- .menu -->
-                            <ul class="menu">
-                                <!-- .menu-item -->
-                                <li class="menu-item has-active">
-                                    <a href="{% url 'AdminDashboard' %}" class="menu-link">
-                                        <span class="menu-icon oi oi-dashboard"></span>
-                                        <span class="menu-text">Dashboard</span>
-                                    </a>
-                                </li>
-                                <!-- /.menu-item -->
-                                <!-- .menu-item -->
-                                <!-- .menu-header -->
-                                <!-- .menu-header -->
-                                <!-- here intake mgnt insted of the Pages -->
-                                <li class="menu-header">Intake managements</li>
-                                <!-- /.menu-header -->
-                                <!-- datamanagements -->
-                                <li class="menu-item has-child ">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-people"></span>
-                                        <span class="menu-text">User management</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a class="menu-link" href="{% url 'ViewSystemUser' %}">View system Users</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a class="menu-link" href="{% url 'AddSystemUser' %}">Add system Users</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child ">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-folder"></span>
-                                        <span class="menu-text">Data management</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewCourses' %}" class="menu-link">Course</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewBatches' %}" class="menu-link">Batches</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewClassroom' %}" class="menu-link">Classrooms</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewEnrollment' %}" class="menu-link">Enrollments</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- finance  -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-calendar"></span>
-                                        <span class="menu-text">Schedules & Time-tables</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!--  ./finance-->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child has-open">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-dollar"></span>
-                                        <span class="menu-text">Finance</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
-                                        </li>
-                                        <li class="menu-item has-active">
-                                            <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- .exports -->
-                                <li class="menu-item has-child" style="">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-list-rich"></span>
-                                        <span class="menu-text">Exports</span>
-                                    </a>
-                                    <!-- child menu -->
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /child menu -->
-                                    <!-- .analytics -->
-                                    <!-- .menu-item -->
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon-sm oi oi-bar-chart"></span>
-                                            <span class="menu-text">Analytics</span>
-                                        </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'ActiveStudent' %}" class="menu-link">Active Students</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'analytics_enrollment_trends' %}" class="menu-link">Enrollments Trends</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- ./menuitems -->
-                                    <!-- ./analytics -->
-                                    <!-- System logs -->
-                                    <!-- .menu-item -->
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">
-                                            <span class="menu-icon-sm oi oi-file"></span>
-                                            <span class="menu-text">System Logs</span>
-                                        </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="{% url 'AllActivities' %}" class="menu-link">All activities</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="{% url 'Export-Details' %}" class="menu-link">Export Details</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- ./menuitems -->
-                                    <!-- ./System logs  -->
-                                    <!-- .menu-item -->
-                                    <!-- /.menu-item -->
-                                </ul>
-                                <!-- /.menu -->
-                            </nav>
-                            <!-- /.stacked-menu -->
-                        </section>
-                        <!-- /.aside-menu -->
+                <!-- Search Input -->
+                <div class="input-group input-group-alt" style="max-width: 300px">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                     </div>
-                    <!-- /.aside-content -->
-                </aside>
-                <!-- /.app-aside -->
-                <!-- .app-main -->
-                <main class="app-main">
-                    <div class="wrapper">
-                        <div class="page">
-                            <div class="page-inner">
-                                <!-- Page Header & Breadcrumbs -->
-                                <header class="">
-                                    <nav aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item">
-                                                <a href="{% url 'AdminDashboard' %}">DataManagement</a>
-                                            </li>
-                                            <li class="breadcrumb-item">
-                                                <a href="#">Finance</a>
-                                            </li>
-                                            <li class="breadcrumb-item active" aria-current="page">Dues & Overdues</li>
-                                        </ol>
-                                    </nav>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h1 class="page-title">Financial Status</h1>
-                                    </div>
-                                </header>
-                                <!-- Page Content Section -->
-                                <section class="card card-fluid">
-                                    <!-- Toolbar: Filter & Search (Header) -->
-                                    <header class="card-header border-bottom-0">
-                                        <div class="d-flex justify-content-between">
-                                            <!-- Filter Dropdown -->
-                                            <div class="form-group mb-0 mr-3">
-                                                <select id="statusFilter" class="custom-select" style="min-width: 150px;">
-                                                    <option value="all" selected>All Status</option>
-                                                    <option value="pending">Has Dues</option>
-                                                    <!-- Includes Pending & Overdue -->
-                                                    <option value="overdue">Overdue Only</option>
-                                                </select>
-                                            </div>
-                                            <!-- Search Input -->
-                                            <div class="input-group input-group-alt" style="max-width: 300px">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                                </div>
-                                                <input id="table-search"
-                                                       type="text"
-                                                       class="form-control"
-                                                       placeholder="Search student or batch...">
-                                                <div class="input-group-append">
-                                                    <button id="clear-search"
-                                                            type="button"
-                                                            class="btn btn-secondary"
-                                                            style="display:none">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </header>
-                                    <!-- .table-responsive -->
-                                    <div class="table-responsive">
-                                        <!-- .table -->
-                                        <table class="table table-hover" id="duesTable">
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <!-- 1. Name: Visible Always -->
-                                                    <th style="min-width:200px">Student Name</th>
-                                                    <!-- 2. Batch: Hidden on Mobile (XS) & Small (SM) -->
-                                                    <th class="d-none d-md-table-cell">Batch</th>
-                                                    <!-- 3. Total Paid: Hidden on Mobile, SM, MD -->
-                                                    <th class="d-none d-lg-table-cell">Total Paid</th>
-                                                    <!-- 4. Status: Hidden on Mobile (XS) -->
-                                                    <th class="d-none d-sm-table-cell">Status</th>
-                                                    <!-- 5. Due: Hidden on Mobile (XS) & Small (SM) -->
-                                                    <th class="d-none d-md-table-cell">Due Amount</th>
-                                                    <!-- 6. Actions: Visible Always -->
-                                                    <th style="min-width:100px; text-align:right;">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="duesTableBody">
-                                                {% for student in due_list %}
-                                                    <!-- Row with data attributes for JS Filtering -->
-                                                    <tr class="due-row"
-                                                        data-search="{{ student.name }} {{ student.batch }}"
-                                                        data-filter-status="{{ student.status_code }}">
-                                                        <!-- 1. Name -->
-                                                        <td class="align-middle">
-                                                            <a href="#" class="text-dark font-weight-bold">{{ student.name }}</a>
-                                                            <!-- Mobile-only Subtext (Shows Due Amount on phone since column is hidden) -->
-                                                            <div class="d-block d-md-none small">
-                                                                {% if student.due_amount > 0 %}
-                                                                    <span class="text-danger">Due: Rs. {{ student.due_amount }}</span>
-                                                                {% else %}
-                                                                    <span class="text-success">Cleared</span>
-                                                                {% endif %}
-                                                            </div>
-                                                        </td>
-                                                        <!-- 2. Batch -->
-                                                        <td class="align-middle d-none d-md-table-cell">{{ student.batch }}</td>
-                                                        <!-- 3. Paid -->
-                                                        <td class="align-middle d-none d-lg-table-cell text-success">Rs. {{ student.paid_amount }}</td>
-                                                        <!-- 4. Status -->
-                                                        <td class="align-middle d-none d-sm-table-cell">
-                                                            {% if student.status_code == 'cleared' %}
-                                                                <span class="badge badge-subtle badge-success">Cleared</span>
-                                                            {% elif student.status_code == 'pending' %}
-                                                                <span class="badge badge-subtle badge-warning">Pending</span>
-                                                            {% elif student.status_code == 'overdue' %}
-                                                                <span class="badge badge-subtle badge-danger">Overdue</span>
-                                                            {% endif %}
-                                                        </td>
-                                                        <!-- 5. Due Amount -->
-                                                        <td class="align-middle d-none d-md-table-cell font-weight-bold {% if student.due_amount > 0 %}text-danger{% else %}text-muted{% endif %}">
-                                                            {% if student.due_amount > 0 %}
-                                                                Rs. {{ student.due_amount }}
-                                                            {% else %}
-                                                                <span class=" badge badge-success">Over paid</span>
-                                                            {% endif %}
-                                                        </td>
-                                                        <!-- 6. Actions -->
-                                                        <td class="align-middle text-right">
-                                                            <button type="button"
-                                                                    class="btn btn-sm btn-subtle-info"
-                                                                    data-toggle="modal"
-                                                                    data-target="#dueDetailsModal"
-                                                                    data-student="{{ student.name }}"
-                                                                    data-course="{{ student.course }}"
-                                                                    data-batch="{{ student.batch }}"
-                                                                    data-fee="{{ student.total_fee }}"
-                                                                    data-paid="{{ student.paid_amount }}"
-                                                                    data-due="{{ student.due_amount }}"
-                                                                    data-status="{{ student.status_code|title }}"
-                                                                    onclick="populateDueModal(this)">View</button>
-                                                        </td>
-                                                    </tr>
-                                                {% empty %}
-                                                    <tr>
-                                                        <td colspan="6" class="text-center py-5 text-muted">
-                                                            <i class="fas fa-check-circle fa-3x mb-3"></i>
-                                                            <br>
-                                                            No records found.
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                                <!-- Hidden Row for No Search Results -->
-                                                <tr id="no-search-results" style="display: none;">
-                                                    <td colspan="6" class="text-center py-5 text-muted">
-                                                        <i class="fas fa-search mb-2"></i>
-                                                        <br>
-                                                        No students found matching your criteria.
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <tfoot>
-                                            <ul class="pagination justify-content-center mt-4">
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">
-                                                        <i class="fa fa-lg fa-angle-left"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">1</a>
-                                                </li>
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">...</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">13</a>
-                                                </li>
-                                                <li class="page-item active">
-                                                    <a class="page-link" href="#">14</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">15</a>
-                                                </li>
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">...</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">24</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">
-                                                        <i class="fa fa-lg fa-angle-right"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </tfoot>
-                                    </div>
-                                </section>
-                                <!-- /.wrapper -->
-                            </main>
-                            <!-- /.app-main -->
-                            <!-- /.app -->
-                            <!-- BEGIN BASE JS -->
-                            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-                            <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-                            <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-                            <!-- END BASE JS -->
-                            <!-- BEGIN PLUGINS JS -->
-                            <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-                            <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-                            <!-- END PLUGINS JS -->
-                            <!-- BEGIN THEME JS -->
-                            <script src="{% static 'javascript/main.min.js' %}"></script>
-                            <!-- END THEME JS -->
-                            <!-- Global site tag (gtag.js) - Google Analytics -->
-                            <script async
-                                    src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-                            <script>
-      window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "UA-116692175-1");
-                            </script>
-                            <!-- single modal  -->
-                            <div class="modal fade"
-                                 id="dueDetailsModal"
-                                 tabindex="-1"
-                                 role="dialog"
-                                 aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Financial Breakdown</h5>
-                                            <button type="button"
-                                                    class="btn-close"
-                                                    data-dismiss="modal"
-                                                    aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered mb-0">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th class="bg-primary text-white" style="width: 40%;">Student Name</th>
-                                                            <td id="modal_due_student"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="bg-light text-primary">Course</th>
-                                                            <td id="modal_due_course"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="bg-primary text-white">Batch</th>
-                                                            <td id="modal_due_batch"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="bg-light text-primary">Total Fee</th>
-                                                            <td id="modal_due_fee" class="font-weight-bold"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="bg-primary text-white">Total Paid</th>
-                                                            <td id="modal_due_paid" class="text-success font-weight-bold"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="bg-light text-danger">Balance Due</th>
-                                                            <td id="modal_due_amount"
-                                                                class="text-danger font-weight-bold"
-                                                                style="font-size: 1.1em"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="bg-primary text-white">Status</th>
-                                                            <td>
-                                                                <span id="modal_due_status" class="badge"></span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
+                    <input id="table-search"
+                           type="text"
+                           class="form-control"
+                           placeholder="Search student or batch...">
+                    <div class="input-group-append">
+                        <button id="clear-search"
+                                type="button"
+                                class="btn btn-secondary"
+                                style="display:none">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- .table-responsive -->
+        <div class="table-responsive">
+            <!-- .table -->
+            <table class="table table-hover" id="duesTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <!-- 1. Name: Visible Always -->
+                        <th style="min-width:200px">Student Name</th>
+                        <!-- 2. Batch: Hidden on Mobile (XS) & Small (SM) -->
+                        <th class="d-none d-md-table-cell">Batch</th>
+                        <!-- 3. Total Paid: Hidden on Mobile, SM, MD -->
+                        <th class="d-none d-lg-table-cell">Total Paid</th>
+                        <!-- 4. Status: Hidden on Mobile (XS) -->
+                        <th class="d-none d-sm-table-cell">Status</th>
+                        <!-- 5. Due: Hidden on Mobile (XS) & Small (SM) -->
+                        <th class="d-none d-md-table-cell">Due Amount</th>
+                        <!-- 6. Actions: Visible Always -->
+                        <th style="min-width:100px; text-align:right;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="duesTableBody">
+                    {% for student in due_list %}
+                        <!-- Row with data attributes for JS Filtering -->
+                        <tr class="due-row"
+                            data-search="{{ student.name }} {{ student.batch }}"
+                            data-filter-status="{{ student.status_code }}">
+                            <!-- 1. Name -->
+                            <td class="align-middle">
+                                <a href="#" class="text-dark font-weight-bold">{{ student.name }}</a>
+                                <!-- Mobile-only Subtext (Shows Due Amount on phone since column is hidden) -->
+                                <div class="d-block d-md-none small">
+                                    {% if student.due_amount > 0 %}
+                                        <span class="text-danger">Due: Rs. {{ student.due_amount }}</span>
+                                    {% else %}
+                                        <span class="text-success">Cleared</span>
+                                    {% endif %}
                                 </div>
-                            </div>
-                            <!-- js -->
-                            <script>
+                            </td>
+                            <!-- 2. Batch -->
+                            <td class="align-middle d-none d-md-table-cell">{{ student.batch }}</td>
+                            <!-- 3. Paid -->
+                            <td class="align-middle d-none d-lg-table-cell text-success">Rs. {{ student.paid_amount }}</td>
+                            <!-- 4. Status -->
+                            <td class="align-middle d-none d-sm-table-cell">
+                                {% if student.status_code == 'cleared' %}
+                                    <span class="badge badge-subtle badge-success">Cleared</span>
+                                {% elif student.status_code == 'pending' %}
+                                    <span class="badge badge-subtle badge-warning">Pending</span>
+                                {% elif student.status_code == 'overdue' %}
+                                    <span class="badge badge-subtle badge-danger">Overdue</span>
+                                {% endif %}
+                            </td>
+                            <!-- 5. Due Amount -->
+                            <td class="align-middle d-none d-md-table-cell font-weight-bold {% if student.due_amount > 0 %}text-danger{% else %}text-muted{% endif %}">
+                                {% if student.due_amount > 0 %}
+                                    Rs. {{ student.due_amount }}
+                                {% else %}
+                                    <span class=" badge badge-success">Over paid</span>
+                                {% endif %}
+                            </td>
+                            <!-- 6. Actions -->
+                            <td class="align-middle text-right">
+                                <button type="button"
+                                        class="btn btn-sm btn-subtle-info"
+                                        data-toggle="modal"
+                                        data-target="#dueDetailsModal"
+                                        data-student="{{ student.name }}"
+                                        data-course="{{ student.course }}"
+                                        data-batch="{{ student.batch }}"
+                                        data-fee="{{ student.total_fee }}"
+                                        data-paid="{{ student.paid_amount }}"
+                                        data-due="{{ student.due_amount }}"
+                                        data-status="{{ student.status_code|title }}"
+                                        onclick="populateDueModal(this)">View</button>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center py-5 text-muted">
+                                <i class="fas fa-check-circle fa-3x mb-3"></i>
+                                <br>
+                                No records found.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <!-- Hidden Row for No Search Results -->
+                    <tr id="no-search-results" style="display: none;">
+                        <td colspan="6" class="text-center py-5 text-muted">
+                            <i class="fas fa-search mb-2"></i>
+                            <br>
+                            No students found matching your criteria.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <tfoot>
+                <ul class="pagination justify-content-center mt-4">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">
+                            <i class="fa fa-lg fa-angle-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">...</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">13</a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">14</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">15</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">...</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">24</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">
+                            <i class="fa fa-lg fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </tfoot>
+        </div>
+    </section>
+    <!-- single modal -->
+    <div class="modal fade"
+         id="dueDetailsModal"
+         tabindex="-1"
+         role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Financial Breakdown</h5>
+                    <button type="button"
+                            class="btn-close"
+                            data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-0">
+                            <tbody>
+                                <tr>
+                                    <th class="bg-primary text-white" style="width: 40%;">Student Name</th>
+                                    <td id="modal_due_student"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light text-primary">Course</th>
+                                    <td id="modal_due_course"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-primary text-white">Batch</th>
+                                    <td id="modal_due_batch"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light text-primary">Total Fee</th>
+                                    <td id="modal_due_fee" class="font-weight-bold"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-primary text-white">Total Paid</th>
+                                    <td id="modal_due_paid" class="text-success font-weight-bold"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light text-danger">Balance Due</th>
+                                    <td id="modal_due_amount"
+                                        class="text-danger font-weight-bold"
+                                        style="font-size: 1.1em"></td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-primary text-white">Status</th>
+                                    <td>
+                                        <span id="modal_due_status" class="badge"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block bottomjs %}
+    <!-- js -->
+    <script>
 document.addEventListener("DOMContentLoaded", function() {
     
     // Elements
@@ -761,8 +363,8 @@ function populateDueModal(buttonElement) {
         statusEl.classList.add('badge-success');
     }
 }
-                            </script>
-                            <script>
+    </script>
+    <script>
 $(document).ready(function() {
 
     // --- jQuery Ctrl + F Override ---
@@ -788,5 +390,5 @@ $(document).ready(function() {
     // ... Your other jQuery or JS code ...
 
 });
-                            </script>
-                        </html>
+    </script>
+{% endblock bottomjs %}
