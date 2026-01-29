@@ -1,576 +1,170 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <!-- End Required meta tags -->
-        <!-- Begin SEO tag -->
-        <title>Starter Template | Looper - Bootstrap 4 Admin Theme</title>
-        <meta property="og:title" content="Starter Template" />
-        <meta name="author" content="Beni Arisandi" />
-        <meta property="og:locale" content="en_US" />
-        <meta name="description"
-              content="Responsive admin theme build on top of Bootstrap 4" />
-        <meta property="og:description"
-              content="Responsive admin theme build on top of Bootstrap 4" />
-        <link rel="canonical" href="//uselooper.com" />
-        <meta property="og:url" content="//uselooper.com" />
-        <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme" />
-        <script type="application/ld+json">
-      {
-        "name": "Looper - Bootstrap 4 Admin Theme",
-        "description": "Responsive admin theme build on top of Bootstrap 4",
-        "author": {
-          "@type": "Person",
-          "name": "Beni Arisandi"
-        },
-        "@type": "WebSite",
-        "url": "",
-        "headline": "Starter Template",
-        "@context": "http://schema.org"
-      }
-        </script>
-        <!-- End SEO tag -->
-        <!-- FAVICONS -->
-        <link rel="apple-touch-icon-precomposed"
-              sizes="144x144"
-              href="{% static 'apple-touch-icon.png' %}" />
-        <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
-        <meta name="theme-color" content="#3063A0" />
-        <!-- End FAVICONS -->
-        <script src="{% static 'vendor/pace/pace.min.js' %}"></script>
-        <!-- BEGIN BASE STYLES -->
-        <link rel="stylesheet" href="{% static 'vendor/pace/pace.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/open-iconic/css/open-iconic-bootstrap.min.css' %}" />
-        <link rel="stylesheet"
-              href="{% static 'vendor/font-awesome/css/fontawesome-all.min.css' %}" />
-        <!-- END BASE STYLES -->
-        <!-- BEGIN THEME STYLES -->
-        <link rel="stylesheet" href="{% static 'css/main.min.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
-        <!-- END THEME STYLES -->
-    </head>
-    <body>
-        <!-- .app -->
-        <div class="app">
-            <!-- .app-header -->
-            <header class="app-header">
-                <!-- .top-bar -->
-                <div class="top-bar">
-                    <!-- .top-bar-brand -->
-                    <div class="top-bar-brand">
-                        <a href="{% url 'AdminDashboard' %}">
-                            <img src="{% static 'images/brand-inverse.png' %}"
-                                 height="42"
-                                 width="150"
-                                 class="rounded"
-                                 alt="Brand Logo" />
-                        </a>
-                    </div>
-                    <!-- /.top-bar-brand -->
-                    <!-- .top-bar-list -->
-                    <div class="top-bar-list">
-                        <!-- Mobile Menu Toggle -->
-                        <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
-                            <button class="hamburger hamburger-squeeze"
-                                    type="button"
-                                    data-toggle="aside"
-                                    aria-label="Menu"
-                                    aria-controls="navigation">
-                                <span class="hamburger-box">
-                                    <span class="hamburger-inner"></span>
-                                </span>
-                            </button>
+{% extends "base.html" %}
+{% block extrastyles %}
+{% endblock extrastyles %}
+{% block extrajs %}
+{% endblock extrajs %}
+{% block content %}
+    <div class="page-inner ms-2 me-2">
+        <!-- Page Header & Breadcrumbs -->
+        <header class="">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'AdminDashboard' %}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">System Logs</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">All Activities</li>
+                </ol>
+            </nav>
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="page-title">Audit Trail</h1>
+                <a href="{% url 'download_report' %}">Export Logs</a>
+            </div>
+        </header>
+        <!-- Page Content Section -->
+        <div class="page-section">
+            <div class="card card-fluid">
+                <!-- Toolbar: Filter & Search -->
+                <div class="card-header border-bottom-0">
+                    <div class="d-flex align-items-center">
+                        <!-- FILTER DROPDOWN -->
+                        <div class="form-group mb-0 mr-3">
+                            <select class="custom-select" id="logFilter">
+                                <option value="all" selected>Action: All</option>
+                                <option value="create">Created</option>
+                                <option value="update">Updated</option>
+                                <option value="delete">Deleted</option>
+                                <option value="login">Login/Logout</option>
+                            </select>
                         </div>
-                        <!-- Spacer -->
-                        <div class="top-bar-item top-bar-item-full"></div>
-                        <!-- .top-bar-item: The Right Side User Menu -->
-                        <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
-                            <!-- Dropdown -->
-                            <div class="dropdown">
-                                <button class="btn-account d-none d-md-flex"
-                                        type="button"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false">
-                                    <!-- User Avatar (UPDATED: Generic Icon) -->
-                                    <span class="tile tile-circle bg-white">
-                                        <span class="oi oi-person text-black"></span>
-                                    </span>
-                                    <!-- User Name and Role -->
-                                    {% if request.user.is_authenticated %}
-                                        <span class="account-summary pr-lg-4 d-none d-lg-block">
-                                            <span class="account-name">{{ request.user.get_full_name|default:request.user.username }}</span>
-                                            <span class="account-description">{{ request.user.get_role_display }}</span>
-                                        </span>
-                                    {% else %}
-                                        <span class="account-summary pr-lg-4 d-none d-lg-block">
-                                            <span class="account-name">Admin_demo</span>
-                                            <span class="account-description">Admin</span>
-                                        </span>
-                                    {% endif %}
-                                </button>
-                                <div class="dropdown-arrow dropdown-arrow-left"></div>
-                                <!-- Dropdown Menu -->
-                                <div class="dropdown-menu">
-                                    {% if request.user.is_authenticated %}
-                                        <h6 class="dropdown-header d-flex flex-column">
-                                            <span class="font-weight-bold">{{ request.user.get_full_name|default:request.user.username }}</span>
-                                            <small class="text-muted">{{ request.user.get_role_display }}</small>
-                                        </h6>
-                                    {% else %}
-                                        <h6>
-                                             <span style="margin-left: 1rem !important;" class="font-weight-bold ">Admin_demo</span>
-                                            <small class="text-muted">admin</small>
-                                        </h6>
-                                    {% endif %}
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'login' %}">
-                                        <span class="dropdown-icon oi oi-account-logout"></span> Logout
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" href="{% url 'login' %}">
-                                        <span class="dropdown-icon oi oi-trash"></span> Delete Account
-                                    </a>
+                        <!-- SEARCH INPUT -->
+                        <div class="form-group mb-0 flex-grow-1">
+                            <div class="input-group input-group-alt">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                 </div>
+                                <input type="text"
+                                       class="form-control"
+                                       id="logSearch"
+                                       placeholder="Search logs (e.g., 'Deleted Batch', 'admin_user')">
                             </div>
-                            <!-- /.dropdown -->
                         </div>
-                        <!-- /.top-bar-item -->
                     </div>
-                    <!-- /.top-bar-list -->
                 </div>
-                <!-- /.top-bar -->
-            </header>
-            <!-- /.app-header -->
-            <!-- .app-aside -->
-            <aside class="app-aside">
-                <!-- .aside-content -->
-                <div class="aside-content">
-                    <!-- .aside-header -->
-                    <header class="aside-header d-block d-md-none">
-                        <!-- .btn-account -->
-                        <button class="btn-account"
-                                type="button"
-                                data-toggle="collapse"
-                                data-target="#dropdown-aside">
-                            <!-- 1. User Avatar (Generic Icon) -->
-                            <span class="user-avatar user-avatar-xs">
-                                <span class="oi oi-person text-black"></span>
-                            </span>
-                            <span class="account-icon">
-                                <span class="fa fa-caret-down fa-sm"></span>
-                            </span>
-                            <!-- 2. User Name and Role -->
-                            <span class="account-summary">
-                                <span class="account-name">
-                                    {% if request.user.is_authenticated %}
-                                        {{ request.user.get_full_name|default:request.user.username }}
-                                    {% else %}
-                                        Admin_DEMO
-                                    {% endif %}
-                                </span>
-                                <span class="account-description">
-                                    {% if request.user.is_authenticated %}
-                                        {{ request.user.get_role_display }}
-                                    {% else %}
-                                        Admin
-                                    {% endif %}
-                                </span>
-                            </span>
-                        </button>
-                        <!-- /.btn-account -->
-                        <!-- .dropdown-aside -->
-                        <div id="dropdown-aside" class="dropdown-aside collapse">
-                            <!-- dropdown-items -->
-                            <div class="pb-3">
-                                <!-- Logout Link -->
-                                <a class="dropdown-item" href="{% url 'login' %}">
-                                    <span class="dropdown-icon oi oi-account-logout"></span> Logout
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <!-- Delete Account Link -->
-                                <a class="dropdown-item text-danger" href="{% url 'login' %}">
-                                    <span class="dropdown-icon oi oi-trash"></span> Delete Account
-                                </a>
-                            </div>
-                            <!-- /dropdown-items -->
-                        </div>
-                        <!-- /.dropdown-aside -->
-                    </header>
-                    <!-- /.aside-header -->
-                    <!-- .aside-menu -->
-                    <section class="aside-menu has-scrollable">
-                        <!-- .stacked-menu -->
-                        <nav id="stacked-menu" class="stacked-menu">
-                            <!-- .menu -->
-                            <ul class="menu">
-                                <!-- .menu-item -->
-                                <li class="menu-item has-active">
-                                    <a href="{% url 'AdminDashboard' %}" class="menu-link">
-                                        <span class="menu-icon oi oi-dashboard"></span>
-                                        <span class="menu-text">Dashboard</span>
-                                    </a>
-                                </li>
-                                <!-- /.menu-item -->
-                                <!-- .menu-item -->
-                                <!-- .menu-header -->
-                                <!-- .menu-header -->
-                                <!-- here intake mgnt insted of the Pages -->
-                                <li class="menu-header">Intake managements</li>
-                                <!-- /.menu-header -->
-                                <!-- .menu-item -->
-                                <!-- /.menu-item -->
-                                <!-- user managements -->
-                                <li class="menu-item has-child ">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-people"></span>
-                                        <span class="menu-text">User management</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a class="menu-link" href="{% url 'ViewSystemUser' %}">View system Users</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a class="menu-link" href="{% url 'AddSystemUser' %}">Add system Users</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./user managements -->
-                                <!-- datamanagements -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child ">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-folder"></span>
-                                        <span class="menu-text">Data management</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a class="menu-link" href="{% url 'ViewStudent' %}">Students</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewCourses' %}" class="menu-link">Course</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewBatches' %}" class="menu-link">Batches</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'Instructor' %}" class="menu-link">Instructors</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewClassroom' %}" class="menu-link">Classrooms</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewEnrollment' %}" class="menu-link">Enrollments</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- finance  -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-calendar"></span>
-                                        <span class="menu-text">Schedules & Time-tables</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewSchedule' %}" class="menu-link">View Schedules</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'FreeRoom' %}" class="menu-link">Free Rooms</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'AddSchedule' %}" class="menu-link">Add Session</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!--  ./finance-->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-dollar"></span>
-                                        <span class="menu-text">Finance</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="{% url 'ViewPayment' %}" class="menu-link">Payments</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'DuesAndOverDues' %}" class="menu-link">Dues and overdues</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- .exports -->
-                                <li class="menu-item has-child" style="">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-list-rich"></span>
-                                        <span class="menu-text">Exports</span>
-                                    </a>
-                                    <!-- child menu -->
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="{% url 'Downloads' %}" class="menu-link">Download data</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /child menu -->
-                                </li>
-                                <!-- .analytics -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-bar-chart"></span>
-                                        <span class="menu-text">Analytics</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="{% url 'studentpercourse' %}" class="menu-link">Students per Course</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'MonthlyRevenue' %}" class="menu-link">Monthly Revenue</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'ActiveStudent' %}" class="menu-link">Active Students</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'analytics_enrollment_trends' %}" class="menu-link">Enrollments Trends</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- ./analytics -->
-                                <!-- System logs -->
-                                <!-- .menu-item -->
-                                <li class="menu-item has-child has-open">
-                                    <a href="#" class="menu-link">
-                                        <span class="menu-icon-sm oi oi-file"></span>
-                                        <span class="menu-text">System Logs</span>
-                                    </a>
-                                    <ul class="menu">
-                                        <li class="menu-item has-active">
-                                            <a href="{% url 'AllActivities' %}" class="menu-link">All activities</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="{% url 'Export-Details' %}" class="menu-link">Export Details</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- ./menuitems -->
-                                <!-- ./System logs  -->
-                                <!-- .menu-item -->
-                                <!-- /.menu-item -->
-                            </ul>
-                            <!-- /.menu -->
-                        </nav>
-                        <!-- /.stacked-menu -->
-                    </section>
-                    <!-- /.aside-menu -->
-                </div>
-                <!-- /.aside-content -->
-            </aside>
-            <!-- /.app-aside -->
-            <!-- .app-main -->
-            <main class="app-main">
-                <div class="wrapper">
-                    <div class="page">
-                        <div class="page-inner ms-2 me-2">
-                            <!-- Page Header & Breadcrumbs -->
-                            <header class="">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item">
-                                            <a href="{% url 'AdminDashboard' %}">Dashboard</a>
-                                        </li>
-                                        <li class="breadcrumb-item">
-                                            <a href="#">System Logs</a>
-                                        </li>
-                                        <li class="breadcrumb-item active" aria-current="page">All Activities</li>
-                                    </ol>
-                                </nav>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h1 class="page-title">Audit Trail</h1>
-                                    <a href="{% url 'download_report' %}">Export Logs</a>
-                                </div>
-                            </header>
-                            <!-- Page Content Section -->
-                            <div class="page-section">
-                                <div class="card card-fluid">
-                                    <!-- Toolbar: Filter & Search -->
-                                    <div class="card-header border-bottom-0">
-                                        <div class="d-flex align-items-center">
-                                            <!-- FILTER DROPDOWN -->
-                                            <div class="form-group mb-0 mr-3">
-                                                <select class="custom-select" id="logFilter">
-                                                    <option value="all" selected>Action: All</option>
-                                                    <option value="create">Created</option>
-                                                    <option value="update">Updated</option>
-                                                    <option value="delete">Deleted</option>
-                                                    <option value="login">Login/Logout</option>
-                                                </select>
-                                            </div>
-                                            <!-- SEARCH INPUT -->
-                                            <div class="form-group mb-0 flex-grow-1">
-                                                <div class="input-group input-group-alt">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                                    </div>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           id="logSearch"
-                                                           placeholder="Search logs (e.g., 'Deleted Batch', 'admin_user')">
-                                                </div>
-                                            </div>
+                <!-- THE LOGS LIST CONTAINER -->
+                <!-- We removed the hardcoded items. JS will fill this div. -->
+                <!-- .table-responsive -->
+                <div class="table-responsive">
+                    <!-- .table -->
+                    <table class="table table-hover">
+                        <!-- thead -->
+                        <thead class="thead-dark">
+                            <tr>
+                                <th style="min-width:100px">Action</th>
+                                <th style="min-width:300px">Description</th>
+                                <th>User</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <!-- /tbody -->
+                        <tbody id="logsTableBody">
+                            {% for log in activities %}
+                                <!-- We add data-type and data-search attributes for the JS filter to read -->
+                                <tr class="log-row"
+                                    data-type="{{ log.type }}"
+                                    data-search="{{ log.description }} {{ log.target|default:'' }} {{ log.user }}">
+                                    <td class="align-middle">
+                                        <span class="badge badge-subtle {{ log.badge_class }}">{{ log.action_text }}</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        {{ log.description }}:
+                                        {% if log.target %}<strong>{{ log.target }}</strong>{% endif %}
+                                    </td>
+                                    <td class="align-middle">
+                                        <span class="text-dark font-weight-bold">{{ log.user }}</span>
+                                        <div class="small text-muted d-block d-md-none">
+                                            {% if log.type == 'login' %}
+                                                User
+                                            {% else %}
+                                                Performed by
+                                            {% endif %}
                                         </div>
-                                    </div>
-                                    <!-- THE LOGS LIST CONTAINER -->
-                                    <!-- We removed the hardcoded items. JS will fill this div. -->
-                                    <!-- .table-responsive -->
-                                    <div class="table-responsive">
-                                        <!-- .table -->
-                                        <table class="table table-hover">
-                                            <!-- thead -->
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <th style="min-width:100px">Action</th>
-                                                    <th style="min-width:300px">Description</th>
-                                                    <th>User</th>
-                                                    <th>Date</th>
-                                                </tr>
-                                            </thead>
-                                            <!-- /tbody -->
-                                            <tbody id="logsTableBody">
-                                                {% for log in activities %}
-                                                    <!-- We add data-type and data-search attributes for the JS filter to read -->
-                                                    <tr class="log-row"
-                                                        data-type="{{ log.type }}"
-                                                        data-search="{{ log.description }} {{ log.target|default:'' }} {{ log.user }}">
-                                                        <td class="align-middle">
-                                                            <span class="badge badge-subtle {{ log.badge_class }}">{{ log.action_text }}</span>
-                                                        </td>
-                                                        <td class="align-middle">
-                                                            {{ log.description }}:
-                                                            {% if log.target %}<strong>{{ log.target }}</strong>{% endif %}
-                                                        </td>
-                                                        <td class="align-middle">
-                                                            <span class="text-dark font-weight-bold">{{ log.user }}</span>
-                                                            <div class="small text-muted d-block d-md-none">
-                                                                {% if log.type == 'login' %}
-                                                                    User
-                                                                {% else %}
-                                                                    Performed by
-                                                                {% endif %}
-                                                            </div>
-                                                        </td>
-                                                        <td class="align-middle text-muted">{{ log.date }}</td>
-                                                    </tr>
-                                                {% empty %}
-                                                    <!-- Initial Empty State (if database is empty) -->
-                                                    <tr>
-                                                        <td colspan="4" class="text-center py-4 text-muted">
-                                                            <i class="fas fa-info-circle mb-2"></i>
-                                                            <br>
-                                                            No activity logs found in the database.
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                                <!-- Hidden "No Results" row for JS Search -->
-                                                <tr id="no-search-results" style="display: none;">
-                                                    <td colspan="4" class="text-center py-4 text-muted">
-                                                        <i class="fas fa-search mb-2"></i>
-                                                        <br>
-                                                        No activities found matching your criteria.
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            <!-- /tbody -->
-                                        </table>
-                                        <tfoot>
-                                            <ul class="pagination justify-content-center mt-4">
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">
-                                                        <i class="fa fa-lg fa-angle-left"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">1</a>
-                                                </li>
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">...</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">13</a>
-                                                </li>
-                                                <li class="page-item active">
-                                                    <a class="page-link" href="#">14</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">15</a>
-                                                </li>
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">...</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">24</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">
-                                                        <i class="fa fa-lg fa-angle-right"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </tfoot>
-                                        <!-- /.table -->
-                                    </div>
-                                    <!-- /.table-responsive -->
-                                </div>
-                            </div>
-                            <!-- ========================================== -->
-                            <!-- 4. DATA BRIDGE: BACKEND TO FRONTEND        -->
-                            <!-- ========================================== -->
-                            <!-- This converts the Python list into a valid JSON object hidden in the HTML -->
-                            {{ activities|json_script:"activity-data" }}
-                        </div>
-                        <!-- /.page-inner -->
-                    </div>
-                    <!-- /.page -->
+                                    </td>
+                                    <td class="align-middle text-muted">{{ log.date }}</td>
+                                </tr>
+                            {% empty %}
+                                <!-- Initial Empty State (if database is empty) -->
+                                <tr>
+                                    <td colspan="4" class="text-center py-4 text-muted">
+                                        <i class="fas fa-info-circle mb-2"></i>
+                                        <br>
+                                        No activity logs found in the database.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <!-- Hidden "No Results" row for JS Search -->
+                            <tr id="no-search-results" style="display: none;">
+                                <td colspan="4" class="text-center py-4 text-muted">
+                                    <i class="fas fa-search mb-2"></i>
+                                    <br>
+                                    No activities found matching your criteria.
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!-- /tbody -->
+                    </table>
+                    <tfoot>
+                        <ul class="pagination justify-content-center mt-4">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">
+                                    <i class="fa fa-lg fa-angle-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">...</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">13</a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">14</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">15</a>
+                            </li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">...</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">24</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">
+                                    <i class="fa fa-lg fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </tfoot>
+                    <!-- /.table -->
                 </div>
-                <!-- /.wrapper -->
-            </main>
-            <!-- /.app-main -->
-            <!-- /.app -->
-            <!-- BEGIN BASE JS -->
-            <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-            <script src="{% static 'vendor/bootstrap/js/popper.min.js' %}"></script>
-            <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-            <!-- END BASE JS -->
-            <!-- BEGIN PLUGINS JS -->
-            <script src="{% static 'vendor/stacked-menu/stacked-menu.min.js' %}"></script>
-            <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-            <!-- END PLUGINS JS -->
-            <!-- BEGIN THEME JS -->
-            <script src="{% static 'javascript/main.min.js' %}"></script>
-            <!-- END THEME JS -->
-            <!-- Global site tag (gtag.js) - Google Analytics -->
-            <script async
-                    src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-            <script>
-      window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "UA-116692175-1");
-            </script>
-        </body>
-        <script>
+                <!-- /.table-responsive -->
+            </div>
+        </div>
+        <!-- ========================================== -->
+        <!-- 4. DATA BRIDGE: BACKEND TO FRONTEND        -->
+        <!-- ========================================== -->
+        <!-- This converts the Python list into a valid JSON object hidden in the HTML -->
+        {{ activities|json_script:"activity-data" }}
+    </div>
+    <!-- /.page-inner -->
+{% endblock content %}
+{% block bottomjs %}
+    <script>
         document.addEventListener("DOMContentLoaded", function() {
         // DOM Elements
         const searchInput = document.getElementById('logSearch');
@@ -608,8 +202,8 @@
         if(searchInput) searchInput.addEventListener('keyup', applyFilters);
         if(filterSelect) filterSelect.addEventListener('change', applyFilters);
         });
-        </script>
-        <script>
+    </script>
+    <script>
 $(document).ready(function() {
 
     // --- jQuery Ctrl + F Override ---
@@ -635,5 +229,5 @@ $(document).ready(function() {
     // ... Your other jQuery or JS code ...
 
 });
-        </script>
-    </html>
+    </script>
+{% endblock bottomjs %}
