@@ -31,94 +31,104 @@
             {% endfor %}
         {% endif %}
         <!-- .form -->
-        <form method="post">
-            <!-- .fieldset -->
-            {% csrf_token %}
-            <fieldset>
-                <legend>Student Update form</legend>
-                <!-- .form-group -->
-                <div class="form-group">
-                    <label for="lbl1">
-                        Student name
-                        <abbr title="Required">*</abbr>
-                    </label>
-                    <input type="text"
-                           class="form-control placeholder-shown"
-                           id="lbl1"
-                           placeholder="Enter your name"
-                           value="{{ name }}"
-                           required
-                           name="name">
-                </div>
-                <!-- /.form-group -->
-                <!-- .form-group -->
-                <div class="form-group">
-                    <label for="lbl1">
-                        Email
-                        <abbr title="Required">*</abbr>
-                    </label>
-                    <input type="email"
-                           class="form-control placeholder-shown"
-                           id="lbl1"
-                           placeholder="example@gmail.com"
-                           value="{{ email }}"
-                           required
-                           name="email">
-                </div>
-                <!-- /.form-group -->
-                <!-- .form-group -->
-                <div class="form-group">
-                    <label for="lbl1">
-                        Phone Number
-                        <abbr title="Required">*</abbr>
-                    </label>
-                    <input type="text"
-                           class="form-control placeholder-shown"
-                           id="lbl1"
-                           placeholder="eg :9849554478"
-                           value="{{ phone }}"
-                           required
-                           name="phone">
-                </div>
-                <!-- /.form-group -->
-                <!-- .form-group -->
-                <div class="form-group">
-                    <label for="lbl1">
-                        Address
-                        <abbr title="Required">*</abbr>
-                    </label>
-                    <input type="text"
-                           class="form-control placeholder-shown"
-                           id="lbl1"
-                           placeholder="Enter the place you reside"
-                           value="{{ address }}"
-                           required
-                           name="Address">
-                </div>
-                <!-- /.form-group -->
-                <!-- select-element -->
-                <div class="form-group">
-                    <label for="sel3">Status</label>
-                    <select class="custom-select" id="sel3" name="status" required>
-                        <option value="ACTIVE"
-                                {% if status == "ACTIVE" or status == "Active" %}selected{% endif %}>Active</option>
-                        <option value="INACTIVE"
-                                {% if status == "Inactive" or status == "INACTIVE" %}selected{% endif %}>
-                            Inactive
-                        </option>
-                        <option value="COMPLETED"
-                                {% if status == "COMPLETED" or status == "Completed" %}selected{% endif %}>
-                            Completed
-                        </option>
-                        <option value="DROPPED"
-                                {% if status == "DROPPED" or status == "Dropped" %}selected{% endif %}>Dropped</option>
-                    </select>
-                </div>
-                <button type="submit"
-                        class="btn btn-outline-primary d-flex justify-content-center w-100">Update Student</button>
-            </fieldset>
-            <!-- /.fieldset -->
-        </form>
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    <!-- .fieldset -->
+                    {% csrf_token %}
+                    <fieldset>
+                        <legend>Student Update form</legend>
+                        <!-- .form-group -->
+                        <div class="form-group">
+                            <label for="lbl1">
+                                Student name
+                                <abbr title="Required">*</abbr>
+                            </label>
+                            <input type="text"
+                                   class="form-control placeholder-shown"
+                                   id="lbl1"
+                                   placeholder="Enter your name"
+                                   value="{{ name }}"
+                                   required
+                                   name="name">
+                        </div>
+                        <!-- /.form-group -->
+                        <!-- .form-group -->
+                        <div class="form-group">
+                            <label for="lbl1">
+                                Email
+                                <abbr title="Required">*</abbr>
+                            </label>
+                            <input type="email"
+                                   class="form-control placeholder-shown"
+                                   id="lbl1"
+                                   placeholder="example@gmail.com"
+                                   value="{{ email }}"
+                                   required
+                                   name="email">
+                        </div>
+                        <!-- /.form-group -->
+                        <!-- .form-group -->
+                        <div class="form-group">
+                            <label for="lbl1">
+                                Phone Number
+                                <abbr title="Required">*</abbr>
+                            </label>
+                            <input type="text"
+                                   class="form-control placeholder-shown"
+                                   id="lbl1"
+                                   placeholder="eg :9849554478"
+                                   value="{{ phone }}"
+                                   required
+                                   name="phone">
+                        </div>
+                        <!-- /.form-group -->
+                        <!-- .form-group -->
+                        <div class="form-group">
+                            <label for="lbl1">
+                                Address
+                                <abbr title="Required">*</abbr>
+                            </label>
+                            <input type="text"
+                                   class="form-control placeholder-shown"
+                                   id="lbl1"
+                                   placeholder="Enter the place you reside"
+                                   value="{{ address }}"
+                                   required
+                                   name="Address">
+                        </div>
+                        <!-- /.form-group -->
+                        <!-- select-element -->
+                        <div class="form-group">
+                            <label for="sel3">Status</label>
+                            <select class="custom-select" id="sel3" name="status" required>
+                                <option value="ACTIVE"
+                                        {% if status == "ACTIVE" or status == "Active" %}selected{% endif %}>
+                                    Active
+                                </option>
+                                <option value="INACTIVE"
+                                        {% if status == "Inactive" or status == "INACTIVE" %}selected{% endif %}>
+                                    Inactive
+                                </option>
+                                <option value="COMPLETED"
+                                        {% if status == "COMPLETED" or status == "Completed" %}selected{% endif %}>
+                                    Completed
+                                </option>
+                                <option value="DROPPED"
+                                        {% if status == "DROPPED" or status == "Dropped" %}selected{% endif %}>
+                                    Dropped
+                                </option>
+                            </select>
+                        </div>
+                        <button type="submit"
+                                class="btn btn-outline-primary d-flex justify-content-center w-100">
+                            Update Student
+                        </button>
+                    </fieldset>
+                    <!-- /.fieldset -->
+                </form>
+            </div>
+        </div>
         <!-- /.form -->
     </div>
 {% endblock content %}

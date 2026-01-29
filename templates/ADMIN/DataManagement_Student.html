@@ -4,129 +4,131 @@
 {% block extrajs %}
 {% endblock extrajs %}
 {% block content %}
-    <div class="page-inner ms-2">
-        <!-- Page header -->
-        <header class="">
-            <div class="">
-                <div>
-                    <h1 class="page-title">Add new Students</h1>
-                    <p class="text-muted mb-0">
-                        <a class="text-muted"
-                           style="text-decoration: none"
-                           href="{% url 'AdminDashboard' %}">DataManagement</a>/ <a class="text-muted"
+    <!-- Page header -->
+    <!-- Added mb-4 for spacing between title and form card -->
+    <header class="mb-4">
+        <div>
+            <div>
+                <h1 class="page-title">Add new Students</h1>
+                <p class="text-muted mb-0">
+                    <a class="text-muted"
+                       style="text-decoration: none"
+                       href="{% url 'AdminDashboard' %}">DataManagement</a>/ <a class="text-muted"
     style="text-decoration: none"
     href="{% url 'ViewStudent' %}">Students</a> / <a style="text-decoration: none" class="text-primary">Add new students</a>
-                    </p>
-                </div>
+                </p>
             </div>
-        </header>
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
-                     role="alert">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-        <!-- <h4 class="d-block d-lg-block d-sm-block">Adding students</h4> -->
-        <!-- form -->
+        </div>
+    </header>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+                 role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <div class="page-section">
         <div class="row">
-            <div class="col-12 col-sm-12 col-lg-12 border rounded mb-5 mb-sm-5 ">
-                <div class="card-body ">
-                    <!-- .form -->
-                    <form method="post">
-                        {% csrf_token %}
-                        <!-- .fieldset -->
-                        <fieldset>
-                            <legend>Student Registration form</legend>
-                            <!-- .form-group -->
-                            <div class="form-group">
-                                <label for="lbl1">
-                                    Student name
-                                    <abbr title="Required">*</abbr>
-                                </label>
-                                <input type="text"
-                                       class="form-control placeholder-shown"
-                                       id="lbl1"
-                                       placeholder="Enter your name"
-                                       name='name'
-                                       required>
-                            </div>
-                            <!-- /.form-group -->
-                            <!-- .form-group -->
-                            <div class="form-group">
-                                <label for="lbl1">
-                                    Email
-                                    <abbr title="Required">*</abbr>
-                                </label>
-                                <input type="email"
-                                       class="form-control placeholder-shown"
-                                       id="lbl1"
-                                       placeholder="example@gmail.com"
-                                       name="email"
-                                       required>
-                            </div>
-                            <!-- /.form-group -->
-                            <!-- .form-group -->
-                            <div class="form-group">
-                                <label for="lbl1">
-                                    Phone Number
-                                    <abbr title="Required">*</abbr>
-                                </label>
-                                <input type="text"
-                                       class="form-control placeholder-shown"
-                                       id="lbl1"
-                                       placeholder="eg :9849554478"
-                                       name="phone"
-                                       required>
-                            </div>
-                            <!-- /.form-group -->
-                            <!-- .form-group -->
-                            <div class="form-group">
-                                <label for="lbl1">
-                                    Address
-                                    <abbr title="Required">*</abbr>
-                                </label>
-                                <input type="text"
-                                       class="form-control placeholder-shown"
-                                       id="lbl1"
-                                       placeholder="Enter the place you reside"
-                                       name="Address"
-                                       required>
-                            </div>
-                            <!-- /.form-group -->
-                            <!-- select-element -->
-                            <div class="form-group">
-                                <label for="sel3">Status</label>
-                                <select class="custom-select" id="sel3" name="status" required>
-                                    <option value="">Choose...</option>
-                                    <option value="ACTIVE" selected>Active</option>
-                                    <option value="Inactive">Inactive</option>
-                                    <option value="Completed">Completed</option>
-                                    <option value="Completed">Dropped</option>
-                                </select>
-                            </div>
-                            <button type="submit"
-                                    class="btn btn-outline-primary d-flex justify-content-center w-100">
-                                Register Student
-                            </button>
-                        </fieldset>
-                        <!-- /.fieldset -->
-                    </form>
-                    <!-- /.form -->
+            <!-- CHANGED: col-lg-12 to col-lg-8 offset-lg-2 to Center the form -->
+            <div class="col-12 col-md-12 col-lg-12 ">
+                <!-- CHANGED: Added shadow-sm, removed default border for cleaner look -->
+                <div class="card card-fluid shadow-sm border-0">
+                    <!-- CHANGED: Removed 'ms-2', Added 'p-4 p-md-5' for proper internal spacing -->
+                    <div class="card-body p-4 p-md-5">
+                        <!-- .form -->
+                        <form method="post">
+                            {% csrf_token %}
+                            <!-- .fieldset -->
+                            <fieldset>
+                                <legend class="border-bottom mb-4">Student Registration form</legend>
+                                <!-- .form-group -->
+                                <div class="form-group mb-3">
+                                    <label for="lbl1">
+                                        Student name
+                                        <abbr title="Required">*</abbr>
+                                    </label>
+                                    <input type="text"
+                                           class="form-control placeholder-shown"
+                                           id="lbl1"
+                                           placeholder="Enter your name"
+                                           name='name'
+                                           required>
+                                </div>
+                                <!-- /.form-group -->
+                                <!-- .form-group -->
+                                <div class="form-group mb-3">
+                                    <label for="lbl1">
+                                        Email
+                                        <abbr title="Required">*</abbr>
+                                    </label>
+                                    <input type="email"
+                                           class="form-control placeholder-shown"
+                                           id="lbl1"
+                                           placeholder="example@gmail.com"
+                                           name="email"
+                                           required>
+                                </div>
+                                <!-- /.form-group -->
+                                <!-- .form-group -->
+                                <div class="form-group mb-3">
+                                    <label for="lbl1">
+                                        Phone Number
+                                        <abbr title="Required">*</abbr>
+                                    </label>
+                                    <input type="text"
+                                           class="form-control placeholder-shown"
+                                           id="lbl1"
+                                           placeholder="eg :9849554478"
+                                           name="phone"
+                                           required>
+                                </div>
+                                <!-- /.form-group -->
+                                <!-- .form-group -->
+                                <div class="form-group mb-3">
+                                    <label for="lbl1">
+                                        Address
+                                        <abbr title="Required">*</abbr>
+                                    </label>
+                                    <input type="text"
+                                           class="form-control placeholder-shown"
+                                           id="lbl1"
+                                           placeholder="Enter the place you reside"
+                                           name="Address"
+                                           required>
+                                </div>
+                                <!-- /.form-group -->
+                                <!-- select-element -->
+                                <div class="form-group mb-4">
+                                    <label for="sel3">Status</label>
+                                    <select class="custom-select" id="sel3" name="status" required>
+                                        <option value="">Choose...</option>
+                                        <option value="ACTIVE" selected>Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                        <option value="Completed">Completed</option>
+                                        <option value="Completed">Dropped</option>
+                                    </select>
+                                </div>
+                                <button type="submit"
+                                        class="btn btn-outline-primary d-flex justify-content-center w-100 btn-lg">
+                                    Register Student
+                                </button>
+                            </fieldset>
+                            <!-- /.fieldset -->
+                        </form>
+                        <!-- /.form -->
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- ./students add -->
     </div>
+    <!-- ./students add -->
 {% endblock content %}
 {% block bottomjs %}
     <script>
 document.addEventListener("DOMContentLoaded", function() {
     // 1. Define the specific Sidebar Link we want to highlight
-    // We let Django generate the string for us
     const targetUrl = "{% url 'ViewStudent' %}";
 
     // 2. Find the <a> tag in the sidebar that matches this URL
-    // We search specifically inside #stacked-menu
     const activeLink = document.querySelector(`#stacked-menu .menu-link[href="${targetUrl}"]`);
 
     if (activeLink) {
@@ -140,13 +142,10 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // 5. Open the Parent Dropdown (Data Management)
-        // Find the <ul> (menu) holding this link
         const parentMenu = activeLink.closest('ul.menu');
         if (parentMenu) {
-            // Find the <li> (Data Management) holding that <ul>
             const grandParent = parentMenu.closest('.menu-item.has-child');
             if (grandParent) {
-                // 'has-open' expands the menu, 'has-active' highlights the folder icon
                 grandParent.classList.add('has-active', 'has-open');
             }
         }

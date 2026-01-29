@@ -111,7 +111,7 @@
                                         </h6>
                                     {% else %}
                                         <h6>
-                                          <span style="margin-left: 1rem !important;" class="font-weight-bold ">Admin_demo</span>
+                                            <span style="margin-left: 1rem !important;" class="font-weight-bold ">Admin_demo</span>
                                             <small class="text-muted">admin</small>
                                         </h6>
                                     {% endif %}
@@ -387,86 +387,90 @@
                                     {% endfor %}
                                 {% endif %}
                                 <!-- .form -->
-                                <form method="post">
-                                    {% csrf_token %}
-                                    <!-- .fieldset -->
-                                    <fieldset>
-                                        <legend>Course Update Form</legend>
-                                        <!-- Field: Title -->
-                                        <div class="form-group">
-                                            <label for="inputTitle">
-                                                Course Title
-                                                <abbr title="Required">*</abbr>
-                                            </label>
-                                            <input type="text"
-                                                   class="form-control placeholder-shown"
-                                                   id="inputTitle"
-                                                   placeholder="e.g. Introduction to Python"
-                                                   name="title"
-                                                   value="{{ course.title }}"
-                                                   required>
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- Field: Code -->
-                                        <div class="form-group">
-                                            <label for="inputCode">
-                                                Course Code
-                                                <abbr title="Required">*</abbr>
-                                            </label>
-                                            <input type="text"
-                                                   class="form-control placeholder-shown"
-                                                   id="inputCode"
-                                                   placeholder="e.g. PY-101"
-                                                   name="course_code"
-                                                   value="{{ course.code }}"
-                                                   required>
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- Field: Description -->
-                                        <div class="form-group">
-                                            <label for="inputDescription">Description</label>
-                                            <!-- Using textarea for models.TextField -->
-                                            <textarea class="form-control placeholder-shown"
-                                                      id="inputDescription"
-                                                      rows="3"
-                                                      placeholder="Enter course details..."
-                                                      name="description">{{course.description}}</textarea>
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- Field: Default Duration Weeks -->
-                                        <div class="form-group">
-                                            <label for="inputDuration">Default Duration (Weeks)</label>
-                                            <input type="number"
-                                                   class="form-control placeholder-shown"
-                                                   id="inputDuration"
-                                                   placeholder="e.g. 12"
-                                                   name="duration"
-                                                   min="0"
-                                                   value="{{ course.duration }}">
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- Field: Course Fee -->
-                                        <div class="form-group">
-                                            <label for="inputFee">Course Fee</label>
-                                            <!-- step="0.01" allows for decimal inputs like 1500.50 -->
-                                            <input type="number"
-                                                   class="form-control placeholder-shown"
-                                                   id="inputFee"
-                                                   placeholder="0.00"
-                                                   min="0"
-                                                   name="Fee"
-                                                   value="{{ course.fee }}">
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- Submit Button -->
-                                        <!-- Changed from div to button for proper form submission behavior -->
-                                        <button type="submit"
-                                                class="btn btn-outline-primary d-flex justify-content-center w-100">
-                                            Save Course
-                                        </button>
-                                    </fieldset>
-                                    <!-- /.fieldset -->
-                                </form>
+                                <div class="card col-12 col-sm-12 col-lg-12 border rounded mb-5 mb-sm-5 mt-2">
+                                    <div class="card-body ">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <!-- .fieldset -->
+                                            <fieldset>
+                                                <legend>Course Update Form</legend>
+                                                <!-- Field: Title -->
+                                                <div class="form-group">
+                                                    <label for="inputTitle">
+                                                        Course Title
+                                                        <abbr title="Required">*</abbr>
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control placeholder-shown"
+                                                           id="inputTitle"
+                                                           placeholder="e.g. Introduction to Python"
+                                                           name="title"
+                                                           value="{{ course.title }}"
+                                                           required>
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- Field: Code -->
+                                                <div class="form-group">
+                                                    <label for="inputCode">
+                                                        Course Code
+                                                        <abbr title="Required">*</abbr>
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control placeholder-shown"
+                                                           id="inputCode"
+                                                           placeholder="e.g. PY-101"
+                                                           name="course_code"
+                                                           value="{{ course.code }}"
+                                                           required>
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- Field: Description -->
+                                                <div class="form-group">
+                                                    <label for="inputDescription">Description</label>
+                                                    <!-- Using textarea for models.TextField -->
+                                                    <textarea class="form-control placeholder-shown"
+                                                              id="inputDescription"
+                                                              rows="3"
+                                                              placeholder="Enter course details..."
+                                                              name="description">{{course.description}}</textarea>
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- Field: Default Duration Weeks -->
+                                                <div class="form-group">
+                                                    <label for="inputDuration">Default Duration (Weeks)</label>
+                                                    <input type="number"
+                                                           class="form-control placeholder-shown"
+                                                           id="inputDuration"
+                                                           placeholder="e.g. 12"
+                                                           name="duration"
+                                                           min="0"
+                                                           value="{{ course.duration }}">
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- Field: Course Fee -->
+                                                <div class="form-group">
+                                                    <label for="inputFee">Course Fee</label>
+                                                    <!-- step="0.01" allows for decimal inputs like 1500.50 -->
+                                                    <input type="number"
+                                                           class="form-control placeholder-shown"
+                                                           id="inputFee"
+                                                           placeholder="0.00"
+                                                           min="0"
+                                                           name="Fee"
+                                                           value="{{ course.fee }}">
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- Submit Button -->
+                                                <!-- Changed from div to button for proper form submission behavior -->
+                                                <button type="submit"
+                                                        class="btn btn-outline-primary d-flex justify-content-center w-100">
+                                                    Save Course
+                                                </button>
+                                            </fieldset>
+                                            <!-- /.fieldset -->
+                                        </form>
+                                    </div>
+                                </div>
                                 <!-- /.form -->
                             </div>
                         </div>

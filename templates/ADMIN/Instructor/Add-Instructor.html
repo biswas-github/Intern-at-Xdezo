@@ -4,139 +4,137 @@
 {% block extrajs %}
 {% endblock extrajs %}
 {% block content %}
-    <div class="page-inner">
-        <!-- Page Header & Breadcrumbs -->
-        <header class="">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="{% url 'AdminDashboard' %}">DataManagement</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="{% url 'Instructor' %}">Instructors</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Add Instructor</li>
-                </ol>
-            </nav>
-            <div class="d-flex justify-content-between align-items-center">
-                <h1 class="page-title">Register New Instructor</h1>
-            </div>
-        </header>
-        <!-- messages  -->
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
-                     role="alert">{{ message | safe }}</div>
-            {% endfor %}
-        {% endif %}
-        <!-- Page Content Section -->
-        <div class="page-section">
-            <div class="row">
-                <!-- Center the form nicely -->
-                <div class="col-12 col-sm-12 col-lg-12 border rounded mb-5 mb-sm-5 bg-white">
-                    <div class="card-body">
-                        <!-- Form -->
-                        <form method="post">
-                            {% csrf_token %}
-                            <!-- SECTION 1: Personal Information -->
-                            <fieldset>
-                                <legend>Personal Information</legend>
-                                <!-- Full Name (Updated) -->
-                                <!-- Name Row -->
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="id_first_name">
-                                            First Name <abbr title="Required">*</abbr>
-                                        </label>
-                                        <input type="text"
-                                               class="form-control"
-                                               id="id_first_name"
-                                               name="first_name"
-                                               placeholder="First Name"
-                                               required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="id_last_name">
-                                            Last Name <abbr title="Required">*</abbr>
-                                        </label>
-                                        <input type="text"
-                                               class="form-control"
-                                               id="id_last_name"
-                                               name="last_name"
-                                               placeholder="Last Name"
-                                               required>
-                                    </div>
-                                </div>
-                                <!-- Contact Row -->
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="id_email">
-                                            Email Address <abbr title="Required">*</abbr>
-                                        </label>
-                                        <input type="email"
-                                               class="form-control"
-                                               id="id_email"
-                                               name="email"
-                                               placeholder="e.g. john.doe@example.com"
-                                               required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="id_phone">Phone Number</label>
-                                        <input type="text"
-                                               class="form-control"
-                                               id="id_phone"
-                                               name="phone"
-                                               placeholder="e.g. 9800000000">
-                                    </div>
-                                </div>
-                                <!-- Address Row -->
-                                <div class="form-group">
-                                    <label for="id_address">Address</label>
+    <!-- Page Header & Breadcrumbs -->
+    <header class="">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'AdminDashboard' %}">DataManagement</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'Instructor' %}">Instructors</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Add Instructor</li>
+            </ol>
+        </nav>
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="page-title">Register New Instructor</h1>
+        </div>
+    </header>
+    <!-- messages  -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-primary {% endif %}"
+                 role="alert">{{ message | safe }}</div>
+        {% endfor %}
+    {% endif %}
+    <!-- Page Content Section -->
+    <div class="page-section">
+        <div class="row">
+            <!-- Center the form nicely -->
+            <div class="col-12 col-sm-12 col-lg-12 border rounded mb-5 mb-sm-5 bg-white">
+                <div class="card-body">
+                    <!-- Form -->
+                    <form method="post">
+                        {% csrf_token %}
+                        <!-- SECTION 1: Personal Information -->
+                        <fieldset>
+                            <legend>Personal Information</legend>
+                            <!-- Full Name (Updated) -->
+                            <!-- Name Row -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_first_name">
+                                        First Name <abbr title="Required">*</abbr>
+                                    </label>
                                     <input type="text"
                                            class="form-control"
-                                           id="id_address"
-                                           name="address"
-                                           placeholder="e.g. Kathmandu, Nepal">
+                                           id="id_first_name"
+                                           name="first_name"
+                                           placeholder="First Name"
+                                           required>
                                 </div>
-                            </fieldset>
-                            <hr class="my-4">
-                            <!-- SECTION 2: Professional Details -->
-                            <fieldset>
-                                <legend>Professional Details</legend>
-                                <!-- Specialization -->
-                                <div class="form-group">
-                                    <label for="id_specialization">Specialization</label>
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_last_name">
+                                        Last Name <abbr title="Required">*</abbr>
+                                    </label>
                                     <input type="text"
                                            class="form-control"
-                                           id="id_specialization"
-                                           name="specialization"
-                                           placeholder="e.g. Python, Django, Graphic Design">
+                                           id="id_last_name"
+                                           name="last_name"
+                                           placeholder="Last Name"
+                                           required>
                                 </div>
-                                <!-- Bio -->
-                                <div class="form-group">
-                                    <label for="id_bio">Biography / Notes</label>
-                                    <textarea class="form-control"
-                                              id="id_bio"
-                                              name="bio"
-                                              rows="4"
-                                              placeholder="Write a brief description about the instructor..."></textarea>
+                            </div>
+                            <!-- Contact Row -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_email">
+                                        Email Address <abbr title="Required">*</abbr>
+                                    </label>
+                                    <input type="email"
+                                           class="form-control"
+                                           id="id_email"
+                                           name="email"
+                                           placeholder="e.g. john.doe@example.com"
+                                           required>
                                 </div>
-                                <!-- Status (Is Active) -->
-                                <div class="form-group">
-                                    <label for="id_is_active">Account Status</label>
-                                    <select class="form-control" id="id_is_active" name="is_active">
-                                        <option value="is_active" selected>Active</option>
-                                        <option value="">Inactive</option>
-                                    </select>
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_phone">Phone Number</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="id_phone"
+                                           name="phone"
+                                           placeholder="e.g. 9800000000">
                                 </div>
-                                <!-- Action Buttons -->
-                                <div class="d-flex justify-content-between align-items-center mt-4">
-                                    <button type="submit" class="btn btn-outline-primary px-5 w-100 w-sm-100">Register Instructor</button>
-                                </div>
-                            </fieldset>
-                        </form>
-                        <!-- /.form -->
-                    </div>
+                            </div>
+                            <!-- Address Row -->
+                            <div class="form-group">
+                                <label for="id_address">Address</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="id_address"
+                                       name="address"
+                                       placeholder="e.g. Kathmandu, Nepal">
+                            </div>
+                        </fieldset>
+                        <hr class="my-4">
+                        <!-- SECTION 2: Professional Details -->
+                        <fieldset>
+                            <legend>Professional Details</legend>
+                            <!-- Specialization -->
+                            <div class="form-group">
+                                <label for="id_specialization">Specialization</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="id_specialization"
+                                       name="specialization"
+                                       placeholder="e.g. Python, Django, Graphic Design">
+                            </div>
+                            <!-- Bio -->
+                            <div class="form-group">
+                                <label for="id_bio">Biography / Notes</label>
+                                <textarea class="form-control"
+                                          id="id_bio"
+                                          name="bio"
+                                          rows="4"
+                                          placeholder="Write a brief description about the instructor..."></textarea>
+                            </div>
+                            <!-- Status (Is Active) -->
+                            <div class="form-group">
+                                <label for="id_is_active">Account Status</label>
+                                <select class="form-control" id="id_is_active" name="is_active">
+                                    <option value="is_active" selected>Active</option>
+                                    <option value="">Inactive</option>
+                                </select>
+                            </div>
+                            <!-- Action Buttons -->
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <button type="submit" class="btn btn-outline-primary px-5 w-100 w-sm-100">Register Instructor</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <!-- /.form -->
                 </div>
             </div>
         </div>
